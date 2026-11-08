@@ -7,10 +7,10 @@ Validación ejecutada por el agente sobre los archivos locales. No constituye ev
 | Fuente | Artículos | Anotaciones | Referencias detectadas | Advertencias |
 |---|---:|---:|---:|---:|
 | Nacional | 208 | 146 | 156 | 1 |
-| PBA | 154 | 72 | 92 | 3 |
+| PBA | 155 | 74 | 92 | 4 |
 | Santa Fe | 296 | 6 | 29 | 1 |
 
-El conteo actual de PBA difiere del inicial (155): al comenzar TP2-RAG-02, el usuario ya había eliminado la segunda rúbrica 151 del TXT. Se preservó ese cambio previo; no es una corrección de límites del parser ni se inventó un registro para alcanzar el conteo anterior.
+En TP2-RAG-03 se restauró desde el historial exactamente la segunda rúbrica `ARTÍCULO 151.- (*) Comuníquese al Poder Ejecutivo.` con su nota explicativa. Ahora vuelve a haber 155 registros PBA y dos ocurrencias 151 con IDs distintos; ambas son apariciones de la fuente.
 
 Las referencias cuentan menciones únicas dentro de cada artículo, no normas únicas del corpus. El reporte JSON contiene los hashes SHA-256 de los originales, los textos fuera de artículos y las 140 líneas de layout retiradas del PDF (encabezado y marca de página en cada una de las 70 páginas).
 
@@ -29,7 +29,7 @@ Los originales TXT son los propios documentos utilizados, no una extracción adi
 ## Hallazgos y advertencias pendientes
 
 - Nacional: encabezado previo a la primera rúbrica conservado como no clasificado.
-- PBA: prefacio conservado; observación del art. 13; observación del art. 25 que depende de subrayado perdido. La duplicación del 151 de la validación inicial ya no existe en la fuente recibida para TP2-RAG-02 (edición previa del usuario).
+- PBA: prefacio conservado; observación del art. 13; observación del art. 25 que depende de subrayado perdido; la segunda aparición del art. 151 fue restaurada literalmente desde Git con su nota asociada.
 - Santa Fe: prefacio y cierre de sanción/firmas/decreto conservados fuera de artículos. No hay números duplicados entre las rúbricas detectadas.
 - **Fallo observado durante la inspección:** un primer detector reconocía como segunda rúbrica la remisión `artículo 172.` envuelta al inicio de una línea de la p. 45, dentro del art. 173. Se corrigió exigiendo mayúscula inicial en las rúbricas del corpus y se agregó regresión sintética y real. El conteo final santafesino es 296, no 297. Esto no generaliza a documentos cuyas rúbricas estén en minúscula.
 - **Corrección TP2-RAG-02:** en Santa Fe 285–290, el reemplazo citado es contenido sustantivo del propio artículo. Ahora se identifica como `texto_modificatorio` en `notas` y permanece íntegro tanto en `texto` como en `texto_principal`. Antes se restaba erróneamente de la vista principal por ser `transcripcion_citada`. La clasificación se limita a los seis casos verificados y no infiere vigencia por las comillas. No cambia el número de anotaciones.
@@ -65,14 +65,32 @@ Se intentó también `uv lock --check`, pero **uv 0.5.4 no admite esa opción**;
 
 No se verificó reproducción integral del futuro RAG en un directorio fresco: queda fuera de esta etapa.
 
-## Verificación de TP2-RAG-02
+## Verificación de TP2-RAG-02 y TP2-RAG-03
 
 - `uv run pytest -q -k 'amendment or pba_26 or pba_2_3_and_13'`: 9 aprobadas, 14 omitidas por selección.
 - `uv run python preprocesar.py`: tres JSONL y auditoría regenerados; 208 / 154 / 296 registros, 1 / 3 / 1 advertencias.
 - Comparación programática contra una copia temporal de las salidas recibidas: sólo cambian `texto_principal` y el tipo de anotación de Santa Fe 285–290; `texto`, IDs, orden y toda la metadata permanecen iguales. PBA y Nacional no cambian. La auditoría regenerada coincide con la recibida (no cambiaron sus conteos).
 - `uv run pytest -q`: **23 aprobadas en 12.43 s**, suite completa ejecutada una vez al finalizar.
 - `sha256sum datos/procesados/* > /tmp/tp2-rag02-outputs.sha256`, segunda ejecución de `uv run python preprocesar.py` y `sha256sum -c /tmp/tp2-rag02-outputs.sha256`: **4 archivos OK**, incluido el reporte.
-- `sha256sum datos/ley_nacional.txt datos/ley_pba.txt datos/ley_sta_fe.pdf`: los originales mantienen las tres huellas medidas al iniciar TP2-RAG-02. La huella PBA distinta de TP2-RAG-01 corresponde exclusivamente a la edición previa ya descrita.
+- `sha256sum datos/ley_nacional.txt datos/ley_pba.txt datos/ley_sta_fe.pdf`: los originales mantienen las tres huellas medidas al iniciar TP2-RAG-02. La huella PBA vigente incluye la restauración exacta de la segunda ocurrencia desde el commit histórico `6e08426`; no se reescribió ninguna otra parte de la ley.
 - `git diff --check`: detecta espacio final en `datos/ley_pba.txt:886`, parte del cambio previo del usuario; no se alteró la fuente para limpiarlo. La comprobación limitada a los archivos de implementación/documentación de esta tarea no detecta problemas.
 
 No se amplió la clasificación a otras citas ambiguas: conservan el tratamiento previo. La incertidumbre de subrayado del art. 25 PBA queda intacta. Las limitaciones de procedencia y redistribución siguen pendientes.
+
+### TP2-RAG-03: encabezados únicos y chunks
+
+Se reconocen `TÍTULO ÚNICO`/`CAPÍTULO ÚNICO` sin absorber el siguiente encabezado: Santa Fe art. 40 lleva `CAPÍTULO ÚNICO`; art. 239 (Libro IV) lleva `TÍTULO ÚNICO`. Se restauró además desde `git show 6e08426:datos/ley_pba.txt` la segunda aparición de PBA 151, ausente en la fuente de entrada; no se inventó texto.
+
+`fragmentar.py` consume los JSONL de artículos y genera `chunks.jsonl` (828 registros; tamaño objetivo 1000 caracteres y solapamiento 150) y `reporte_fragmentacion.json`:
+
+| Jurisdicción | chunks | mínimo | mediana | máximo |
+|---|---:|---:|---:|---:|
+| Nacional | 289 | 86 | 506 | 998 |
+| PBA | 175 | 50 | 356 | 995 |
+| Santa Fe | 364 | 46 | 489 | 1000 |
+
+No hubo chunks sobre el tamaño configurado ni registros sin vista indexable. Los artículos heredan el rango de páginas completo; no se asigna página precisa a cada chunk. La vista indexable une wraps visuales PDF sin tocar el JSONL fuente, mantiene saltos en listas/párrafos, incluye como texto sustantivo las enmiendas SF 285–290 y excluye la propuesta observada PBA 13. Los artículos solo con nota explícita de derogación (p. ej. nacional 19) reciben una descripción literal derivada de la nota, no una afirmación independiente de vigencia.
+
+**Procedencia aún pendiente:** `datos/fuentes.csv` deja sin URL oficial verificada y fecha de recuperación a los tres documentos; los tres permisos/condiciones de redistribución figuran desconocidos. No se presume licencia. No se añadió corpus ni se evaluó retrieval accuracy; embeddings e índice vectorial están fuera de alcance.
+
+Verificación TP2-RAG-03 ejecutada: `uv sync`; `uv run python preprocesar.py` (208/155/296); `uv run python fragmentar.py` (828 chunks; 289/175/364); pruebas focalizadas (15 aprobadas); `uv run pytest -q` (**32 aprobadas en 12.22 s**); segunda ejecución de ambos scripts y comparación SHA-256: los seis JSONL/reportes generados coinciden byte a byte. SHA-256 de los originales tras la restauración: nacional `b7e7d75a…`, PBA `3c11d299…`, Santa Fe `2d244762…`. `uv export --format requirements-txt --no-hashes --output-file requirements.txt` actualizado; `git diff --check` limitado a los archivos propios de implementación/documentación/salidas no reporta errores. No se corrió el full suite de etapas RAG, que aún no están implementadas.

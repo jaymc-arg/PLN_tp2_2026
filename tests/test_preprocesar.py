@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 HASHES = {
     "ley_nacional.txt": "b7e7d75ad921d086c9cd87ffb3621f716784afc7c81d105ff04433f99d6c4b93",
     # Fuente al iniciar TP2-RAG-02: el usuario ya había retirado la segunda rúbrica 151.
-    "ley_pba.txt": "b203430ff13f2429dd17e53ef9b1972d8063a337df4bf3a7ccd0313e8280577b",
+    "ley_pba.txt": "3c11d299e4830bc12281e514b15f87fca81e148b9470f1f250da8e5d958fae31",
     "ley_sta_fe.pdf": "2d2447623105b707a286a57b8853385cd9f8fe6f70cd504b4881a2fb3c08f4bb",
 }
 
@@ -171,8 +171,9 @@ def test_real_sf_4_definitions_and_duplicates(corpus):
     assert r4["texto"] == stream[stream.index("ARTÍCULO 4.-"):stream.index("CAPÍTULO II")].strip()
     assert len([r for r in corpus[0]["santa_fe"] if r["articulo"] == "172"]) == 1
     assert "artículo 172." in article(corpus, "santa_fe", "173")["texto"]
-    assert len([r for r in corpus[0]["pba"] if r["articulo"] == "151"]) == 1
-    assert [len(corpus[0][j]) for j, _, _ in SOURCES] == [208, 154, 296]
+    duplicates = [r for r in corpus[0]["pba"] if r["articulo"] == "151"]
+    assert [r["id"] for r in duplicates] == ["pba_5109_art_151", "pba_5109_art_151__2"]
+    assert [len(corpus[0][j]) for j, _, _ in SOURCES] == [208, 155, 296]
 
 
 @pytest.mark.parametrize("number,pages", [
@@ -194,6 +195,23 @@ def test_real_sf_amendment_wording_is_substantive(corpus, number, pages):
     records = corpus[0]["santa_fe"]
     assert [r["articulo"] for r in records[-12:]] == list(map(str, range(285, 297)))
     assert all(len([r for r in records if r["articulo"] == n]) == 1 for n in ["2", "7", "8", "9", "12"])
+
+
+def test_restored_pba_151_occurrences_match_source(corpus):
+    records = [r for r in corpus[0]["pba"] if r["articulo"] == "151"]
+    assert [r["id"] for r in records] == ["pba_5109_art_151", "pba_5109_art_151__2"]
+    assert records[0]["texto"].startswith("ARTÍCULO 151.- (Texto según Ley N° 13.082)")
+    assert records[1]["texto"] == "ARTÍCULO 151.- (*) Comuníquese al Poder Ejecutivo.\n\n(*) Para el presente artículo se respetó la numeración según el texto ordenado por decreto 997/1993 anterior a la modificación introducida por Ley 13082."
+    assert records[1]["notas"][0]["texto"].startswith("(*) Para el presente artículo")
+
+
+def test_unique_structural_headings_are_metadata(corpus):
+    chapter = article(corpus, "santa_fe", "40")
+    assert chapter["capitulo"].startswith("CAPÍTULO ÚNICO")
+    book_iv = next(r for r in corpus[0]["santa_fe"] if r["articulo"] == "239")
+    assert book_iv["libro"].startswith("LIBRO IV")
+    assert book_iv["titulo"] == "TÍTULO ÚNICO"
+    assert book_iv["capitulo"].startswith("CAPÍTULO I")
 
 
 def test_real_pba_26_is_distinct_and_unchanged(corpus):

@@ -311,8 +311,16 @@
         },
         {
           "tipo": "estructura",
-          "texto": "TITULO VIII\n\nDisposiciones Generales y Transitorias\n\nCapítulo Unico",
+          "texto": "TITULO VIII\n\nDisposiciones Generales y Transitorias",
           "inicio": 166761,
+          "fin": 166814,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "Capítulo Unico",
+          "inicio": 166814,
           "fin": 166830,
           "pagina_inicio": null,
           "pagina_fin": null
@@ -321,16 +329,18 @@
       "conservacion_contenido_no_blanco": true
     },
     "ley_pba.txt": {
-      "sha256": "b203430ff13f2429dd17e53ef9b1972d8063a337df4bf3a7ccd0313e8280577b",
-      "caracteres_leidos": 83095,
+      "sha256": "3c11d299e4830bc12281e514b15f87fca81e148b9470f1f250da8e5d958fae31",
+      "caracteres_leidos": 83147,
       "paginas_leidas": null,
       "codificacion": "UTF-8",
       "layout_eliminado": [],
       "errores_extraccion": [],
-      "caracteres_limpios": 83059,
-      "articulos": 154,
-      "numeros_duplicados": {},
-      "cantidad_duplicados": 0,
+      "caracteres_limpios": 83111,
+      "articulos": 155,
+      "numeros_duplicados": {
+        "151": 2
+      },
+      "cantidad_duplicados": 1,
       "anotaciones": 72,
       "referencias": 92,
       "advertencias": [
@@ -341,6 +351,10 @@
         {
           "id": "pba_5109_art_25",
           "motivo": "Revisar alcance de la observación; no se determina vigencia. TXT no conserva subrayado: no puede aislarse el pasaje afectado."
+        },
+        {
+          "id": "pba_5109_art_151__2",
+          "motivo": "Número duplicado 151; conservado sin decidir precedencia."
         },
         {
           "id": null,
@@ -1394,8 +1408,16 @@
         },
         {
           "tipo": "estructura",
-          "texto": "TÍTULO II\nDE LA DIVISIÓN ELECTORAL\nCAPÍTULO ÚNICO\nDE LOS DISTRITOS, SECCIONES Y CIRCUITOS",
+          "texto": "TÍTULO II\nDE LA DIVISIÓN ELECTORAL",
           "inicio": 30145,
+          "fin": 30180,
+          "pagina_inicio": 12,
+          "pagina_fin": 12
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO ÚNICO\nDE LOS DISTRITOS, SECCIONES Y CIRCUITOS",
+          "inicio": 30180,
           "fin": 30235,
           "pagina_inicio": 12,
           "pagina_fin": 12
@@ -1634,10 +1656,18 @@
         },
         {
           "tipo": "estructura",
-          "texto": "TÍTULO I\nPRINCIPIOS GENERALES\nCAPÍTULO ÚNICO",
+          "texto": "TÍTULO I\nPRINCIPIOS GENERALES",
           "inicio": 136036,
-          "fin": 136081,
+          "fin": 136066,
           "pagina_inicio": 47,
+          "pagina_fin": 47
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO ÚNICO",
+          "inicio": 136066,
+          "fin": 136081,
+          "pagina_inicio": 48,
           "pagina_fin": 48
         },
         {
@@ -1746,16 +1776,32 @@
         },
         {
           "tipo": "estructura",
-          "texto": "TÍTULO VI\nCADUCIDAD Y EXTINCIÓN DE LOS PARTIDOS\nCAPÍTULO ÚNICO",
+          "texto": "TÍTULO VI\nCADUCIDAD Y EXTINCIÓN DE LOS PARTIDOS",
           "inicio": 165904,
+          "fin": 165952,
+          "pagina_inicio": 59,
+          "pagina_fin": 59
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO ÚNICO",
+          "inicio": 165952,
           "fin": 165967,
           "pagina_inicio": 59,
           "pagina_fin": 59
         },
         {
           "tipo": "estructura",
-          "texto": "LIBRO IV\nFALTAS ELECTORALES Y RÉGIMEN SANCIONATORIO\n\nTÍTULO ÚNICO",
+          "texto": "LIBRO IV\nFALTAS ELECTORALES Y RÉGIMEN SANCIONATORIO",
           "inicio": 168762,
+          "fin": 168815,
+          "pagina_inicio": 60,
+          "pagina_fin": 60
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO ÚNICO",
+          "inicio": 168815,
           "fin": 168829,
           "pagina_inicio": 60,
           "pagina_fin": 60
@@ -1802,8 +1848,16 @@
         },
         {
           "tipo": "estructura",
-          "texto": "LIBRO V\nDISPOSICIONES FINALES\n\nTÍTULO ÚNICO",
+          "texto": "LIBRO V\nDISPOSICIONES FINALES",
           "inicio": 187864,
+          "fin": 187895,
+          "pagina_inicio": 66,
+          "pagina_fin": 66
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO ÚNICO",
+          "inicio": 187895,
           "fin": 187908,
           "pagina_inicio": 66,
           "pagina_fin": 66

@@ -17,7 +17,7 @@ ARTICLE = re.compile(
     r"^(?:art[íi]culo|art\.)\s+(?P<num>\d+[°º]?\s*(?:(?:bis|ter|qu[áa]ter|quinquies|sexies|septies|octies|nonies)\b)?|s/n)"
     r"\s*(?=[.\-:—–(])", re.I,
 )
-STRUCTURE = re.compile(r"^(LIBRO|T[ÍI]TULO|CAP[ÍI]TULO)\s+[IVXLCDM]+\.?$", re.I)
+STRUCTURE = re.compile(r"^(LIBRO|T[ÍI]TULO|CAP[ÍI]TULO)\s+(?:[IVXLCDM]+|[ÚU]NICO)\.?$", re.I)
 REFERENCE = re.compile(r"\b(?:ley(?:es)?|decreto(?:-ley)?)[ \t]+(?:nacional[ \t]+)?(?:N[°º.]*[ \t]*)?\d[\d./-]*", re.I)
 EDITORIAL = re.compile(
     r"^(?:texto seg[úu]n|art[íi]culo (?:sustituido|incorporado|derogado)|"
@@ -170,9 +170,13 @@ def parse_lines(lines, jurisdiction: str, law: str, source: str):
         if entry["tipo"] != "articulo":
             outside.append({"tipo": entry["tipo"], "texto": text, **location})
             if entry["tipo"] == "estructura":
-                first = text.splitlines()[0].upper()
+                heading_lines = [line.strip() for line in text.splitlines() if line.strip()]
+                first = heading_lines[0].upper()
                 key = "libro" if first.startswith("LIBRO") else "titulo" if first.startswith(("TÍTULO", "TITULO")) else "capitulo"
-                context[key] = text
+                # La etiqueta y el texto descriptivo siguiente forman el contexto; no
+                # absorber otro encabezado estructural cuando títulos/capítulos son adyacentes.
+                descriptor = heading_lines[1] if len(heading_lines) > 1 and not STRUCTURE.fullmatch(heading_lines[1]) else None
+                context[key] = "\n".join(part for part in (heading_lines[0], descriptor) if part)
                 if key == "libro":
                     context["titulo"] = context["capitulo"] = None
                 elif key == "titulo":

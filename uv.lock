@@ -393,6 +393,18 @@ wheels = [
 ]
 
 [[package]]
+name = "langchain-text-splitters"
+version = "0.3.11"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "langchain-core" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/11/43/dcda8fd25f0b19cb2835f2f6bb67f26ad58634f04ac2d8eae00526b0fa55/langchain_text_splitters-0.3.11.tar.gz", hash = "sha256:7a50a04ada9a133bbabb80731df7f6ddac51bc9f1b9cab7fa09304d71d38a6cc", size = 46458 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/58/0d/41a51b40d24ff0384ec4f7ab8dd3dcea8353c05c973836b5e289f1465d4f/langchain_text_splitters-0.3.11-py3-none-any.whl", hash = "sha256:cf079131166a487f1372c8ab5d0bfaa6c0a4291733d9c43a34a16ac9bcd6a393", size = 33845 },
+]
+
+[[package]]
 name = "langgraph"
 version = "1.2.20"
 source = { registry = "https://pypi.org/simple" }
@@ -820,6 +832,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "langchain-community" },
+    { name = "langchain-text-splitters" },
     { name = "pypdf" },
 ]
 
@@ -831,6 +844,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "langchain-community", specifier = ">=0.3,<0.4" },
+    { name = "langchain-text-splitters", specifier = ">=0.3,<0.4" },
     { name = "pypdf", specifier = ">=7.0.0" },
 ]
 

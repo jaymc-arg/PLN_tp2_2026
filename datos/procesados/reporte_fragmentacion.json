@@ -1,0 +1,33 @@
+{
+  "chunk_size_caracteres": 1000,
+  "chunk_overlap_caracteres": 150,
+  "longitud": "caracteres Python del texto del chunk; splitter recursivo",
+  "total_chunks": 828,
+  "jurisdicciones": {
+    "nacional": {
+      "chunks": 289,
+      "min": 86,
+      "mediana": 506,
+      "max": 998
+    },
+    "pba": {
+      "chunks": 175,
+      "min": 50,
+      "mediana": 356,
+      "max": 995
+    },
+    "santa_fe": {
+      "chunks": 364,
+      "min": 46,
+      "mediana": 489.0,
+      "max": 1000
+    }
+  },
+  "chunks_mayores_que_chunk_size": [],
+  "registros_sin_vista": [],
+  "limitaciones": [
+    "Los chunks heredan rango de páginas del artículo completo; no se asignan páginas internas sin mapeo validado.",
+    "Las longitudes no implican calidad de recuperación; embeddings y evaluación están fuera de alcance.",
+    "Las descripciones de artículos derogados sólo repiten la nota explícita de la fuente y no afirman vigencia."
+  ]
+}

@@ -21,6 +21,7 @@ Requiere Python **3.12** y `uv` (verificación realizada con uv 0.5.4). Desde la
 ```bash
 uv sync
 uv run python preprocesar.py
+uv run python fragmentar.py
 uv run pytest -q
 uv run python preprocesar.py
 ```
@@ -45,6 +46,8 @@ El PDF se extrae con `langchain-community` / `PyPDFLoader` y `pypdf`; los TXT se
 
 - `preprocesar.py`: procesador y CLI; `tests/test_preprocesar.py`: fixtures sintéticos y corpus real.
 - `datos/procesados/{nacional,pba,santa_fe}_articulos.jsonl`: un registro por artículo en orden de aparición.
+- `datos/procesados/chunks.jsonl`: vista recuperable por artículo, dividida con `RecursiveCharacterTextSplitter` (1000 caracteres, solapamiento 150); ejecutable por separado con `uv run python fragmentar.py`.
+- `datos/procesados/reporte_fragmentacion.json`: conteos y longitudes observadas de chunks.
 - `datos/procesados/reporte_preprocesamiento.json`: SHA-256 originales, caracteres leídos/limpios, páginas, conteos, duplicados, notas, referencias, advertencias y contenido fuera de artículos.
 - `evalucacion/validacion_preprocesamiento.md`: cotejos y limitaciones de esta etapa, **no** evaluación de respuestas RAG.
 
@@ -65,17 +68,17 @@ Se colapsan espacios horizontales y se limpian extremos de línea. Sólo se quit
 
 ## Validaciones y límites
 
-Resultado actual: **208 artículos nacionales, 154 bonaerenses y 296 santafesinos**. Advertencias: **1 / 3 / 1**, respectivamente; detalle en el reporte. Las pruebas cubren campos y JSONL, IDs, orden, conservación, páginas, artículos multipágina, `bis`/otros sufijos, referencias internas, citas, notas, duplicados, los cinco casos reales solicitados, SHA-256 y determinismo.
+Resultado actual: **208 artículos nacionales, 155 bonaerenses y 296 santafesinos**. Advertencias: **1 / 4 / 1**, respectivamente; detalle en el reporte. Las pruebas cubren campos y JSONL, IDs, orden, conservación, páginas, artículos multipágina, `bis`/otros sufijos, referencias internas, citas, notas, duplicados, los cinco casos reales solicitados, SHA-256 y determinismo.
 
 Limitaciones preservadas, no resueltas por interpretación:
 
 - Art. 13 PBA: la modificación observada se conserva en una nota que incluye su transcripción, separada de la vista principal. Art. 25 PBA: la nota remite a subrayado que el TXT no conserva; no puede identificarse exactamente el tramo observado.
-- Antes de TP2-RAG-02, el usuario retiró la segunda rúbrica 151 del TXT de PBA: el corpus actual tiene 154 artículos, no los 155 de la validación inicial. Esta tarea no altera esa fuente; el detector de duplicados sigue probado con fixtures sintéticos.
+- En TP2-RAG-03 se restauró desde el historial la segunda aparición del artículo 151 de PBA y su nota, idénticas a la fuente previa; ambos registros se conservan con IDs diferenciados.
 - El parser se ajusta a estas fuentes: reconoce rúbricas con mayúscula inicial, número/sufijo y separador. Una remisión en minúsculas partida en p. 45 del PDF no se convierte en artículo. No es un parser universal de leyes.
 - Las referencias externas son menciones literales detectadas, no el contenido de esas leyes ni una lista exhaustiva de relaciones jurídicas. No se reconstruyen formatos perdidos, tachados o subrayados del TXT.
 - Los textos fuera de artículos se conservan para revisión. La igualdad de contenido extraído no garantiza por sí sola fidelidad visual de cada página; se hicieron cotejos representativos, no revisión exhaustiva.
 
-La estructura **artículo primero** mantiene excepciones, incisos, anotaciones y procedencia juntos, incluso entre páginas. En una etapa posterior, `RecursiveCharacterTextSplitter` podrá subdividir artículos demasiado largos heredando su metadata; este preprocesamiento no crea todavía chunks de embeddings.
+La estructura **artículo primero** mantiene excepciones, incisos, anotaciones y procedencia juntos, incluso entre páginas. `RecursiveCharacterTextSplitter` subdivide cada vista por separado; el tamaño y solapamiento son caracteres, no tokens. Las citas sustantivas marcadas `texto_modificatorio` de Santa Fe 285–290 se mantienen en la vista; notas históricas/editoriales como la propuesta observada de PBA 13 no se indexan como texto principal. Los artículos con únicamente nota explícita de derogación reciben una descripción de índice literal derivada de esa nota, sin afirmación independiente de vigencia. El reporte no mide calidad de recuperación; embeddings y recuperación quedan fuera de esta etapa.
 
 ## Alcance pendiente
 
