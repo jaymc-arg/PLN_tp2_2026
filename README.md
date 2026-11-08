@@ -55,7 +55,7 @@ Cada registro contiene `id`, `jurisdiccion`, `ley`, `articulo`, `libro`, `titulo
 Ampliaciones al esquema solicitado:
 
 - `texto` conserva íntegramente el artículo, incluida su rúbrica y las notas; no equivale a «norma vigente».
-- `texto_principal` omite sólo los pasajes explícitamente anotados. Es una vista auxiliar, **no una consolidación jurídica**. No debe enviarse solo al futuro RAG cuando haya advertencias.
+- `texto_principal` omite los pasajes editoriales anotados, pero conserva los de tipo `texto_modificatorio`: en Santa Fe 285–290, la cita es el reemplazo dispuesto por el propio artículo y también queda localizada en `notas`. Es una vista auxiliar, **no una consolidación jurídica**. No debe enviarse solo al futuro RAG cuando haya advertencias.
 - Cada nota guarda `tipo`, `texto`, offsets relativos `inicio`/`fin` y eventual `advertencia`. Se distinguen marcas editoriales, pasajes marcados como derogados y transcripciones citadas; no se decide su fuerza legal.
 - Los offsets de cada registro y segmento fuera de artículos son intervalos `[inicio, fin)` en el flujo de texto limpio, **no offsets del archivo original**. `texto` elimina espacios externos del intervalo.
 - IDs como `pba_5109_art_151__2` conservan ocurrencias repetidas; `s/n` y sufijos latinos se mantienen sin renumerar.
@@ -65,12 +65,12 @@ Se colapsan espacios horizontales y se limpian extremos de línea. Sólo se quit
 
 ## Validaciones y límites
 
-Resultado: **208 artículos nacionales, 155 bonaerenses y 296 santafesinos**. Advertencias: **1 / 4 / 1**, respectivamente; detalle en el reporte. Las pruebas cubren campos y JSONL, IDs, orden, conservación, páginas, artículos multipágina, `bis`/otros sufijos, referencias internas, citas, notas, duplicados, los cinco casos reales solicitados, SHA-256 y determinismo.
+Resultado actual: **208 artículos nacionales, 154 bonaerenses y 296 santafesinos**. Advertencias: **1 / 3 / 1**, respectivamente; detalle en el reporte. Las pruebas cubren campos y JSONL, IDs, orden, conservación, páginas, artículos multipágina, `bis`/otros sufijos, referencias internas, citas, notas, duplicados, los cinco casos reales solicitados, SHA-256 y determinismo.
 
 Limitaciones preservadas, no resueltas por interpretación:
 
 - Art. 13 PBA: la modificación observada se conserva en una nota que incluye su transcripción, separada de la vista principal. Art. 25 PBA: la nota remite a subrayado que el TXT no conserva; no puede identificarse exactamente el tramo observado.
-- PBA tiene **dos artículos 151**: ambos se conservan y se advierte el duplicado, sin decidir precedencia.
+- Antes de TP2-RAG-02, el usuario retiró la segunda rúbrica 151 del TXT de PBA: el corpus actual tiene 154 artículos, no los 155 de la validación inicial. Esta tarea no altera esa fuente; el detector de duplicados sigue probado con fixtures sintéticos.
 - El parser se ajusta a estas fuentes: reconoce rúbricas con mayúscula inicial, número/sufijo y separador. Una remisión en minúsculas partida en p. 45 del PDF no se convierte en artículo. No es un parser universal de leyes.
 - Las referencias externas son menciones literales detectadas, no el contenido de esas leyes ni una lista exhaustiva de relaciones jurídicas. No se reconstruyen formatos perdidos, tachados o subrayados del TXT.
 - Los textos fuera de artículos se conservan para revisión. La igualdad de contenido extraído no garantiza por sí sola fidelidad visual de cada página; se hicieron cotejos representativos, no revisión exhaustiva.

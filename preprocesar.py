@@ -63,7 +63,7 @@ def load_source(path: Path):
     }
 
 
-def annotations(text: str):
+def annotations(text: str, *, amendment: bool = False):
     """Índices relativos a texto. Etiquetas describen marcas, no fuerza legal."""
     spans = []
     # Paréntesis balanceados, incluidos los de notas con paréntesis internos.
@@ -91,7 +91,8 @@ def annotations(text: str):
         closing = {"“": "”", "«": "»", '"': '"'}[text[match.start()]]
         end = text.find(closing, match.end())
         if end >= 0:
-            spans.append((match.start(), end + 1, "transcripcion_citada"))
+            kind = "texto_modificatorio" if amendment else "transcripcion_citada"
+            spans.append((match.start(), end + 1, kind))
     notes = []
     for start, end, kind in sorted(spans, key=lambda s: (s[0], -s[1])):
         if notes and start < notes[-1]["fin"]:
@@ -106,7 +107,9 @@ def annotations(text: str):
                       "advertencia": warning})
     principal = text
     for note in reversed(notes):
-        principal = principal[:note["inicio"]] + principal[note["fin"]:]
+        # Las notas también localizan texto modificatorio sustantivo: éste no se resta.
+        if note["tipo"] != "texto_modificatorio":
+            principal = principal[:note["inicio"]] + principal[note["fin"]:]
     return notes, principal.strip()
 
 
@@ -182,7 +185,11 @@ def parse_lines(lines, jurisdiction: str, law: str, source: str):
         if counts[number] > 1:
             rid += f"__{counts[number]}"
             warnings.append({"id": rid, "motivo": f"Número duplicado {number}; conservado sin decidir precedencia."})
-        notes, principal = annotations(text)
+        # Casos verificados de la fuente, no inferencia de vigencia por comillas.
+        amendment = (jurisdiction, law, source) == ("santa_fe", "14478", "ley_sta_fe.pdf") and number in {
+            "285", "286", "287", "288", "289", "290",
+        }
+        notes, principal = annotations(text, amendment=amendment)
         refs = list(dict.fromkeys(m.group() for m in REFERENCE.finditer(text)))
         for note in notes:
             if note["advertencia"]:

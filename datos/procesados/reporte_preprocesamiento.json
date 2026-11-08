@@ -321,18 +321,16 @@
       "conservacion_contenido_no_blanco": true
     },
     "ley_pba.txt": {
-      "sha256": "3a953008981d0730bd4bc506ba14b076f30ed3ea6a49a96d210e8b6b882aa54e",
-      "caracteres_leidos": 83146,
+      "sha256": "b203430ff13f2429dd17e53ef9b1972d8063a337df4bf3a7ccd0313e8280577b",
+      "caracteres_leidos": 83095,
       "paginas_leidas": null,
       "codificacion": "UTF-8",
       "layout_eliminado": [],
       "errores_extraccion": [],
-      "caracteres_limpios": 83111,
-      "articulos": 155,
-      "numeros_duplicados": {
-        "151": 2
-      },
-      "cantidad_duplicados": 1,
+      "caracteres_limpios": 83059,
+      "articulos": 154,
+      "numeros_duplicados": {},
+      "cantidad_duplicados": 0,
       "anotaciones": 72,
       "referencias": 92,
       "advertencias": [
@@ -343,10 +341,6 @@
         {
           "id": "pba_5109_art_25",
           "motivo": "Revisar alcance de la observación; no se determina vigencia. TXT no conserva subrayado: no puede aislarse el pasaje afectado."
-        },
-        {
-          "id": "pba_5109_art_151__2",
-          "motivo": "Número duplicado 151; conservado sin decidir precedencia."
         },
         {
           "id": null,
