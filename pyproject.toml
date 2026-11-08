@@ -1,7 +1,19 @@
 [project]
 name = "tp2"
 version = "0.1.0"
-description = "Add your description here"
+description = "Preprocesamiento auditable de un corpus de legislación electoral"
 readme = "README.md"
-requires-python = ">=3.12"
-dependencies = []
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "langchain-community>=0.3,<0.4",
+    "pypdf>=7.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

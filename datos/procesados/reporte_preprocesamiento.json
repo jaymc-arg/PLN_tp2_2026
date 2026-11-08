@@ -1,0 +1,1845 @@
+{
+  "version_esquema": 1,
+  "fuentes": {
+    "ley_nacional.txt": {
+      "sha256": "b7e7d75ad921d086c9cd87ffb3621f716784afc7c81d105ff04433f99d6c4b93",
+      "caracteres_leidos": 171876,
+      "paginas_leidas": null,
+      "codificacion": "UTF-8",
+      "layout_eliminado": [],
+      "errores_extraccion": [],
+      "caracteres_limpios": 171875,
+      "articulos": 208,
+      "numeros_duplicados": {},
+      "cantidad_duplicados": 0,
+      "anotaciones": 146,
+      "referencias": 156,
+      "advertencias": [
+        {
+          "id": null,
+          "motivo": "Contenido no clasificado conservado íntegramente en segmentos_fuera_articulos."
+        }
+      ],
+      "segmentos_fuera_articulos": [
+        {
+          "tipo": "no_clasificado",
+          "texto": "CODIGO ELECTORAL NACIONAL.",
+          "inicio": 0,
+          "fin": 28,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TITULO I.\n\nDel Cuerpo Electoral",
+          "inicio": 28,
+          "fin": 61,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO I\n\nDe la calidad, derechos y deberes del elector",
+          "inicio": 61,
+          "fin": 120,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO II\n\nDel Registro Nacional de Electores\n\n(Nombre del Capítulo sustituido por art. 74 de la Ley N° 26.571 B.O. 14/12/2009)",
+          "inicio": 9852,
+          "fin": 9983,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO III\n\n(Capítulo sustituido por art. 80 de la Ley N° 26.571 B.O. 14/12/2009)\n\nPadrones provisionales",
+          "inicio": 17095,
+          "fin": 17204,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO IV.\n\nPadrón electoral",
+          "inicio": 20886,
+          "fin": 20918,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TITULO II.\n\nDivisiones Territoriales. Agrupación de Electores. Jueces y Juntas Electorales",
+          "inicio": 29188,
+          "fin": 29280,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO I.\n\nDivisiones territoriales y agrupación de electores",
+          "inicio": 29280,
+          "fin": 29345,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO II.\n\nJueces electorales",
+          "inicio": 33983,
+          "fin": 34017,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO III\n\nJuntas Electorales Nacionales",
+          "inicio": 38409,
+          "fin": 38454,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TITULO III.\n\nDe los actos preelectorales",
+          "inicio": 42943,
+          "fin": 42985,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO I.\n\nConvocatoria.",
+          "inicio": 42985,
+          "fin": 43013,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO II.\n\nApoderados y fiscales de los partidos políticos",
+          "inicio": 44229,
+          "fin": 44292,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO III.\n\nOficialización de las listas de candidatos",
+          "inicio": 46699,
+          "fin": 46758,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO IV.\n\n(Capítulo sustituido por art. 2° de la Ley N° 27.781 B.O. 18/10/2024. Vigencia: a partir del día siguiente a su publicación en el Boletín Oficial.)\n\nSistema de Boleta Única de Papel para la Emisión del Sufragio",
+          "inicio": 51568,
+          "fin": 51794,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO V\n\nDistribución de equipos y útiles electorales",
+          "inicio": 69256,
+          "fin": 69314,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TITULO IV\n\nEL ACTO ELECTORAL",
+          "inicio": 71343,
+          "fin": 71373,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO I\n\nNormas especiales para su celebración",
+          "inicio": 71373,
+          "fin": 71424,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO II\n\nMesas receptoras de votos",
+          "inicio": 76107,
+          "fin": 76147,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO III\n\nApertura del acto electoral",
+          "inicio": 84122,
+          "fin": 84165,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO IV\n\nEmisión del sufragio",
+          "inicio": 89626,
+          "fin": 89661,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO V\n\nFuncionamiento del cuarto oscuro",
+          "inicio": 100061,
+          "fin": 100107,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO VI\n\nClausura",
+          "inicio": 100515,
+          "fin": 100538,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TITULO V\n\nEscrutinio",
+          "inicio": 101341,
+          "fin": 101363,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO I\n\nEscrutinio de la mesa",
+          "inicio": 101363,
+          "fin": 101398,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO II\n\nEscrutinio de la Junta",
+          "inicio": 113586,
+          "fin": 113623,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TITULO VI\n\nViolación de la Ley Electoral:\n\nPenas y Régimen Procesal",
+          "inicio": 126827,
+          "fin": 126896,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO I\n\nDe las faltas electorales",
+          "inicio": 126896,
+          "fin": 126935,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO II\n\nDe los delitos electorales",
+          "inicio": 134604,
+          "fin": 134645,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO III.\n\n(Capítulo sustituido por art. 37 de la Ley N° 27.504 B.O. 31/5/2019. Vigencia: el día siguiente de su publicación en el Boletín Oficial)\n\nProcedimiento de Aplicación de Sanciones Electorales.",
+          "inicio": 141982,
+          "fin": 142190,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO IV\n\nProcedimiento especial en la acción de amparo al elector.",
+          "inicio": 152604,
+          "fin": 152676,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TITULO VII\n\nSistema Electoral Nacional",
+          "inicio": 153966,
+          "fin": 154006,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO I\n\nDe la elección de Presidente y Vicepresidente de la Nación",
+          "inicio": 154006,
+          "fin": 154078,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO II\n\nDe la elección de Senadores Nacionales",
+          "inicio": 157696,
+          "fin": 157749,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO III\n\nDe los Diputados Nacionales",
+          "inicio": 159265,
+          "fin": 159308,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPITULO IV\n\nDe los parlamentarios del Mercosur\n\n(Capítulo incorporado por art. 7° de la Ley N° 27.120 B.O. 08/01/2015)",
+          "inicio": 162891,
+          "fin": 163012,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TITULO VIII\n\nDisposiciones Generales y Transitorias\n\nCapítulo Unico",
+          "inicio": 166761,
+          "fin": 166830,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        }
+      ],
+      "conservacion_contenido_no_blanco": true
+    },
+    "ley_pba.txt": {
+      "sha256": "3a953008981d0730bd4bc506ba14b076f30ed3ea6a49a96d210e8b6b882aa54e",
+      "caracteres_leidos": 83146,
+      "paginas_leidas": null,
+      "codificacion": "UTF-8",
+      "layout_eliminado": [],
+      "errores_extraccion": [],
+      "caracteres_limpios": 83111,
+      "articulos": 155,
+      "numeros_duplicados": {
+        "151": 2
+      },
+      "cantidad_duplicados": 1,
+      "anotaciones": 72,
+      "referencias": 92,
+      "advertencias": [
+        {
+          "id": "pba_5109_art_13",
+          "motivo": "Revisar alcance de la observación; no se determina vigencia."
+        },
+        {
+          "id": "pba_5109_art_25",
+          "motivo": "Revisar alcance de la observación; no se determina vigencia. TXT no conserva subrayado: no puede aislarse el pasaje afectado."
+        },
+        {
+          "id": "pba_5109_art_151__2",
+          "motivo": "Número duplicado 151; conservado sin decidir precedencia."
+        },
+        {
+          "id": null,
+          "motivo": "Contenido no clasificado conservado íntegramente en segmentos_fuera_articulos."
+        }
+      ],
+      "segmentos_fuera_articulos": [
+        {
+          "tipo": "no_clasificado",
+          "texto": "LEY N° 5.109\n\nTexto actualizado de la Ley N° 5.109 según Texto Ordenado por Decreto N° 997/93, con las modificaciones introducidas por las Leyes 11733, 11833, 12312, 12926, 13082, 13291, 14086, 14248, 14456, 14470, 14836, 14848 y 15315.\n\nVer Ley 15523 que modifica, por única vez, los plazos establecidos en el artículo 61 de la presente.\nLEY ELECTORAL",
+          "inicio": 0,
+          "fin": 354,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO I\n\nDERECHO ELECTORAL\n\nDE LOS ELECTORES",
+          "inicio": 354,
+          "fin": 403,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO II\n\nDE LA DIVISION ELECTORAL",
+          "inicio": 8638,
+          "fin": 8677,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO III\n\nDE LA JUNTA ELECTORAL",
+          "inicio": 15206,
+          "fin": 15243,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO IV\n\nDEL REGISTRO DE ELECTORES",
+          "inicio": 20830,
+          "fin": 20870,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO VI\n\nDE LAS MESAS RECEPTORAS DE VOTOS",
+          "inicio": 27614,
+          "fin": 27661,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO VII\n\nDE LOS FISCALES",
+          "inicio": 32448,
+          "fin": 32479,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO VIII\n\nDE LA UBICACIÓN DE LAS MESAS",
+          "inicio": 34496,
+          "fin": 34541,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO IX\n\nDEL CUARTO OBSCURO",
+          "inicio": 35519,
+          "fin": 35552,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO X\n\nDE LA BOLETA DE SUFRAGIO",
+          "inicio": 36386,
+          "fin": 36424,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO XI\n\nDE LAS CONVOCATORIAS",
+          "inicio": 38999,
+          "fin": 39034,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO XII\n\nDEL SUFRAGIO",
+          "inicio": 39656,
+          "fin": 39684,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO XIII\n\nDE LAS IMPUGNACIONES",
+          "inicio": 44778,
+          "fin": 44815,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO XIV\n\nDE LA CLAUSURA DEL COMICIO Y ESCRUTINIO PROVISORIO",
+          "inicio": 48346,
+          "fin": 48412,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO XV\n\nDEL ESCRUTINIO DEFINITIVO",
+          "inicio": 57337,
+          "fin": 57377,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO XVI\n\nDEL CUOCIENTE ELECTORAL",
+          "inicio": 62328,
+          "fin": 62367,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO XVII\n\nDE LA PROCLAMACIÓN Y DIPLOMAS DE CANDIDATOS",
+          "inicio": 64253,
+          "fin": 64313,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO XVIII\n\nDE LA ELECCIÓN CONJUNTA DE GOBERNADOR , VICEGOBERNADOR, DE SENADORES Y DIPUTADOS NACIONALES Y PROVINCIALES, Y DE INTENDENTES, CONCEJALES Y CONSEJEROS ESCOLARES\n\n(Título modificado por Ley 12.926)",
+          "inicio": 65072,
+          "fin": 65285,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO XIX\n\nFECHA DE LA ELECCIONES\n\n(Título según Ley 12.926)",
+          "inicio": 66389,
+          "fin": 66454,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO XX\n\nDE LAS ELECCIONES DE CONCEJALES, CONSEJEROS ESCOLARES O\n\nINTENDENTES MUNICIPALES (*)\n\n(*) Ley 5175",
+          "inicio": 66895,
+          "fin": 67008,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO XXI\n\nDEL REEMPLAZO DE LOS LEGISLADORES, DEL INTENDENTE, CONCEJALES Y CONSEJEROS ESCOLARES\n\n(Título según Ley 14.248)",
+          "inicio": 68897,
+          "fin": 69024,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO XXII\n\nDE LA ASAMBLEA LEGISLATIVA",
+          "inicio": 71211,
+          "fin": 71254,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO XXIII\n\nDE LAS ELECCIONES EXTRAORDINARIAS",
+          "inicio": 72505,
+          "fin": 72556,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO XXIV\n\nDISPOSICIONES PENALES",
+          "inicio": 72856,
+          "fin": 72894,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO XXV\n\nDISPOSICIONES GENERALES",
+          "inicio": 80395,
+          "fin": 80434,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO XXVI\n\nDISPOSICIONES COMPLEMENTARIAS\n\n(*) Ley 6224",
+          "inicio": 81190,
+          "fin": 81250,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO XXVII\n\nSISTEMA DE VOTO ELECTRÓNICO\n\n(Capítulo sustituido por Ley 13.082)",
+          "inicio": 81505,
+          "fin": 81588,
+          "pagina_inicio": null,
+          "pagina_fin": null
+        }
+      ],
+      "conservacion_contenido_no_blanco": true
+    },
+    "ley_sta_fe.pdf": {
+      "sha256": "2d2447623105b707a286a57b8853385cd9f8fe6f70cd504b4881a2fb3c08f4bb",
+      "caracteres_leidos": 201448,
+      "paginas_leidas": 70,
+      "codificacion": "texto PDF directo (sin OCR)",
+      "layout_eliminado": [
+        {
+          "pagina": 1,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 1,
+          "linea_extraida": 2,
+          "texto": "Página 1"
+        },
+        {
+          "pagina": 2,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 2,
+          "linea_extraida": 2,
+          "texto": "Página 2"
+        },
+        {
+          "pagina": 3,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 3,
+          "linea_extraida": 2,
+          "texto": "Página 3"
+        },
+        {
+          "pagina": 4,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 4,
+          "linea_extraida": 2,
+          "texto": "Página 4"
+        },
+        {
+          "pagina": 5,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 5,
+          "linea_extraida": 2,
+          "texto": "Página 5"
+        },
+        {
+          "pagina": 6,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 6,
+          "linea_extraida": 2,
+          "texto": "Página 6"
+        },
+        {
+          "pagina": 7,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 7,
+          "linea_extraida": 2,
+          "texto": "Página 7"
+        },
+        {
+          "pagina": 8,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 8,
+          "linea_extraida": 2,
+          "texto": "Página 8"
+        },
+        {
+          "pagina": 9,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 9,
+          "linea_extraida": 2,
+          "texto": "Página 9"
+        },
+        {
+          "pagina": 10,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 10,
+          "linea_extraida": 2,
+          "texto": "Página 10"
+        },
+        {
+          "pagina": 11,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 11,
+          "linea_extraida": 2,
+          "texto": "Página 11"
+        },
+        {
+          "pagina": 12,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 12,
+          "linea_extraida": 2,
+          "texto": "Página 12"
+        },
+        {
+          "pagina": 13,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 13,
+          "linea_extraida": 2,
+          "texto": "Página 13"
+        },
+        {
+          "pagina": 14,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 14,
+          "linea_extraida": 2,
+          "texto": "Página 14"
+        },
+        {
+          "pagina": 15,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 15,
+          "linea_extraida": 2,
+          "texto": "Página 15"
+        },
+        {
+          "pagina": 16,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 16,
+          "linea_extraida": 2,
+          "texto": "Página 16"
+        },
+        {
+          "pagina": 17,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 17,
+          "linea_extraida": 2,
+          "texto": "Página 17"
+        },
+        {
+          "pagina": 18,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 18,
+          "linea_extraida": 2,
+          "texto": "Página 18"
+        },
+        {
+          "pagina": 19,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 19,
+          "linea_extraida": 2,
+          "texto": "Página 19"
+        },
+        {
+          "pagina": 20,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 20,
+          "linea_extraida": 2,
+          "texto": "Página 20"
+        },
+        {
+          "pagina": 21,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 21,
+          "linea_extraida": 2,
+          "texto": "Página 21"
+        },
+        {
+          "pagina": 22,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 22,
+          "linea_extraida": 2,
+          "texto": "Página 22"
+        },
+        {
+          "pagina": 23,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 23,
+          "linea_extraida": 2,
+          "texto": "Página 23"
+        },
+        {
+          "pagina": 24,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 24,
+          "linea_extraida": 2,
+          "texto": "Página 24"
+        },
+        {
+          "pagina": 25,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 25,
+          "linea_extraida": 2,
+          "texto": "Página 25"
+        },
+        {
+          "pagina": 26,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 26,
+          "linea_extraida": 2,
+          "texto": "Página 26"
+        },
+        {
+          "pagina": 27,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 27,
+          "linea_extraida": 2,
+          "texto": "Página 27"
+        },
+        {
+          "pagina": 28,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 28,
+          "linea_extraida": 2,
+          "texto": "Página 28"
+        },
+        {
+          "pagina": 29,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 29,
+          "linea_extraida": 2,
+          "texto": "Página 29"
+        },
+        {
+          "pagina": 30,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 30,
+          "linea_extraida": 2,
+          "texto": "Página 30"
+        },
+        {
+          "pagina": 31,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 31,
+          "linea_extraida": 2,
+          "texto": "Página 31"
+        },
+        {
+          "pagina": 32,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 32,
+          "linea_extraida": 2,
+          "texto": "Página 32"
+        },
+        {
+          "pagina": 33,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 33,
+          "linea_extraida": 2,
+          "texto": "Página 33"
+        },
+        {
+          "pagina": 34,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 34,
+          "linea_extraida": 2,
+          "texto": "Página 34"
+        },
+        {
+          "pagina": 35,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 35,
+          "linea_extraida": 2,
+          "texto": "Página 35"
+        },
+        {
+          "pagina": 36,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 36,
+          "linea_extraida": 2,
+          "texto": "Página 36"
+        },
+        {
+          "pagina": 37,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 37,
+          "linea_extraida": 2,
+          "texto": "Página 37"
+        },
+        {
+          "pagina": 38,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 38,
+          "linea_extraida": 2,
+          "texto": "Página 38"
+        },
+        {
+          "pagina": 39,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 39,
+          "linea_extraida": 2,
+          "texto": "Página 39"
+        },
+        {
+          "pagina": 40,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 40,
+          "linea_extraida": 2,
+          "texto": "Página 40"
+        },
+        {
+          "pagina": 41,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 41,
+          "linea_extraida": 2,
+          "texto": "Página 41"
+        },
+        {
+          "pagina": 42,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 42,
+          "linea_extraida": 2,
+          "texto": "Página 42"
+        },
+        {
+          "pagina": 43,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 43,
+          "linea_extraida": 2,
+          "texto": "Página 43"
+        },
+        {
+          "pagina": 44,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 44,
+          "linea_extraida": 2,
+          "texto": "Página 44"
+        },
+        {
+          "pagina": 45,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 45,
+          "linea_extraida": 2,
+          "texto": "Página 45"
+        },
+        {
+          "pagina": 46,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 46,
+          "linea_extraida": 2,
+          "texto": "Página 46"
+        },
+        {
+          "pagina": 47,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 47,
+          "linea_extraida": 2,
+          "texto": "Página 47"
+        },
+        {
+          "pagina": 48,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 48,
+          "linea_extraida": 2,
+          "texto": "Página 48"
+        },
+        {
+          "pagina": 49,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 49,
+          "linea_extraida": 2,
+          "texto": "Página 49"
+        },
+        {
+          "pagina": 50,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 50,
+          "linea_extraida": 2,
+          "texto": "Página 50"
+        },
+        {
+          "pagina": 51,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 51,
+          "linea_extraida": 2,
+          "texto": "Página 51"
+        },
+        {
+          "pagina": 52,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 52,
+          "linea_extraida": 2,
+          "texto": "Página 52"
+        },
+        {
+          "pagina": 53,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 53,
+          "linea_extraida": 2,
+          "texto": "Página 53"
+        },
+        {
+          "pagina": 54,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 54,
+          "linea_extraida": 2,
+          "texto": "Página 54"
+        },
+        {
+          "pagina": 55,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 55,
+          "linea_extraida": 2,
+          "texto": "Página 55"
+        },
+        {
+          "pagina": 56,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 56,
+          "linea_extraida": 2,
+          "texto": "Página 56"
+        },
+        {
+          "pagina": 57,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 57,
+          "linea_extraida": 2,
+          "texto": "Página 57"
+        },
+        {
+          "pagina": 58,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 58,
+          "linea_extraida": 2,
+          "texto": "Página 58"
+        },
+        {
+          "pagina": 59,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 59,
+          "linea_extraida": 2,
+          "texto": "Página 59"
+        },
+        {
+          "pagina": 60,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 60,
+          "linea_extraida": 2,
+          "texto": "Página 60"
+        },
+        {
+          "pagina": 61,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 61,
+          "linea_extraida": 2,
+          "texto": "Página 61"
+        },
+        {
+          "pagina": 62,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 62,
+          "linea_extraida": 2,
+          "texto": "Página 62"
+        },
+        {
+          "pagina": 63,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 63,
+          "linea_extraida": 2,
+          "texto": "Página 63"
+        },
+        {
+          "pagina": 64,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 64,
+          "linea_extraida": 2,
+          "texto": "Página 64"
+        },
+        {
+          "pagina": 65,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 65,
+          "linea_extraida": 2,
+          "texto": "Página 65"
+        },
+        {
+          "pagina": 66,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 66,
+          "linea_extraida": 2,
+          "texto": "Página 66"
+        },
+        {
+          "pagina": 67,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 67,
+          "linea_extraida": 2,
+          "texto": "Página 67"
+        },
+        {
+          "pagina": 68,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 68,
+          "linea_extraida": 2,
+          "texto": "Página 68"
+        },
+        {
+          "pagina": 69,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 69,
+          "linea_extraida": 2,
+          "texto": "Página 69"
+        },
+        {
+          "pagina": 70,
+          "linea_extraida": 1,
+          "texto": "Texto  original  de la Ley N° 14478"
+        },
+        {
+          "pagina": 70,
+          "linea_extraida": 2,
+          "texto": "Página 70"
+        }
+      ],
+      "errores_extraccion": [],
+      "caracteres_limpios": 198126,
+      "articulos": 296,
+      "numeros_duplicados": {},
+      "cantidad_duplicados": 0,
+      "anotaciones": 6,
+      "referencias": 29,
+      "advertencias": [
+        {
+          "id": null,
+          "motivo": "Contenido no clasificado conservado íntegramente en segmentos_fuera_articulos."
+        }
+      ],
+      "segmentos_fuera_articulos": [
+        {
+          "tipo": "no_clasificado",
+          "texto": "REGISTRADA BAJO EL Nº 14478\n\nLA LEGISLATURA DE LA PROVINCIA DE SANTA FE\nSANCIONA CON FUERZA DE\nLEY:\n\nCÓDIGO ELECTORAL Y DE PARTIDOS POLÍTICOS",
+          "inicio": 0,
+          "fin": 142,
+          "pagina_inicio": 1,
+          "pagina_fin": 1
+        },
+        {
+          "tipo": "estructura",
+          "texto": "LIBRO I\nOBJETO, PRINCIPIOS RECTORES Y AUTORIDAD\nELECTORAL Y DE PARTIDOS POLÍTICOS",
+          "inicio": 142,
+          "fin": 224,
+          "pagina_inicio": 1,
+          "pagina_fin": 1
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO I\nPRINCIPIOS, DERECHOS Y GARANTÍAS",
+          "inicio": 224,
+          "fin": 266,
+          "pagina_inicio": 1,
+          "pagina_fin": 1
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO I\nÁMBITO DE APLICACIÓN Y ORDEN PÚBLICO",
+          "inicio": 266,
+          "fin": 314,
+          "pagina_inicio": 1,
+          "pagina_fin": 1
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO II\nPRINCIPIOS RECTORES",
+          "inicio": 9316,
+          "fin": 9348,
+          "pagina_inicio": 4,
+          "pagina_fin": 4
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO III\nDERECHOS Y GARANTÍAS POLÍTICO-ELECTORALES",
+          "inicio": 11441,
+          "fin": 11496,
+          "pagina_inicio": 5,
+          "pagina_fin": 5
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO II\nDE LAS AUTORIDADES Y ORGANISMOS ELECTORALES",
+          "inicio": 13179,
+          "fin": 13233,
+          "pagina_inicio": 5,
+          "pagina_fin": 5
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO I\nDEL Juez Electoral",
+          "inicio": 13233,
+          "fin": 13263,
+          "pagina_inicio": 5,
+          "pagina_fin": 5
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO II\nDE LA SECRETARÍA ELECTORAL",
+          "inicio": 19342,
+          "fin": 19381,
+          "pagina_inicio": 8,
+          "pagina_fin": 8
+        },
+        {
+          "tipo": "estructura",
+          "texto": "LIBRO II\nRÉGIMEN ELECTORAL",
+          "inicio": 21704,
+          "fin": 21731,
+          "pagina_inicio": 9,
+          "pagina_fin": 9
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO I\nDEL CUERPO ELECTORAL",
+          "inicio": 21731,
+          "fin": 21761,
+          "pagina_inicio": 9,
+          "pagina_fin": 9
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO I\nDE LAS PERSONAS ELECTORAS",
+          "inicio": 21761,
+          "fin": 21798,
+          "pagina_inicio": 9,
+          "pagina_fin": 9
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO II\nDEL PADRÓN ELECTORAL",
+          "inicio": 23615,
+          "fin": 23648,
+          "pagina_inicio": 9,
+          "pagina_fin": 9
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO II\nDE LA DIVISIÓN ELECTORAL\nCAPÍTULO ÚNICO\nDE LOS DISTRITOS, SECCIONES Y CIRCUITOS",
+          "inicio": 30145,
+          "fin": 30235,
+          "pagina_inicio": 12,
+          "pagina_fin": 12
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+          "inicio": 31006,
+          "fin": 31052,
+          "pagina_inicio": 12,
+          "pagina_fin": 12
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO I\nDE LA CONVOCATORIA Y OFICIALIZACIÓN\nDE LISTAS DE PERSONAS CANDIDATAS",
+          "inicio": 31052,
+          "fin": 31132,
+          "pagina_inicio": 12,
+          "pagina_fin": 12
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO II\nDE LAS BOLETAS ÚNICAS DE PAPEL",
+          "inicio": 39926,
+          "fin": 39969,
+          "pagina_inicio": 15,
+          "pagina_fin": 15
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO III\nDE LA RATIFICACIÓN Y UBICACIÓN DE LAS MESAS",
+          "inicio": 55004,
+          "fin": 55061,
+          "pagina_inicio": 20,
+          "pagina_fin": 20
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA",
+          "inicio": 56033,
+          "fin": 56090,
+          "pagina_inicio": 20,
+          "pagina_fin": 20
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO V\nDE LOS FISCALES DE LAS AGRUPACIONES POLÍTICAS",
+          "inicio": 60763,
+          "fin": 60820,
+          "pagina_inicio": 22,
+          "pagina_fin": 22
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO IV\nDEL ACTO ELECTORAL",
+          "inicio": 62122,
+          "fin": 62151,
+          "pagina_inicio": 22,
+          "pagina_fin": 22
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO I\nDISPOSICIONES COMUNES PARA ELECCIONES PRIMARIAS Y GENERALES",
+          "inicio": 62151,
+          "fin": 62222,
+          "pagina_inicio": 22,
+          "pagina_fin": 22
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO II\nDE LA APERTURA DEL ACTO Y LA EMISIÓN DEL SUFRAGIO",
+          "inicio": 66523,
+          "fin": 66585,
+          "pagina_inicio": 24,
+          "pagina_fin": 24
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO III\nDEL FUNCIONAMIENTO DE LAS MESAS Y LA CLAUSURA DEL ACTO",
+          "inicio": 67257,
+          "fin": 67325,
+          "pagina_inicio": 24,
+          "pagina_fin": 24
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO V\nDEL ESCRUTINIO",
+          "inicio": 74957,
+          "fin": 74982,
+          "pagina_inicio": 26,
+          "pagina_fin": 27
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO I\nDEL ESCRUTINIO DE MESA",
+          "inicio": 74982,
+          "fin": 75016,
+          "pagina_inicio": 27,
+          "pagina_fin": 27
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO II\nDE LA DIFUSIÓN DE DATOS PRELIMINARES",
+          "inicio": 81320,
+          "fin": 81369,
+          "pagina_inicio": 29,
+          "pagina_fin": 29
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO III\nDEL ESCRUTINIO DEFINITIVO",
+          "inicio": 84308,
+          "fin": 84347,
+          "pagina_inicio": 30,
+          "pagina_fin": 30
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO VI\nELECCIONES PRIMARIAS, ABIERTAS, SIMULTÁNEAS Y OBLIGATORIAS",
+          "inicio": 92608,
+          "fin": 92678,
+          "pagina_inicio": 33,
+          "pagina_fin": 33
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO I\nPROCESO DE SELECCIÓN DE CANDIDATOS",
+          "inicio": 92678,
+          "fin": 92724,
+          "pagina_inicio": 33,
+          "pagina_fin": 33
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO II\nDE LA PROCLAMACIÓN DE LA LISTA DE CANDIDATOS PARA\nELECCIONES GENERALES",
+          "inicio": 93824,
+          "fin": 93907,
+          "pagina_inicio": 33,
+          "pagina_fin": 33
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO VII\nELECCIONES GENERALES",
+          "inicio": 101639,
+          "fin": 101672,
+          "pagina_inicio": 36,
+          "pagina_fin": 36
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO I\nDEL PROCESO DE ELECCIONES GENERALES",
+          "inicio": 101672,
+          "fin": 101719,
+          "pagina_inicio": 36,
+          "pagina_fin": 36
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO II\nDE LA PROCLAMACIÓN DE LOS ELECTOS",
+          "inicio": 102174,
+          "fin": 102220,
+          "pagina_inicio": 36,
+          "pagina_fin": 36
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO III\nDE LA ELECCIÓN DE CONVENCIONALES\nMUNICIPALES. DISPOSICIONES GENERALES",
+          "inicio": 107159,
+          "fin": 107242,
+          "pagina_inicio": 38,
+          "pagina_fin": 38
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO VIII\nDE LA CAMPAÑA ELECTORAL",
+          "inicio": 108852,
+          "fin": 108888,
+          "pagina_inicio": 38,
+          "pagina_fin": 38
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO I\nDISPOSICIONES GENERALES",
+          "inicio": 108888,
+          "fin": 108923,
+          "pagina_inicio": 38,
+          "pagina_fin": 38
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO II\nRESTRICCIONES DURANTE LA CAMPAÑA",
+          "inicio": 113038,
+          "fin": 113083,
+          "pagina_inicio": 40,
+          "pagina_fin": 40
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO III\nPUBLICIDAD ELECTORAL EN MEDIOS AUDIOVISUALES",
+          "inicio": 116385,
+          "fin": 116443,
+          "pagina_inicio": 41,
+          "pagina_fin": 41
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO IV\nFINANCIAMIENTO DE LA CAMPAÑA ELECTORAL",
+          "inicio": 126366,
+          "fin": 126417,
+          "pagina_inicio": 44,
+          "pagina_fin": 44
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO V\nDEBATE ELECTORAL OBLIGATORIO",
+          "inicio": 131029,
+          "fin": 131069,
+          "pagina_inicio": 46,
+          "pagina_fin": 46
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO VI\nOBSERVADORES ELECTORALES",
+          "inicio": 133054,
+          "fin": 133091,
+          "pagina_inicio": 46,
+          "pagina_fin": 46
+        },
+        {
+          "tipo": "estructura",
+          "texto": "LIBRO III\nRÉGIMEN DE PARTIDOS POLÍTICOS",
+          "inicio": 135995,
+          "fin": 136036,
+          "pagina_inicio": 47,
+          "pagina_fin": 47
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO I\nPRINCIPIOS GENERALES\nCAPÍTULO ÚNICO",
+          "inicio": 136036,
+          "fin": 136081,
+          "pagina_inicio": 47,
+          "pagina_fin": 48
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO II\nFUNDACIÓN Y CONSTITUCIÓN DE LOS PARTIDOS",
+          "inicio": 139243,
+          "fin": 139294,
+          "pagina_inicio": 49,
+          "pagina_fin": 49
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO I\nREQUISITOS PARA SU RECONOCIMIENTO",
+          "inicio": 139294,
+          "fin": 139339,
+          "pagina_inicio": 49,
+          "pagina_fin": 49
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO II\nNOMBRE Y DEMÁS ATRIBUTOS",
+          "inicio": 144669,
+          "fin": 144706,
+          "pagina_inicio": 51,
+          "pagina_fin": 51
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO III\nORGANIZACIÓN DE LOS PARTIDOS CAPÍTULO ÚNICO",
+          "inicio": 147201,
+          "fin": 147256,
+          "pagina_inicio": 51,
+          "pagina_fin": 51
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO IV\nFUNCIONAMIENTO DE LOS PARTIDOS",
+          "inicio": 150385,
+          "fin": 150426,
+          "pagina_inicio": 53,
+          "pagina_fin": 53
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO I\nAFILIACIÓN",
+          "inicio": 150426,
+          "fin": 150448,
+          "pagina_inicio": 53,
+          "pagina_fin": 53
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO II\nFUNCIONAMIENTO INTERNO",
+          "inicio": 156109,
+          "fin": 156144,
+          "pagina_inicio": 55,
+          "pagina_fin": 55
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO III\nLIBROS Y DOCUMENTOS",
+          "inicio": 159856,
+          "fin": 159889,
+          "pagina_inicio": 56,
+          "pagina_fin": 56
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO IV\nREGISTRO DE ACTOS PARTIDARIOS",
+          "inicio": 160355,
+          "fin": 160397,
+          "pagina_inicio": 56,
+          "pagina_fin": 56
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO V\nPATRIMONIO DE LOS PARTIDOS",
+          "inicio": 160851,
+          "fin": 160887,
+          "pagina_inicio": 57,
+          "pagina_fin": 57
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO I\nBIENES Y RECURSOS",
+          "inicio": 160887,
+          "fin": 160916,
+          "pagina_inicio": 57,
+          "pagina_fin": 57
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO II\nFONDO PARTIDARIO PERMANENTE, SUBSIDIOS Y FRANQUICIAS",
+          "inicio": 162577,
+          "fin": 162642,
+          "pagina_inicio": 57,
+          "pagina_fin": 57
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO III\nCONTROL PATRIMONIAL",
+          "inicio": 164719,
+          "fin": 164752,
+          "pagina_inicio": 58,
+          "pagina_fin": 58
+        },
+        {
+          "tipo": "estructura",
+          "texto": "TÍTULO VI\nCADUCIDAD Y EXTINCIÓN DE LOS PARTIDOS\nCAPÍTULO ÚNICO",
+          "inicio": 165904,
+          "fin": 165967,
+          "pagina_inicio": 59,
+          "pagina_fin": 59
+        },
+        {
+          "tipo": "estructura",
+          "texto": "LIBRO IV\nFALTAS ELECTORALES Y RÉGIMEN SANCIONATORIO\n\nTÍTULO ÚNICO",
+          "inicio": 168762,
+          "fin": 168829,
+          "pagina_inicio": 60,
+          "pagina_fin": 60
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO I\nDISPOSICIONES GENERALES",
+          "inicio": 168829,
+          "fin": 168864,
+          "pagina_inicio": 60,
+          "pagina_fin": 60
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO II\nFALTAS DE LAS PERSONAS ELECTORAS",
+          "inicio": 175091,
+          "fin": 175136,
+          "pagina_inicio": 62,
+          "pagina_fin": 62
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO III\nFALTAS DE LAS AUTORIDADES DE MESA",
+          "inicio": 177733,
+          "fin": 177780,
+          "pagina_inicio": 63,
+          "pagina_fin": 63
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO IV\nFALTAS DE LAS AGRUPACIONES POLÍTICAS Y SUS REPRESENTANTES",
+          "inicio": 179144,
+          "fin": 179214,
+          "pagina_inicio": 64,
+          "pagina_fin": 64
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO V\nFALTAS DE FUNCIONARIOS PÚBLICOS Y MEDIOS DE COMUNICACION",
+          "inicio": 184784,
+          "fin": 184852,
+          "pagina_inicio": 65,
+          "pagina_fin": 65
+        },
+        {
+          "tipo": "estructura",
+          "texto": "LIBRO V\nDISPOSICIONES FINALES\n\nTÍTULO ÚNICO",
+          "inicio": 187864,
+          "fin": 187908,
+          "pagina_inicio": 66,
+          "pagina_fin": 66
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO I\nMODIFICACIONES",
+          "inicio": 187908,
+          "fin": 187934,
+          "pagina_inicio": 67,
+          "pagina_fin": 67
+        },
+        {
+          "tipo": "estructura",
+          "texto": "CAPÍTULO II\nDISPOSICIONES TRANSITORIAS",
+          "inicio": 193414,
+          "fin": 193453,
+          "pagina_inicio": 68,
+          "pagina_fin": 68
+        },
+        {
+          "tipo": "no_clasificado",
+          "texto": "DADA EN LA SALA DE SESIONES DE LA LEGISLATURA DE LA PROVINCIA DE\nSANTA FE, EL DIA VEINTISIETE AGOSTO DEL AÑO DOS MIL VEINTISÉIS.\nCLARA GARCÍA\nPresidenta\nCámara de Diputadas y Diputados\n\nFELIPE MICHLIG\nPresidente Provisional\nCámara de Senadores\n\nMARÍA PAULA SALARI\nSecretaria Parlamentaria\nCámara de Diputadas y Diputados\nAGUSTÍN CARLOS LEMOS\nSecretario Legislativo\nCámara de Senadores\nANEXOS\nDECRETO Nº 1844\nSanta Fe, 09 de Septiembre de 2026.\nV I S T O :\nLa aprobación de la Ley Nº 14.478 efectuada por la H. Legislatura, la cual se Anexa al presente;\nEL GOBERNADOR DE LA PROVINCIA\nD E C R E T A :\nPromúlgase como Ley del Estado, insértese en el Registro General de Leyes con el sello oficial,\npublíquese en el Boletín Oficial, cúmplase por todos a quienes corresponde observarla y hacerla\nobservar.-\nPULLARO\nBastía, Fabián Lionel",
+          "inicio": 197295,
+          "fin": 198126,
+          "pagina_inicio": 70,
+          "pagina_fin": 70
+        }
+      ],
+      "conservacion_contenido_no_blanco": true
+    }
+  }
+}
