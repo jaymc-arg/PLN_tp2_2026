@@ -48,6 +48,8 @@ El PDF se extrae con `langchain-community` / `PyPDFLoader` y `pypdf`; los TXT se
 - `datos/procesados/{nacional,pba,santa_fe}_articulos.jsonl`: un registro por artículo en orden de aparición.
 - `datos/procesados/chunks.jsonl`: vista recuperable por artículo, dividida con `RecursiveCharacterTextSplitter` (1000 caracteres, solapamiento 150); ejecutable por separado con `uv run python fragmentar.py`.
 - `datos/procesados/reporte_fragmentacion.json`: conteos y longitudes observadas de chunks.
+- `evalucacion/preguntas.json`: cinco preguntas de evaluación fijadas manualmente antes de probar retrieval: tres respondibles con una fuente por jurisdicción y dos ausentes del corpus.
+- `indexar.py`: indexación local Ollama + Chroma; `tests/test_indexar.py`: validación de metadatos, firmas y contrato de indexación con dobles de prueba (no sustituye una prueba del servicio real).
 - `datos/procesados/reporte_preprocesamiento.json`: SHA-256 originales, caracteres leídos/limpios, páginas, conteos, duplicados, notas, referencias, advertencias y contenido fuera de artículos.
 - `evalucacion/validacion_preprocesamiento.md`: cotejos y limitaciones de esta etapa, **no** evaluación de respuestas RAG.
 
@@ -80,8 +82,35 @@ Limitaciones preservadas, no resueltas por interpretación:
 
 La estructura **artículo primero** mantiene excepciones, incisos, anotaciones y procedencia juntos, incluso entre páginas. `RecursiveCharacterTextSplitter` subdivide cada vista por separado; el tamaño y solapamiento son caracteres, no tokens. Las citas sustantivas marcadas `texto_modificatorio` de Santa Fe 285–290 se mantienen en la vista; notas históricas/editoriales como la propuesta observada de PBA 13 no se indexan como texto principal. Los artículos con únicamente nota explícita de derogación reciben una descripción de índice literal derivada de esa nota, sin afirmación independiente de vigencia. El reporte no mide calidad de recuperación; embeddings y recuperación quedan fuera de esta etapa.
 
+## Índice vectorial local (TP2-RAG-04)
+
+Requiere Ollama instalado desde [ollama.com](https://ollama.com/) y su servicio local activo. En una terminal:
+
+```bash
+# Iniciar sólo si el servicio Ollama no está corriendo ya:
+ollama serve
+ollama pull bge-m3
+ollama list
+uv sync
+uv run python preprocesar.py
+uv run python fragmentar.py
+uv run python indexar.py
+```
+
+`indexar.py` lee los chunks ya generados, crea `Document` de LangChain, usa `OllamaEmbeddings(model="bge-m3", base_url="http://localhost:11434")` y persiste una colección `electoral_laws` bajo `.chroma/electoral_laws/` (ruta ignorada por Git). Al terminar verifica los IDs/cantidad, informa dimensión sólo si el embedding la devuelve y muestra una inspección semántica de hasta tres fragmentos. Esa consulta sirve para inspeccionar la conexión y el ranking, **no acredita que la respuesta a una pregunta sea correcta**. Las mismas preguntas de `evalucacion/preguntas.json` quedan fijas para una etapa posterior.
+
+La firma local contiene versión de esquema, nombre de colección, modelo y SHA-256 exacto de `chunks.jsonl`. Una repetición con la misma firma es idempotente (IDs estables y upsert); cambio de modelo o chunks detiene el uso y pide regenerar explícitamente:
+
+```bash
+uv run python indexar.py --rebuild
+```
+
+`--rebuild` elimina sólo el directorio de índice seleccionado, y se niega a borrar carpetas sin un manifest propio reconocido. También se puede seleccionar ruta/modelo mediante `--index-dir` y `--model`; no se debe cambiar el modelo si se pretende reutilizar el índice. Índice y embeddings se ejecutan localmente; no se consulta un proveedor remoto. Versiones verificadas en este entorno: Ollama `0.40.15`; modelo `bge-m3:latest` (ID `790764642607`, dimensión devuelta 1024); `langchain-chroma 0.2.6`, `langchain-ollama 0.3.10`, `chromadb 1.5.9`, cliente Python `ollama 0.6.3`. En la indexación observada hubo 828/828 IDs únicos y persistidos.
+
+El TXT/PDF no se modifica: el indexador sólo lee `chunks.jsonl`. La conversión omite campos `null` (en particular páginas para TXT) en metadatos Chroma y mantiene rango completo de páginas del artículo PDF, no páginas inventadas por chunk. La app no mide precisión de retrieval ni genera respuestas.
+
 ## Alcance pendiente
 
-Esto implementa únicamente TP2-RAG-01. Faltan embeddings locales, Chroma, generación con Ollama, Gradio, cinco pruebas RAG (tres respondibles y dos ausentes), reproducción integral en un directorio fresco, documentación final de asistencia de IA y demo/video. El notebook `trabajo_integrador_2_rag.ipynb` referido en la tarea no está presente en este checkout.
+Faltan ejecutar y analizar retrieval sobre las cinco preguntas fijas, generación local, Gradio, reproducción integral en un directorio fresco, documentación final de asistencia de IA y demo/video. El notebook `trabajo_integrador_2_rag.ipynb` referido en la tarea no está presente en este checkout.
 
 El agente implementó y ejecutó estas validaciones; no se afirma que el estudiante las haya revisado personalmente, grabado una demo o enviado la entrega. La declaración final de asistencia debe completar cuándo, modelos utilizados y qué verificó personalmente el estudiante.

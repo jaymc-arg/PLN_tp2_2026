@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "estado": "fixture fijo definido antes de inspeccionar resultados de recuperación; no modificar para favorecer resultados",
+  "uso": "Evaluación de retrieval en una etapa posterior; respuestas esperadas redactadas manualmente desde los JSONL de artículos.",
+  "preguntas": [
+    {
+      "id": "nacional_respondible_deber_votar",
+      "respondible": true,
+      "jurisdiccion": "nacional",
+      "pregunta": "¿Qué excepciones al deber de votar enumera el artículo 12 del Código Electoral Nacional?",
+      "fuentes_esperadas": ["nacional_19945_art_12"],
+      "respuesta_referencia": "El artículo 12 exceptúa a jueces y auxiliares obligados a concurrir a sus oficinas; a quienes el día de la elección estén a más de 500 km del lugar de votación por motivos razonables y acrediten su comparecencia ante la autoridad policial; a personas enfermas o imposibilitadas por fuerza mayor debidamente justificadas; y a personal de servicios públicos cuyas tareas impidan votar, con comunicación y certificación del empleador. La propia norma dice que las exenciones son optativas para el elector.",
+      "anotacion": "Síntesis manual; conserva condiciones y no amplía causales."
+    },
+    {
+      "id": "pba_respondible_representacion",
+      "respondible": true,
+      "jurisdiccion": "pba",
+      "pregunta": "Según el artículo 13 de la Ley Electoral bonaerense 5.109, ¿cuántos diputados y senadores integran la representación legislativa provincial?",
+      "fuentes_esperadas": ["pba_5109_art_13"],
+      "respuesta_referencia": "El texto principal del artículo 13 fija la representación en 92 diputados y 46 senadores. La propuesta observada de 100 diputados y 50 senadores aparece en una nota histórica/editorial y no es la respuesta que establece el texto principal del registro.",
+      "anotacion": "Ground truth contrastado con texto principal y nota diferenciada del artículo."
+    },
+    {
+      "id": "santa_fe_respondible_autoridad_mesa",
+      "respondible": true,
+      "jurisdiccion": "santa_fe",
+      "pregunta": "¿Cómo define el artículo 4 de la Ley 14.478 a la autoridad de mesa?",
+      "fuentes_esperadas": ["santa_fe_14478_art_4"],
+      "respuesta_referencia": "Es la persona que ejerce la presidencia de la mesa receptora de votos y, ante ausencia o impedimento, quien la reemplaza conforme al orden de designación establecido en el Código.",
+      "anotacion": "Definición literal del inciso b; el artículo se extiende por páginas 1–4."
+    },
+    {
+      "id": "ausente_resultado_electoral",
+      "respondible": false,
+      "jurisdiccion": null,
+      "pregunta": "¿Qué partido ganó la elección presidencial argentina de 2023 y cuántos votos obtuvo?",
+      "fuentes_esperadas": [],
+      "respuesta_referencia": "No respondible con este corpus: contiene legislación electoral, no resultados oficiales de elecciones.",
+      "anotacion": "Pregunta negativa sobre un hecho/resultados electorales ajeno a las tres normas incluidas."
+    },
+    {
+      "id": "ausente_gasto_real_partido",
+      "respondible": false,
+      "jurisdiccion": null,
+      "pregunta": "¿Cuánto dinero gastó efectivamente cada partido político en la campaña presidencial argentina de 2023?",
+      "fuentes_esperadas": [],
+      "respuesta_referencia": "No respondible con este corpus: las normas pueden regular financiamiento, pero no aportan las rendiciones contables reales de partidos para esa campaña.",
+      "anotacion": "Distinguir disposiciones o límites legales de datos contables observados que no forman parte de estas fuentes."
+    }
+  ]
+}
