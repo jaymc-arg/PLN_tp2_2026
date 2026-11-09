@@ -8,6 +8,8 @@ import json
 from pathlib import Path
 import re
 
+ROOT = Path(__file__).resolve().parent.parent
+
 SOURCES = (
     ("nacional", "19945", "ley_nacional.txt"),
     ("pba", "5109", "ley_pba.txt"),
@@ -242,7 +244,7 @@ def run(root: Path, output: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--entrada", type=Path, default=Path(__file__).parent / "datos")
-    parser.add_argument("--salida", type=Path, default=Path(__file__).parent / "datos/procesados")
+    parser.add_argument("--entrada", type=Path, default=ROOT / "datos")
+    parser.add_argument("--salida", type=Path, default=ROOT / "datos/procesados")
     args = parser.parse_args()
     run(args.entrada, args.salida)

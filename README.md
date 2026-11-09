@@ -20,10 +20,10 @@ Requiere Python **3.12** y `uv` (verificación realizada con uv 0.5.4). Desde la
 
 ```bash
 uv sync
-uv run python preprocesar.py
-uv run python fragmentar.py
+uv run python scripts/preprocesar.py
+uv run python scripts/fragmentar.py
 uv run pytest -q
-uv run python preprocesar.py
+uv run python scripts/preprocesar.py
 ```
 
 La última ejecución permite comparar los archivos; la prueba de determinismo también genera una segunda salida y compara sus bytes, incluido el reporte. No hay marcas de tiempo volátiles ni llamadas a servicios externos durante el procesamiento. `uv.lock` fija las dependencias; `requirements.txt` incluye ejecución y pruebas y se exporta con:
@@ -35,7 +35,7 @@ uv export --format requirements-txt --no-hashes --output-file requirements.txt
 Alternativa de rutas, sin modificar los originales:
 
 ```bash
-uv run python preprocesar.py --entrada datos --salida /tmp/tp2-procesados
+uv run python scripts/preprocesar.py --entrada datos --salida /tmp/tp2-procesados
 ```
 
 El PDF se extrae con `langchain-community` / `PyPDFLoader` y `pypdf`; los TXT se decodifican como UTF-8 estricto. Las versiones exactas están en el lock y en `requirements.txt`. Un archivo ausente, UTF-8 inválido o página PDF sin texto detiene la ejecución: no se sustituye ni se aplica OCR automáticamente.
@@ -44,12 +44,12 @@ El PDF se extrae con `langchain-community` / `PyPDFLoader` y `pypdf`; los TXT se
 
 `originales locales → lectura → limpieza de espacios/layout → artículos y anotaciones → JSONL + auditoría`
 
-- `preprocesar.py`: procesador y CLI; `tests/test_preprocesar.py`: fixtures sintéticos y corpus real.
+- `scripts/`: ejecutables del pipeline (`preprocesar.py`, `fragmentar.py`, `indexar.py`); sus rutas predeterminadas se resuelven respecto a la raíz del repositorio. `tests/`: pruebas del pipeline.
 - `datos/procesados/{nacional,pba,santa_fe}_articulos.jsonl`: un registro por artículo en orden de aparición.
-- `datos/procesados/chunks.jsonl`: vista recuperable por artículo, dividida con `RecursiveCharacterTextSplitter` (1000 caracteres, solapamiento 150); ejecutable por separado con `uv run python fragmentar.py`.
+- `datos/procesados/chunks.jsonl`: vista recuperable por artículo, dividida con `RecursiveCharacterTextSplitter` (1000 caracteres, solapamiento 150); ejecutable por separado con `uv run python scripts/fragmentar.py`.
 - `datos/procesados/reporte_fragmentacion.json`: conteos y longitudes observadas de chunks.
 - `evalucacion/preguntas.json`: cinco preguntas de evaluación fijadas manualmente antes de probar retrieval: tres respondibles con una fuente por jurisdicción y dos ausentes del corpus.
-- `indexar.py`: indexación local Ollama + Chroma; `tests/test_indexar.py`: validación de metadatos, firmas y contrato de indexación con dobles de prueba (no sustituye una prueba del servicio real).
+- `scripts/indexar.py`: indexación local Ollama + Chroma; `tests/test_indexar.py`: validación de metadatos, firmas y contrato de indexación con dobles de prueba (no sustituye una prueba del servicio real).
 - `datos/procesados/reporte_preprocesamiento.json`: SHA-256 originales, caracteres leídos/limpios, páginas, conteos, duplicados, notas, referencias, advertencias y contenido fuera de artículos.
 - `evalucacion/validacion_preprocesamiento.md`: cotejos y limitaciones de esta etapa, **no** evaluación de respuestas RAG.
 
@@ -92,17 +92,17 @@ ollama serve
 ollama pull bge-m3
 ollama list
 uv sync
-uv run python preprocesar.py
-uv run python fragmentar.py
-uv run python indexar.py
+uv run python scripts/preprocesar.py
+uv run python scripts/fragmentar.py
+uv run python scripts/indexar.py
 ```
 
-`indexar.py` lee los chunks ya generados, crea `Document` de LangChain, usa `OllamaEmbeddings(model="bge-m3", base_url="http://localhost:11434")` y persiste una colección `electoral_laws` bajo `.chroma/electoral_laws/` (ruta ignorada por Git). Al terminar verifica los IDs/cantidad, informa dimensión sólo si el embedding la devuelve y muestra una inspección semántica de hasta tres fragmentos. Esa consulta sirve para inspeccionar la conexión y el ranking, **no acredita que la respuesta a una pregunta sea correcta**. Las mismas preguntas de `evalucacion/preguntas.json` quedan fijas para una etapa posterior.
+`scripts/indexar.py` lee los chunks ya generados, crea `Document` de LangChain, usa `OllamaEmbeddings(model="bge-m3", base_url="http://localhost:11434")` y persiste una colección `electoral_laws` bajo `.chroma/electoral_laws/` (ruta ignorada por Git). Al terminar verifica los IDs/cantidad, informa dimensión sólo si el embedding la devuelve y muestra una inspección semántica de hasta tres fragmentos. Esa consulta sirve para inspeccionar la conexión y el ranking, **no acredita que la respuesta a una pregunta sea correcta**. Las mismas preguntas de `evalucacion/preguntas.json` quedan fijas para una etapa posterior.
 
 La firma local contiene versión de esquema, nombre de colección, modelo y SHA-256 exacto de `chunks.jsonl`. Una repetición con la misma firma es idempotente (IDs estables y upsert); cambio de modelo o chunks detiene el uso y pide regenerar explícitamente:
 
 ```bash
-uv run python indexar.py --rebuild
+uv run python scripts/indexar.py --rebuild
 ```
 
 `--rebuild` elimina sólo el directorio de índice seleccionado, y se niega a borrar carpetas sin un manifest propio reconocido. También se puede seleccionar ruta/modelo mediante `--index-dir` y `--model`; no se debe cambiar el modelo si se pretende reutilizar el índice. Índice y embeddings se ejecutan localmente; no se consulta un proveedor remoto. Versiones verificadas en este entorno: Ollama `0.40.15`; modelo `bge-m3:latest` (ID `790764642607`, dimensión devuelta 1024); `langchain-chroma 0.2.6`, `langchain-ollama 0.3.10`, `chromadb 1.5.9`, cliente Python `ollama 0.6.3`. En la indexación observada hubo 828/828 IDs únicos y persistidos.

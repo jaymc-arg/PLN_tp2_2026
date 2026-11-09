@@ -14,7 +14,7 @@ from langchain_core.documents import Document
 from langchain_chroma import Chroma
 from langchain_ollama import OllamaEmbeddings
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_INPUT = ROOT / "datos/procesados/chunks.jsonl"
 DEFAULT_INDEX = ROOT / ".chroma/electoral_laws"
 COLLECTION = "electoral_laws"

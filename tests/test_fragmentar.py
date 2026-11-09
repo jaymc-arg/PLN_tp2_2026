@@ -4,8 +4,8 @@ from pathlib import Path
 
 import pytest
 
-from fragmentar import build_chunks, indexable_text, normalize_visual_wraps
-from preprocesar import run
+from scripts.fragmentar import build_chunks, indexable_text, normalize_visual_wraps
+from scripts.preprocesar import run
 
 ROOT = Path(__file__).resolve().parents[1]
 

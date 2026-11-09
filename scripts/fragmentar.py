@@ -10,6 +10,7 @@ import statistics
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
+ROOT = Path(__file__).resolve().parent.parent
 JURISDICTIONS = ("nacional", "pba", "santa_fe")
 REPEAL = re.compile(r"^\(Artículo derogado\b[^)]*\)$", re.I)
 LIST_ITEM = re.compile(r"^(?:(?:[a-záéíóúñ]|\d+|[ivxlcdm]+)[.)]|[-•])\s", re.I)
@@ -131,8 +132,8 @@ def summarize(chunks: list[dict], skipped: list[dict], chunk_size: int, chunk_ov
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--entrada", type=Path, default=Path(__file__).parent / "datos/procesados")
-    parser.add_argument("--salida", type=Path, default=Path(__file__).parent / "datos/procesados/chunks.jsonl")
+    parser.add_argument("--entrada", type=Path, default=ROOT / "datos/procesados")
+    parser.add_argument("--salida", type=Path, default=ROOT / "datos/procesados/chunks.jsonl")
     parser.add_argument("--chunk-size", type=int, default=1000)
     parser.add_argument("--chunk-overlap", type=int, default=150)
     args = parser.parse_args()

@@ -5,7 +5,7 @@ import re
 
 import pytest
 
-from preprocesar import SOURCES, annotations, load_source, normalize, parse_lines, run
+from scripts.preprocesar import SOURCES, annotations, load_source, normalize, parse_lines, run
 
 ROOT = Path(__file__).resolve().parents[1]
 HASHES = {

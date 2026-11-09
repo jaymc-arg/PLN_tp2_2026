@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 from langchain_core.documents import Document
 
-from indexar import (
+from scripts.indexar import (
     COLLECTION, DEFAULT_MODEL, IndexConfigurationError, chunk_metadata,
     make_signature, prepare_index_dir, read_chunks, run_index, to_documents,
 )
