@@ -44,7 +44,7 @@ El PDF se extrae con `langchain-community` / `PyPDFLoader` y `pypdf`; los TXT se
 
 `originales locales → lectura → limpieza de espacios/layout → artículos y anotaciones → JSONL + auditoría`
 
-- `scripts/`: ejecutables del pipeline (`preprocesar.py`, `fragmentar.py`, `indexar.py`); sus rutas predeterminadas se resuelven respecto a la raíz del repositorio. `tests/`: pruebas del pipeline.
+- `scripts/`: ejecutables (`preprocesar.py`, `fragmentar.py`, `indexar.py`, `recuperar.py`, `evaluar_recuperacion.py`); sus rutas predeterminadas se resuelven respecto a la raíz del repositorio. `tests/`: pruebas del pipeline y retrieval.
 - `datos/procesados/{nacional,pba,santa_fe}_articulos.jsonl`: un registro por artículo en orden de aparición.
 - `datos/procesados/chunks.jsonl`: vista recuperable por artículo, dividida con `RecursiveCharacterTextSplitter` (1000 caracteres, solapamiento 150); ejecutable por separado con `uv run python scripts/fragmentar.py`.
 - `datos/procesados/reporte_fragmentacion.json`: conteos y longitudes observadas de chunks.
@@ -97,7 +97,7 @@ uv run python scripts/fragmentar.py
 uv run python scripts/indexar.py
 ```
 
-`scripts/indexar.py` lee los chunks ya generados, crea `Document` de LangChain, usa `OllamaEmbeddings(model="bge-m3", base_url="http://localhost:11434")` y persiste una colección `electoral_laws` bajo `.chroma/electoral_laws/` (ruta ignorada por Git). Al terminar verifica los IDs/cantidad, informa dimensión sólo si el embedding la devuelve y muestra una inspección semántica de hasta tres fragmentos. Esa consulta sirve para inspeccionar la conexión y el ranking, **no acredita que la respuesta a una pregunta sea correcta**. Las mismas preguntas de `evalucacion/preguntas.json` quedan fijas para una etapa posterior.
+`scripts/indexar.py` lee los chunks ya generados, crea `Document` de LangChain, usa `OllamaEmbeddings(model="bge-m3", base_url="http://localhost:11434")` y persiste una colección `electoral_laws` bajo `.chroma/electoral_laws/` (ruta ignorada por Git). Al terminar verifica los IDs/cantidad, informa dimensión sólo si el embedding la devuelve y muestra una inspección semántica de hasta tres fragmentos. Esa consulta sirve para inspeccionar la conexión y el ranking, **no acredita que la respuesta a una pregunta sea correcta**. Las preguntas fijas se evalúan por separado en `evalucacion/` mediante retrieval read-only.
 
 La firma local contiene versión de esquema, nombre de colección, modelo y SHA-256 exacto de `chunks.jsonl`. Una repetición con la misma firma es idempotente (IDs estables y upsert); cambio de modelo o chunks detiene el uso y pide regenerar explícitamente:
 
@@ -109,8 +109,22 @@ uv run python scripts/indexar.py --rebuild
 
 El TXT/PDF no se modifica: el indexador sólo lee `chunks.jsonl`. La conversión omite campos `null` (en particular páginas para TXT) en metadatos Chroma y mantiene rango completo de páginas del artículo PDF, no páginas inventadas por chunk. La app no mide precisión de retrieval ni genera respuestas.
 
+## Recuperación semántica y evaluación (TP2-RAG-05)
+
+Con el índice existente y Ollama activo, consulta sin filtro o restringe en Chroma por jurisdicción:
+
+```bash
+uv run python scripts/recuperar.py --pregunta "¿Qué excepciones al deber de votar establece el Código Electoral Nacional?" --k 5
+uv run python scripts/recuperar.py --pregunta "¿Cómo define Santa Fe la autoridad de mesa?" --jurisdiccion santa_fe --k 5
+uv run python scripts/evaluar_recuperacion.py
+```
+
+`--k` debe ser positivo; `--jurisdiccion` acepta `nacional`, `pba`, `santa_fe` y, si se omite, no se aplica filtro. La capa valida modelo/corpus/manifiesto y abre la colección con creación deshabilitada: no llama al indexador, no agrega ni re-embebe documentos. Distancia nativa Chroma menor significa vecino más cercano, **no** probabilidad de respuesta correcta. El API y el JSON conservan texto completo, ID, fuente, artículo y páginas PDF disponibles; TXT no recibe páginas inventadas. Los resultados negativos también tienen vecinos; retrieval no decide abstención.
+
+La ejecución evaluó una vez cada combinación requerida con k=5. `evalucacion/reporte_recuperacion.json` guarda los rankings completos, métricas por artículo, inspecciones manuales de pasajes realizadas por el agente (pendientes de verificación personal del estudiante), paráfrasis, comparación k=1/k=3, un preview numerado con texto íntegro e integridad del índice. `validacion_recuperacion.md` resume la evidencia; `distancias_recuperacion.svg` grafica distancias reales del top-3. En esta corrida, sin filtro y filtrada, Hit@1/3/5 fueron **0.667** y MRR@5 **0.667** (denominador: tres positivas; las negativas se excluyen). La cobertura de pasaje top-3, inspeccionada manualmente por el agente, fue nacional **parcial**, PBA **sí**, Santa Fe **no** en ambos modos. El índice/article hit no equivale a evidencia completa: el chunk siguiente del art. 12 nacional no aparece en top-5; el art. 4 santafesino no aparece en top-5 aunque sí está en los chunks, y el top vecino es el art. 67. Ver reporte para fuentes, distancias, revisión de preguntas ausentes y limitaciones.
+
 ## Alcance pendiente
 
-Faltan ejecutar y analizar retrieval sobre las cinco preguntas fijas, generación local, Gradio, reproducción integral en un directorio fresco, documentación final de asistencia de IA y demo/video. El notebook `trabajo_integrador_2_rag.ipynb` referido en la tarea no está presente en este checkout.
+Faltan generación local, Gradio, reproducción integral en un directorio fresco, documentación final de asistencia de IA y demo/video. El notebook `trabajo_integrador_2_rag.ipynb` referido en la tarea no está presente en este checkout.
 
 El agente implementó y ejecutó estas validaciones; no se afirma que el estudiante las haya revisado personalmente, grabado una demo o enviado la entrega. La declaración final de asistencia debe completar cuándo, modelos utilizados y qué verificó personalmente el estudiante.
