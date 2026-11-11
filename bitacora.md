@@ -4,8 +4,8 @@
 **Materia:** Procesamiento de Lenguaje Natural — Tecnicatura Superior en Ciencia de Datos e Inteligencia Artificial, IFTS N.º 24  
 **Repositorio:** [jaymc-arg/PLN_tp2_2026](https://github.com/jaymc-arg/PLN_tp2_2026)  
 **Período documentado:** inicio del proyecto al **11 de noviembre de 2026**  
-**Última etapa incorporada:** `TP2-RAG-05` (commit `81690cf`; README actualizado en `605b5af`, 11 de noviembre de 2026).
-**Estado:** corpus preparado, indexado en Chroma con `bge-m3` y **recuperación semántica implementada y evaluada sobre cinco preguntas fijas**. Se identificaron fallas de cobertura de evidencia que aún requieren experimentación. **No se implementó ni evaluó la generación de respuestas.**
+**Última etapa incorporada:** `TP2-RAG-06` (commit `28f26ef`, 11 de noviembre de 2026).
+**Estado:** corpus procesado, 828 chunks indexados en Chroma con `bge-m3`, recuperación evaluada y **generación local implementada con `granite4:latest`**. Se registraron respuestas reales para cinco preguntas fijas, incluidos aciertos de abstención y errores de fundamentación y citas. **No se implementó todavía la interfaz Gradio ni se resolvieron las fallas de recuperación detectadas.**
 
 > **Propósito de esta bitácora.** Registrar las decisiones, los problemas encontrados, las correcciones realizadas y la evidencia que permite comprobarlas. No es un manual de instalación ni un registro exhaustivo de comandos del agente. Se ampliará a medida que avance el trabajo y se obtengan resultados del sistema RAG.
 
@@ -112,7 +112,36 @@ La evaluación se implementó en [`scripts/evaluar_recuperacion.py`](scripts/eva
 
 **Decisión posterior.** Se conserva el índice como línea de base y se registran los errores, en vez de modificar las preguntas para mejorar artificialmente las métricas. Antes de confiar en la generación corresponde **experimentar y comparar** recuperación dirigida por metadatos cuando se mencione un artículo concreto y expansión a chunks contiguos del mismo artículo; verificar si esas estrategias incorporan el inciso `d)` nacional y la definición santafesina. Estos experimentos **aún no están implementados ni evaluados**. Tampoco se fija un umbral universal de distancia para afirmar que una pregunta puede responderse.
 
-## 3. Resultados medibles al cierre de `TP2-RAG-05`
+### Etapa 6 — Generación local con contexto y fuentes (`TP2-RAG-06`)
+
+**Problema abordado.** La recuperación de `TP2-RAG-05` demostró que una coincidencia semántica no garantiza disponer del pasaje necesario. El siguiente desafío era comprobar cómo responde un modelo generativo ante fragmentos relevantes, incompletos o de otras jurisdicciones; si se abstiene al faltar evidencia; y si sus citas corresponden a lo que recibió realmente. El propósito de esta etapa fue **observar y documentar** el comportamiento del RAG, no presentar una tasa de exactitud general a partir de cinco casos.
+
+**Decisiones y acciones:**
+
+1. **Generación local y reutilización del índice.** Se implementó [`scripts/generar.py`](scripts/generar.py), integrado con `SemanticRetriever`, `ChatPromptTemplate`, `ChatOllama` y `StrOutputParser`. Se utilizó `granite4:latest` en Ollama local, con temperatura **0**, mientras `bge-m3` permaneció como modelo de embeddings. La versión observada de Granite fue **3,4B parámetros, cuantización Q4_K_M** (digest `4235724a127c…`). No se reconstruyó el índice ni se modificaron los chunks.
+2. **Contexto explícito y auditable.** El generador envía los fragmentos completos obtenidos por recuperación en orden, con referencias numeradas `[1]`, `[2]`, etc. El resultado conserva la pregunta, el texto **exactamente enviado como contexto** (`context_sent`), los IDs, fuentes, artículos, jurisdicciones, páginas disponibles, respuesta literal del modelo y mapa de referencias. La instrucción solicita responder en español sólo con la evidencia y no mezclar jurisdicciones; ante información insuficiente, pide responder literalmente: «No encuentro esa información en los documentos».
+3. **Comprobar citas sin encubrir fallos.** Se comprueba automáticamente si las referencias tienen el formato esperado, si falta una cita o si un número no corresponde a un fragmento enviado. **Este control no comprueba que una afirmación esté respaldada semánticamente**. Las respuestas originales se guardan sin insertar ni corregir citas a posteriori. Si la recuperación está vacía, no se invoca Granite y se devuelve una abstención explícita; esta situación es distinta de una respuesta insuficientemente fundamentada pero no vacía.
+4. **Mantener el conjunto de evaluación fijo.** [`scripts/evaluar_generacion.py`](scripts/evaluar_generacion.py) ejecutó las **tres preguntas respondibles y las dos no respondibles** ya definidas en `evalucacion/preguntas.json`, con **k=3 sin filtro jurisdiccional**. Los resultados y el contexto utilizado se conservaron en [`reporte_generacion.json`](evalucacion/reporte_generacion.json). La inspección textual fue registrada por el agente en [`revision_manual_generacion.json`](evalucacion/revision_manual_generacion.json) y contrastada con las respuestas originales mediante hashes. No equivale a validación jurídica independiente.
+
+**Resultados de las cinco preguntas fijas:**
+
+| Pregunta | Evidencia recibida por Granite | Respuesta observada | Diagnóstico |
+|---|---|---|---|
+| **Nación, art. 12:** excepciones al voto | Primer chunk del art. 12 nacional, seguido de PBA art. 4 y Santa Fe art. 77 | Enumeró las causales **a–c**, pero omitió la **d** y el carácter optativo. Citó `[1]`. | **Parcial e imprecisa:** faltaba la continuación del artículo; además incorporó una formulación bonaerense sobre la acreditación, atribuyéndola incorrectamente a la fuente nacional `[1]`. Cita formalmente válida, pero respaldo semántico defectuoso. |
+| **PBA, art. 13:** composición legislativa | Art. 13 bonaerense en primer lugar | Respondió **92 diputados y 46 senadores**. | **Contenido correcto para la consulta**, pero **sin la cita `[1]` exigida**. La nota histórica observada sobre 100/50 no estaba en la vista indexada. |
+| **Santa Fe, art. 4:** definición de autoridad de mesa | Santa Fe arts. 67 y 59, y Nación art. 72; **sin art. 4** | Atribuyó al art. 4 información sobre presidencia, suplentes y balotaje; agregó `[1][2][4]`. | **Error crítico:** respondió sin la fuente solicitada, mezcló jurisdicciones, no se abstuvo y citó **`[4]`, referencia inexistente** entre los tres fragmentos enviados. |
+| **Resultado presidencial 2023** (fuera del corpus) | Fragmentos de reglas electorales sin resultados observados | «No encuentro esa información en los documentos». | **Abstención correcta** en esta ejecución. |
+| **Gastos reales de campaña 2023** (fuera del corpus) | Disposiciones sobre cuentas y límites legales, sin rendiciones reales | «No encuentro esa información en los documentos». | **Abstención correcta** en esta ejecución; no confundió topes legales con gastos efectivos. |
+
+**Experimento `k=1` frente a `k=3`.** Para la pregunta nacional se mantuvieron modelo, temperatura y prompt; sólo cambió la cantidad de fragmentos recuperados. **Ambas respuestas fueron parciales** porque no llegó el segundo chunk nacional. Con **k=1** el modelo conservó la referencia a la autoridad policial más próxima y su certificación, respaldadas por `[1]`. Con **k=3** aparecieron normas provinciales similares y la respuesta sustituyó ese detalle por «autoridad que corresponda», expresión del fragmento bonaerense, pero la adjudicó a `[1]`. En este caso **agregar fragmentos empeoró la atribución normativa sin mejorar la cobertura**. No se infiere de un único experimento que k=1 sea siempre superior.
+
+**Qué aprendimos.** En las tres preguntas respondibles hubo al menos una deficiencia: omisión de evidencia y contaminación de fuente (Nación), falta de cita (PBA) o respuesta sin la disposición pedida y referencia inventada (Santa Fe). **Sólo PBA obtuvo una respuesta sustantivamente correcta y suficiente para su pregunta concreta, aunque incumplió la citación**. Las dos preguntas negativas terminaron en abstención, pero el caso de Santa Fe demuestra que **la instrucción de abstenerse no es una barrera confiable cuando se recupera evidencia temática pero insuficiente**. El cotejo de números de cita es necesario y no suficiente.
+
+**Verificación y límites.** La ejecución real documentada utilizó Ollama **0.40.15**, `granite4:latest`, temperatura **0**, y mantuvo intactos los **828 registros**, los IDs y el manifiesto Chroma antes y después. `tests/test_generar.py` cubre con dobles de prueba contexto, metadatos, citas, abstención y errores del runtime; el material inspeccionado **no aporta un conteo final de la suite completa**, por lo que no se inventa. Los informes permiten cotejar cada respuesta con el texto enviado, pero el análisis fue realizado por el agente y debe ser revisado por el estudiante. La configuración con temperatura 0 no garantiza veracidad ni repetibilidad.
+
+**Evidencia:** [`scripts/generar.py`](scripts/generar.py), [`scripts/evaluar_generacion.py`](scripts/evaluar_generacion.py), [`tests/test_generar.py`](tests/test_generar.py), [`evalucacion/reporte_generacion.json`](evalucacion/reporte_generacion.json), [`evalucacion/revision_manual_generacion.json`](evalucacion/revision_manual_generacion.json) y [`evalucacion/validacion_generacion.md`](evalucacion/validacion_generacion.md).
+
+## 3. Resultados medibles al cierre de `TP2-RAG-06`
 
 | Indicador | Nación | Buenos Aires | Santa Fe | Total |
 |---|---:|---:|---:|---:|
@@ -146,6 +175,8 @@ No se registraron artículos sin vista indexable ni fragmentos que superaran los
 
 En cobertura del pasaje top-3: **Nación parcial; PBA suficiente; Santa Fe ausente**, en ambos modos. Las dos preguntas negativas no encuentran evidencia que fundamente la respuesta, aunque Chroma siempre devuelva vecinos. El índice conserva **828 IDs** antes y después de las consultas. `tests/test_recuperar.py` incorpora **11 funciones de prueba**; no se atribuye una nueva cifra de *suite* completa aprobada sin registro de su ejecución en los informes consultados.
 
+**Resultado de generación `TP2-RAG-06`:** `granite4:latest` (3,4B, Q4_K_M), con temperatura **0** y **k=3** sobre las mismas cinco preguntas, sin filtro jurisdiccional. Las respuestas fueron: **Nación parcial y con contaminación de fuente**, **PBA sustantivamente correcta pero sin cita**, **Santa Fe incorrectamente atribuida al artículo 4, con cita `[4]` inexistente y sin abstención**, y **dos abstenciones correctas** en las preguntas fuera del corpus. En esta muestra **ninguna de las tres respuestas positivas cumplió simultáneamente cobertura suficiente y requisito de citas**; esto no es una tasa poblacional de exactitud. El experimento `k=1`/`k=3` sobre Nación mantuvo la omisión de la causal `d)` y mostró que el contexto adicional introdujo una atribución de PBA a Nación. El índice siguió en **828/828** registros, sin alteraciones.
+
 Las seis advertencias no son seis fallos: incluyen prefacios o cierres ajenos al articulado, la duplicación documentada del artículo 151 y las observaciones normativas de los artículos 13 y 25 de PBA. El reporte no determina vigencia legal.
 
 La etapa `TP2-RAG-03` cerró con **32 pruebas automatizadas aprobadas**, ejecuciones repetidas de los procesadores con resultados idénticos y verificación de SHA-256 de los archivos de origen. La etapa `TP2-RAG-04` registra **39 pruebas aprobadas** y comprobaciones adicionales del índice real. Estos son **resultados consignados por el agente de programación**; la inspección posterior del repositorio corroboró la implementación y los casos documentados, pero no equivale a una auditoría visual exhaustiva de las 70 páginas ni a una reconstrucción independiente del índice en otro equipo.
@@ -155,11 +186,11 @@ La etapa `TP2-RAG-03` cerró con **32 pruebas automatizadas aprobadas**, ejecuci
 - **Fidelidad antes que limpieza agresiva:** una nota o excepción mal eliminada puede cambiar el significado de una disposición. Por eso el texto completo permanece disponible aun cuando exista una vista simplificada para recuperación.
 - **Trazabilidad:** es posible relacionar cada chunk con su artículo y documento, y reconstruir las salidas a partir de las fuentes versionadas.
 - **Índice reconstruible y consistente:** Chroma conserva IDs y metadatos; un manifiesto asociado al hash de los chunks y al modelo impide mezclar configuraciones de forma inadvertida. La carpeta del índice no se sube al repositorio.
-- **Distinción entre recuperar y responder:** `bge-m3` identifica vecinos semánticos, pero no genera respuestas ni decide suficiencia jurídica. En la evaluación, **dos aciertos de artículo no significaron dos respuestas completas**: Nación sólo aportó evidencia parcial. Las distancias nativas no deben presentarse como probabilidades de certeza.
+- **Distinción entre recuperar, generar y fundamentar:** `bge-m3` identifica vecinos semánticos, pero no decide suficiencia jurídica; `granite4:latest` genera lenguaje a partir del contexto recibido. En la evaluación, **dos aciertos de artículo no significaron dos respuestas completas**: Nación sólo aportó evidencia parcial. La generación confirmó que un fragmento temáticamente próximo puede producir una respuesta atribuida a otra norma. Las distancias nativas no representan probabilidades de certeza.
 - **Sin resolución jurídica automática:** la presencia de un artículo en un texto actualizado o de una nota modificatoria no prueba por sí sola que todas las disposiciones relacionadas estén contempladas.
 - **Tratamiento diferenciado de los formatos:** TXT sin páginas originales; PDF con página inicial y final del artículo. No se inventaron páginas para los TXT ni una correspondencia precisa por chunk que todavía no ha sido validada.
-- **Limitaciones menores aún visibles:** ciertas vistas auxiliares pueden conservar puntuación aislada al retirar notas; la fragmentación recursiva puede dejar poco o ningún solapamiento efectivo. Ambos aspectos podrán contrastarse con resultados de búsqueda reales.
-- **Alcance de la validación:** además de ingesta, fragmentación e indexación, se evaluó **recuperación semántica en cinco preguntas fijadas**, con métricas por artículo, verificación del pasaje y casos negativos. La recuperación resultó incompleta en Nación y fallida para el artículo 4 santafesino. **Todavía no se evaluaron la calidad de respuestas generadas ni la abstención efectiva del LLM.**
+- **Limitaciones de fragmentación:** ciertas vistas auxiliares pueden conservar puntuación aislada al retirar notas; la fragmentación recursiva puede dejar poco o ningún solapamiento efectivo. La falta del segundo chunk nacional muestra una consecuencia concreta de cobertura, aunque no permite atribuir el fallo únicamente al solapamiento.
+- **Alcance de la validación:** se evaluaron **recuperación y generación local sobre cinco preguntas fijadas**. Además del hit por artículo y la cobertura del pasaje, se contrastó cada salida de Granite con las fuentes realmente enviadas. En este lote hubo dos abstenciones pertinentes, pero las tres respuestas positivas tuvieron defectos de cobertura o citas. **El control automático de referencias sólo detecta errores sintácticos y números inexistentes, no respalda semánticamente el contenido ni garantiza abstención.**
 - **Pendientes documentales menores identificados en la revisión:** la tabla inicial de `evalucacion/validacion_preprocesamiento.md` muestra **74** anotaciones bonaerenses, pero el reporte de auditoría y los registros JSONL actuales contienen **72**. Asimismo, el README conserva una frase desactualizada que describe los enlaces de las fuentes como desconocidos, aunque `datos/fuentes.csv` ya consigna enlaces. Son inconsistencias de documentación, no problemas del índice; se deben armonizar al preparar la entrega final.
 
 ## 5. Evidencia y reproducibilidad hasta esta etapa
@@ -168,11 +199,13 @@ Los documentos originales, el código y los JSONL están versionados. La base Ch
 
 ```bash
 ollama pull bge-m3
+ollama pull granite4:latest
 uv sync
 uv run python scripts/preprocesar.py
 uv run python scripts/fragmentar.py
 uv run python scripts/indexar.py
 uv run python scripts/evaluar_recuperacion.py
+uv run python scripts/evaluar_generacion.py
 uv run pytest -q
 ```
 
@@ -182,19 +215,19 @@ Para reconstruir expresamente un índice propio ya creado:
 uv run python scripts/indexar.py --rebuild
 ```
 
-Las validaciones de extracción y fragmentación están en [`evalucacion/validacion_preprocesamiento.md`](evalucacion/validacion_preprocesamiento.md); las de vectorización y persistencia están en [`evalucacion/validacion_indexacion.md`](evalucacion/validacion_indexacion.md); y la evaluación de búsqueda y evidencia en [`evalucacion/validacion_recuperacion.md`](evalucacion/validacion_recuperacion.md). Los reportes y el conjunto de preguntas en [`evalucacion/preguntas.json`](evalucacion/preguntas.json) ofrecen evidencia revisable sin depender únicamente de una explicación retrospectiva. La reproducción completa del RAG en un entorno limpio queda pendiente hasta que estén implementadas sus etapas restantes.
+Las validaciones de extracción y fragmentación están en [`evalucacion/validacion_preprocesamiento.md`](evalucacion/validacion_preprocesamiento.md); las de vectorización y persistencia en [`evalucacion/validacion_indexacion.md`](evalucacion/validacion_indexacion.md); las de búsqueda en [`evalucacion/validacion_recuperacion.md`](evalucacion/validacion_recuperacion.md); y las respuestas reales con sus fuentes en [`evalucacion/validacion_generacion.md`](evalucacion/validacion_generacion.md). Los JSON de recuperación y generación conservan texto íntegro, orden, identificadores y resultados originales. La reproducción integral en un entorno limpio continúa pendiente hasta el cierre.
 
 ## 6. Próximos pasos — pendientes, no realizados
 
-1. **Mejora de recuperación (experimento pendiente):** contrastar la línea de base `TP2-RAG-05` con búsqueda dirigida por artículo y expansión de chunks adyacentes, sin alterar las cinco preguntas fijas ni reescribir los resultados originales. Medir por separado hit del artículo y suficiencia del pasaje, especialmente para Nación art. 12 y Santa Fe art. 4.
-2. **Generación (`TP2-RAG-06`):** utilizar `granite4:latest` u otro modelo local justificado con instrucciones explícitas y fragmentos recuperados como contexto; exigir citas y abstención cuando falte evidencia.
-3. **Interfaz (`TP2-RAG-07`):** construir Gradio para consultar el sistema y mostrar por separado la respuesta y **los mismos fragmentos** enviados al modelo generativo.
-4. **Evaluación integral (`TP2-RAG-08`):** reutilizar las cinco consultas fijadas para evaluar **respuestas generadas** (exactitud, respaldo y abstención), diferenciándolas de los resultados de *retrieval* ya obtenidos en `TP2-RAG-05`. Registrar mejoras o fallas sin sustituir la línea de base.
-5. **Cierre (`TP2-RAG-09/10`):** corregir inconsistencias menores de documentación, comprobar instalación y ejecución en un directorio limpio, completar declaración del uso de IA, preparar demostración de hasta cinco minutos y efectuar la entrega.
+1. **Experimento de mejora de recuperación:** comparar la línea de base con búsqueda dirigida por jurisdicción y artículo cuando la pregunta los mencione, y expansión de chunks contiguos del mismo artículo. Evaluar si recupera la causal `d)` nacional y la definición del art. 4 santafesino **sin sustituir los resultados originales de `TP2-RAG-05/06`**. Conservar la distinción entre evidencia suficiente y artículo presente en top-k.
+2. **Citas y seguridad de la respuesta:** comprobar de manera visible las referencias faltantes, los números inexistentes y el riesgo de atribuir frases de otra jurisdicción a una fuente. Decidir antes del uso en interfaz si las salidas con referencias inválidas o evidencia insuficiente se deben bloquear, advertir o marcar para revisión; no atribuir fiabilidad por un prompt solamente.
+3. **Interfaz (`TP2-RAG-07`):** implementar Gradio mostrando respuesta, fuentes recuperadas y **los mismos fragmentos íntegros** enviados al modelo, incluidas advertencias de citación cuando correspondan.
+4. **Evaluación integral (`TP2-RAG-08`):** mantener las cinco preguntas congeladas; contrastar la línea de base con los experimentos, con revisión sustantiva de las citas y abstenciones. Probar cambios de `k` y de estrategia de recuperación sin presentar mejoras anecdóticas como resultados generalizables.
+5. **Cierre (`TP2-RAG-09/10`):** armonizar inconsistencias documentales menores, verificar una instalación limpia, documentar el uso de IA y la revisión del estudiante, y preparar la demostración y entrega.
 
 ## 7. Asistencia de IA y responsabilidades
 
-La delimitación del problema, la selección del corpus, la revisión de los casos jurídicos y la planificación se trabajaron con asistencia conversacional de IA. La implementación y ejecución de scripts y pruebas se delegó parcialmente a un **agente de programación** bajo tareas acotadas y criterios de aceptación. En `TP2-RAG-04` y `TP2-RAG-05`, el agente documentó ejecuciones contra servicios locales reales (Ollama y Chroma) y, en la quinta etapa, inspeccionó manualmente el top-3 recuperado. Los resultados informados se contrastaron con el código, los archivos versionados y casos concretos; la verificación posterior no tuvo acceso al índice local no versionado ni ejecutó nuevamente las cinco consultas.
+La delimitación del problema, la selección del corpus, la revisión de los casos jurídicos y la planificación se trabajaron con asistencia conversacional de IA. La implementación y ejecución de scripts y pruebas se delegó parcialmente a un **agente de programación** bajo tareas acotadas y criterios de aceptación. En `TP2-RAG-04`, `TP2-RAG-05` y `TP2-RAG-06`, el agente documentó ejecuciones contra Ollama y Chroma locales. Inspeccionó los fragmentos recuperados y, en la sexta etapa, las respuestas originales de Granite, contrastándolas con el contexto y las citas. Los resultados se revisaron posteriormente a partir del código y archivos versionados; **no se volvió a ejecutar el modelo ni se accedió al índice local**, y no se atribuye al estudiante una comprobación personal aún no documentada.
 
 Para la declaración final de la materia se deberá añadir **qué modelos concretos se utilizaron en cada momento** y **qué comprobaciones realizó personalmente el estudiante**. Esta bitácora distingue las pruebas que constan en los registros del agente de las verificaciones posteriores; no atribuye al estudiante comprobaciones que todavía no están documentadas.
 
