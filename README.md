@@ -107,7 +107,7 @@ uv run python scripts/indexar.py --rebuild
 
 `--rebuild` elimina sólo el directorio de índice seleccionado, y se niega a borrar carpetas sin un manifest propio reconocido. También se puede seleccionar ruta/modelo mediante `--index-dir` y `--model`; no se debe cambiar el modelo si se pretende reutilizar el índice. Índice y embeddings se ejecutan localmente; no se consulta un proveedor remoto. Versiones verificadas en este entorno: Ollama `0.40.15`; modelo `bge-m3:latest` (ID `790764642607`, dimensión devuelta 1024); `langchain-chroma 0.2.6`, `langchain-ollama 0.3.10`, `chromadb 1.5.9`, cliente Python `ollama 0.6.3`. En la indexación observada hubo 828/828 IDs únicos y persistidos.
 
-El TXT/PDF no se modifica: el indexador sólo lee `chunks.jsonl`. La conversión omite campos `null` (en particular páginas para TXT) en metadatos Chroma y mantiene rango completo de páginas del artículo PDF, no páginas inventadas por chunk. La app no mide precisión de retrieval ni genera respuestas.
+El TXT/PDF no se modifica: el indexador sólo lee `chunks.jsonl`. La conversión omite campos `null` (en particular páginas para TXT) en metadatos Chroma y mantiene rango completo de páginas del artículo PDF, no páginas inventadas por chunk. El indexador no mide precisión ni genera respuestas; esas etapas se validan por separado en los reportes de `evalucacion/`.
 
 ## Recuperación semántica y evaluación (TP2-RAG-05)
 
@@ -123,8 +123,21 @@ uv run python scripts/evaluar_recuperacion.py
 
 La ejecución evaluó una vez cada combinación requerida con k=5. `evalucacion/reporte_recuperacion.json` guarda los rankings completos, métricas por artículo, inspecciones manuales de pasajes realizadas por el agente (pendientes de verificación personal del estudiante), paráfrasis, comparación k=1/k=3, un preview numerado con texto íntegro e integridad del índice. `validacion_recuperacion.md` resume la evidencia; `distancias_recuperacion.svg` grafica distancias reales del top-3. En esta corrida, sin filtro y filtrada, Hit@1/3/5 fueron **0.667** y MRR@5 **0.667** (denominador: tres positivas; las negativas se excluyen). La cobertura de pasaje top-3, inspeccionada manualmente por el agente, fue nacional **parcial**, PBA **sí**, Santa Fe **no** en ambos modos. El índice/article hit no equivale a evidencia completa: el chunk siguiente del art. 12 nacional no aparece en top-5; el art. 4 santafesino no aparece en top-5 aunque sí está en los chunks, y el top vecino es el art. 67. Ver reporte para fuentes, distancias, revisión de preguntas ausentes y limitaciones.
 
+## Generación local (TP2-RAG-06)
+
+Requiere Ollama en ejecución y el modelo local (sin cambiar ni reconstruir el índice):
+
+```bash
+ollama pull granite4:latest
+uv run python scripts/generar.py --pregunta "¿Cuántos diputados y senadores fija el artículo 13 de la Ley 5.109?" --k 3
+uv run python scripts/generar.py --pregunta "¿Qué partido ganó la elección presidencial argentina de 2023?" --k 3 --json
+uv run python scripts/evaluar_generacion.py
+```
+
+El generador reusa `SemanticRetriever`, entrega el contexto completo numerado y muestra las fuentes directamente desde retrieval; usa `ChatOllama` con `granite4:latest`, temperatura 0 y `bge-m3` para consultas. Un chequeo automático detecta referencias faltantes o fuera del mapa, pero **no** verifica apoyo semántico ni garantiza abstención. Las respuestas reales, contextos, referencias y limitaciones observadas quedan en `evalucacion/reporte_generacion.json` y `evalucacion/validacion_generacion.md`. Versión probada: Ollama server 0.40.15, cliente Python 0.6.3; Granite 4 de 3.4B parámetros, Q4_K_M, digest `4235724a127c0f86dcc0247d67c20148705d6dd2319164014d92f71d607f4773`. El modelo no se incluye en Git y debe descargarse localmente.
+
 ## Alcance pendiente
 
-Faltan generación local, Gradio, reproducción integral en un directorio fresco, documentación final de asistencia de IA y demo/video. El notebook `trabajo_integrador_2_rag.ipynb` referido en la tarea no está presente en este checkout.
+Faltan Gradio, reproducción integral en un directorio fresco, documentación final de asistencia de IA y demo/video. El notebook `trabajo_integrador_2_rag.ipynb` referido en la tarea no está presente en este checkout.
 
 El agente implementó y ejecutó estas validaciones; no se afirma que el estudiante las haya revisado personalmente, grabado una demo o enviado la entrega. La declaración final de asistencia debe completar cuándo, modelos utilizados y qué verificó personalmente el estudiante.

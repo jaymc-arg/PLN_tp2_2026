@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "review_protocol": "El agente de código inspeccionó manualmente las respuestas reales y el texto íntegro de los fragmentos guardados en context_sent. La revisión describe este lote, no es una validación jurídica independiente; la verificación personal del estudiante sigue pendiente.",
+  "cases": {
+    "nacional_respondible_deber_votar": {
+      "original_response_sha256": "7b1a332f3a395b2fb6135be17c892b96ce9729735312ba8bbd3bccbbc5ed687d",
+      "evidence_coverage": "partial",
+      "answer_supported_by_context": "partially",
+      "abstention_expected": false,
+      "abstention_observed": false,
+      "citation_assessment": "Los tres [1] son referencias numéricas válidas y [1] resuelve a nacional_19945_art_12__chunk_0001. Sin embargo, la oración b) agrega 'debiendo acreditarse ante la autoridad que corresponda', frase que aparece en el chunk PBA [2], no en el chunk nacional [1]; [1] dice que se debe comparecer ante la autoridad policial más próxima, que extiende certificación escrita. El formato válido no demuestra soporte semántico.",
+      "failure_categories": ["retrieval/context coverage", "generation", "citation"],
+      "observations": "El contexto top-3 sólo contiene el primer chunk del art. 12 nacional (causales a–c), no la causal d ni la cláusula final sobre carácter optativo; por ello la respuesta omite parte de la pregunta. Además mezcla la formulación de acreditación del chunk bonaerense dentro de una respuesta sobre la ley nacional y la atribuye a [1]. La cita es formalmente válida pero no respalda esa frase específica. No se corrigió la respuesta."
+    },
+    "pba_respondible_representacion": {
+      "original_response_sha256": "ed3fc490385c9ff33238024a9a62fdee42cf8b030f15a80736bff05f87a14576",
+      "evidence_coverage": "full",
+      "answer_supported_by_context": "yes",
+      "abstention_expected": false,
+      "abstention_observed": false,
+      "citation_assessment": "La respuesta menciona 92 diputados y 46 senadores, presentes en pba_5109_art_13__chunk_0001, pero no incluye ninguna referencia numerada; el control automático marca citations_missing=true. El chunk visible es el texto principal y no contiene el pasaje editorial completo sobre la propuesta observada 100/50.",
+      "failure_categories": ["citation"],
+      "observations": "Los dos valores solicitados coinciden con el texto principal de [1]. El contenido sustantivo se recuperó y respondió correctamente para la pregunta acotada, pero el modelo omitió la cita exigida por el prompt. El contexto no expone la nota histórica/editorial separada; no se infiere su vigencia ni se presenta 100/50 como respuesta operativa."
+    },
+    "santa_fe_respondible_autoridad_mesa": {
+      "original_response_sha256": "861dc5b7cd91bae2dfc9a41134e06644f254b80ddc36b79e1782dd4148887136",
+      "evidence_coverage": "none",
+      "answer_supported_by_context": "partially",
+      "abstention_expected": false,
+      "abstention_observed": false,
+      "citation_assessment": "La respuesta cita [1] (Santa Fe art. 67) y [2] (Código nacional art. 72), no el art. 4 pedido; agrega [4], que no existe en el mapa de tres fragmentos y el chequeo automático marca inválida. Las primeras fuentes sí tratan autoridades de mesa, pero no acreditan que el art. 4 santafesino diga lo afirmado ni corrigen la atribución errónea.",
+      "failure_categories": ["retrieval/context coverage", "generation", "citation", "abstention"],
+      "observations": "El art. 4 no está entre los fragmentos enviados. El modelo atribuye a ese artículo contenido de los arts. 67 santafesino y 72 nacional, incluso mezcla jurisdicciones y añade una referencia [4] inexistente. También dice que los suplentes toman posesión cuando no puede asistir el titular, mientras que el pasaje [1] dice que, si concurre después la persona titular, ella toma posesión; el resultado no es una definición sustentada del art. 4. No presentó la frase de abstención pese a faltar el pasaje solicitado."
+    },
+    "ausente_resultado_electoral": {
+      "original_response_sha256": "37ce93edd5b2b0ce9e5d93727c918e99073e1fb470db0650f0eca1ee20f00b6f",
+      "evidence_coverage": "none",
+      "answer_supported_by_context": "not_applicable",
+      "abstention_expected": true,
+      "abstention_observed": true,
+      "citation_assessment": "Respuesta de abstención exacta; no requería citas. Los tres vecinos recuperados no contienen el partido ganador ni el conteo presidencial de 2023.",
+      "failure_categories": [],
+      "observations": "En esta ejecución el modelo respondió exactamente 'No encuentro esa información en los documentos.' Los fragmentos eran reglas electorales y registro electoral, no resultados oficiales de la elección presidencial de 2023. Un resultado negativo exitoso no garantiza abstención fiable en otras preguntas."
+    },
+    "ausente_gasto_real_partido": {
+      "original_response_sha256": "37ce93edd5b2b0ce9e5d93727c918e99073e1fb470db0650f0eca1ee20f00b6f",
+      "evidence_coverage": "none",
+      "answer_supported_by_context": "not_applicable",
+      "abstention_expected": true,
+      "abstention_observed": true,
+      "citation_assessment": "Respuesta de abstención exacta; no requería citas. Los vecinos regulan cuenta de campaña/topes de aportes, no gastos reales rendidos por partido.",
+      "failure_categories": [],
+      "observations": "En esta ejecución el modelo respondió exactamente 'No encuentro esa información en los documentos.' Los textos sobre depósitos y porcentajes legales no aportan gastos observados para la campaña presidencial argentina de 2023. No se usa este único caso para afirmar una tasa general de abstención."
+    }
+  },
+  "k_comparison": {
+    "k1_original_response_sha256": "23f24f77fe58d45fc79031af984ab294493753191016931e4c3eacddef0078f8",
+    "k3_original_response_sha256": "7b1a332f3a395b2fb6135be17c892b96ce9729735312ba8bbd3bccbbc5ed687d",
+    "k1_vs_k3": "k=1 envió sólo nacional_19945_art_12__chunk_0001; k=3 envió ese chunk más pba_5109_art_4__chunk_0001 y santa_fe_14478_art_77__chunk_0001. El modelo, tag, temperatura y hash del prompt se mantuvieron iguales; k=3 reutiliza la corrida fija baseline de esa misma pregunta.",
+    "observations": "Ambas respuestas son parciales porque el chunk nacional no incluye la causal d. Con k=1, la condición de 500 km conserva la certificación de la autoridad policial más próxima y la cita [1] es formal y semánticamente consistente con ese pasaje. Con k=3, el modelo incorpora al inciso b la formulación 'autoridad que corresponda' del texto bonaerense y la atribuye a [1]; cita [1] sigue siendo formalmente válida, pero esa afirmación concreta no está respaldada por [1]. Los dos chunks extra no aportan la continuación nacional ausente y favorecen contaminación entre jurisdicciones. El contexto más largo no mejoró cobertura completa en esta comparación.",
+    "k1_evidence_coverage": "partial",
+    "k3_evidence_coverage": "partial",
+    "failure_categories": ["retrieval/context coverage", "generation", "citation"]
+  }
+}
