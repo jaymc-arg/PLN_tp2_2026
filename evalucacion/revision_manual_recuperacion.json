@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "metodo": "El agente de código inspeccionó manualmente el texto íntegro del top-3 recuperado para cada condición indicada. Las citas se cotejan literalmente con el resultado guardado; el cotejo automático no decide si la respuesta legal está sustentada. Esta inspección no reemplaza la verificación personal del estudiante ni una revisión jurídica.",
+  "fixed_positive": {
+    "nacional_respondible_deber_votar": {
+      "unfiltered": {
+        "reviewed_top3_chunk_ids": [
+          "nacional_19945_art_12__chunk_0001",
+          "pba_5109_art_4__chunk_0001",
+          "santa_fe_14478_art_77__chunk_0001"
+        ],
+        "top3_passage_coverage": "partial",
+        "evidence": [
+          {
+            "chunk_id": "nacional_19945_art_12__chunk_0001",
+            "quote": "a) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial;"
+          }
+        ],
+        "limitation": "El chunk del art. 12 contiene las causales a–c, pero el artículo continúa en nacional_19945_art_12__chunk_0002 con la causal d (personal de servicios públicos), requisitos de aviso/certificación y el carácter optativo de las exenciones. Ese chunk contiguo no aparece en top-5. Los otros dos chunks top-3 son normas provinciales parecidas, no completan el artículo nacional.",
+        "diagnostic_category": "chunking / retrieval: el artículo se partió en dos chunks y el segundo no quedó entre los cinco vecinos; k=3 no recupera las condiciones finales",
+        "next_experiment": "Probar recuperación por artículo con expansión al chunk contiguo y comparar overlap mayor; cotejar que el contexto conserve d), certificación y carácter optativo sin mezclar jurisdicciones."
+      },
+      "jurisdiction_filtered": {
+        "reviewed_top3_chunk_ids": [
+          "nacional_19945_art_12__chunk_0001",
+          "nacional_19945_art_18__chunk_0001",
+          "nacional_19945_art_3__chunk_0001"
+        ],
+        "top3_passage_coverage": "partial",
+        "evidence": [
+          {
+            "chunk_id": "nacional_19945_art_12__chunk_0001",
+            "quote": "a) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial;"
+          }
+        ],
+        "limitation": "El filtro quita vecinos de otras jurisdicciones, pero no trae el segundo chunk del art. 12. Los arts. 18 y 3 no cubren las excepciones solicitadas.",
+        "diagnostic_category": "chunking / retrieval; el filtro jurisdiccional no corrige la ausencia del chunk adyacente",
+        "next_experiment": "Mantener el filtro y ampliar el contexto con el siguiente chunk del mismo artículo; comparar la cobertura de todas las causales y excepciones."
+      }
+    },
+    "pba_respondible_representacion": {
+      "unfiltered": {
+        "reviewed_top3_chunk_ids": [
+          "pba_5109_art_13__chunk_0001",
+          "pba_5109_art_12__chunk_0001",
+          "santa_fe_14478_art_133__chunk_0001"
+        ],
+        "top3_passage_coverage": "yes",
+        "evidence": [
+          {
+            "chunk_id": "pba_5109_art_13__chunk_0001",
+            "quote": "Fíjase la representación legislativa de la Provincia en noventa y dos (92) diputados y cuarenta y seis (46) senadores"
+          }
+        ],
+        "limitation": "El primer chunk respalda los 92 diputados y 46 senadores del texto principal. Contiene un asterisco, pero el pasaje editorial/histórico de la modificación observada (100/50) está fuera de los chunks indexados; este resultado no permite interpretar su vigencia ni mostrar esa nota.",
+        "diagnostic_category": "retrieval (correcto para texto principal; alcance de indexación excluye nota editorial)",
+        "next_experiment": "Si la interfaz debe exponer historia legislativa, indexar la nota como evidencia separada, con su advertencia y sin atribuirle vigencia."
+      },
+      "jurisdiction_filtered": {
+        "reviewed_top3_chunk_ids": [
+          "pba_5109_art_13__chunk_0001",
+          "pba_5109_art_12__chunk_0001",
+          "pba_5109_art_124__chunk_0001"
+        ],
+        "top3_passage_coverage": "yes",
+        "evidence": [
+          {
+            "chunk_id": "pba_5109_art_13__chunk_0001",
+            "quote": "Fíjase la representación legislativa de la Provincia en noventa y dos (92) diputados y cuarenta y seis (46) senadores"
+          }
+        ],
+        "limitation": "El pasaje esperado aparece primero; la nota editorial sobre la modificación observada no forma parte del chunk indexado.",
+        "diagnostic_category": "retrieval (correcto para texto principal; alcance de indexación excluye nota editorial)",
+        "next_experiment": "Evaluar una nota histórica separada y rotulada, conservando distinta la evidencia del texto principal."
+      }
+    },
+    "santa_fe_respondible_autoridad_mesa": {
+      "unfiltered": {
+        "reviewed_top3_chunk_ids": [
+          "santa_fe_14478_art_67__chunk_0001",
+          "nacional_19945_art_72__chunk_0001",
+          "santa_fe_14478_art_59__chunk_0001"
+        ],
+        "top3_passage_coverage": "no",
+        "evidence": [],
+        "retrieved_nonanswering_matches": [
+          {
+            "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+            "quote": "Cada mesa electoral tiene como única autoridad quien ejerce la presidencia de mesa y dos (2) suplentes"
+          }
+        ],
+        "limitation": "Ningún top-3 contiene el art. 4 solicitado. El art. 67 es un vecino temáticamente próximo y describe presidencia/suplentes, pero no es el pasaje definitorio citado por la pregunta. El art. 4 sí está extraído en la página 1 y su inciso b aparece en santa_fe_14478_art_4__chunk_0001; el artículo largo se fragmentó en diez chunks y ese chunk no aparece en top-5.",
+        "diagnostic_category": "chunking / retrieval; pasaje extraído pero fragmentado dentro de un artículo largo",
+        "next_experiment": "Como la pregunta da jurisdicción y número de artículo, probar primero un filtro de metadatos jurisdiccion=santa_fe y articulo=4, luego recuperar/mostrar sus chunks; compararlo con similitud global sin cambiar el texto fuente."
+      },
+      "jurisdiction_filtered": {
+        "reviewed_top3_chunk_ids": [
+          "santa_fe_14478_art_67__chunk_0001",
+          "santa_fe_14478_art_59__chunk_0001",
+          "santa_fe_14478_art_264__chunk_0001"
+        ],
+        "top3_passage_coverage": "no",
+        "evidence": [],
+        "retrieved_nonanswering_matches": [
+          {
+            "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+            "quote": "Cada mesa electoral tiene como única autoridad quien ejerce la presidencia de mesa y dos (2) suplentes"
+          }
+        ],
+        "limitation": "El filtro elimina jurisdicciones ajenas pero tampoco recupera el art. 4; el primer vecino es el art. 67 de Santa Fe, de tema similar pero fuente distinta de la esperada.",
+        "diagnostic_category": "chunking / retrieval; artículo esperado largo y dividido en diez chunks",
+        "next_experiment": "Probar filtro explícito por artículo 4 y cotejar la fuente/página del resultado; mantener visible que el top semántico original falló."
+      }
+    }
+  },
+  "negative": {
+    "ausente_resultado_electoral": {
+      "can_substantiate_requested_fact": false,
+      "reviewed_top3_chunk_ids": [
+        "nacional_19945_art_166__chunk_0003",
+        "nacional_19945_art_17__chunk_0003",
+        "santa_fe_14478_art_87__chunk_0002"
+      ],
+      "retrieved_nonanswering_matches": [
+        {
+          "chunk_id": "nacional_19945_art_166__chunk_0003",
+          "quote": "Resultará electo el titular de la lista que obtuviere el mayor número de sufragios"
+        },
+        {
+          "chunk_id": "nacional_19945_art_17__chunk_0003",
+          "quote": "Queda garantizado a las provincias y a la Ciudad Autónoma de Buenos Aires el acceso libre y permanente a la información contenida en el Registro Nacional de Electores"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_87__chunk_0002",
+          "quote": "Nadie puede exigir certificado o explicación sobre la necesidad de apoyo."
+        }
+      ],
+      "explanation": "Los tres textos son reglas electorales generales o de accesibilidad; ninguno aporta el partido ganador ni el recuento oficial de votos presidenciales argentinos de 2023. La búsqueda devuelve vecinos aunque el corpus no contenga ese hecho."
+    },
+    "ausente_gasto_real_partido": {
+      "can_substantiate_requested_fact": false,
+      "reviewed_top3_chunk_ids": [
+        "santa_fe_14478_art_169__chunk_0001",
+        "santa_fe_14478_art_173__chunk_0002",
+        "santa_fe_14478_art_173__chunk_0001"
+      ],
+      "retrieved_nonanswering_matches": [
+        {
+          "chunk_id": "santa_fe_14478_art_169__chunk_0001",
+          "quote": "Los fondos destinados a financiar la campaña electoral deben depositarse en una cuenta bancaria única por agrupación política"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_173__chunk_0002",
+          "quote": "Las personas jurídicas pueden aportar un monto que no supere el cinco por ciento (5%) de los gastos permitidos para la campaña de que se trate."
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_173__chunk_0001",
+          "quote": "El límite a los aportes de las personas humanas para las campañas electorales no puede superar el uno por ciento (1%) del límite de gastos establecido en el artículo 172."
+        }
+      ],
+      "explanation": "El top-3 habla de cuentas bancarias y límites legales de aportes, no de gastos reales rendidos por cada partido en la campaña presidencial argentina de 2023. Confundir un límite regulatorio con un monto observado sería una respuesta no sustentada; se requieren fuentes contables/financieras fuera del corpus."
+    }
+  },
+  "k_comparison": {
+    "question_id": "nacional_respondible_deber_votar",
+    "k1_coverage": "partial",
+    "k3_coverage": "partial",
+    "observation": "El top-1 ya encuentra el art. 12, pero solo su primer chunk. Subir a top-3 añade otros artículos (incluidas normas provinciales similares en el ranking sin filtro), no el chunk 0002; la métrica de hit por artículo queda en 1, pero la cobertura de todas las causales no mejora.",
+    "next_experiment": "Recuperar por artículo y agregar el chunk adyacente; contrastar un overlap ajustado o consulta multi-query, midiendo que se incluyan todas las condiciones sin mezclar regímenes."
+  },
+  "paraphrase": {
+    "reviewed_top3_chunk_ids": [
+      "santa_fe_14478_art_77__chunk_0001",
+      "pba_5109_art_4__chunk_0001",
+      "santa_fe_14478_art_27__chunk_0001"
+    ],
+    "evidence": [
+      {
+        "chunk_id": "nacional_19945_art_12__chunk_0001",
+        "quote": "Quedan exentos de esa obligación:"
+      }
+    ],
+    "assessment": "El top-3 devuelve primero dos regímenes provinciales sobre exenciones; la norma nacional esperada aparece recién en el rango 4 (nacional_19945_art_12__chunk_0001). La paráfrasis conserva la mención a elecciones nacionales, pero sin el identificador exacto del artículo la competencia entre leyes semánticamente próximas reduce su prioridad.",
+    "diagnostic_category": "recuperación; posible ambigüedad/competencia entre jurisdicciones",
+    "next_experiment": "Comparar la misma paráfrasis con filtro nacional y reportar por separado su ranking, sin presentar el mejor resultado filtrado como la recuperación original."
+  }
+}
