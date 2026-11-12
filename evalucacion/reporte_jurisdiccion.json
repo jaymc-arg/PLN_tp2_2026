@@ -1,0 +1,2402 @@
+{
+  "version": 1,
+  "fixture": "/home/juanc/Documents/ifts/PLN/tp2/evalucacion/preguntas_jurisdiccion.json",
+  "fixture_sha256": "3ef5fa9188caefb85876c531bf95b12a5db9612389b17a08583db5e4f45a06fe",
+  "fixture_count": 40,
+  "classification": {
+    "cases": [
+      {
+        "id": "nat_01",
+        "pregunta": "¿Qué dispone el Código Electoral Nacional sobre el padrón?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "nacional"
+        ],
+        "rationale": "Referencia explícita al código nacional.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "nacional"
+        ],
+        "signals": {
+          "normalized_query": "que dispone el codigo electoral nacional sobre el padron",
+          "law": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "codigo electoral nacional"
+              ]
+            }
+          ],
+          "scope": [],
+          "geography": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "nacional"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica nacional.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "nat_02",
+        "pregunta": "Según la ley 19.945, ¿quiénes deben votar?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "nacional"
+        ],
+        "rationale": "Identificador inequívoco de la ley nacional.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "nacional"
+        ],
+        "signals": {
+          "normalized_query": "segun la ley 19 945 quienes deben votar",
+          "law": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "ley 19 945"
+              ]
+            }
+          ],
+          "scope": [],
+          "geography": [],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica nacional.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "nat_03",
+        "pregunta": "¿Cómo se elige presidente de la Nación?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "nacional"
+        ],
+        "rationale": "Cargo presidencial nacional explícito.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "nacional"
+        ],
+        "signals": {
+          "normalized_query": "como se elige presidente de la nacion",
+          "law": [],
+          "scope": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "presidente"
+              ]
+            }
+          ],
+          "geography": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "nacion"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica nacional.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "nat_04",
+        "pregunta": "En la elección presidencial argentina de 2023, ¿quién ganó?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "nacional"
+        ],
+        "rationale": "Alcance presidencial nacional; clasificación no implica que haya resultados en el corpus.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "nacional"
+        ],
+        "signals": {
+          "normalized_query": "en la eleccion presidencial argentina de 2023 quien gano",
+          "law": [],
+          "scope": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "presidencial",
+                "eleccion presidencial"
+              ]
+            }
+          ],
+          "geography": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "argentina"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica nacional.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "nat_05",
+        "pregunta": "¿Qué reglas rigen para elegir diputados nacionales?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "nacional"
+        ],
+        "rationale": "Cargo legislativo nacional explícito.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "nacional"
+        ],
+        "signals": {
+          "normalized_query": "que reglas rigen para elegir diputados nacionales",
+          "law": [],
+          "scope": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "diputados nacionales"
+              ]
+            }
+          ],
+          "geography": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "nacionales"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica nacional.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "nat_06",
+        "pregunta": "¿Qué establece el CÓDIGO ELECTORAL NACIONAL, art. 12?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "nacional"
+        ],
+        "rationale": "Mayúsculas y puntuación no cambian referencia expresa.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "nacional"
+        ],
+        "signals": {
+          "normalized_query": "que establece el codigo electoral nacional art 12",
+          "law": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "codigo electoral nacional"
+              ]
+            }
+          ],
+          "scope": [],
+          "geography": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "nacional"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica nacional.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "nat_07",
+        "pregunta": "¿Qué reglas nacionales regulan el voto?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "nacional"
+        ],
+        "rationale": "Ámbito normativo nacional descrito directamente.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "nacional"
+        ],
+        "signals": {
+          "normalized_query": "que reglas nacionales regulan el voto",
+          "law": [],
+          "scope": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "reglas nacionales"
+              ]
+            }
+          ],
+          "geography": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "nacionales"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica nacional.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "pba_01",
+        "pregunta": "¿Qué fija la Ley 5.109 sobre la legislatura provincial?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "pba"
+        ],
+        "rationale": "Identificador de ley bonaerense.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "pba"
+        ],
+        "signals": {
+          "normalized_query": "que fija la ley 5 109 sobre la legislatura provincial",
+          "law": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "ley 5 109"
+              ]
+            }
+          ],
+          "scope": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "legislatura provincial",
+                "legislatura"
+              ]
+            }
+          ],
+          "geography": [],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica pba.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "pba_02",
+        "pregunta": "Según la ley 5109, ¿cuántos representantes se eligen?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "pba"
+        ],
+        "rationale": "Variante numérica de la ley de PBA.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "pba"
+        ],
+        "signals": {
+          "normalized_query": "segun la ley 5109 cuantos representantes se eligen",
+          "law": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "ley 5109"
+              ]
+            }
+          ],
+          "scope": [],
+          "geography": [],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica pba.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "pba_03",
+        "pregunta": "¿Cómo se elige gobernador en la Provincia de Buenos Aires?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "pba"
+        ],
+        "rationale": "Elección provincial y provincia identificada.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "pba"
+        ],
+        "signals": {
+          "normalized_query": "como se elige gobernador en la provincia de buenos aires",
+          "law": [],
+          "scope": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "gobernador"
+              ]
+            }
+          ],
+          "geography": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "buenos aires",
+                "provincia de buenos aires"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica pba.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "pba_04",
+        "pregunta": "¿Qué dice la norma electoral bonaerense sobre las mesas?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "pba"
+        ],
+        "rationale": "Alias de normativa electoral de PBA.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "pba"
+        ],
+        "signals": {
+          "normalized_query": "que dice la norma electoral bonaerense sobre las mesas",
+          "law": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "norma electoral bonaerense"
+              ]
+            }
+          ],
+          "scope": [],
+          "geography": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "bonaerense"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica pba.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "pba_05",
+        "pregunta": "¿Qué reglas se aplican a diputados provinciales en PBA?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "pba"
+        ],
+        "rationale": "Cargo provincial y provincia soportada.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "pba"
+        ],
+        "signals": {
+          "normalized_query": "que reglas se aplican a diputados provinciales en pba",
+          "law": [],
+          "scope": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "diputados provinciales"
+              ]
+            }
+          ],
+          "geography": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "pba"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica pba.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "pba_06",
+        "pregunta": "Para las elecciones de la Legislatura de la Provincia de Buenos Aires, ¿cómo se distribuyen las bancas?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "pba"
+        ],
+        "rationale": "Alcance provincial explícito.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "pba"
+        ],
+        "signals": {
+          "normalized_query": "para las elecciones de la legislatura de la provincia de buenos aires como se distribuyen las bancas",
+          "law": [],
+          "scope": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "legislatura"
+              ]
+            }
+          ],
+          "geography": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "buenos aires",
+                "provincia de buenos aires"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica pba.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "pba_07",
+        "pregunta": "¿Qué establece la LEY 5 109 para la representación legislativa?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "pba"
+        ],
+        "rationale": "Variante tipográfica con espacios.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "pba"
+        ],
+        "signals": {
+          "normalized_query": "que establece la ley 5 109 para la representacion legislativa",
+          "law": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "ley 5 109"
+              ]
+            }
+          ],
+          "scope": [],
+          "geography": [],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica pba.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "sf_01",
+        "pregunta": "¿Qué establece la Ley 14.478 sobre autoridades de mesa?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "santa_fe"
+        ],
+        "rationale": "Identificador expreso de la norma santafesina.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "santa_fe"
+        ],
+        "signals": {
+          "normalized_query": "que establece la ley 14 478 sobre autoridades de mesa",
+          "law": [
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "ley 14 478"
+              ]
+            }
+          ],
+          "scope": [],
+          "geography": [],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica santa_fe.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "sf_02",
+        "pregunta": "Según la ley 14478, ¿cómo se vota con boleta única?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "santa_fe"
+        ],
+        "rationale": "Variante numérica de ley provincial.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "santa_fe"
+        ],
+        "signals": {
+          "normalized_query": "segun la ley 14478 como se vota con boleta unica",
+          "law": [
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "ley 14478"
+              ]
+            }
+          ],
+          "scope": [],
+          "geography": [],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica santa_fe.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "sf_03",
+        "pregunta": "¿Cómo se elige gobernador en Santa Fe?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "santa_fe"
+        ],
+        "rationale": "Elección provincial y provincia identificada.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "santa_fe"
+        ],
+        "signals": {
+          "normalized_query": "como se elige gobernador en santa fe",
+          "law": [],
+          "scope": [
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "gobernador"
+              ]
+            }
+          ],
+          "geography": [
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "santa fe"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica santa_fe.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "sf_04",
+        "pregunta": "¿Qué regula el Código Electoral de Santa Fe sobre el sufragio?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "santa_fe"
+        ],
+        "rationale": "Referencia explícita al código provincial.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "santa_fe"
+        ],
+        "signals": {
+          "normalized_query": "que regula el codigo electoral de santa fe sobre el sufragio",
+          "law": [
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "codigo electoral de santa fe"
+              ]
+            }
+          ],
+          "scope": [],
+          "geography": [
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "santa fe"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica santa_fe.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "sf_05",
+        "pregunta": "Para la elección de diputados provinciales santafesinos, ¿qué sistema se usa?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "santa_fe"
+        ],
+        "rationale": "Cargo provincial y provincia soportada.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "santa_fe"
+        ],
+        "signals": {
+          "normalized_query": "para la eleccion de diputados provinciales santafesinos que sistema se usa",
+          "law": [],
+          "scope": [
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "diputados provinciales"
+              ]
+            }
+          ],
+          "geography": [
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "santafesinos"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica santa_fe.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "sf_06",
+        "pregunta": "¿Qué dice la Ley 14 478 sobre campañas electorales?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "santa_fe"
+        ],
+        "rationale": "Variación de espaciado del identificador legal.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "santa_fe"
+        ],
+        "signals": {
+          "normalized_query": "que dice la ley 14 478 sobre campanas electorales",
+          "law": [
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "ley 14 478"
+              ]
+            }
+          ],
+          "scope": [],
+          "geography": [],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica santa_fe.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "sf_07",
+        "pregunta": "¿Cómo se organiza la elección de la legislatura en la provincia de Santa Fe?",
+        "gold_status": "identified",
+        "gold_jurisdictions": [
+          "santa_fe"
+        ],
+        "rationale": "Elección provincial explícita.",
+        "predicted_status": "identified",
+        "predicted_jurisdictions": [
+          "santa_fe"
+        ],
+        "signals": {
+          "normalized_query": "como se organiza la eleccion de la legislatura en la provincia de santa fe",
+          "law": [],
+          "scope": [
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "legislatura"
+              ]
+            }
+          ],
+          "geography": [
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "provincia de santa fe",
+                "santa fe"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La referencia normativa o el alcance electoral identifica santa_fe.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "amb_01",
+        "pregunta": "¿Quiénes están exentos de votar en Santa Fe?",
+        "gold_status": "ambiguous",
+        "gold_jurisdictions": [],
+        "rationale": "La ubicación provincial no determina si se pregunta por elección nacional o provincial.",
+        "predicted_status": "ambiguous",
+        "predicted_jurisdictions": [],
+        "signals": {
+          "normalized_query": "quienes estan exentos de votar en santa fe",
+          "law": [],
+          "scope": [],
+          "geography": [
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "santa fe"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La provincia aparece como ubicación, pero no queda claro qué elección o legislación rige la consulta.",
+        "clarification_question": "¿Consultás por una elección nacional o por la elección provincial?",
+        "exact_match": true
+      },
+      {
+        "id": "amb_02",
+        "pregunta": "¿Cómo se vota en PBA?",
+        "gold_status": "ambiguous",
+        "gold_jurisdictions": [],
+        "rationale": "PBA puede ser ubicación; el alcance electoral no está especificado.",
+        "predicted_status": "ambiguous",
+        "predicted_jurisdictions": [],
+        "signals": {
+          "normalized_query": "como se vota en pba",
+          "law": [],
+          "scope": [],
+          "geography": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "pba"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La provincia aparece como ubicación, pero no queda claro qué elección o legislación rige la consulta.",
+        "clarification_question": "¿Consultás por una elección nacional o por la elección provincial?",
+        "exact_match": true
+      },
+      {
+        "id": "amb_03",
+        "pregunta": "¿Cómo se elige gobernador?",
+        "gold_status": "ambiguous",
+        "gold_jurisdictions": [],
+        "rationale": "No identifica provincia.",
+        "predicted_status": "ambiguous",
+        "predicted_jurisdictions": [],
+        "signals": {
+          "normalized_query": "como se elige gobernador",
+          "law": [],
+          "scope": [],
+          "geography": [],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La consulta menciona una elección provincial, pero no indica de qué provincia.",
+        "clarification_question": "¿De qué provincia querés consultar la elección?",
+        "exact_match": true
+      },
+      {
+        "id": "amb_04",
+        "pregunta": "¿Cómo voto en Buenos Aires?",
+        "gold_status": "ambiguous",
+        "gold_jurisdictions": [],
+        "rationale": "Buenos Aires es geográficamente ambiguo y no fija jurisdicción normativa.",
+        "predicted_status": "ambiguous",
+        "predicted_jurisdictions": [],
+        "signals": {
+          "normalized_query": "como voto en buenos aires",
+          "law": [],
+          "scope": [],
+          "geography": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "buenos aires"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La provincia aparece como ubicación, pero no queda claro qué elección o legislación rige la consulta.",
+        "clarification_question": "¿Consultás por una elección nacional o por la elección provincial?",
+        "exact_match": true
+      },
+      {
+        "id": "amb_05",
+        "pregunta": "¿Qué requisitos hay para votar desde Rosario?",
+        "gold_status": "ambiguous",
+        "gold_jurisdictions": [],
+        "rationale": "Ubicación geográfica no basta para fijar el tipo de elección.",
+        "predicted_status": "ambiguous",
+        "predicted_jurisdictions": [],
+        "signals": {
+          "normalized_query": "que requisitos hay para votar desde rosario",
+          "law": [],
+          "scope": [],
+          "geography": [
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "rosario"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La provincia aparece como ubicación, pero no queda claro qué elección o legislación rige la consulta.",
+        "clarification_question": "¿Consultás por una elección nacional o por la elección provincial?",
+        "exact_match": true
+      },
+      {
+        "id": "amb_06",
+        "pregunta": "En Santa Fe, ¿qué excepciones al deber de sufragar se reconocen?",
+        "gold_status": "ambiguous",
+        "gold_jurisdictions": [],
+        "rationale": "No se especifica si el deber corresponde a una elección nacional o provincial.",
+        "predicted_status": "ambiguous",
+        "predicted_jurisdictions": [],
+        "signals": {
+          "normalized_query": "en santa fe que excepciones al deber de sufragar se reconocen",
+          "law": [],
+          "scope": [],
+          "geography": [
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "santa fe"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La provincia aparece como ubicación, pero no queda claro qué elección o legislación rige la consulta.",
+        "clarification_question": "¿Consultás por una elección nacional o por la elección provincial?",
+        "exact_match": true
+      },
+      {
+        "id": "amb_07",
+        "pregunta": "¿Qué ocurre con el padrón electoral en territorio bonaerense?",
+        "gold_status": "ambiguous",
+        "gold_jurisdictions": [],
+        "rationale": "Mención geográfica sin elección o norma provincial definida.",
+        "predicted_status": "ambiguous",
+        "predicted_jurisdictions": [],
+        "signals": {
+          "normalized_query": "que ocurre con el padron electoral en territorio bonaerense",
+          "law": [],
+          "scope": [],
+          "geography": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "bonaerense"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "La provincia aparece como ubicación, pero no queda claro qué elección o legislación rige la consulta.",
+        "clarification_question": "¿Consultás por una elección nacional o por la elección provincial?",
+        "exact_match": true
+      },
+      {
+        "id": "uns_01",
+        "pregunta": "¿A qué hora comienza la votación?",
+        "gold_status": "unspecified",
+        "gold_jurisdictions": [],
+        "rationale": "Sin señal jurisdiccional.",
+        "predicted_status": "unspecified",
+        "predicted_jurisdictions": [],
+        "signals": {
+          "normalized_query": "a que hora comienza la votacion",
+          "law": [],
+          "scope": [],
+          "geography": [],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "No se detectó una jurisdicción normativa suficiente.",
+        "clarification_question": "¿Sobre qué jurisdicción querés consultar: Nación, PBA o Santa Fe?",
+        "exact_match": true
+      },
+      {
+        "id": "uns_02",
+        "pregunta": "¿Qué documentos llevo para votar?",
+        "gold_status": "unspecified",
+        "gold_jurisdictions": [],
+        "rationale": "Pregunta general sin ámbito normativo.",
+        "predicted_status": "unspecified",
+        "predicted_jurisdictions": [],
+        "signals": {
+          "normalized_query": "que documentos llevo para votar",
+          "law": [],
+          "scope": [],
+          "geography": [],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "No se detectó una jurisdicción normativa suficiente.",
+        "clarification_question": "¿Sobre qué jurisdicción querés consultar: Nación, PBA o Santa Fe?",
+        "exact_match": true
+      },
+      {
+        "id": "uns_03",
+        "pregunta": "¿Cuántas autoridades hay en cada mesa electoral?",
+        "gold_status": "unspecified",
+        "gold_jurisdictions": [],
+        "rationale": "Tema común a varias normas sin mención jurisdiccional.",
+        "predicted_status": "unspecified",
+        "predicted_jurisdictions": [],
+        "signals": {
+          "normalized_query": "cuantas autoridades hay en cada mesa electoral",
+          "law": [],
+          "scope": [],
+          "geography": [],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "No se detectó una jurisdicción normativa suficiente.",
+        "clarification_question": "¿Sobre qué jurisdicción querés consultar: Nación, PBA o Santa Fe?",
+        "exact_match": true
+      },
+      {
+        "id": "uns_04",
+        "pregunta": "¿Cuándo se publican los padrones?",
+        "gold_status": "unspecified",
+        "gold_jurisdictions": [],
+        "rationale": "Sin referencia normativa o geográfica.",
+        "predicted_status": "unspecified",
+        "predicted_jurisdictions": [],
+        "signals": {
+          "normalized_query": "cuando se publican los padrones",
+          "law": [],
+          "scope": [],
+          "geography": [],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "reason": "No se detectó una jurisdicción normativa suficiente.",
+        "clarification_question": "¿Sobre qué jurisdicción querés consultar: Nación, PBA o Santa Fe?",
+        "exact_match": true
+      },
+      {
+        "id": "out_01",
+        "pregunta": "¿Cómo se vota en CABA?",
+        "gold_status": "unsupported",
+        "gold_jurisdictions": [],
+        "rationale": "Ciudad Autónoma de Buenos Aires no está en el corpus.",
+        "predicted_status": "unsupported",
+        "predicted_jurisdictions": [],
+        "signals": {
+          "normalized_query": "como se vota en caba",
+          "law": [],
+          "scope": [],
+          "geography": [],
+          "unsupported_geography": [
+            "caba"
+          ],
+          "comparison": []
+        },
+        "reason": "La jurisdicción mencionada no está cubierta por este corpus.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "out_02",
+        "pregunta": "¿Qué dispone la ley electoral de Córdoba?",
+        "gold_status": "unsupported",
+        "gold_jurisdictions": [],
+        "rationale": "Provincia no incluida en el corpus.",
+        "predicted_status": "unsupported",
+        "predicted_jurisdictions": [],
+        "signals": {
+          "normalized_query": "que dispone la ley electoral de cordoba",
+          "law": [],
+          "scope": [],
+          "geography": [],
+          "unsupported_geography": [
+            "cordoba",
+            "cordoba"
+          ],
+          "comparison": []
+        },
+        "reason": "La jurisdicción mencionada no está cubierta por este corpus.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "out_03",
+        "pregunta": "¿Cómo se eligen legisladores en Mendoza?",
+        "gold_status": "unsupported",
+        "gold_jurisdictions": [],
+        "rationale": "Provincia no incluida en el corpus.",
+        "predicted_status": "unsupported",
+        "predicted_jurisdictions": [],
+        "signals": {
+          "normalized_query": "como se eligen legisladores en mendoza",
+          "law": [],
+          "scope": [],
+          "geography": [],
+          "unsupported_geography": [
+            "mendoza"
+          ],
+          "comparison": []
+        },
+        "reason": "La jurisdicción mencionada no está cubierta por este corpus.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "out_04",
+        "pregunta": "¿Qué dice la Ley 8.100 de Tucumán?",
+        "gold_status": "unsupported",
+        "gold_jurisdictions": [],
+        "rationale": "Ley y provincia fuera del alcance del corpus.",
+        "predicted_status": "unsupported",
+        "predicted_jurisdictions": [],
+        "signals": {
+          "normalized_query": "que dice la ley 8 100 de tucuman",
+          "law": [],
+          "scope": [],
+          "geography": [],
+          "unsupported_geography": [
+            "tucuman"
+          ],
+          "comparison": []
+        },
+        "reason": "La jurisdicción mencionada no está cubierta por este corpus.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "cmp_01",
+        "pregunta": "¿Qué diferencias hay entre la legislación electoral de PBA y la de Santa Fe?",
+        "gold_status": "comparative",
+        "gold_jurisdictions": [
+          "pba",
+          "santa_fe"
+        ],
+        "rationale": "Comparación explícita de dos provincias cubiertas.",
+        "predicted_status": "comparative",
+        "predicted_jurisdictions": [
+          "pba",
+          "santa_fe"
+        ],
+        "signals": {
+          "normalized_query": "que diferencias hay entre la legislacion electoral de pba y la de santa fe",
+          "law": [],
+          "scope": [],
+          "geography": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "pba"
+              ]
+            },
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "santa fe"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": [
+            "diferencias"
+          ]
+        },
+        "reason": "Se detectó una comparación explícita entre jurisdicciones del corpus.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "cmp_02",
+        "pregunta": "Compará las reglas nacionales con las de PBA para el sufragio.",
+        "gold_status": "comparative",
+        "gold_jurisdictions": [
+          "nacional",
+          "pba"
+        ],
+        "rationale": "Intención comparativa y dos ámbitos normativos.",
+        "predicted_status": "comparative",
+        "predicted_jurisdictions": [
+          "nacional",
+          "pba"
+        ],
+        "signals": {
+          "normalized_query": "compara las reglas nacionales con las de pba para el sufragio",
+          "law": [],
+          "scope": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "reglas nacionales"
+              ]
+            }
+          ],
+          "geography": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "nacionales"
+              ]
+            },
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "pba"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": [
+            "compara"
+          ]
+        },
+        "reason": "Se detectó una comparación explícita entre jurisdicciones del corpus.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "cmp_03",
+        "pregunta": "¿En qué se distinguen las normas electorales de Santa Fe y Nación?",
+        "gold_status": "comparative",
+        "gold_jurisdictions": [
+          "nacional",
+          "santa_fe"
+        ],
+        "rationale": "Comparación explícita entre provincias y Nación.",
+        "predicted_status": "comparative",
+        "predicted_jurisdictions": [
+          "nacional",
+          "santa_fe"
+        ],
+        "signals": {
+          "normalized_query": "en que se distinguen las normas electorales de santa fe y nacion",
+          "law": [],
+          "scope": [],
+          "geography": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "nacion"
+              ]
+            },
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "santa fe"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": [
+            "distinguen",
+            "se distinguen"
+          ]
+        },
+        "reason": "Se detectó una comparación explícita entre jurisdicciones del corpus.",
+        "clarification_question": null,
+        "exact_match": true
+      },
+      {
+        "id": "cmp_04",
+        "pregunta": "Comparar la Ley 5.109 con la Ley 14.478: ¿qué cambia?",
+        "gold_status": "comparative",
+        "gold_jurisdictions": [
+          "pba",
+          "santa_fe"
+        ],
+        "rationale": "Dos leyes del corpus y verbo comparativo.",
+        "predicted_status": "comparative",
+        "predicted_jurisdictions": [
+          "pba",
+          "santa_fe"
+        ],
+        "signals": {
+          "normalized_query": "comparar la ley 5 109 con la ley 14 478 que cambia",
+          "law": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "ley 5 109"
+              ]
+            },
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "ley 14 478"
+              ]
+            }
+          ],
+          "scope": [],
+          "geography": [],
+          "unsupported_geography": [],
+          "comparison": [
+            "comparar"
+          ]
+        },
+        "reason": "Se detectó una comparación explícita entre jurisdicciones del corpus.",
+        "clarification_question": null,
+        "exact_match": true
+      }
+    ],
+    "metrics": {
+      "exact_routing_match": {
+        "numerator": 40,
+        "denominator": 40,
+        "value": 1.0
+      },
+      "confusion_matrix": {
+        "identified": {
+          "identified": 21,
+          "ambiguous": 0,
+          "comparative": 0,
+          "unspecified": 0,
+          "unsupported": 0
+        },
+        "ambiguous": {
+          "identified": 0,
+          "ambiguous": 7,
+          "comparative": 0,
+          "unspecified": 0,
+          "unsupported": 0
+        },
+        "comparative": {
+          "identified": 0,
+          "ambiguous": 0,
+          "comparative": 4,
+          "unspecified": 0,
+          "unsupported": 0
+        },
+        "unspecified": {
+          "identified": 0,
+          "ambiguous": 0,
+          "comparative": 0,
+          "unspecified": 4,
+          "unsupported": 0
+        },
+        "unsupported": {
+          "identified": 0,
+          "ambiguous": 0,
+          "comparative": 0,
+          "unspecified": 0,
+          "unsupported": 4
+        }
+      },
+      "per_jurisdiction": {
+        "nacional": {
+          "precision": {
+            "numerator": 9,
+            "denominator": 9,
+            "value": 1.0
+          },
+          "recall": {
+            "numerator": 9,
+            "denominator": 9,
+            "value": 1.0
+          }
+        },
+        "pba": {
+          "precision": {
+            "numerator": 10,
+            "denominator": 10,
+            "value": 1.0
+          },
+          "recall": {
+            "numerator": 10,
+            "denominator": 10,
+            "value": 1.0
+          }
+        },
+        "santa_fe": {
+          "precision": {
+            "numerator": 10,
+            "denominator": 10,
+            "value": 1.0
+          },
+          "recall": {
+            "numerator": 10,
+            "denominator": 10,
+            "value": 1.0
+          }
+        }
+      },
+      "auto_filter_coverage_single_identifiable": {
+        "numerator": 21,
+        "denominator": 21,
+        "value": 1.0
+      },
+      "correct_auto_filter_rate_single_identifiable": {
+        "numerator": 21,
+        "denominator": 21,
+        "value": 1.0
+      },
+      "harmful_misrouting": {
+        "count": 0,
+        "denominator": 40,
+        "rate": 0.0
+      },
+      "clarification_abstention_appropriateness": {
+        "numerator": 15,
+        "denominator": 15,
+        "value": 1.0
+      },
+      "comparative_detection": {
+        "precision": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0
+        },
+        "recall": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0
+        },
+        "correct_jurisdiction_set": {
+          "numerator": 4,
+          "denominator": 4,
+          "value": 1.0
+        }
+      }
+    }
+  },
+  "retrieval_impact": {
+    "status": "completed",
+    "model": "bge-m3",
+    "k": [
+      1,
+      3,
+      5
+    ],
+    "fixed_question_count": 3,
+    "passage_review": {
+      "nacional_respondible_deber_votar": {
+        "retrieved_expected_article": true,
+        "complete_evidence_in_top3": false,
+        "observed_limitation": "El top incluye el chunk 1 del art. 12, pero no la continuación con inciso d), certificación del empleador y carácter optativo; el artículo aparece como hit sin cubrir todo el pasaje pedido.",
+        "stage": "fragmentation/retrieval"
+      },
+      "pba_respondible_representacion": {
+        "retrieved_expected_article": true,
+        "complete_evidence_in_top3": true,
+        "observed_limitation": "El chunk superior del art. 13 contiene el dato preguntado (92 diputados y 46 senadores); no se interpreta la nota histórica como texto principal.",
+        "stage": "passage inspection"
+      },
+      "santa_fe_respondible_autoridad_mesa": {
+        "retrieved_expected_article": false,
+        "complete_evidence_in_top3": false,
+        "observed_limitation": "El art. 4 no aparece en top-5; el vecino art. 67 trata autoridades de mesa pero no es la definición consultada. El art. 4 existe en los chunks versionados.",
+        "stage": "retrieval"
+      }
+    },
+    "end_to_end_denominator": 3,
+    "auto_filter_coverage": {
+      "numerator": 3,
+      "denominator": 3
+    },
+    "clarification_attempts_avoided": {
+      "count": 0,
+      "denominator": 3
+    },
+    "wrong_jurisdiction_source_leakage": {
+      "count": 0,
+      "scope": "automatic-filter retrieved chunks"
+    },
+    "metrics": {
+      "baseline_unfiltered": {
+        "hit_at_1": {
+          "numerator": 2,
+          "denominator": 3,
+          "value": 0.6666666666666666
+        },
+        "hit_at_3": {
+          "numerator": 2,
+          "denominator": 3,
+          "value": 0.6666666666666666
+        },
+        "hit_at_5": {
+          "numerator": 2,
+          "denominator": 3,
+          "value": 0.6666666666666666
+        },
+        "mrr_at_5": {
+          "numerator": 2.0,
+          "denominator": 3,
+          "value": 0.6666666666666666
+        }
+      },
+      "oracle_filter": {
+        "hit_at_1": {
+          "numerator": 2,
+          "denominator": 3,
+          "value": 0.6666666666666666
+        },
+        "hit_at_3": {
+          "numerator": 2,
+          "denominator": 3,
+          "value": 0.6666666666666666
+        },
+        "hit_at_5": {
+          "numerator": 2,
+          "denominator": 3,
+          "value": 0.6666666666666666
+        },
+        "mrr_at_5": {
+          "numerator": 2.0,
+          "denominator": 3,
+          "value": 0.6666666666666666
+        }
+      },
+      "automatic_filter": {
+        "hit_at_1": {
+          "numerator": 2,
+          "denominator": 3,
+          "value": 0.6666666666666666
+        },
+        "hit_at_3": {
+          "numerator": 2,
+          "denominator": 3,
+          "value": 0.6666666666666666
+        },
+        "hit_at_5": {
+          "numerator": 2,
+          "denominator": 3,
+          "value": 0.6666666666666666
+        },
+        "mrr_at_5": {
+          "numerator": 2.0,
+          "denominator": 3,
+          "value": 0.6666666666666666
+        }
+      }
+    },
+    "runs": {
+      "baseline_unfiltered": [
+        {
+          "id": "nacional_respondible_deber_votar",
+          "question": "¿Qué excepciones al deber de votar enumera el artículo 12 del Código Electoral Nacional?",
+          "expected_source_article_ids": [
+            "nacional_19945_art_12"
+          ],
+          "gold_jurisdiction": "nacional",
+          "route_status": "retrieved",
+          "results": [
+            {
+              "rank": 1,
+              "id": "nacional_19945_art_12__chunk_0001",
+              "chunk_id": "nacional_19945_art_12__chunk_0001",
+              "source_article_id": "nacional_19945_art_12",
+              "jurisdiccion": "nacional",
+              "ley": "19945",
+              "articulo": "12",
+              "source": "ley_nacional.txt",
+              "chunk_numero": 1,
+              "text": "Artículo 12. - Deber de votar. Todo elector tiene el deber de votar en la elección nacional que se realice en su distrito.\n\nQuedan exentos de esa obligación:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial;\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables.\n\nTales electores se presentarán el día de la elección a la autoridad policial más próxima, la que extenderá certificación escrita que acredite la comparecencia;\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares.",
+              "distance": 0.6459735035896301,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "titulo": "TITULO I.\nDel Cuerpo Electoral",
+              "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+            },
+            {
+              "rank": 2,
+              "id": "pba_5109_art_4__chunk_0001",
+              "chunk_id": "pba_5109_art_4__chunk_0001",
+              "source_article_id": "pba_5109_art_4",
+              "jurisdiccion": "pba",
+              "ley": "5109",
+              "articulo": "4",
+              "source": "ley_pba.txt",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 4°.-  Quedan exentos de la obligación de votar:\n\na) Los que se hallen físicamente imposibilitados para concurrir al comicio por razones de salud.\n\nLa enfermedad se justificará con un certificado expedido por la autoridad médica local. Será obligación de la autoridad médica, concurrir al domicilio donde se encuentre la persona imposibilitada de trasladarse, en las formas y condiciones que establezca la reglamentación.\n\nb) Los funcionarios y empleados que por sus ocupaciones, como tales, no puedan hacerlo.\n\nEstos casos se justificarán con un certificado expedido por los superiores jerárquicos respectivos.\n\nc) Los jueces y sus auxiliares que por imperio de esta Ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial.\n\nd) Los que al día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables, debiendo acreditarse ante la autoridad que corresponda.",
+              "distance": 0.7382873892784119,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "capitulo": "CAPÍTULO I\nDERECHO ELECTORAL"
+            },
+            {
+              "rank": 3,
+              "id": "santa_fe_14478_art_77__chunk_0001",
+              "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+              "source_article_id": "santa_fe_14478_art_77",
+              "jurisdiccion": "santa_fe",
+              "ley": "14478",
+              "articulo": "77",
+              "source": "ley_sta_fe.pdf",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 77.- Eximición del sufragio. Causales. Están eximidas de la obligación de votar las personas electoras comprendidas en las siguientes causales:\na. las personas electoras mayores de dieciséis (16) y menores de dieciocho (18) años, y los mayores de setenta (70) años de edad;\nb. los funcionarios públicos obligados a mantener sus oficinas abiertas durante el comicio;\nc. los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar de votación por motivos fundados y razonables, debiendo acreditarlo con una certificación policial;\nd. los enfermos o impedidos por fuerza mayor debidamente acreditada, justificada con el certificado del médico del servicio público de salud o, en su ausencia, de médico particular; y\ne. el personal de servicios públicos que deba cumplir tareas que le impidan asistir al comicio; el empleador comunica la nómina al Juez Electoral con diez (10) días de anticipación y extiende la certificación individual.",
+              "distance": 0.8041388392448425,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "pagina_inicio": 23,
+              "pagina_fin": 23,
+              "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+              "titulo": "TÍTULO IV\nDEL ACTO ELECTORAL",
+              "capitulo": "CAPÍTULO I\nDISPOSICIONES COMUNES PARA ELECCIONES PRIMARIAS Y GENERALES"
+            },
+            {
+              "rank": 4,
+              "id": "pba_5109_art_3__chunk_0001",
+              "chunk_id": "pba_5109_art_3__chunk_0001",
+              "source_article_id": "pba_5109_art_3",
+              "jurisdiccion": "pba",
+              "ley": "5109",
+              "articulo": "3",
+              "source": "ley_pba.txt",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 3: No podrán votar:\n\n1) Por razones de incapacidad:\n\na) Los dementes declarados en juicio.\n\nb) Los sordomudos que no sepan darse a entender por escrito y declarados en juicio.\n\n2) Por razón de su estado y condición:\n\na) Los eclesiásticos regulares;\n\nc) Los detenidos por orden de, o condenados por, juez competente, mientras no recuperen su libertad;\n\nd) Los dementes no declarados en juicio, y los mendigos, mientras estén recluidos en establecimientos públicos;\n\ne) Los que se hallen asilados en establecimientos públicos o estén habitualmente a cargo de asociaciones de caridad.\n\n3) Por razón de indignidad:\n\na) Los condenados a inhabilitación absoluta por el tiempo fijado en la sentencia;\n\nb) Los condenados por el delito previsto por el artículo 17 de la Ley Nacional 12.331, por el término de diez (10) años, y en caso de reincidencia, a perpetuidad;",
+              "distance": 0.8712165951728821,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "capitulo": "CAPÍTULO I\nDERECHO ELECTORAL"
+            },
+            {
+              "rank": 5,
+              "id": "nacional_19945_art_18__chunk_0001",
+              "chunk_id": "nacional_19945_art_18__chunk_0001",
+              "source_article_id": "nacional_19945_art_18",
+              "jurisdiccion": "nacional",
+              "ley": "19945",
+              "articulo": "18",
+              "source": "ley_nacional.txt",
+              "chunk_numero": 1,
+              "text": "Artículo 18: Registro de infractores al deber de votar. La Cámara Nacional Electoral llevará un registro de infractores al deber de votar establecido en el artículo 12. Luego de cada elección nacional, elaborará un listado por distrito, con nombre, apellido y matrícula de los electores mayores de dieciocho (18) años y menores de setenta (70) años de edad de quienes no se tenga constancia de emisión del voto, el que pondrá en conocimiento del Poder Ejecutivo. Los gobiernos provinciales y de la Ciudad Autónoma de Buenos Aires podrán solicitar a la Cámara el listado correspondiente a los electores de su distrito.",
+              "distance": 0.8897403478622437,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "titulo": "TITULO I.\nDel Cuerpo Electoral",
+              "capitulo": "CAPITULO II\nDel Registro Nacional de Electores"
+            }
+          ]
+        },
+        {
+          "id": "pba_respondible_representacion",
+          "question": "Según el artículo 13 de la Ley Electoral bonaerense 5.109, ¿cuántos diputados y senadores integran la representación legislativa provincial?",
+          "expected_source_article_ids": [
+            "pba_5109_art_13"
+          ],
+          "gold_jurisdiction": "pba",
+          "route_status": "retrieved",
+          "results": [
+            {
+              "rank": 1,
+              "id": "pba_5109_art_13__chunk_0001",
+              "chunk_id": "pba_5109_art_13__chunk_0001",
+              "source_article_id": "pba_5109_art_13",
+              "jurisdiccion": "pba",
+              "ley": "5109",
+              "articulo": "13",
+              "source": "ley_pba.txt",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 13.-* Fíjase la representación legislativa de la Provincia en noventa y dos (92) diputados y cuarenta y seis (46) senadores los que serán elegidos en la siguiente proporción:\n\nSECCIÓN CAPITAL, elegirá tres (3) senadores y seis (6) diputados.\n\nSECCIÓN PRIMERA, elegirá ocho (8) senadores y quince (15) diputados.\n\nSECCIÓN SEGUNDA, elegirá cinco (5) senadores y once (11) diputados.\n\nSECCIÓN TERCERA, elegirá nueve (9) senadores y dieciocho (18) diputados.\n\nSECCIÓN CUARTA, elegirá siete (7) senadores y catorce (14) diputados.\n\nSECCIÓN QUINTA, elegirá cinco (5) senadores y once (11) diputados.\n\nSECCIÓN SEXTA, elegirá seis (6) senadores y once (11) diputados\n\nSECCIÓN SEPTIMA, elegirá tres (3) senadores y seis (6) diputados.\n\n.",
+              "distance": 0.577640950679779,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "capitulo": "CAPÍTULO II\nDE LA DIVISION ELECTORAL"
+            },
+            {
+              "rank": 2,
+              "id": "pba_5109_art_12__chunk_0001",
+              "chunk_id": "pba_5109_art_12__chunk_0001",
+              "source_article_id": "pba_5109_art_12",
+              "jurisdiccion": "pba",
+              "ley": "5109",
+              "articulo": "12",
+              "source": "ley_pba.txt",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 12.- Divídese el territorio de la Provincia en ocho secciones electorales para elegir senadores y diputados a la Honorable Legislatura, que se denominarán y formarán del modo siguiente:\n\nSECCIÓN CAPITAL: La forma el partido de La Plata.\n\nPRIMERA SECCIÓN ELECTORAL: Los partidos de Campana, Escobar, General Las Heras, General Rodríguez, General San Martín, Hurlingham, Ituzaingó, José C. Paz, Luján, Malvinas Argentinas, Marcos Paz, Mercedes, Merlo, Moreno, Morón, Navarro, Pilar, San Fernando, San Miguel, San Isidro, Suipacha, Tigre, Tres de Febrero y Vicente López.\n\nPartidos que se incorporan a la Sección con posterioridad al texto ordenado por decreto 997/93:\n\nSEGUNDA SECCIÓN ELECTORAL: Los partidos de Baradero, Bartolomé Mitre, Capitán Sarmiento, Carmen de Areco, Colón, Exaltación de la Cruz, Pergamino, Ramallo, Rojas, Salto, San Andrés de Giles, San Antonio de Areco, San Nicolás, San Pedro y Zárate.",
+              "distance": 0.7885047793388367,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "capitulo": "CAPÍTULO II\nDE LA DIVISION ELECTORAL"
+            },
+            {
+              "rank": 3,
+              "id": "santa_fe_14478_art_133__chunk_0001",
+              "chunk_id": "santa_fe_14478_art_133__chunk_0001",
+              "source_article_id": "santa_fe_14478_art_133",
+              "jurisdiccion": "santa_fe",
+              "ley": "14478",
+              "articulo": "133",
+              "source": "ley_sta_fe.pdf",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 133.- Elección de diputados y diputadas provinciales. Sistema proporcional. La Cámara de Diputados se compone de cincuenta (50) legisladores elegidos directamente por el pueblo mediante sistema de representación proporcional, constituyendo la Provincia un distrito electoral único. La distribución de cargos se realiza aplicando el sistema D'Hondt, entre las agrupaciones políticas que alcancen el cuatro por ciento (4%) del padrón electoral del distrito.",
+              "distance": 0.8043085336685181,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "pagina_inicio": 36,
+              "pagina_fin": 36,
+              "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+              "titulo": "TÍTULO VII\nELECCIONES GENERALES",
+              "capitulo": "CAPÍTULO II\nDE LA PROCLAMACIÓN DE LOS ELECTOS"
+            },
+            {
+              "rank": 4,
+              "id": "santa_fe_14478_art_132__chunk_0001",
+              "chunk_id": "santa_fe_14478_art_132__chunk_0001",
+              "source_article_id": "santa_fe_14478_art_132",
+              "jurisdiccion": "santa_fe",
+              "ley": "14478",
+              "articulo": "132",
+              "source": "ley_sta_fe.pdf",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 132.- Elección de senadores provinciales. La Cámara de Senadores se compone de un senador por cada departamento de la Provincia, elegido directamente por el pueblo a simple pluralidad de sufragios en circunscripciones uninominales. Se proclaman electas, en cada departamento, la persona candidata y su correspondiente suplente que obtengan la mayor cantidad de votos válidos.",
+              "distance": 0.8536823391914368,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "pagina_inicio": 36,
+              "pagina_fin": 36,
+              "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+              "titulo": "TÍTULO VII\nELECCIONES GENERALES",
+              "capitulo": "CAPÍTULO II\nDE LA PROCLAMACIÓN DE LOS ELECTOS"
+            },
+            {
+              "rank": 5,
+              "id": "nacional_19945_art_166__chunk_0001",
+              "chunk_id": "nacional_19945_art_166__chunk_0001",
+              "source_article_id": "nacional_19945_art_166",
+              "jurisdiccion": "nacional",
+              "ley": "19945",
+              "articulo": "166",
+              "source": "ley_nacional.txt",
+              "chunk_numero": 1,
+              "text": "Artículo 166.- A los fines de la aplicación de la disposición transitoria cuarta contenida en la Constitución Nacional acerca de la elección de Senadores Nacionales por las provincias en ocasión de la renovación parcial trienal de 1995, las legislaturas en cada provincia procederán a la elección de un Senador conforme con la disposición constitucional que establece que sean tres los Senadores por cada distrito y que no resulten los tres Senadores del distrito de un mismo partido político o alianza electoral, de modo tal que, en lo posible, correspondan dos Senadores Nacionales a la mayoría y uno a la primera minoría.",
+              "distance": 0.9059286117553711,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "titulo": "TITULO VIII\nDisposiciones Generales y Transitorias",
+              "capitulo": "Capítulo Unico"
+            }
+          ]
+        },
+        {
+          "id": "santa_fe_respondible_autoridad_mesa",
+          "question": "¿Cómo define el artículo 4 de la Ley 14.478 a la autoridad de mesa?",
+          "expected_source_article_ids": [
+            "santa_fe_14478_art_4"
+          ],
+          "gold_jurisdiction": "santa_fe",
+          "route_status": "retrieved",
+          "results": [
+            {
+              "rank": 1,
+              "id": "santa_fe_14478_art_67__chunk_0001",
+              "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+              "source_article_id": "santa_fe_14478_art_67",
+              "jurisdiccion": "santa_fe",
+              "ley": "14478",
+              "articulo": "67",
+              "source": "ley_sta_fe.pdf",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 67.- Autoridades de mesa. Cada mesa electoral tiene como única autoridad quien ejerce la presidencia de mesa y dos (2) suplentes que la auxilian y reemplazan, en el orden de sus designaciones, por inasistencia o ausencias momentáneas; siendo éstos los únicos supuestos en que tienen injerencia en el acto comicial. La autoridad de mesa no puede retirarse del local de votación mientras dure el comicio; en su caso será reemplazado definitivamente por sus suplentes. Si luego de constituida la mesa concurre la persona que hubiera sido designada titular de la presidencia de mesa, ésta toma posesión del cargo, dejando constancia escrita de ello.",
+              "distance": 0.7990511059761047,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "pagina_inicio": 21,
+              "pagina_fin": 21,
+              "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+              "titulo": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+              "capitulo": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA"
+            },
+            {
+              "rank": 2,
+              "id": "nacional_19945_art_72__chunk_0001",
+              "chunk_id": "nacional_19945_art_72__chunk_0001",
+              "source_article_id": "nacional_19945_art_72",
+              "jurisdiccion": "nacional",
+              "ley": "19945",
+              "articulo": "72",
+              "source": "ley_nacional.txt",
+              "chunk_numero": 1,
+              "text": "Artículo 72 — Autoridades de la mesa. Para la designación de las autoridades de mesa se dará prioridad a los electores que resulten de una selección aleatoria por medios informáticos en la cual se debe tener en cuenta su grado de instrucción y edad, a los electores que hayan sido capacitados a tal efecto y a continuación a los inscriptos en el Registro Público de Postulantes a Autoridades de Mesa.\n\nCada mesa electoral tendrá como única autoridad un funcionario que actuará con el título de presidente. Se designará también un suplente, que auxiliará al presidente y lo reemplazará en los casos que esta ley determina.\n\nEn caso de tratarse de la elección de Presidente y Vicepresidente de la Nación, las autoridades de mesa designadas para la primera vuelta cumplirán también esa función en caso de llevarse a cabo la segunda vuelta.\n\nLos electores que hayan cumplido funciones como autoridades de mesa recibirán una compensación consistente en una suma fija en concepto de viático.",
+              "distance": 0.8327478170394897,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "titulo": "TITULO IV\nEL ACTO ELECTORAL",
+              "capitulo": "CAPITULO II\nMesas receptoras de votos"
+            },
+            {
+              "rank": 3,
+              "id": "santa_fe_14478_art_59__chunk_0001",
+              "chunk_id": "santa_fe_14478_art_59__chunk_0001",
+              "source_article_id": "santa_fe_14478_art_59",
+              "jurisdiccion": "santa_fe",
+              "ley": "14478",
+              "articulo": "59",
+              "source": "ley_sta_fe.pdf",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 59.- Designación de autoridades de mesa. La Secretaría Electoral confecciona el listado de las autoridades de cada mesa y el Juez Electoral resuelve y ordena su publicación con una antelación no menor de treinta (30) días a la fecha de las elecciones primarias, ratificando dicha designación para las elecciones generales. Las autoridades de mesa deben figurar en el padrón de la mesa para la cual son designadas y son notificadas por los medios que determine la Secretaría.",
+              "distance": 0.8687150478363037,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "pagina_inicio": 20,
+              "pagina_fin": 20,
+              "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+              "titulo": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+              "capitulo": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA"
+            },
+            {
+              "rank": 4,
+              "id": "santa_fe_14478_art_264__chunk_0001",
+              "chunk_id": "santa_fe_14478_art_264__chunk_0001",
+              "source_article_id": "santa_fe_14478_art_264",
+              "jurisdiccion": "santa_fe",
+              "ley": "14478",
+              "articulo": "264",
+              "source": "ley_sta_fe.pdf",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 264.- Inasistencia injustificada de la autoridad de mesa. La persona designada como autoridad de mesa que, sin causa justificada debidamente acreditada, no concurriere a desempeñar sus funciones el día del comicio, es sancionada con multa de 1 JUS. La reiteración de la conducta en un proceso electoral subsiguiente duplica la sanción.",
+              "distance": 0.8898764848709106,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "pagina_inicio": 63,
+              "pagina_fin": 63,
+              "libro": "LIBRO IV\nFALTAS ELECTORALES Y RÉGIMEN SANCIONATORIO",
+              "titulo": "TÍTULO ÚNICO",
+              "capitulo": "CAPÍTULO III\nFALTAS DE LAS AUTORIDADES DE MESA"
+            },
+            {
+              "rank": 5,
+              "id": "pba_5109_art_42__chunk_0001",
+              "chunk_id": "pba_5109_art_42__chunk_0001",
+              "source_article_id": "pba_5109_art_42",
+              "jurisdiccion": "pba",
+              "ley": "5109",
+              "articulo": "42",
+              "source": "ley_pba.txt",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 42.- El cargo de autoridad de las mesas receptoras de votos, es obligatorio y nadie puede excusarse de desempeñarlo, sino por imposibilidad física certificada por la autoridad médica local o por haber cumplido sesenta (60) años de edad.\n\nLa causa de excusación deberá ser presentada a la Junta Electoral dentro de los tres (3) días de recibido el nombramiento, la que resolverá sin más recurso.",
+              "distance": 0.9046416282653809,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "capitulo": "CAPÍTULO VI\nDE LAS MESAS RECEPTORAS DE VOTOS"
+            }
+          ]
+        }
+      ],
+      "oracle_filter": [
+        {
+          "id": "nacional_respondible_deber_votar",
+          "question": "¿Qué excepciones al deber de votar enumera el artículo 12 del Código Electoral Nacional?",
+          "expected_source_article_ids": [
+            "nacional_19945_art_12"
+          ],
+          "gold_jurisdiction": "nacional",
+          "route_status": "retrieved",
+          "results": [
+            {
+              "rank": 1,
+              "id": "nacional_19945_art_12__chunk_0001",
+              "chunk_id": "nacional_19945_art_12__chunk_0001",
+              "source_article_id": "nacional_19945_art_12",
+              "jurisdiccion": "nacional",
+              "ley": "19945",
+              "articulo": "12",
+              "source": "ley_nacional.txt",
+              "chunk_numero": 1,
+              "text": "Artículo 12. - Deber de votar. Todo elector tiene el deber de votar en la elección nacional que se realice en su distrito.\n\nQuedan exentos de esa obligación:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial;\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables.\n\nTales electores se presentarán el día de la elección a la autoridad policial más próxima, la que extenderá certificación escrita que acredite la comparecencia;\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares.",
+              "distance": 0.6459735035896301,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "titulo": "TITULO I.\nDel Cuerpo Electoral",
+              "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+            },
+            {
+              "rank": 2,
+              "id": "nacional_19945_art_18__chunk_0001",
+              "chunk_id": "nacional_19945_art_18__chunk_0001",
+              "source_article_id": "nacional_19945_art_18",
+              "jurisdiccion": "nacional",
+              "ley": "19945",
+              "articulo": "18",
+              "source": "ley_nacional.txt",
+              "chunk_numero": 1,
+              "text": "Artículo 18: Registro de infractores al deber de votar. La Cámara Nacional Electoral llevará un registro de infractores al deber de votar establecido en el artículo 12. Luego de cada elección nacional, elaborará un listado por distrito, con nombre, apellido y matrícula de los electores mayores de dieciocho (18) años y menores de setenta (70) años de edad de quienes no se tenga constancia de emisión del voto, el que pondrá en conocimiento del Poder Ejecutivo. Los gobiernos provinciales y de la Ciudad Autónoma de Buenos Aires podrán solicitar a la Cámara el listado correspondiente a los electores de su distrito.",
+              "distance": 0.8897403478622437,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "titulo": "TITULO I.\nDel Cuerpo Electoral",
+              "capitulo": "CAPITULO II\nDel Registro Nacional de Electores"
+            },
+            {
+              "rank": 3,
+              "id": "nacional_19945_art_3__chunk_0001",
+              "chunk_id": "nacional_19945_art_3__chunk_0001",
+              "source_article_id": "nacional_19945_art_3",
+              "jurisdiccion": "nacional",
+              "ley": "19945",
+              "articulo": "3",
+              "source": "ley_nacional.txt",
+              "chunk_numero": 1,
+              "text": "Artículo 3. - Quiénes están excluidos. Están excluidos del padrón electoral:\n\na) Los dementes declarados tales en juicio;\n\nb)\n\nc) ;\n\nd) ;\n\ne) Los condenados por delitos dolosos a pena privativa de la libertad, y, por sentencia ejecutoriada, por el término de la condena;\n\nf) Los condenados por faltas previstas en las leyes nacionales y provinciales de juegos prohibidos, por el término de tres años; en el caso de reincidencia, por seis;\n\ng) Los sancionados por la infracción de deserción calificada, por el doble término de la duración de la sanción;\n\nh) ;\n\ni) Los declarados rebeldes en causa penal, hasta que cese la rebeldía o se opere la prescripción:\n\nj) ;\n\nk) ;\n\nl) Los inhabilitados según disposiciones de la Ley Orgánica de los Partidos Políticos;\n\nm) Los que en virtud de otras prescripciones legales y reglamentarias quedaren inhabilitados para el ejercicio de los derechos políticos.",
+              "distance": 0.9221689105033875,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "titulo": "TITULO I.\nDel Cuerpo Electoral",
+              "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+            },
+            {
+              "rank": 4,
+              "id": "nacional_19945_art_88__chunk_0001",
+              "chunk_id": "nacional_19945_art_88__chunk_0001",
+              "source_article_id": "nacional_19945_art_88",
+              "jurisdiccion": "nacional",
+              "ley": "19945",
+              "articulo": "88",
+              "source": "ley_nacional.txt",
+              "chunk_numero": 1,
+              "text": "Artículo 88. - Derecho del elector a votar. Todo aquel que figure en el padrón y exhiba su documento cívico tiene el derecho a votar y nadie podrá cuestionarlo en el acto del sufragio. Los presidentes no aceptarán impugnación alguna que se funde en la inhabilidad del elector para figurar en el padrón electoral.\n\nEstá excluido del mismo quien se encuentre tachado con tinta roja en el padrón de la mesa, no pudiendo en tal caso emitir el voto aunque se alegare error.",
+              "distance": 0.9263781309127808,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "titulo": "TITULO IV\nEL ACTO ELECTORAL",
+              "capitulo": "CAPITULO IV\nEmisión del sufragio"
+            },
+            {
+              "rank": 5,
+              "id": "nacional_19945_art_8__chunk_0001",
+              "chunk_id": "nacional_19945_art_8__chunk_0001",
+              "source_article_id": "nacional_19945_art_8",
+              "jurisdiccion": "nacional",
+              "ley": "19945",
+              "articulo": "8",
+              "source": "ley_nacional.txt",
+              "chunk_numero": 1,
+              "text": "Artículo 8. - Electores que deben trabajar. Los que por razones de trabajo deban estar ocupados durante las horas del acto electoral, tienen derecho a obtener una licencia especial de sus empleadores con el objeto de concurrir a emitir el voto o desempeñar funciones en el comicio, sin deducción alguna del salario ni ulterior recargo de horario.",
+              "distance": 0.9372823238372803,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "titulo": "TITULO I.\nDel Cuerpo Electoral",
+              "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+            }
+          ]
+        },
+        {
+          "id": "pba_respondible_representacion",
+          "question": "Según el artículo 13 de la Ley Electoral bonaerense 5.109, ¿cuántos diputados y senadores integran la representación legislativa provincial?",
+          "expected_source_article_ids": [
+            "pba_5109_art_13"
+          ],
+          "gold_jurisdiction": "pba",
+          "route_status": "retrieved",
+          "results": [
+            {
+              "rank": 1,
+              "id": "pba_5109_art_13__chunk_0001",
+              "chunk_id": "pba_5109_art_13__chunk_0001",
+              "source_article_id": "pba_5109_art_13",
+              "jurisdiccion": "pba",
+              "ley": "5109",
+              "articulo": "13",
+              "source": "ley_pba.txt",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 13.-* Fíjase la representación legislativa de la Provincia en noventa y dos (92) diputados y cuarenta y seis (46) senadores los que serán elegidos en la siguiente proporción:\n\nSECCIÓN CAPITAL, elegirá tres (3) senadores y seis (6) diputados.\n\nSECCIÓN PRIMERA, elegirá ocho (8) senadores y quince (15) diputados.\n\nSECCIÓN SEGUNDA, elegirá cinco (5) senadores y once (11) diputados.\n\nSECCIÓN TERCERA, elegirá nueve (9) senadores y dieciocho (18) diputados.\n\nSECCIÓN CUARTA, elegirá siete (7) senadores y catorce (14) diputados.\n\nSECCIÓN QUINTA, elegirá cinco (5) senadores y once (11) diputados.\n\nSECCIÓN SEXTA, elegirá seis (6) senadores y once (11) diputados\n\nSECCIÓN SEPTIMA, elegirá tres (3) senadores y seis (6) diputados.\n\n.",
+              "distance": 0.577640950679779,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "capitulo": "CAPÍTULO II\nDE LA DIVISION ELECTORAL"
+            },
+            {
+              "rank": 2,
+              "id": "pba_5109_art_12__chunk_0001",
+              "chunk_id": "pba_5109_art_12__chunk_0001",
+              "source_article_id": "pba_5109_art_12",
+              "jurisdiccion": "pba",
+              "ley": "5109",
+              "articulo": "12",
+              "source": "ley_pba.txt",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 12.- Divídese el territorio de la Provincia en ocho secciones electorales para elegir senadores y diputados a la Honorable Legislatura, que se denominarán y formarán del modo siguiente:\n\nSECCIÓN CAPITAL: La forma el partido de La Plata.\n\nPRIMERA SECCIÓN ELECTORAL: Los partidos de Campana, Escobar, General Las Heras, General Rodríguez, General San Martín, Hurlingham, Ituzaingó, José C. Paz, Luján, Malvinas Argentinas, Marcos Paz, Mercedes, Merlo, Moreno, Morón, Navarro, Pilar, San Fernando, San Miguel, San Isidro, Suipacha, Tigre, Tres de Febrero y Vicente López.\n\nPartidos que se incorporan a la Sección con posterioridad al texto ordenado por decreto 997/93:\n\nSEGUNDA SECCIÓN ELECTORAL: Los partidos de Baradero, Bartolomé Mitre, Capitán Sarmiento, Carmen de Areco, Colón, Exaltación de la Cruz, Pergamino, Ramallo, Rojas, Salto, San Andrés de Giles, San Antonio de Areco, San Nicolás, San Pedro y Zárate.",
+              "distance": 0.7885047793388367,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "capitulo": "CAPÍTULO II\nDE LA DIVISION ELECTORAL"
+            },
+            {
+              "rank": 3,
+              "id": "pba_5109_art_124__chunk_0001",
+              "chunk_id": "pba_5109_art_124__chunk_0001",
+              "source_article_id": "pba_5109_art_124",
+              "jurisdiccion": "pba",
+              "ley": "5109",
+              "articulo": "124",
+              "source": "ley_pba.txt",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 124.- Con arreglo a los artículos 48 y 54(*) de la Constitución Nacional y artículo 12 de la ley Nacional número 8871, la Asamblea Legislativa, por citación especial de su Presidente, deberá reunirse y elegir senadores antes del 1°de Marzo del año de la renovación del Cuerpo a integrar.(#)",
+              "distance": 0.9960494041442871,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "capitulo": "CAPÍTULO XXII\nDE LA ASAMBLEA LEGISLATIVA"
+            },
+            {
+              "rank": 4,
+              "id": "pba_5109_art_2__chunk_0001",
+              "chunk_id": "pba_5109_art_2__chunk_0001",
+              "source_article_id": "pba_5109_art_2",
+              "jurisdiccion": "pba",
+              "ley": "5109",
+              "articulo": "2",
+              "source": "ley_pba.txt",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 2°.- . Son electores para las elecciones Provinciales, Municipales y de Consejeros Escolares:\n\na) Los argentinos nativos y por opción desde los dieciséis (16) años de edad y los naturalizados desde los dieciocho (18) años de edad, siempre que estén inscriptos en el Registro Electoral y no se encuentren alcanzados por las inhabilidades establecidas por la Constitución de la Provincia y las leyes que rigen la materia.\n\nb) Los extranjeros que reúnan los requisitos exigidos en la Ley 11.700 y sus modificatorias.",
+              "distance": 1.019956350326538,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "capitulo": "CAPÍTULO I\nDERECHO ELECTORAL"
+            },
+            {
+              "rank": 5,
+              "id": "pba_5109_art_14__chunk_0001",
+              "chunk_id": "pba_5109_art_14__chunk_0001",
+              "source_article_id": "pba_5109_art_14",
+              "jurisdiccion": "pba",
+              "ley": "5109",
+              "articulo": "14",
+              "source": "ley_pba.txt",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 14.- Habrá una Junta Electoral permanente, integrada por los presidentes de la Suprema Corte de Justicia, del Tribunal de Cuentas y de tres Cámaras de Apelación del Departamento de la Capital o sus sustitutos en caso de impedimento.",
+              "distance": 1.0371414422988892,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "capitulo": "CAPÍTULO III\nDE LA JUNTA ELECTORAL"
+            }
+          ]
+        },
+        {
+          "id": "santa_fe_respondible_autoridad_mesa",
+          "question": "¿Cómo define el artículo 4 de la Ley 14.478 a la autoridad de mesa?",
+          "expected_source_article_ids": [
+            "santa_fe_14478_art_4"
+          ],
+          "gold_jurisdiction": "santa_fe",
+          "route_status": "retrieved",
+          "results": [
+            {
+              "rank": 1,
+              "id": "santa_fe_14478_art_67__chunk_0001",
+              "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+              "source_article_id": "santa_fe_14478_art_67",
+              "jurisdiccion": "santa_fe",
+              "ley": "14478",
+              "articulo": "67",
+              "source": "ley_sta_fe.pdf",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 67.- Autoridades de mesa. Cada mesa electoral tiene como única autoridad quien ejerce la presidencia de mesa y dos (2) suplentes que la auxilian y reemplazan, en el orden de sus designaciones, por inasistencia o ausencias momentáneas; siendo éstos los únicos supuestos en que tienen injerencia en el acto comicial. La autoridad de mesa no puede retirarse del local de votación mientras dure el comicio; en su caso será reemplazado definitivamente por sus suplentes. Si luego de constituida la mesa concurre la persona que hubiera sido designada titular de la presidencia de mesa, ésta toma posesión del cargo, dejando constancia escrita de ello.",
+              "distance": 0.7990511059761047,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "pagina_inicio": 21,
+              "pagina_fin": 21,
+              "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+              "titulo": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+              "capitulo": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA"
+            },
+            {
+              "rank": 2,
+              "id": "santa_fe_14478_art_59__chunk_0001",
+              "chunk_id": "santa_fe_14478_art_59__chunk_0001",
+              "source_article_id": "santa_fe_14478_art_59",
+              "jurisdiccion": "santa_fe",
+              "ley": "14478",
+              "articulo": "59",
+              "source": "ley_sta_fe.pdf",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 59.- Designación de autoridades de mesa. La Secretaría Electoral confecciona el listado de las autoridades de cada mesa y el Juez Electoral resuelve y ordena su publicación con una antelación no menor de treinta (30) días a la fecha de las elecciones primarias, ratificando dicha designación para las elecciones generales. Las autoridades de mesa deben figurar en el padrón de la mesa para la cual son designadas y son notificadas por los medios que determine la Secretaría.",
+              "distance": 0.8687150478363037,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "pagina_inicio": 20,
+              "pagina_fin": 20,
+              "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+              "titulo": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+              "capitulo": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA"
+            },
+            {
+              "rank": 3,
+              "id": "santa_fe_14478_art_264__chunk_0001",
+              "chunk_id": "santa_fe_14478_art_264__chunk_0001",
+              "source_article_id": "santa_fe_14478_art_264",
+              "jurisdiccion": "santa_fe",
+              "ley": "14478",
+              "articulo": "264",
+              "source": "ley_sta_fe.pdf",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 264.- Inasistencia injustificada de la autoridad de mesa. La persona designada como autoridad de mesa que, sin causa justificada debidamente acreditada, no concurriere a desempeñar sus funciones el día del comicio, es sancionada con multa de 1 JUS. La reiteración de la conducta en un proceso electoral subsiguiente duplica la sanción.",
+              "distance": 0.8898764848709106,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "pagina_inicio": 63,
+              "pagina_fin": 63,
+              "libro": "LIBRO IV\nFALTAS ELECTORALES Y RÉGIMEN SANCIONATORIO",
+              "titulo": "TÍTULO ÚNICO",
+              "capitulo": "CAPÍTULO III\nFALTAS DE LAS AUTORIDADES DE MESA"
+            },
+            {
+              "rank": 4,
+              "id": "santa_fe_14478_art_68__chunk_0001",
+              "chunk_id": "santa_fe_14478_art_68__chunk_0001",
+              "source_article_id": "santa_fe_14478_art_68",
+              "jurisdiccion": "santa_fe",
+              "ley": "14478",
+              "articulo": "68",
+              "source": "ley_sta_fe.pdf",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 68.- Requisitos para ser autoridad de mesa. Son requisitos para la presidencia y suplencia de mesa:\na. ser persona electora hábil del municipio;\nb. tener entre 18 y 70 años de edad;\nc. saber leer y escribir; y\nd. no ser persona candidata, apoderada o fiscal en dicha elección.",
+              "distance": 0.920152485370636,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "pagina_inicio": 21,
+              "pagina_fin": 22,
+              "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+              "titulo": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+              "capitulo": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA"
+            },
+            {
+              "rank": 5,
+              "id": "santa_fe_14478_art_63__chunk_0001",
+              "chunk_id": "santa_fe_14478_art_63__chunk_0001",
+              "source_article_id": "santa_fe_14478_art_63",
+              "jurisdiccion": "santa_fe",
+              "ley": "14478",
+              "articulo": "63",
+              "source": "ley_sta_fe.pdf",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 63.- Designación. Para la designación de autoridades de mesa se da preferencia a las personas inscriptas en el Registro que hayan cumplido la capacitación y no se encuentren alcanzadas por observaciones admitidas o inhabilidades. La inscripción no genera derecho a ser designado. Cuando el número de personas registradas resulte insuficiente, pueden designarse otras personas electoras que cumplan los requisitos establecidos por este Código.",
+              "distance": 0.9253653287887573,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "pagina_inicio": 21,
+              "pagina_fin": 21,
+              "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+              "titulo": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+              "capitulo": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA"
+            }
+          ]
+        }
+      ],
+      "automatic_filter": [
+        {
+          "id": "nacional_respondible_deber_votar",
+          "question": "¿Qué excepciones al deber de votar enumera el artículo 12 del Código Electoral Nacional?",
+          "expected_source_article_ids": [
+            "nacional_19945_art_12"
+          ],
+          "gold_jurisdiction": "nacional",
+          "route_status": "retrieved",
+          "selected_jurisdiction": "nacional",
+          "results": [
+            {
+              "rank": 1,
+              "id": "nacional_19945_art_12__chunk_0001",
+              "chunk_id": "nacional_19945_art_12__chunk_0001",
+              "source_article_id": "nacional_19945_art_12",
+              "jurisdiccion": "nacional",
+              "ley": "19945",
+              "articulo": "12",
+              "source": "ley_nacional.txt",
+              "chunk_numero": 1,
+              "text": "Artículo 12. - Deber de votar. Todo elector tiene el deber de votar en la elección nacional que se realice en su distrito.\n\nQuedan exentos de esa obligación:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial;\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables.\n\nTales electores se presentarán el día de la elección a la autoridad policial más próxima, la que extenderá certificación escrita que acredite la comparecencia;\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares.",
+              "distance": 0.6459735035896301,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "titulo": "TITULO I.\nDel Cuerpo Electoral",
+              "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+            },
+            {
+              "rank": 2,
+              "id": "nacional_19945_art_18__chunk_0001",
+              "chunk_id": "nacional_19945_art_18__chunk_0001",
+              "source_article_id": "nacional_19945_art_18",
+              "jurisdiccion": "nacional",
+              "ley": "19945",
+              "articulo": "18",
+              "source": "ley_nacional.txt",
+              "chunk_numero": 1,
+              "text": "Artículo 18: Registro de infractores al deber de votar. La Cámara Nacional Electoral llevará un registro de infractores al deber de votar establecido en el artículo 12. Luego de cada elección nacional, elaborará un listado por distrito, con nombre, apellido y matrícula de los electores mayores de dieciocho (18) años y menores de setenta (70) años de edad de quienes no se tenga constancia de emisión del voto, el que pondrá en conocimiento del Poder Ejecutivo. Los gobiernos provinciales y de la Ciudad Autónoma de Buenos Aires podrán solicitar a la Cámara el listado correspondiente a los electores de su distrito.",
+              "distance": 0.8897403478622437,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "titulo": "TITULO I.\nDel Cuerpo Electoral",
+              "capitulo": "CAPITULO II\nDel Registro Nacional de Electores"
+            },
+            {
+              "rank": 3,
+              "id": "nacional_19945_art_3__chunk_0001",
+              "chunk_id": "nacional_19945_art_3__chunk_0001",
+              "source_article_id": "nacional_19945_art_3",
+              "jurisdiccion": "nacional",
+              "ley": "19945",
+              "articulo": "3",
+              "source": "ley_nacional.txt",
+              "chunk_numero": 1,
+              "text": "Artículo 3. - Quiénes están excluidos. Están excluidos del padrón electoral:\n\na) Los dementes declarados tales en juicio;\n\nb)\n\nc) ;\n\nd) ;\n\ne) Los condenados por delitos dolosos a pena privativa de la libertad, y, por sentencia ejecutoriada, por el término de la condena;\n\nf) Los condenados por faltas previstas en las leyes nacionales y provinciales de juegos prohibidos, por el término de tres años; en el caso de reincidencia, por seis;\n\ng) Los sancionados por la infracción de deserción calificada, por el doble término de la duración de la sanción;\n\nh) ;\n\ni) Los declarados rebeldes en causa penal, hasta que cese la rebeldía o se opere la prescripción:\n\nj) ;\n\nk) ;\n\nl) Los inhabilitados según disposiciones de la Ley Orgánica de los Partidos Políticos;\n\nm) Los que en virtud de otras prescripciones legales y reglamentarias quedaren inhabilitados para el ejercicio de los derechos políticos.",
+              "distance": 0.9221689105033875,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "titulo": "TITULO I.\nDel Cuerpo Electoral",
+              "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+            },
+            {
+              "rank": 4,
+              "id": "nacional_19945_art_88__chunk_0001",
+              "chunk_id": "nacional_19945_art_88__chunk_0001",
+              "source_article_id": "nacional_19945_art_88",
+              "jurisdiccion": "nacional",
+              "ley": "19945",
+              "articulo": "88",
+              "source": "ley_nacional.txt",
+              "chunk_numero": 1,
+              "text": "Artículo 88. - Derecho del elector a votar. Todo aquel que figure en el padrón y exhiba su documento cívico tiene el derecho a votar y nadie podrá cuestionarlo en el acto del sufragio. Los presidentes no aceptarán impugnación alguna que se funde en la inhabilidad del elector para figurar en el padrón electoral.\n\nEstá excluido del mismo quien se encuentre tachado con tinta roja en el padrón de la mesa, no pudiendo en tal caso emitir el voto aunque se alegare error.",
+              "distance": 0.9263781309127808,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "titulo": "TITULO IV\nEL ACTO ELECTORAL",
+              "capitulo": "CAPITULO IV\nEmisión del sufragio"
+            },
+            {
+              "rank": 5,
+              "id": "nacional_19945_art_8__chunk_0001",
+              "chunk_id": "nacional_19945_art_8__chunk_0001",
+              "source_article_id": "nacional_19945_art_8",
+              "jurisdiccion": "nacional",
+              "ley": "19945",
+              "articulo": "8",
+              "source": "ley_nacional.txt",
+              "chunk_numero": 1,
+              "text": "Artículo 8. - Electores que deben trabajar. Los que por razones de trabajo deban estar ocupados durante las horas del acto electoral, tienen derecho a obtener una licencia especial de sus empleadores con el objeto de concurrir a emitir el voto o desempeñar funciones en el comicio, sin deducción alguna del salario ni ulterior recargo de horario.",
+              "distance": 0.9372823238372803,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "titulo": "TITULO I.\nDel Cuerpo Electoral",
+              "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+            }
+          ]
+        },
+        {
+          "id": "pba_respondible_representacion",
+          "question": "Según el artículo 13 de la Ley Electoral bonaerense 5.109, ¿cuántos diputados y senadores integran la representación legislativa provincial?",
+          "expected_source_article_ids": [
+            "pba_5109_art_13"
+          ],
+          "gold_jurisdiction": "pba",
+          "route_status": "retrieved",
+          "selected_jurisdiction": "pba",
+          "results": [
+            {
+              "rank": 1,
+              "id": "pba_5109_art_13__chunk_0001",
+              "chunk_id": "pba_5109_art_13__chunk_0001",
+              "source_article_id": "pba_5109_art_13",
+              "jurisdiccion": "pba",
+              "ley": "5109",
+              "articulo": "13",
+              "source": "ley_pba.txt",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 13.-* Fíjase la representación legislativa de la Provincia en noventa y dos (92) diputados y cuarenta y seis (46) senadores los que serán elegidos en la siguiente proporción:\n\nSECCIÓN CAPITAL, elegirá tres (3) senadores y seis (6) diputados.\n\nSECCIÓN PRIMERA, elegirá ocho (8) senadores y quince (15) diputados.\n\nSECCIÓN SEGUNDA, elegirá cinco (5) senadores y once (11) diputados.\n\nSECCIÓN TERCERA, elegirá nueve (9) senadores y dieciocho (18) diputados.\n\nSECCIÓN CUARTA, elegirá siete (7) senadores y catorce (14) diputados.\n\nSECCIÓN QUINTA, elegirá cinco (5) senadores y once (11) diputados.\n\nSECCIÓN SEXTA, elegirá seis (6) senadores y once (11) diputados\n\nSECCIÓN SEPTIMA, elegirá tres (3) senadores y seis (6) diputados.\n\n.",
+              "distance": 0.577640950679779,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "capitulo": "CAPÍTULO II\nDE LA DIVISION ELECTORAL"
+            },
+            {
+              "rank": 2,
+              "id": "pba_5109_art_12__chunk_0001",
+              "chunk_id": "pba_5109_art_12__chunk_0001",
+              "source_article_id": "pba_5109_art_12",
+              "jurisdiccion": "pba",
+              "ley": "5109",
+              "articulo": "12",
+              "source": "ley_pba.txt",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 12.- Divídese el territorio de la Provincia en ocho secciones electorales para elegir senadores y diputados a la Honorable Legislatura, que se denominarán y formarán del modo siguiente:\n\nSECCIÓN CAPITAL: La forma el partido de La Plata.\n\nPRIMERA SECCIÓN ELECTORAL: Los partidos de Campana, Escobar, General Las Heras, General Rodríguez, General San Martín, Hurlingham, Ituzaingó, José C. Paz, Luján, Malvinas Argentinas, Marcos Paz, Mercedes, Merlo, Moreno, Morón, Navarro, Pilar, San Fernando, San Miguel, San Isidro, Suipacha, Tigre, Tres de Febrero y Vicente López.\n\nPartidos que se incorporan a la Sección con posterioridad al texto ordenado por decreto 997/93:\n\nSEGUNDA SECCIÓN ELECTORAL: Los partidos de Baradero, Bartolomé Mitre, Capitán Sarmiento, Carmen de Areco, Colón, Exaltación de la Cruz, Pergamino, Ramallo, Rojas, Salto, San Andrés de Giles, San Antonio de Areco, San Nicolás, San Pedro y Zárate.",
+              "distance": 0.7885047793388367,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "capitulo": "CAPÍTULO II\nDE LA DIVISION ELECTORAL"
+            },
+            {
+              "rank": 3,
+              "id": "pba_5109_art_124__chunk_0001",
+              "chunk_id": "pba_5109_art_124__chunk_0001",
+              "source_article_id": "pba_5109_art_124",
+              "jurisdiccion": "pba",
+              "ley": "5109",
+              "articulo": "124",
+              "source": "ley_pba.txt",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 124.- Con arreglo a los artículos 48 y 54(*) de la Constitución Nacional y artículo 12 de la ley Nacional número 8871, la Asamblea Legislativa, por citación especial de su Presidente, deberá reunirse y elegir senadores antes del 1°de Marzo del año de la renovación del Cuerpo a integrar.(#)",
+              "distance": 0.9960494041442871,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "capitulo": "CAPÍTULO XXII\nDE LA ASAMBLEA LEGISLATIVA"
+            },
+            {
+              "rank": 4,
+              "id": "pba_5109_art_2__chunk_0001",
+              "chunk_id": "pba_5109_art_2__chunk_0001",
+              "source_article_id": "pba_5109_art_2",
+              "jurisdiccion": "pba",
+              "ley": "5109",
+              "articulo": "2",
+              "source": "ley_pba.txt",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 2°.- . Son electores para las elecciones Provinciales, Municipales y de Consejeros Escolares:\n\na) Los argentinos nativos y por opción desde los dieciséis (16) años de edad y los naturalizados desde los dieciocho (18) años de edad, siempre que estén inscriptos en el Registro Electoral y no se encuentren alcanzados por las inhabilidades establecidas por la Constitución de la Provincia y las leyes que rigen la materia.\n\nb) Los extranjeros que reúnan los requisitos exigidos en la Ley 11.700 y sus modificatorias.",
+              "distance": 1.019956350326538,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "capitulo": "CAPÍTULO I\nDERECHO ELECTORAL"
+            },
+            {
+              "rank": 5,
+              "id": "pba_5109_art_14__chunk_0001",
+              "chunk_id": "pba_5109_art_14__chunk_0001",
+              "source_article_id": "pba_5109_art_14",
+              "jurisdiccion": "pba",
+              "ley": "5109",
+              "articulo": "14",
+              "source": "ley_pba.txt",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 14.- Habrá una Junta Electoral permanente, integrada por los presidentes de la Suprema Corte de Justicia, del Tribunal de Cuentas y de tres Cámaras de Apelación del Departamento de la Capital o sus sustitutos en caso de impedimento.",
+              "distance": 1.0371414422988892,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "capitulo": "CAPÍTULO III\nDE LA JUNTA ELECTORAL"
+            }
+          ]
+        },
+        {
+          "id": "santa_fe_respondible_autoridad_mesa",
+          "question": "¿Cómo define el artículo 4 de la Ley 14.478 a la autoridad de mesa?",
+          "expected_source_article_ids": [
+            "santa_fe_14478_art_4"
+          ],
+          "gold_jurisdiction": "santa_fe",
+          "route_status": "retrieved",
+          "selected_jurisdiction": "santa_fe",
+          "results": [
+            {
+              "rank": 1,
+              "id": "santa_fe_14478_art_67__chunk_0001",
+              "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+              "source_article_id": "santa_fe_14478_art_67",
+              "jurisdiccion": "santa_fe",
+              "ley": "14478",
+              "articulo": "67",
+              "source": "ley_sta_fe.pdf",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 67.- Autoridades de mesa. Cada mesa electoral tiene como única autoridad quien ejerce la presidencia de mesa y dos (2) suplentes que la auxilian y reemplazan, en el orden de sus designaciones, por inasistencia o ausencias momentáneas; siendo éstos los únicos supuestos en que tienen injerencia en el acto comicial. La autoridad de mesa no puede retirarse del local de votación mientras dure el comicio; en su caso será reemplazado definitivamente por sus suplentes. Si luego de constituida la mesa concurre la persona que hubiera sido designada titular de la presidencia de mesa, ésta toma posesión del cargo, dejando constancia escrita de ello.",
+              "distance": 0.7990511059761047,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "pagina_inicio": 21,
+              "pagina_fin": 21,
+              "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+              "titulo": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+              "capitulo": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA"
+            },
+            {
+              "rank": 2,
+              "id": "santa_fe_14478_art_59__chunk_0001",
+              "chunk_id": "santa_fe_14478_art_59__chunk_0001",
+              "source_article_id": "santa_fe_14478_art_59",
+              "jurisdiccion": "santa_fe",
+              "ley": "14478",
+              "articulo": "59",
+              "source": "ley_sta_fe.pdf",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 59.- Designación de autoridades de mesa. La Secretaría Electoral confecciona el listado de las autoridades de cada mesa y el Juez Electoral resuelve y ordena su publicación con una antelación no menor de treinta (30) días a la fecha de las elecciones primarias, ratificando dicha designación para las elecciones generales. Las autoridades de mesa deben figurar en el padrón de la mesa para la cual son designadas y son notificadas por los medios que determine la Secretaría.",
+              "distance": 0.8687150478363037,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "pagina_inicio": 20,
+              "pagina_fin": 20,
+              "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+              "titulo": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+              "capitulo": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA"
+            },
+            {
+              "rank": 3,
+              "id": "santa_fe_14478_art_264__chunk_0001",
+              "chunk_id": "santa_fe_14478_art_264__chunk_0001",
+              "source_article_id": "santa_fe_14478_art_264",
+              "jurisdiccion": "santa_fe",
+              "ley": "14478",
+              "articulo": "264",
+              "source": "ley_sta_fe.pdf",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 264.- Inasistencia injustificada de la autoridad de mesa. La persona designada como autoridad de mesa que, sin causa justificada debidamente acreditada, no concurriere a desempeñar sus funciones el día del comicio, es sancionada con multa de 1 JUS. La reiteración de la conducta en un proceso electoral subsiguiente duplica la sanción.",
+              "distance": 0.8898764848709106,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "pagina_inicio": 63,
+              "pagina_fin": 63,
+              "libro": "LIBRO IV\nFALTAS ELECTORALES Y RÉGIMEN SANCIONATORIO",
+              "titulo": "TÍTULO ÚNICO",
+              "capitulo": "CAPÍTULO III\nFALTAS DE LAS AUTORIDADES DE MESA"
+            },
+            {
+              "rank": 4,
+              "id": "santa_fe_14478_art_68__chunk_0001",
+              "chunk_id": "santa_fe_14478_art_68__chunk_0001",
+              "source_article_id": "santa_fe_14478_art_68",
+              "jurisdiccion": "santa_fe",
+              "ley": "14478",
+              "articulo": "68",
+              "source": "ley_sta_fe.pdf",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 68.- Requisitos para ser autoridad de mesa. Son requisitos para la presidencia y suplencia de mesa:\na. ser persona electora hábil del municipio;\nb. tener entre 18 y 70 años de edad;\nc. saber leer y escribir; y\nd. no ser persona candidata, apoderada o fiscal en dicha elección.",
+              "distance": 0.920152485370636,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "pagina_inicio": 21,
+              "pagina_fin": 22,
+              "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+              "titulo": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+              "capitulo": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA"
+            },
+            {
+              "rank": 5,
+              "id": "santa_fe_14478_art_63__chunk_0001",
+              "chunk_id": "santa_fe_14478_art_63__chunk_0001",
+              "source_article_id": "santa_fe_14478_art_63",
+              "jurisdiccion": "santa_fe",
+              "ley": "14478",
+              "articulo": "63",
+              "source": "ley_sta_fe.pdf",
+              "chunk_numero": 1,
+              "text": "ARTÍCULO 63.- Designación. Para la designación de autoridades de mesa se da preferencia a las personas inscriptas en el Registro que hayan cumplido la capacitación y no se encuentren alcanzadas por observaciones admitidas o inhabilidades. La inscripción no genera derecho a ser designado. Cuando el número de personas registradas resulte insuficiente, pueden designarse otras personas electoras que cumplan los requisitos establecidos por este Código.",
+              "distance": 0.9253653287887573,
+              "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+              "pagina_inicio": 21,
+              "pagina_fin": 21,
+              "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+              "titulo": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+              "capitulo": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA"
+            }
+          ]
+        }
+      ]
+    },
+    "index_integrity": {
+      "before": {
+        "count": 828,
+        "ids_sha256": "d991473aa3f76b07ecd9e35afa203bb1b26a2946b45a2d57f971d46059513df0",
+        "manifest_sha256": "93c7538fc463b647b056881df9a49001905d650c698f4dc95a0ee0f3ddd922e1",
+        "ids_match_chunks": true
+      },
+      "after": {
+        "count": 828,
+        "ids_sha256": "d991473aa3f76b07ecd9e35afa203bb1b26a2946b45a2d57f971d46059513df0",
+        "manifest_sha256": "93c7538fc463b647b056881df9a49001905d650c698f4dc95a0ee0f3ddd922e1",
+        "ids_match_chunks": true
+      },
+      "unchanged": true
+    }
+  }
+}

@@ -1,0 +1,1261 @@
+{
+  "version": 1,
+  "evaluation_questions_sha256": "5b0c0f545671a2a34ea68de096c10c6fb22914bb7b3410011c19df9f40d3de4e",
+  "fixed_question_count": 5,
+  "baseline": {
+    "k": 3,
+    "jurisdiction_policy": "automatic conservative routing via answer_question",
+    "retrieval_protocol": "one routed generation call per fixed question; reuse existing bge-m3 index"
+  },
+  "routing_protocol": "answer_question; automatic jurisdiction routing",
+  "runtime": {
+    "ollama_server_version": "0.40.15",
+    "ollama_python_client_version": "0.6.3",
+    "api_base_url": "http://localhost:11434",
+    "model_tag": "granite4:latest",
+    "model_digest": "4235724a127c0f86dcc0247d67c20148705d6dd2319164014d92f71d607f4773",
+    "model_size_bytes": 2099520825,
+    "model_details": {
+      "parent_model": "/Users/runner/.ollama/models/blobs/sha256-5c7ac4aead1bcf4c8da9534ed72cc632d005aeed6547f1e8662ccdfae688364e",
+      "format": "gguf",
+      "family": "granite",
+      "families": [
+        "granite"
+      ],
+      "parameter_size": "3.4B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 131072,
+      "embedding_length": 2560,
+      "runner": "ggml"
+    },
+    "temperature": 0
+  },
+  "embedding_model": "bge-m3",
+  "fixed_cases": [
+    {
+      "id": "nacional_respondible_deber_votar",
+      "question": "¿Qué excepciones al deber de votar enumera el artículo 12 del Código Electoral Nacional?",
+      "expected": {
+        "answerable_in_corpus": true,
+        "expected_answer": "El artículo 12 exceptúa a jueces y auxiliares obligados a concurrir a sus oficinas; a quienes el día de la elección estén a más de 500 km del lugar de votación por motivos razonables y acrediten su comparecencia ante la autoridad policial; a personas enfermas o imposibilitadas por fuerza mayor debidamente justificadas; y a personal de servicios públicos cuyas tareas impidan votar, con comunicación y certificación del empleador. La propia norma dice que las exenciones son optativas para el elector.",
+        "expected_source_article_ids": [
+          "nacional_19945_art_12"
+        ]
+      },
+      "filter": "nacional",
+      "generation_status": "completed",
+      "generation": {
+        "question": "¿Qué excepciones al deber de votar enumera el artículo 12 del Código Electoral Nacional?",
+        "generation_model": "granite4:latest",
+        "temperature": 0,
+        "k": 3,
+        "jurisdiccion": "nacional",
+        "embedding_model": "bge-m3",
+        "answer": "El artículo 12 del Código Electoral Nacional enumera las siguientes excepciones al deber de votar:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial [1].\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables [1].\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares [1].",
+        "original_response": "El artículo 12 del Código Electoral Nacional enumera las siguientes excepciones al deber de votar:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial [1].\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables [1].\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares [1].",
+        "answer_status": "answered",
+        "fallback_reason": null,
+        "abstained": false,
+        "references_used": [
+          {
+            "number": 1,
+            "label": "[1]",
+            "rank": 1,
+            "chunk_id": "nacional_19945_art_12__chunk_0001",
+            "source_article_id": "nacional_19945_art_12",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "12",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "distance": 0.6459735035896301
+          }
+        ],
+        "citation_check": {
+          "cited_tokens": [
+            "[1]",
+            "[1]",
+            "[1]"
+          ],
+          "cited_reference_numbers": [
+            1
+          ],
+          "invalid_references": [],
+          "malformed_references": [],
+          "citations_required": true,
+          "citations_missing": false,
+          "citations_invalid": false,
+          "only_valid_retrieved_references": true,
+          "citations_valid": true,
+          "semantic_support_checked": false,
+          "note": "Format/range check only; this does not establish that a cited chunk semantically supports each claim."
+        },
+        "source_map": [
+          {
+            "number": 1,
+            "label": "[1]",
+            "rank": 1,
+            "chunk_id": "nacional_19945_art_12__chunk_0001",
+            "source_article_id": "nacional_19945_art_12",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "12",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "distance": 0.6459735035896301
+          },
+          {
+            "number": 2,
+            "label": "[2]",
+            "rank": 2,
+            "chunk_id": "nacional_19945_art_18__chunk_0001",
+            "source_article_id": "nacional_19945_art_18",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "18",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "distance": 0.8897403478622437
+          },
+          {
+            "number": 3,
+            "label": "[3]",
+            "rank": 3,
+            "chunk_id": "nacional_19945_art_3__chunk_0001",
+            "source_article_id": "nacional_19945_art_3",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "3",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "distance": 0.9221689105033875
+          }
+        ],
+        "retrieval_records": [
+          {
+            "rank": 1,
+            "id": "nacional_19945_art_12__chunk_0001",
+            "chunk_id": "nacional_19945_art_12__chunk_0001",
+            "source_article_id": "nacional_19945_art_12",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "12",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "text": "Artículo 12. - Deber de votar. Todo elector tiene el deber de votar en la elección nacional que se realice en su distrito.\n\nQuedan exentos de esa obligación:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial;\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables.\n\nTales electores se presentarán el día de la elección a la autoridad policial más próxima, la que extenderá certificación escrita que acredite la comparecencia;\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares.",
+            "distance": 0.6459735035896301,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO I.\nDel Cuerpo Electoral",
+            "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+          },
+          {
+            "rank": 2,
+            "id": "nacional_19945_art_18__chunk_0001",
+            "chunk_id": "nacional_19945_art_18__chunk_0001",
+            "source_article_id": "nacional_19945_art_18",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "18",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "text": "Artículo 18: Registro de infractores al deber de votar. La Cámara Nacional Electoral llevará un registro de infractores al deber de votar establecido en el artículo 12. Luego de cada elección nacional, elaborará un listado por distrito, con nombre, apellido y matrícula de los electores mayores de dieciocho (18) años y menores de setenta (70) años de edad de quienes no se tenga constancia de emisión del voto, el que pondrá en conocimiento del Poder Ejecutivo. Los gobiernos provinciales y de la Ciudad Autónoma de Buenos Aires podrán solicitar a la Cámara el listado correspondiente a los electores de su distrito.",
+            "distance": 0.8897403478622437,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO I.\nDel Cuerpo Electoral",
+            "capitulo": "CAPITULO II\nDel Registro Nacional de Electores"
+          },
+          {
+            "rank": 3,
+            "id": "nacional_19945_art_3__chunk_0001",
+            "chunk_id": "nacional_19945_art_3__chunk_0001",
+            "source_article_id": "nacional_19945_art_3",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "3",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "text": "Artículo 3. - Quiénes están excluidos. Están excluidos del padrón electoral:\n\na) Los dementes declarados tales en juicio;\n\nb)\n\nc) ;\n\nd) ;\n\ne) Los condenados por delitos dolosos a pena privativa de la libertad, y, por sentencia ejecutoriada, por el término de la condena;\n\nf) Los condenados por faltas previstas en las leyes nacionales y provinciales de juegos prohibidos, por el término de tres años; en el caso de reincidencia, por seis;\n\ng) Los sancionados por la infracción de deserción calificada, por el doble término de la duración de la sanción;\n\nh) ;\n\ni) Los declarados rebeldes en causa penal, hasta que cese la rebeldía o se opere la prescripción:\n\nj) ;\n\nk) ;\n\nl) Los inhabilitados según disposiciones de la Ley Orgánica de los Partidos Políticos;\n\nm) Los que en virtud de otras prescripciones legales y reglamentarias quedaren inhabilitados para el ejercicio de los derechos políticos.",
+            "distance": 0.9221689105033875,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO I.\nDel Cuerpo Electoral",
+            "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+          }
+        ],
+        "context_sent": "[1]\nchunk_id: nacional_19945_art_12__chunk_0001\nsource_article_id: nacional_19945_art_12\njurisdiccion: nacional\nley: 19945\narticulo: 12\nsource: ley_nacional.txt\ntexto:\nArtículo 12. - Deber de votar. Todo elector tiene el deber de votar en la elección nacional que se realice en su distrito.\n\nQuedan exentos de esa obligación:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial;\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables.\n\nTales electores se presentarán el día de la elección a la autoridad policial más próxima, la que extenderá certificación escrita que acredite la comparecencia;\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares.\n\n[2]\nchunk_id: nacional_19945_art_18__chunk_0001\nsource_article_id: nacional_19945_art_18\njurisdiccion: nacional\nley: 19945\narticulo: 18\nsource: ley_nacional.txt\ntexto:\nArtículo 18: Registro de infractores al deber de votar. La Cámara Nacional Electoral llevará un registro de infractores al deber de votar establecido en el artículo 12. Luego de cada elección nacional, elaborará un listado por distrito, con nombre, apellido y matrícula de los electores mayores de dieciocho (18) años y menores de setenta (70) años de edad de quienes no se tenga constancia de emisión del voto, el que pondrá en conocimiento del Poder Ejecutivo. Los gobiernos provinciales y de la Ciudad Autónoma de Buenos Aires podrán solicitar a la Cámara el listado correspondiente a los electores de su distrito.\n\n[3]\nchunk_id: nacional_19945_art_3__chunk_0001\nsource_article_id: nacional_19945_art_3\njurisdiccion: nacional\nley: 19945\narticulo: 3\nsource: ley_nacional.txt\ntexto:\nArtículo 3. - Quiénes están excluidos. Están excluidos del padrón electoral:\n\na) Los dementes declarados tales en juicio;\n\nb)\n\nc) ;\n\nd) ;\n\ne) Los condenados por delitos dolosos a pena privativa de la libertad, y, por sentencia ejecutoriada, por el término de la condena;\n\nf) Los condenados por faltas previstas en las leyes nacionales y provinciales de juegos prohibidos, por el término de tres años; en el caso de reincidencia, por seis;\n\ng) Los sancionados por la infracción de deserción calificada, por el doble término de la duración de la sanción;\n\nh) ;\n\ni) Los declarados rebeldes en causa penal, hasta que cese la rebeldía o se opere la prescripción:\n\nj) ;\n\nk) ;\n\nl) Los inhabilitados según disposiciones de la Ley Orgánica de los Partidos Políticos;\n\nm) Los que en virtud de otras prescripciones legales y reglamentarias quedaren inhabilitados para el ejercicio de los derechos políticos.",
+        "model_invoked": true,
+        "prompt_template_sha256": "977716dc3cd4769a0690da2e0b2f796d5e8322f9f03cfd33a2259dd5f450e350",
+        "routing_status": "identified",
+        "jurisdiction_status": "identified",
+        "jurisdictions": [
+          "nacional"
+        ],
+        "jurisdiction_source": "automatic",
+        "routing_signals": {
+          "normalized_query": "que excepciones al deber de votar enumera el articulo 12 del codigo electoral nacional",
+          "law": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "codigo electoral nacional"
+              ]
+            }
+          ],
+          "scope": [],
+          "geography": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "nacional"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "routing_reason": "La referencia normativa o el alcance electoral identifica nacional.",
+        "clarification_question": null,
+        "applied_filter": "nacional",
+        "per_jurisdiction_retrievals": null
+      },
+      "diagnosis": {
+        "status": "pending inspection of actual supplied snippets and response"
+      }
+    },
+    {
+      "id": "pba_respondible_representacion",
+      "question": "Según el artículo 13 de la Ley Electoral bonaerense 5.109, ¿cuántos diputados y senadores integran la representación legislativa provincial?",
+      "expected": {
+        "answerable_in_corpus": true,
+        "expected_answer": "El texto principal del artículo 13 fija la representación en 92 diputados y 46 senadores. La propuesta observada de 100 diputados y 50 senadores aparece en una nota histórica/editorial y no es la respuesta que establece el texto principal del registro.",
+        "expected_source_article_ids": [
+          "pba_5109_art_13"
+        ]
+      },
+      "filter": "pba",
+      "generation_status": "completed",
+      "generation": {
+        "question": "Según el artículo 13 de la Ley Electoral bonaerense 5.109, ¿cuántos diputados y senadores integran la representación legislativa provincial?",
+        "generation_model": "granite4:latest",
+        "temperature": 0,
+        "k": 3,
+        "jurisdiccion": "pba",
+        "embedding_model": "bge-m3",
+        "answer": "Según el artículo 13 de la Ley Electoral bonaerense 5.109, la representación legislativa de la Provincia consiste en 92 diputados y 46 senadores. Estos son los números exactos de integrantes que conformarán la representación legislativa provincial.",
+        "original_response": "Según el artículo 13 de la Ley Electoral bonaerense 5.109, la representación legislativa de la Provincia consiste en 92 diputados y 46 senadores. Estos son los números exactos de integrantes que conformarán la representación legislativa provincial.",
+        "answer_status": "answered",
+        "fallback_reason": null,
+        "abstained": false,
+        "references_used": [],
+        "citation_check": {
+          "cited_tokens": [],
+          "cited_reference_numbers": [],
+          "invalid_references": [],
+          "malformed_references": [],
+          "citations_required": true,
+          "citations_missing": true,
+          "citations_invalid": false,
+          "only_valid_retrieved_references": true,
+          "citations_valid": false,
+          "semantic_support_checked": false,
+          "note": "Format/range check only; this does not establish that a cited chunk semantically supports each claim."
+        },
+        "source_map": [
+          {
+            "number": 1,
+            "label": "[1]",
+            "rank": 1,
+            "chunk_id": "pba_5109_art_13__chunk_0001",
+            "source_article_id": "pba_5109_art_13",
+            "jurisdiccion": "pba",
+            "ley": "5109",
+            "articulo": "13",
+            "source": "ley_pba.txt",
+            "chunk_numero": 1,
+            "distance": 0.577640950679779
+          },
+          {
+            "number": 2,
+            "label": "[2]",
+            "rank": 2,
+            "chunk_id": "pba_5109_art_12__chunk_0001",
+            "source_article_id": "pba_5109_art_12",
+            "jurisdiccion": "pba",
+            "ley": "5109",
+            "articulo": "12",
+            "source": "ley_pba.txt",
+            "chunk_numero": 1,
+            "distance": 0.7885047793388367
+          },
+          {
+            "number": 3,
+            "label": "[3]",
+            "rank": 3,
+            "chunk_id": "pba_5109_art_124__chunk_0001",
+            "source_article_id": "pba_5109_art_124",
+            "jurisdiccion": "pba",
+            "ley": "5109",
+            "articulo": "124",
+            "source": "ley_pba.txt",
+            "chunk_numero": 1,
+            "distance": 0.9960494041442871
+          }
+        ],
+        "retrieval_records": [
+          {
+            "rank": 1,
+            "id": "pba_5109_art_13__chunk_0001",
+            "chunk_id": "pba_5109_art_13__chunk_0001",
+            "source_article_id": "pba_5109_art_13",
+            "jurisdiccion": "pba",
+            "ley": "5109",
+            "articulo": "13",
+            "source": "ley_pba.txt",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 13.-* Fíjase la representación legislativa de la Provincia en noventa y dos (92) diputados y cuarenta y seis (46) senadores los que serán elegidos en la siguiente proporción:\n\nSECCIÓN CAPITAL, elegirá tres (3) senadores y seis (6) diputados.\n\nSECCIÓN PRIMERA, elegirá ocho (8) senadores y quince (15) diputados.\n\nSECCIÓN SEGUNDA, elegirá cinco (5) senadores y once (11) diputados.\n\nSECCIÓN TERCERA, elegirá nueve (9) senadores y dieciocho (18) diputados.\n\nSECCIÓN CUARTA, elegirá siete (7) senadores y catorce (14) diputados.\n\nSECCIÓN QUINTA, elegirá cinco (5) senadores y once (11) diputados.\n\nSECCIÓN SEXTA, elegirá seis (6) senadores y once (11) diputados\n\nSECCIÓN SEPTIMA, elegirá tres (3) senadores y seis (6) diputados.\n\n.",
+            "distance": 0.577640950679779,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "capitulo": "CAPÍTULO II\nDE LA DIVISION ELECTORAL"
+          },
+          {
+            "rank": 2,
+            "id": "pba_5109_art_12__chunk_0001",
+            "chunk_id": "pba_5109_art_12__chunk_0001",
+            "source_article_id": "pba_5109_art_12",
+            "jurisdiccion": "pba",
+            "ley": "5109",
+            "articulo": "12",
+            "source": "ley_pba.txt",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 12.- Divídese el territorio de la Provincia en ocho secciones electorales para elegir senadores y diputados a la Honorable Legislatura, que se denominarán y formarán del modo siguiente:\n\nSECCIÓN CAPITAL: La forma el partido de La Plata.\n\nPRIMERA SECCIÓN ELECTORAL: Los partidos de Campana, Escobar, General Las Heras, General Rodríguez, General San Martín, Hurlingham, Ituzaingó, José C. Paz, Luján, Malvinas Argentinas, Marcos Paz, Mercedes, Merlo, Moreno, Morón, Navarro, Pilar, San Fernando, San Miguel, San Isidro, Suipacha, Tigre, Tres de Febrero y Vicente López.\n\nPartidos que se incorporan a la Sección con posterioridad al texto ordenado por decreto 997/93:\n\nSEGUNDA SECCIÓN ELECTORAL: Los partidos de Baradero, Bartolomé Mitre, Capitán Sarmiento, Carmen de Areco, Colón, Exaltación de la Cruz, Pergamino, Ramallo, Rojas, Salto, San Andrés de Giles, San Antonio de Areco, San Nicolás, San Pedro y Zárate.",
+            "distance": 0.7885047793388367,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "capitulo": "CAPÍTULO II\nDE LA DIVISION ELECTORAL"
+          },
+          {
+            "rank": 3,
+            "id": "pba_5109_art_124__chunk_0001",
+            "chunk_id": "pba_5109_art_124__chunk_0001",
+            "source_article_id": "pba_5109_art_124",
+            "jurisdiccion": "pba",
+            "ley": "5109",
+            "articulo": "124",
+            "source": "ley_pba.txt",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 124.- Con arreglo a los artículos 48 y 54(*) de la Constitución Nacional y artículo 12 de la ley Nacional número 8871, la Asamblea Legislativa, por citación especial de su Presidente, deberá reunirse y elegir senadores antes del 1°de Marzo del año de la renovación del Cuerpo a integrar.(#)",
+            "distance": 0.9960494041442871,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "capitulo": "CAPÍTULO XXII\nDE LA ASAMBLEA LEGISLATIVA"
+          }
+        ],
+        "context_sent": "[1]\nchunk_id: pba_5109_art_13__chunk_0001\nsource_article_id: pba_5109_art_13\njurisdiccion: pba\nley: 5109\narticulo: 13\nsource: ley_pba.txt\ntexto:\nARTÍCULO 13.-* Fíjase la representación legislativa de la Provincia en noventa y dos (92) diputados y cuarenta y seis (46) senadores los que serán elegidos en la siguiente proporción:\n\nSECCIÓN CAPITAL, elegirá tres (3) senadores y seis (6) diputados.\n\nSECCIÓN PRIMERA, elegirá ocho (8) senadores y quince (15) diputados.\n\nSECCIÓN SEGUNDA, elegirá cinco (5) senadores y once (11) diputados.\n\nSECCIÓN TERCERA, elegirá nueve (9) senadores y dieciocho (18) diputados.\n\nSECCIÓN CUARTA, elegirá siete (7) senadores y catorce (14) diputados.\n\nSECCIÓN QUINTA, elegirá cinco (5) senadores y once (11) diputados.\n\nSECCIÓN SEXTA, elegirá seis (6) senadores y once (11) diputados\n\nSECCIÓN SEPTIMA, elegirá tres (3) senadores y seis (6) diputados.\n\n.\n\n[2]\nchunk_id: pba_5109_art_12__chunk_0001\nsource_article_id: pba_5109_art_12\njurisdiccion: pba\nley: 5109\narticulo: 12\nsource: ley_pba.txt\ntexto:\nARTÍCULO 12.- Divídese el territorio de la Provincia en ocho secciones electorales para elegir senadores y diputados a la Honorable Legislatura, que se denominarán y formarán del modo siguiente:\n\nSECCIÓN CAPITAL: La forma el partido de La Plata.\n\nPRIMERA SECCIÓN ELECTORAL: Los partidos de Campana, Escobar, General Las Heras, General Rodríguez, General San Martín, Hurlingham, Ituzaingó, José C. Paz, Luján, Malvinas Argentinas, Marcos Paz, Mercedes, Merlo, Moreno, Morón, Navarro, Pilar, San Fernando, San Miguel, San Isidro, Suipacha, Tigre, Tres de Febrero y Vicente López.\n\nPartidos que se incorporan a la Sección con posterioridad al texto ordenado por decreto 997/93:\n\nSEGUNDA SECCIÓN ELECTORAL: Los partidos de Baradero, Bartolomé Mitre, Capitán Sarmiento, Carmen de Areco, Colón, Exaltación de la Cruz, Pergamino, Ramallo, Rojas, Salto, San Andrés de Giles, San Antonio de Areco, San Nicolás, San Pedro y Zárate.\n\n[3]\nchunk_id: pba_5109_art_124__chunk_0001\nsource_article_id: pba_5109_art_124\njurisdiccion: pba\nley: 5109\narticulo: 124\nsource: ley_pba.txt\ntexto:\nARTÍCULO 124.- Con arreglo a los artículos 48 y 54(*) de la Constitución Nacional y artículo 12 de la ley Nacional número 8871, la Asamblea Legislativa, por citación especial de su Presidente, deberá reunirse y elegir senadores antes del 1°de Marzo del año de la renovación del Cuerpo a integrar.(#)",
+        "model_invoked": true,
+        "prompt_template_sha256": "977716dc3cd4769a0690da2e0b2f796d5e8322f9f03cfd33a2259dd5f450e350",
+        "routing_status": "identified",
+        "jurisdiction_status": "identified",
+        "jurisdictions": [
+          "pba"
+        ],
+        "jurisdiction_source": "automatic",
+        "routing_signals": {
+          "normalized_query": "segun el articulo 13 de la ley electoral bonaerense 5 109 cuantos diputados y senadores integran la representacion legislativa provincial",
+          "law": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "ley electoral bonaerense"
+              ]
+            }
+          ],
+          "scope": [],
+          "geography": [
+            {
+              "jurisdiction": "pba",
+              "matched_phrases": [
+                "bonaerense"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "routing_reason": "La referencia normativa o el alcance electoral identifica pba.",
+        "clarification_question": null,
+        "applied_filter": "pba",
+        "per_jurisdiction_retrievals": null
+      },
+      "diagnosis": {
+        "status": "pending inspection of actual supplied snippets and response"
+      }
+    },
+    {
+      "id": "santa_fe_respondible_autoridad_mesa",
+      "question": "¿Cómo define el artículo 4 de la Ley 14.478 a la autoridad de mesa?",
+      "expected": {
+        "answerable_in_corpus": true,
+        "expected_answer": "Es la persona que ejerce la presidencia de la mesa receptora de votos y, ante ausencia o impedimento, quien la reemplaza conforme al orden de designación establecido en el Código.",
+        "expected_source_article_ids": [
+          "santa_fe_14478_art_4"
+        ]
+      },
+      "filter": "santa_fe",
+      "generation_status": "completed",
+      "generation": {
+        "question": "¿Cómo define el artículo 4 de la Ley 14.478 a la autoridad de mesa?",
+        "generation_model": "granite4:latest",
+        "temperature": 0,
+        "k": 3,
+        "jurisdiccion": "santa_fe",
+        "embedding_model": "bge-m3",
+        "answer": "El artículo 4 de la Ley 14.478 define la autoridad de mesa como la persona que ejerce la presidencia de la mesa electoral. Esta persona, junto con dos suplentes, tiene la única autoridad en el acto comicial y pueden reemplazar a la designada en caso de inasistencia o ausencias momentáneas. La autoridad de mesa no puede retirarse del local de votación mientras dure el comicio y, en caso de que luego de constituida la mesa concuerde la persona designada como titular, esta toma posesión del cargo dejando constancia escrita de ello. [1][2]",
+        "original_response": "El artículo 4 de la Ley 14.478 define la autoridad de mesa como la persona que ejerce la presidencia de la mesa electoral. Esta persona, junto con dos suplentes, tiene la única autoridad en el acto comicial y pueden reemplazar a la designada en caso de inasistencia o ausencias momentáneas. La autoridad de mesa no puede retirarse del local de votación mientras dure el comicio y, en caso de que luego de constituida la mesa concuerde la persona designada como titular, esta toma posesión del cargo dejando constancia escrita de ello. [1][2]",
+        "answer_status": "answered",
+        "fallback_reason": null,
+        "abstained": false,
+        "references_used": [
+          {
+            "number": 1,
+            "label": "[1]",
+            "rank": 1,
+            "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+            "source_article_id": "santa_fe_14478_art_67",
+            "jurisdiccion": "santa_fe",
+            "ley": "14478",
+            "articulo": "67",
+            "source": "ley_sta_fe.pdf",
+            "chunk_numero": 1,
+            "distance": 0.7990511059761047,
+            "pagina_inicio": 21,
+            "pagina_fin": 21
+          },
+          {
+            "number": 2,
+            "label": "[2]",
+            "rank": 2,
+            "chunk_id": "santa_fe_14478_art_59__chunk_0001",
+            "source_article_id": "santa_fe_14478_art_59",
+            "jurisdiccion": "santa_fe",
+            "ley": "14478",
+            "articulo": "59",
+            "source": "ley_sta_fe.pdf",
+            "chunk_numero": 1,
+            "distance": 0.8687150478363037,
+            "pagina_inicio": 20,
+            "pagina_fin": 20
+          }
+        ],
+        "citation_check": {
+          "cited_tokens": [
+            "[1]",
+            "[2]"
+          ],
+          "cited_reference_numbers": [
+            1,
+            2
+          ],
+          "invalid_references": [],
+          "malformed_references": [],
+          "citations_required": true,
+          "citations_missing": false,
+          "citations_invalid": false,
+          "only_valid_retrieved_references": true,
+          "citations_valid": true,
+          "semantic_support_checked": false,
+          "note": "Format/range check only; this does not establish that a cited chunk semantically supports each claim."
+        },
+        "source_map": [
+          {
+            "number": 1,
+            "label": "[1]",
+            "rank": 1,
+            "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+            "source_article_id": "santa_fe_14478_art_67",
+            "jurisdiccion": "santa_fe",
+            "ley": "14478",
+            "articulo": "67",
+            "source": "ley_sta_fe.pdf",
+            "chunk_numero": 1,
+            "distance": 0.7990511059761047,
+            "pagina_inicio": 21,
+            "pagina_fin": 21
+          },
+          {
+            "number": 2,
+            "label": "[2]",
+            "rank": 2,
+            "chunk_id": "santa_fe_14478_art_59__chunk_0001",
+            "source_article_id": "santa_fe_14478_art_59",
+            "jurisdiccion": "santa_fe",
+            "ley": "14478",
+            "articulo": "59",
+            "source": "ley_sta_fe.pdf",
+            "chunk_numero": 1,
+            "distance": 0.8687150478363037,
+            "pagina_inicio": 20,
+            "pagina_fin": 20
+          },
+          {
+            "number": 3,
+            "label": "[3]",
+            "rank": 3,
+            "chunk_id": "santa_fe_14478_art_264__chunk_0001",
+            "source_article_id": "santa_fe_14478_art_264",
+            "jurisdiccion": "santa_fe",
+            "ley": "14478",
+            "articulo": "264",
+            "source": "ley_sta_fe.pdf",
+            "chunk_numero": 1,
+            "distance": 0.8898764848709106,
+            "pagina_inicio": 63,
+            "pagina_fin": 63
+          }
+        ],
+        "retrieval_records": [
+          {
+            "rank": 1,
+            "id": "santa_fe_14478_art_67__chunk_0001",
+            "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+            "source_article_id": "santa_fe_14478_art_67",
+            "jurisdiccion": "santa_fe",
+            "ley": "14478",
+            "articulo": "67",
+            "source": "ley_sta_fe.pdf",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 67.- Autoridades de mesa. Cada mesa electoral tiene como única autoridad quien ejerce la presidencia de mesa y dos (2) suplentes que la auxilian y reemplazan, en el orden de sus designaciones, por inasistencia o ausencias momentáneas; siendo éstos los únicos supuestos en que tienen injerencia en el acto comicial. La autoridad de mesa no puede retirarse del local de votación mientras dure el comicio; en su caso será reemplazado definitivamente por sus suplentes. Si luego de constituida la mesa concurre la persona que hubiera sido designada titular de la presidencia de mesa, ésta toma posesión del cargo, dejando constancia escrita de ello.",
+            "distance": 0.7990511059761047,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "pagina_inicio": 21,
+            "pagina_fin": 21,
+            "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+            "titulo": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+            "capitulo": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA"
+          },
+          {
+            "rank": 2,
+            "id": "santa_fe_14478_art_59__chunk_0001",
+            "chunk_id": "santa_fe_14478_art_59__chunk_0001",
+            "source_article_id": "santa_fe_14478_art_59",
+            "jurisdiccion": "santa_fe",
+            "ley": "14478",
+            "articulo": "59",
+            "source": "ley_sta_fe.pdf",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 59.- Designación de autoridades de mesa. La Secretaría Electoral confecciona el listado de las autoridades de cada mesa y el Juez Electoral resuelve y ordena su publicación con una antelación no menor de treinta (30) días a la fecha de las elecciones primarias, ratificando dicha designación para las elecciones generales. Las autoridades de mesa deben figurar en el padrón de la mesa para la cual son designadas y son notificadas por los medios que determine la Secretaría.",
+            "distance": 0.8687150478363037,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "pagina_inicio": 20,
+            "pagina_fin": 20,
+            "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+            "titulo": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+            "capitulo": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA"
+          },
+          {
+            "rank": 3,
+            "id": "santa_fe_14478_art_264__chunk_0001",
+            "chunk_id": "santa_fe_14478_art_264__chunk_0001",
+            "source_article_id": "santa_fe_14478_art_264",
+            "jurisdiccion": "santa_fe",
+            "ley": "14478",
+            "articulo": "264",
+            "source": "ley_sta_fe.pdf",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 264.- Inasistencia injustificada de la autoridad de mesa. La persona designada como autoridad de mesa que, sin causa justificada debidamente acreditada, no concurriere a desempeñar sus funciones el día del comicio, es sancionada con multa de 1 JUS. La reiteración de la conducta en un proceso electoral subsiguiente duplica la sanción.",
+            "distance": 0.8898764848709106,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "pagina_inicio": 63,
+            "pagina_fin": 63,
+            "libro": "LIBRO IV\nFALTAS ELECTORALES Y RÉGIMEN SANCIONATORIO",
+            "titulo": "TÍTULO ÚNICO",
+            "capitulo": "CAPÍTULO III\nFALTAS DE LAS AUTORIDADES DE MESA"
+          }
+        ],
+        "context_sent": "[1]\nchunk_id: santa_fe_14478_art_67__chunk_0001\nsource_article_id: santa_fe_14478_art_67\njurisdiccion: santa_fe\nley: 14478\narticulo: 67\nsource: ley_sta_fe.pdf\npaginas_articulo: 21–21\ntexto:\nARTÍCULO 67.- Autoridades de mesa. Cada mesa electoral tiene como única autoridad quien ejerce la presidencia de mesa y dos (2) suplentes que la auxilian y reemplazan, en el orden de sus designaciones, por inasistencia o ausencias momentáneas; siendo éstos los únicos supuestos en que tienen injerencia en el acto comicial. La autoridad de mesa no puede retirarse del local de votación mientras dure el comicio; en su caso será reemplazado definitivamente por sus suplentes. Si luego de constituida la mesa concurre la persona que hubiera sido designada titular de la presidencia de mesa, ésta toma posesión del cargo, dejando constancia escrita de ello.\n\n[2]\nchunk_id: santa_fe_14478_art_59__chunk_0001\nsource_article_id: santa_fe_14478_art_59\njurisdiccion: santa_fe\nley: 14478\narticulo: 59\nsource: ley_sta_fe.pdf\npaginas_articulo: 20–20\ntexto:\nARTÍCULO 59.- Designación de autoridades de mesa. La Secretaría Electoral confecciona el listado de las autoridades de cada mesa y el Juez Electoral resuelve y ordena su publicación con una antelación no menor de treinta (30) días a la fecha de las elecciones primarias, ratificando dicha designación para las elecciones generales. Las autoridades de mesa deben figurar en el padrón de la mesa para la cual son designadas y son notificadas por los medios que determine la Secretaría.\n\n[3]\nchunk_id: santa_fe_14478_art_264__chunk_0001\nsource_article_id: santa_fe_14478_art_264\njurisdiccion: santa_fe\nley: 14478\narticulo: 264\nsource: ley_sta_fe.pdf\npaginas_articulo: 63–63\ntexto:\nARTÍCULO 264.- Inasistencia injustificada de la autoridad de mesa. La persona designada como autoridad de mesa que, sin causa justificada debidamente acreditada, no concurriere a desempeñar sus funciones el día del comicio, es sancionada con multa de 1 JUS. La reiteración de la conducta en un proceso electoral subsiguiente duplica la sanción.",
+        "model_invoked": true,
+        "prompt_template_sha256": "977716dc3cd4769a0690da2e0b2f796d5e8322f9f03cfd33a2259dd5f450e350",
+        "routing_status": "identified",
+        "jurisdiction_status": "identified",
+        "jurisdictions": [
+          "santa_fe"
+        ],
+        "jurisdiction_source": "automatic",
+        "routing_signals": {
+          "normalized_query": "como define el articulo 4 de la ley 14 478 a la autoridad de mesa",
+          "law": [
+            {
+              "jurisdiction": "santa_fe",
+              "matched_phrases": [
+                "ley 14 478"
+              ]
+            }
+          ],
+          "scope": [],
+          "geography": [],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "routing_reason": "La referencia normativa o el alcance electoral identifica santa_fe.",
+        "clarification_question": null,
+        "applied_filter": "santa_fe",
+        "per_jurisdiction_retrievals": null
+      },
+      "diagnosis": {
+        "status": "pending inspection of actual supplied snippets and response"
+      }
+    },
+    {
+      "id": "ausente_resultado_electoral",
+      "question": "¿Qué partido ganó la elección presidencial argentina de 2023 y cuántos votos obtuvo?",
+      "expected": {
+        "answerable_in_corpus": false,
+        "expected_answer": "No respondible con este corpus: contiene legislación electoral, no resultados oficiales de elecciones.",
+        "expected_source_article_ids": []
+      },
+      "filter": "nacional",
+      "generation_status": "completed",
+      "generation": {
+        "question": "¿Qué partido ganó la elección presidencial argentina de 2023 y cuántos votos obtuvo?",
+        "generation_model": "granite4:latest",
+        "temperature": 0,
+        "k": 3,
+        "jurisdiccion": "nacional",
+        "embedding_model": "bge-m3",
+        "answer": "No encuentro esa información en los documentos.",
+        "original_response": "No encuentro esa información en los documentos.",
+        "answer_status": "abstained",
+        "fallback_reason": null,
+        "abstained": true,
+        "references_used": [],
+        "citation_check": {
+          "cited_tokens": [],
+          "cited_reference_numbers": [],
+          "invalid_references": [],
+          "malformed_references": [],
+          "citations_required": false,
+          "citations_missing": false,
+          "citations_invalid": false,
+          "only_valid_retrieved_references": true,
+          "citations_valid": true,
+          "semantic_support_checked": false,
+          "note": "Format/range check only; this does not establish that a cited chunk semantically supports each claim."
+        },
+        "source_map": [
+          {
+            "number": 1,
+            "label": "[1]",
+            "rank": 1,
+            "chunk_id": "nacional_19945_art_166__chunk_0003",
+            "source_article_id": "nacional_19945_art_166",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "166",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 3,
+            "distance": 1.232388973236084
+          },
+          {
+            "number": 2,
+            "label": "[2]",
+            "rank": 2,
+            "chunk_id": "nacional_19945_art_17__chunk_0003",
+            "source_article_id": "nacional_19945_art_17",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "17",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 3,
+            "distance": 1.2327497005462646
+          },
+          {
+            "number": 3,
+            "label": "[3]",
+            "rank": 3,
+            "chunk_id": "nacional_19945_art_120__chunk_0002",
+            "source_article_id": "nacional_19945_art_120",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "120",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 2,
+            "distance": 1.2442374229431152
+          }
+        ],
+        "retrieval_records": [
+          {
+            "rank": 1,
+            "id": "nacional_19945_art_166__chunk_0003",
+            "chunk_id": "nacional_19945_art_166__chunk_0003",
+            "source_article_id": "nacional_19945_art_166",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "166",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 3,
+            "text": "En la Ciudad de Buenos Aires se celebrará durante 1995 una elección directa de Senador Nacional, a efectos de incorporar el tercer Senador por el distrito. Cada elector votará por una lista oficializada con un candidato titular y un suplente.\n\nResultará electo el titular de la lista que obtuviere el mayor número de sufragios, y el suplente lo sustituirá en los casos previstos por el artículo 62 de la Constitución Nacional.\n\n.\n\nDocumentos cívicos.",
+            "distance": 1.232388973236084,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO VIII\nDisposiciones Generales y Transitorias",
+            "capitulo": "Capítulo Unico"
+          },
+          {
+            "rank": 2,
+            "id": "nacional_19945_art_17__chunk_0003",
+            "chunk_id": "nacional_19945_art_17__chunk_0003",
+            "source_article_id": "nacional_19945_art_17",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "17",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 3,
+            "text": "Queda garantizado a las provincias y a la Ciudad Autónoma de Buenos Aires el acceso libre y permanente a la información contenida en el Registro Nacional de Electores, a los efectos electorales.",
+            "distance": 1.2327497005462646,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO I.\nDel Cuerpo Electoral",
+            "capitulo": "CAPITULO II\nDel Registro Nacional de Electores"
+          },
+          {
+            "rank": 3,
+            "id": "nacional_19945_art_120__chunk_0002",
+            "chunk_id": "nacional_19945_art_120__chunk_0002",
+            "source_article_id": "nacional_19945_art_120",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "120",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 2,
+            "text": "En el caso de la elección del Presidente y Vicepresidente de la Nación las Juntas Electorales Nacionales, dentro del plazo indicado en el primer párrafo del artículo 112, comunicarán los resultados al presidente del Senado de la Nación. El mismo convocará de inmediato a la Asamblea Legislativa, la que procederá a hacer la sumatoria para determinar si la fórmula más votada ha logrado la mayoría prevista en el artículo 97 de la Constitución Nacional o si se han producido las circunstancias del artículo 98 o si, por el contrario, se deberá realizar una segunda vuelta electoral conforme lo dispuesto en el artículo 96 de la Constitución Nacional.\n\nEn este último supuesto se hará saber tal circunstancia al Poder Ejecutivo nacional y a los apoderados de los partidos políticos, cuyas fórmulas se encuentren en condiciones de participar en la segunda vuelta.",
+            "distance": 1.2442374229431152,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO V\nEscrutinio",
+            "capitulo": "CAPITULO II\nEscrutinio de la Junta"
+          }
+        ],
+        "context_sent": "[1]\nchunk_id: nacional_19945_art_166__chunk_0003\nsource_article_id: nacional_19945_art_166\njurisdiccion: nacional\nley: 19945\narticulo: 166\nsource: ley_nacional.txt\ntexto:\nEn la Ciudad de Buenos Aires se celebrará durante 1995 una elección directa de Senador Nacional, a efectos de incorporar el tercer Senador por el distrito. Cada elector votará por una lista oficializada con un candidato titular y un suplente.\n\nResultará electo el titular de la lista que obtuviere el mayor número de sufragios, y el suplente lo sustituirá en los casos previstos por el artículo 62 de la Constitución Nacional.\n\n.\n\nDocumentos cívicos.\n\n[2]\nchunk_id: nacional_19945_art_17__chunk_0003\nsource_article_id: nacional_19945_art_17\njurisdiccion: nacional\nley: 19945\narticulo: 17\nsource: ley_nacional.txt\ntexto:\nQueda garantizado a las provincias y a la Ciudad Autónoma de Buenos Aires el acceso libre y permanente a la información contenida en el Registro Nacional de Electores, a los efectos electorales.\n\n[3]\nchunk_id: nacional_19945_art_120__chunk_0002\nsource_article_id: nacional_19945_art_120\njurisdiccion: nacional\nley: 19945\narticulo: 120\nsource: ley_nacional.txt\ntexto:\nEn el caso de la elección del Presidente y Vicepresidente de la Nación las Juntas Electorales Nacionales, dentro del plazo indicado en el primer párrafo del artículo 112, comunicarán los resultados al presidente del Senado de la Nación. El mismo convocará de inmediato a la Asamblea Legislativa, la que procederá a hacer la sumatoria para determinar si la fórmula más votada ha logrado la mayoría prevista en el artículo 97 de la Constitución Nacional o si se han producido las circunstancias del artículo 98 o si, por el contrario, se deberá realizar una segunda vuelta electoral conforme lo dispuesto en el artículo 96 de la Constitución Nacional.\n\nEn este último supuesto se hará saber tal circunstancia al Poder Ejecutivo nacional y a los apoderados de los partidos políticos, cuyas fórmulas se encuentren en condiciones de participar en la segunda vuelta.",
+        "model_invoked": true,
+        "prompt_template_sha256": "977716dc3cd4769a0690da2e0b2f796d5e8322f9f03cfd33a2259dd5f450e350",
+        "routing_status": "identified",
+        "jurisdiction_status": "identified",
+        "jurisdictions": [
+          "nacional"
+        ],
+        "jurisdiction_source": "automatic",
+        "routing_signals": {
+          "normalized_query": "que partido gano la eleccion presidencial argentina de 2023 y cuantos votos obtuvo",
+          "law": [],
+          "scope": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "presidencial",
+                "eleccion presidencial"
+              ]
+            }
+          ],
+          "geography": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "argentina"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "routing_reason": "La referencia normativa o el alcance electoral identifica nacional.",
+        "clarification_question": null,
+        "applied_filter": "nacional",
+        "per_jurisdiction_retrievals": null
+      },
+      "diagnosis": {
+        "status": "pending inspection of actual supplied snippets and response"
+      }
+    },
+    {
+      "id": "ausente_gasto_real_partido",
+      "question": "¿Cuánto dinero gastó efectivamente cada partido político en la campaña presidencial argentina de 2023?",
+      "expected": {
+        "answerable_in_corpus": false,
+        "expected_answer": "No respondible con este corpus: las normas pueden regular financiamiento, pero no aportan las rendiciones contables reales de partidos para esa campaña.",
+        "expected_source_article_ids": []
+      },
+      "filter": "nacional",
+      "generation_status": "completed",
+      "generation": {
+        "question": "¿Cuánto dinero gastó efectivamente cada partido político en la campaña presidencial argentina de 2023?",
+        "generation_model": "granite4:latest",
+        "temperature": 0,
+        "k": 3,
+        "jurisdiccion": "nacional",
+        "embedding_model": "bge-m3",
+        "answer": "No encuentro esa información en los documentos.",
+        "original_response": "No encuentro esa información en los documentos.",
+        "answer_status": "abstained",
+        "fallback_reason": null,
+        "abstained": true,
+        "references_used": [],
+        "citation_check": {
+          "cited_tokens": [],
+          "cited_reference_numbers": [],
+          "invalid_references": [],
+          "malformed_references": [],
+          "citations_required": false,
+          "citations_missing": false,
+          "citations_invalid": false,
+          "only_valid_retrieved_references": true,
+          "citations_valid": true,
+          "semantic_support_checked": false,
+          "note": "Format/range check only; this does not establish that a cited chunk semantically supports each claim."
+        },
+        "source_map": [
+          {
+            "number": 1,
+            "label": "[1]",
+            "rank": 1,
+            "chunk_id": "nacional_19945_art_128_quáter__chunk_0001",
+            "source_article_id": "nacional_19945_art_128_quáter",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "128 quáter",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "distance": 1.1688231229782104
+          },
+          {
+            "number": 2,
+            "label": "[2]",
+            "rank": 2,
+            "chunk_id": "nacional_19945_art_128_ter__chunk_0001",
+            "source_article_id": "nacional_19945_art_128_ter",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "128 ter",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "distance": 1.1856062412261963
+          },
+          {
+            "number": 3,
+            "label": "[3]",
+            "rank": 3,
+            "chunk_id": "nacional_19945_art_64_nonies__chunk_0002",
+            "source_article_id": "nacional_19945_art_64_nonies",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "64 nonies",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 2,
+            "distance": 1.2242250442504883
+          }
+        ],
+        "retrieval_records": [
+          {
+            "rank": 1,
+            "id": "nacional_19945_art_128_quáter__chunk_0001",
+            "chunk_id": "nacional_19945_art_128_quáter__chunk_0001",
+            "source_article_id": "nacional_19945_art_128_quáter",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "128 quáter",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "text": "Artículo 128 quáter — Actos de campaña electoral. La agrupación política, que realice actividades entendidas como actos de campaña electoral fuera del plazo establecido en el Artículo 64 bis del presente Código, será sancionada con la pérdida del derecho a recibir contribuciones, subsidios y todo recurso de financiamiento público anual, por un plazo de uno (1) a cuatro (4) años y los fondos para el financiamiento de campaña por una (1) a dos (2) elecciones. La persona física que realizare actividades entendidas como actos de campaña electoral fuera del período establecido por el presente Código, será pasible de una multa de entre diez mil (10.000) y cien mil (100.000) módulos electorales, de acuerdo al valor establecido anualmente en el Presupuesto General de la Administración Nacional.",
+            "distance": 1.1688231229782104,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO VI\nViolación de la Ley Electoral:",
+            "capitulo": "CAPITULO I\nDe las faltas electorales"
+          },
+          {
+            "rank": 2,
+            "id": "nacional_19945_art_128_ter__chunk_0001",
+            "chunk_id": "nacional_19945_art_128_ter__chunk_0001",
+            "source_article_id": "nacional_19945_art_128_ter",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "128 ter",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "text": "Artículo 128 ter. Publicidad en medios de comunicación y plataformas digitales.\n\na) El partido político que incumpliera los límites de emisión, contenido y publicación de avisos publicitarios en televisión, radio, medios gráficos, vía pública, internet, telefonía móvil y fija, y publicidad estática en espectáculos públicos, perderá el derecho a recibir contribuciones, subsidios y todo recurso de financiamiento público anual, por un plazo de uno (1) a cuatro (4) años y los fondos para el financiamiento de campaña por una (1) a dos (2) elecciones;\n\nb) La persona humana o jurídica que incumpliera los límites de emisión, contenido y publicación de avisos publicitarios en televisión, radio, medios gráficos, vía pública, internet, telefonía móvil y fija, y publicidad estática en espectáculos públicos, será pasible de una multa de entre diez mil (10.000) módulos electorales y cien mil (100.000) módulos electorales;",
+            "distance": 1.1856062412261963,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO VI\nViolación de la Ley Electoral:",
+            "capitulo": "CAPITULO I\nDe las faltas electorales"
+          },
+          {
+            "rank": 3,
+            "id": "nacional_19945_art_64_nonies__chunk_0002",
+            "chunk_id": "nacional_19945_art_64_nonies__chunk_0002",
+            "source_article_id": "nacional_19945_art_64_nonies",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "64 nonies",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 2,
+            "text": "Artículo 64 decies: Emisión de señal televisiva. El debate presidencial obligatorio será transmitido en directo por todos los medios pertenecientes a Radio y Televisión Argentina Sociedad del Estado (R.T.A. S.E.). Las señales radiofónicas y televisivas transmitidas por R.T.A. S.E. serán puestas a disposición de todos los medios públicos y privados del país que deseen transmitir el debate de manera simultánea, en forma gratuita.\n\nLa transmisión deberá contar con mecanismos de accesibilidad tales como lenguaje de señas, subtitulado visible y oculto o los que pudieran implementarse en el futuro.\n\nDurante la transmisión del debate presidencial se suspenderá la publicidad electoral en los servicios de comunicación audiovisual y los anuncios públicos de los actos de Gobierno.\n\nLa Cámara Nacional Electoral dispondrá la grabación del debate, que deberá encontrarse disponible en la página oficial de la red informática de la Justicia Nacional Electoral, de forma accesible.",
+            "distance": 1.2242250442504883,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO III.\nDe los actos preelectorales",
+            "capitulo": "CAPITULO IV.\n(Capítulo sustituido por art. 2° de la Ley N° 27.781 B.O. 18/10/2024. Vigencia: a partir del día siguiente a su publicación en el Boletín Oficial.)"
+          }
+        ],
+        "context_sent": "[1]\nchunk_id: nacional_19945_art_128_quáter__chunk_0001\nsource_article_id: nacional_19945_art_128_quáter\njurisdiccion: nacional\nley: 19945\narticulo: 128 quáter\nsource: ley_nacional.txt\ntexto:\nArtículo 128 quáter — Actos de campaña electoral. La agrupación política, que realice actividades entendidas como actos de campaña electoral fuera del plazo establecido en el Artículo 64 bis del presente Código, será sancionada con la pérdida del derecho a recibir contribuciones, subsidios y todo recurso de financiamiento público anual, por un plazo de uno (1) a cuatro (4) años y los fondos para el financiamiento de campaña por una (1) a dos (2) elecciones. La persona física que realizare actividades entendidas como actos de campaña electoral fuera del período establecido por el presente Código, será pasible de una multa de entre diez mil (10.000) y cien mil (100.000) módulos electorales, de acuerdo al valor establecido anualmente en el Presupuesto General de la Administración Nacional.\n\n[2]\nchunk_id: nacional_19945_art_128_ter__chunk_0001\nsource_article_id: nacional_19945_art_128_ter\njurisdiccion: nacional\nley: 19945\narticulo: 128 ter\nsource: ley_nacional.txt\ntexto:\nArtículo 128 ter. Publicidad en medios de comunicación y plataformas digitales.\n\na) El partido político que incumpliera los límites de emisión, contenido y publicación de avisos publicitarios en televisión, radio, medios gráficos, vía pública, internet, telefonía móvil y fija, y publicidad estática en espectáculos públicos, perderá el derecho a recibir contribuciones, subsidios y todo recurso de financiamiento público anual, por un plazo de uno (1) a cuatro (4) años y los fondos para el financiamiento de campaña por una (1) a dos (2) elecciones;\n\nb) La persona humana o jurídica que incumpliera los límites de emisión, contenido y publicación de avisos publicitarios en televisión, radio, medios gráficos, vía pública, internet, telefonía móvil y fija, y publicidad estática en espectáculos públicos, será pasible de una multa de entre diez mil (10.000) módulos electorales y cien mil (100.000) módulos electorales;\n\n[3]\nchunk_id: nacional_19945_art_64_nonies__chunk_0002\nsource_article_id: nacional_19945_art_64_nonies\njurisdiccion: nacional\nley: 19945\narticulo: 64 nonies\nsource: ley_nacional.txt\ntexto:\nArtículo 64 decies: Emisión de señal televisiva. El debate presidencial obligatorio será transmitido en directo por todos los medios pertenecientes a Radio y Televisión Argentina Sociedad del Estado (R.T.A. S.E.). Las señales radiofónicas y televisivas transmitidas por R.T.A. S.E. serán puestas a disposición de todos los medios públicos y privados del país que deseen transmitir el debate de manera simultánea, en forma gratuita.\n\nLa transmisión deberá contar con mecanismos de accesibilidad tales como lenguaje de señas, subtitulado visible y oculto o los que pudieran implementarse en el futuro.\n\nDurante la transmisión del debate presidencial se suspenderá la publicidad electoral en los servicios de comunicación audiovisual y los anuncios públicos de los actos de Gobierno.\n\nLa Cámara Nacional Electoral dispondrá la grabación del debate, que deberá encontrarse disponible en la página oficial de la red informática de la Justicia Nacional Electoral, de forma accesible.",
+        "model_invoked": true,
+        "prompt_template_sha256": "977716dc3cd4769a0690da2e0b2f796d5e8322f9f03cfd33a2259dd5f450e350",
+        "routing_status": "identified",
+        "jurisdiction_status": "identified",
+        "jurisdictions": [
+          "nacional"
+        ],
+        "jurisdiction_source": "automatic",
+        "routing_signals": {
+          "normalized_query": "cuanto dinero gasto efectivamente cada partido politico en la campana presidencial argentina de 2023",
+          "law": [],
+          "scope": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "presidencial"
+              ]
+            }
+          ],
+          "geography": [
+            {
+              "jurisdiction": "nacional",
+              "matched_phrases": [
+                "argentina"
+              ]
+            }
+          ],
+          "unsupported_geography": [],
+          "comparison": []
+        },
+        "routing_reason": "La referencia normativa o el alcance electoral identifica nacional.",
+        "clarification_question": null,
+        "applied_filter": "nacional",
+        "per_jurisdiction_retrievals": null
+      },
+      "diagnosis": {
+        "status": "pending inspection of actual supplied snippets and response"
+      }
+    }
+  ],
+  "k_comparison": {
+    "question_id": "nacional_respondible_deber_votar",
+    "question": "¿Qué excepciones al deber de votar enumera el artículo 12 del Código Electoral Nacional?",
+    "prompt_template_sha256": "977716dc3cd4769a0690da2e0b2f796d5e8322f9f03cfd33a2259dd5f450e350",
+    "model": "granite4:latest",
+    "temperature": 0,
+    "k1": {
+      "question": "¿Qué excepciones al deber de votar enumera el artículo 12 del Código Electoral Nacional?",
+      "generation_model": "granite4:latest",
+      "temperature": 0,
+      "k": 1,
+      "jurisdiccion": "nacional",
+      "embedding_model": "bge-m3",
+      "answer": "El artículo 12 del Código Electoral Nacional enumera las siguientes excepciones al deber de votar:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial [1].\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables. Estos electores se presentarán el día de la elección a la autoridad policial más próxima, la cual extenderá certificación escrita que acredite la comparecencia [1].\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares [1].",
+      "original_response": "El artículo 12 del Código Electoral Nacional enumera las siguientes excepciones al deber de votar:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial [1].\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables. Estos electores se presentarán el día de la elección a la autoridad policial más próxima, la cual extenderá certificación escrita que acredite la comparecencia [1].\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares [1].",
+      "answer_status": "answered",
+      "fallback_reason": null,
+      "abstained": false,
+      "references_used": [
+        {
+          "number": 1,
+          "label": "[1]",
+          "rank": 1,
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "source_article_id": "nacional_19945_art_12",
+          "jurisdiccion": "nacional",
+          "ley": "19945",
+          "articulo": "12",
+          "source": "ley_nacional.txt",
+          "chunk_numero": 1,
+          "distance": 0.6459735035896301
+        }
+      ],
+      "citation_check": {
+        "cited_tokens": [
+          "[1]",
+          "[1]",
+          "[1]"
+        ],
+        "cited_reference_numbers": [
+          1
+        ],
+        "invalid_references": [],
+        "malformed_references": [],
+        "citations_required": true,
+        "citations_missing": false,
+        "citations_invalid": false,
+        "only_valid_retrieved_references": true,
+        "citations_valid": true,
+        "semantic_support_checked": false,
+        "note": "Format/range check only; this does not establish that a cited chunk semantically supports each claim."
+      },
+      "source_map": [
+        {
+          "number": 1,
+          "label": "[1]",
+          "rank": 1,
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "source_article_id": "nacional_19945_art_12",
+          "jurisdiccion": "nacional",
+          "ley": "19945",
+          "articulo": "12",
+          "source": "ley_nacional.txt",
+          "chunk_numero": 1,
+          "distance": 0.6459735035896301
+        }
+      ],
+      "retrieval_records": [
+        {
+          "rank": 1,
+          "id": "nacional_19945_art_12__chunk_0001",
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "source_article_id": "nacional_19945_art_12",
+          "jurisdiccion": "nacional",
+          "ley": "19945",
+          "articulo": "12",
+          "source": "ley_nacional.txt",
+          "chunk_numero": 1,
+          "text": "Artículo 12. - Deber de votar. Todo elector tiene el deber de votar en la elección nacional que se realice en su distrito.\n\nQuedan exentos de esa obligación:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial;\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables.\n\nTales electores se presentarán el día de la elección a la autoridad policial más próxima, la que extenderá certificación escrita que acredite la comparecencia;\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares.",
+          "distance": 0.6459735035896301,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "titulo": "TITULO I.\nDel Cuerpo Electoral",
+          "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+        }
+      ],
+      "context_sent": "[1]\nchunk_id: nacional_19945_art_12__chunk_0001\nsource_article_id: nacional_19945_art_12\njurisdiccion: nacional\nley: 19945\narticulo: 12\nsource: ley_nacional.txt\ntexto:\nArtículo 12. - Deber de votar. Todo elector tiene el deber de votar en la elección nacional que se realice en su distrito.\n\nQuedan exentos de esa obligación:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial;\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables.\n\nTales electores se presentarán el día de la elección a la autoridad policial más próxima, la que extenderá certificación escrita que acredite la comparecencia;\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares.",
+      "model_invoked": true,
+      "prompt_template_sha256": "977716dc3cd4769a0690da2e0b2f796d5e8322f9f03cfd33a2259dd5f450e350",
+      "routing_status": "identified",
+      "jurisdiction_status": "identified",
+      "jurisdictions": [
+        "nacional"
+      ],
+      "jurisdiction_source": "automatic",
+      "routing_signals": {
+        "normalized_query": "que excepciones al deber de votar enumera el articulo 12 del codigo electoral nacional",
+        "law": [
+          {
+            "jurisdiction": "nacional",
+            "matched_phrases": [
+              "codigo electoral nacional"
+            ]
+          }
+        ],
+        "scope": [],
+        "geography": [
+          {
+            "jurisdiction": "nacional",
+            "matched_phrases": [
+              "nacional"
+            ]
+          }
+        ],
+        "unsupported_geography": [],
+        "comparison": []
+      },
+      "routing_reason": "La referencia normativa o el alcance electoral identifica nacional.",
+      "clarification_question": null,
+      "applied_filter": "nacional",
+      "per_jurisdiction_retrievals": null
+    },
+    "k3": {
+      "question": "¿Qué excepciones al deber de votar enumera el artículo 12 del Código Electoral Nacional?",
+      "generation_model": "granite4:latest",
+      "temperature": 0,
+      "k": 3,
+      "jurisdiccion": "nacional",
+      "embedding_model": "bge-m3",
+      "answer": "El artículo 12 del Código Electoral Nacional enumera las siguientes excepciones al deber de votar:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial [1].\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables [1].\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares [1].",
+      "original_response": "El artículo 12 del Código Electoral Nacional enumera las siguientes excepciones al deber de votar:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial [1].\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables [1].\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares [1].",
+      "answer_status": "answered",
+      "fallback_reason": null,
+      "abstained": false,
+      "references_used": [
+        {
+          "number": 1,
+          "label": "[1]",
+          "rank": 1,
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "source_article_id": "nacional_19945_art_12",
+          "jurisdiccion": "nacional",
+          "ley": "19945",
+          "articulo": "12",
+          "source": "ley_nacional.txt",
+          "chunk_numero": 1,
+          "distance": 0.6459735035896301
+        }
+      ],
+      "citation_check": {
+        "cited_tokens": [
+          "[1]",
+          "[1]",
+          "[1]"
+        ],
+        "cited_reference_numbers": [
+          1
+        ],
+        "invalid_references": [],
+        "malformed_references": [],
+        "citations_required": true,
+        "citations_missing": false,
+        "citations_invalid": false,
+        "only_valid_retrieved_references": true,
+        "citations_valid": true,
+        "semantic_support_checked": false,
+        "note": "Format/range check only; this does not establish that a cited chunk semantically supports each claim."
+      },
+      "source_map": [
+        {
+          "number": 1,
+          "label": "[1]",
+          "rank": 1,
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "source_article_id": "nacional_19945_art_12",
+          "jurisdiccion": "nacional",
+          "ley": "19945",
+          "articulo": "12",
+          "source": "ley_nacional.txt",
+          "chunk_numero": 1,
+          "distance": 0.6459735035896301
+        },
+        {
+          "number": 2,
+          "label": "[2]",
+          "rank": 2,
+          "chunk_id": "nacional_19945_art_18__chunk_0001",
+          "source_article_id": "nacional_19945_art_18",
+          "jurisdiccion": "nacional",
+          "ley": "19945",
+          "articulo": "18",
+          "source": "ley_nacional.txt",
+          "chunk_numero": 1,
+          "distance": 0.8897403478622437
+        },
+        {
+          "number": 3,
+          "label": "[3]",
+          "rank": 3,
+          "chunk_id": "nacional_19945_art_3__chunk_0001",
+          "source_article_id": "nacional_19945_art_3",
+          "jurisdiccion": "nacional",
+          "ley": "19945",
+          "articulo": "3",
+          "source": "ley_nacional.txt",
+          "chunk_numero": 1,
+          "distance": 0.9221689105033875
+        }
+      ],
+      "retrieval_records": [
+        {
+          "rank": 1,
+          "id": "nacional_19945_art_12__chunk_0001",
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "source_article_id": "nacional_19945_art_12",
+          "jurisdiccion": "nacional",
+          "ley": "19945",
+          "articulo": "12",
+          "source": "ley_nacional.txt",
+          "chunk_numero": 1,
+          "text": "Artículo 12. - Deber de votar. Todo elector tiene el deber de votar en la elección nacional que se realice en su distrito.\n\nQuedan exentos de esa obligación:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial;\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables.\n\nTales electores se presentarán el día de la elección a la autoridad policial más próxima, la que extenderá certificación escrita que acredite la comparecencia;\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares.",
+          "distance": 0.6459735035896301,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "titulo": "TITULO I.\nDel Cuerpo Electoral",
+          "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+        },
+        {
+          "rank": 2,
+          "id": "nacional_19945_art_18__chunk_0001",
+          "chunk_id": "nacional_19945_art_18__chunk_0001",
+          "source_article_id": "nacional_19945_art_18",
+          "jurisdiccion": "nacional",
+          "ley": "19945",
+          "articulo": "18",
+          "source": "ley_nacional.txt",
+          "chunk_numero": 1,
+          "text": "Artículo 18: Registro de infractores al deber de votar. La Cámara Nacional Electoral llevará un registro de infractores al deber de votar establecido en el artículo 12. Luego de cada elección nacional, elaborará un listado por distrito, con nombre, apellido y matrícula de los electores mayores de dieciocho (18) años y menores de setenta (70) años de edad de quienes no se tenga constancia de emisión del voto, el que pondrá en conocimiento del Poder Ejecutivo. Los gobiernos provinciales y de la Ciudad Autónoma de Buenos Aires podrán solicitar a la Cámara el listado correspondiente a los electores de su distrito.",
+          "distance": 0.8897403478622437,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "titulo": "TITULO I.\nDel Cuerpo Electoral",
+          "capitulo": "CAPITULO II\nDel Registro Nacional de Electores"
+        },
+        {
+          "rank": 3,
+          "id": "nacional_19945_art_3__chunk_0001",
+          "chunk_id": "nacional_19945_art_3__chunk_0001",
+          "source_article_id": "nacional_19945_art_3",
+          "jurisdiccion": "nacional",
+          "ley": "19945",
+          "articulo": "3",
+          "source": "ley_nacional.txt",
+          "chunk_numero": 1,
+          "text": "Artículo 3. - Quiénes están excluidos. Están excluidos del padrón electoral:\n\na) Los dementes declarados tales en juicio;\n\nb)\n\nc) ;\n\nd) ;\n\ne) Los condenados por delitos dolosos a pena privativa de la libertad, y, por sentencia ejecutoriada, por el término de la condena;\n\nf) Los condenados por faltas previstas en las leyes nacionales y provinciales de juegos prohibidos, por el término de tres años; en el caso de reincidencia, por seis;\n\ng) Los sancionados por la infracción de deserción calificada, por el doble término de la duración de la sanción;\n\nh) ;\n\ni) Los declarados rebeldes en causa penal, hasta que cese la rebeldía o se opere la prescripción:\n\nj) ;\n\nk) ;\n\nl) Los inhabilitados según disposiciones de la Ley Orgánica de los Partidos Políticos;\n\nm) Los que en virtud de otras prescripciones legales y reglamentarias quedaren inhabilitados para el ejercicio de los derechos políticos.",
+          "distance": 0.9221689105033875,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "titulo": "TITULO I.\nDel Cuerpo Electoral",
+          "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+        }
+      ],
+      "context_sent": "[1]\nchunk_id: nacional_19945_art_12__chunk_0001\nsource_article_id: nacional_19945_art_12\njurisdiccion: nacional\nley: 19945\narticulo: 12\nsource: ley_nacional.txt\ntexto:\nArtículo 12. - Deber de votar. Todo elector tiene el deber de votar en la elección nacional que se realice en su distrito.\n\nQuedan exentos de esa obligación:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial;\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables.\n\nTales electores se presentarán el día de la elección a la autoridad policial más próxima, la que extenderá certificación escrita que acredite la comparecencia;\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares.\n\n[2]\nchunk_id: nacional_19945_art_18__chunk_0001\nsource_article_id: nacional_19945_art_18\njurisdiccion: nacional\nley: 19945\narticulo: 18\nsource: ley_nacional.txt\ntexto:\nArtículo 18: Registro de infractores al deber de votar. La Cámara Nacional Electoral llevará un registro de infractores al deber de votar establecido en el artículo 12. Luego de cada elección nacional, elaborará un listado por distrito, con nombre, apellido y matrícula de los electores mayores de dieciocho (18) años y menores de setenta (70) años de edad de quienes no se tenga constancia de emisión del voto, el que pondrá en conocimiento del Poder Ejecutivo. Los gobiernos provinciales y de la Ciudad Autónoma de Buenos Aires podrán solicitar a la Cámara el listado correspondiente a los electores de su distrito.\n\n[3]\nchunk_id: nacional_19945_art_3__chunk_0001\nsource_article_id: nacional_19945_art_3\njurisdiccion: nacional\nley: 19945\narticulo: 3\nsource: ley_nacional.txt\ntexto:\nArtículo 3. - Quiénes están excluidos. Están excluidos del padrón electoral:\n\na) Los dementes declarados tales en juicio;\n\nb)\n\nc) ;\n\nd) ;\n\ne) Los condenados por delitos dolosos a pena privativa de la libertad, y, por sentencia ejecutoriada, por el término de la condena;\n\nf) Los condenados por faltas previstas en las leyes nacionales y provinciales de juegos prohibidos, por el término de tres años; en el caso de reincidencia, por seis;\n\ng) Los sancionados por la infracción de deserción calificada, por el doble término de la duración de la sanción;\n\nh) ;\n\ni) Los declarados rebeldes en causa penal, hasta que cese la rebeldía o se opere la prescripción:\n\nj) ;\n\nk) ;\n\nl) Los inhabilitados según disposiciones de la Ley Orgánica de los Partidos Políticos;\n\nm) Los que en virtud de otras prescripciones legales y reglamentarias quedaren inhabilitados para el ejercicio de los derechos políticos.",
+      "model_invoked": true,
+      "prompt_template_sha256": "977716dc3cd4769a0690da2e0b2f796d5e8322f9f03cfd33a2259dd5f450e350",
+      "routing_status": "identified",
+      "jurisdiction_status": "identified",
+      "jurisdictions": [
+        "nacional"
+      ],
+      "jurisdiction_source": "automatic",
+      "routing_signals": {
+        "normalized_query": "que excepciones al deber de votar enumera el articulo 12 del codigo electoral nacional",
+        "law": [
+          {
+            "jurisdiction": "nacional",
+            "matched_phrases": [
+              "codigo electoral nacional"
+            ]
+          }
+        ],
+        "scope": [],
+        "geography": [
+          {
+            "jurisdiction": "nacional",
+            "matched_phrases": [
+              "nacional"
+            ]
+          }
+        ],
+        "unsupported_geography": [],
+        "comparison": []
+      },
+      "routing_reason": "La referencia normativa o el alcance electoral identifica nacional.",
+      "clarification_question": null,
+      "applied_filter": "nacional",
+      "per_jurisdiction_retrievals": null
+    },
+    "context_chunk_ids_changed": true,
+    "answer_changed": true,
+    "references_changed": false,
+    "manual_diagnosis": {
+      "status": "pending"
+    }
+  },
+  "index_integrity": {
+    "before_generation": {
+      "count": 828,
+      "ids_sha256": "d991473aa3f76b07ecd9e35afa203bb1b26a2946b45a2d57f971d46059513df0",
+      "manifest_sha256": "93c7538fc463b647b056881df9a49001905d650c698f4dc95a0ee0f3ddd922e1",
+      "ids_match_chunks": true
+    },
+    "after_generation": {
+      "count": 828,
+      "ids_sha256": "d991473aa3f76b07ecd9e35afa203bb1b26a2946b45a2d57f971d46059513df0",
+      "manifest_sha256": "93c7538fc463b647b056881df9a49001905d650c698f4dc95a0ee0f3ddd922e1",
+      "ids_match_chunks": true
+    },
+    "unchanged": true
+  },
+  "overall_generation_error": null,
+  "manual_review": {
+    "status": "pending",
+    "student_independently_verified": false
+  }
+}

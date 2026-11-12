@@ -1,4 +1,4 @@
-"""Ejecuta y registra generación local sobre las cinco preguntas congeladas."""
+"""Evalúa las cinco preguntas fijas usando el enrutamiento de `answer_question()`."""
 from __future__ import annotations
 
 import argparse
@@ -15,16 +15,16 @@ if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from scripts.generar import (
-    DEFAULT_GENERATION_MODEL, OLLAMA_BASE_URL, GeneratorUnavailableError, generate_answer,
+    DEFAULT_GENERATION_MODEL, OLLAMA_BASE_URL, GeneratorUnavailableError, answer_question,
 )
 from scripts.indexar import DEFAULT_INDEX, DEFAULT_INPUT, DEFAULT_MODEL as DEFAULT_EMBEDDING_MODEL
 from scripts.recuperar import SemanticRetriever
 
 ROOT = Path(__file__).resolve().parent.parent
 QUESTIONS_PATH = ROOT / "evalucacion/preguntas.json"
-REVIEW_PATH = ROOT / "evalucacion/revision_manual_generacion.json"
-REPORT_PATH = ROOT / "evalucacion/reporte_generacion.json"
-MARKDOWN_PATH = ROOT / "evalucacion/validacion_generacion.md"
+REVIEW_PATH = ROOT / "evalucacion/revision_manual_generacion_enrutada.json"
+REPORT_PATH = ROOT / "evalucacion/reporte_generacion_enrutada.json"
+MARKDOWN_PATH = ROOT / "evalucacion/validacion_generacion_enrutada.md"
 K_COMPARISON_QUESTION_ID = "nacional_respondible_deber_votar"
 
 
@@ -80,7 +80,9 @@ def _generation_record(result: dict[str, Any]) -> dict[str, Any]:
         "question", "generation_model", "temperature", "k", "jurisdiccion", "embedding_model",
         "answer", "original_response", "answer_status", "fallback_reason", "abstained",
         "references_used", "citation_check", "source_map", "retrieval_records", "context_sent",
-        "model_invoked", "prompt_template_sha256",
+        "model_invoked", "prompt_template_sha256", "routing_status", "jurisdiction_status",
+        "jurisdictions", "jurisdiction_source", "routing_signals", "routing_reason",
+        "clarification_question", "applied_filter", "per_jurisdiction_retrievals",
     )
     return {key: result.get(key) for key in keys}
 
@@ -163,6 +165,8 @@ def evaluate(*, questions_path: Path = QUESTIONS_PATH, index_dir: Path = DEFAULT
         report = json.loads(existing_report_path.read_text(encoding="utf-8"))
         if report.get("evaluation_questions_sha256") != hashlib.sha256(question_bytes).hexdigest():
             raise ValueError("El reporte previo no pertenece al fixture congelado")
+        if report.get("routing_protocol") != "answer_question; automatic jurisdiction routing":
+            raise ValueError("El reporte previo no usó el protocolo de enrutamiento actual; los resultados históricos no se mezclarán")
         if len(report.get("fixed_cases", [])) != 5:
             raise ValueError("El reporte previo no contiene las cinco ejecuciones")
     else:
@@ -179,13 +183,14 @@ def evaluate(*, questions_path: Path = QUESTIONS_PATH, index_dir: Path = DEFAULT
                 "expected_source_article_ids": question["fuentes_esperadas"],
             }
             try:
-                result = generate_answer(
-                    question["pregunta"], k=3, jurisdiccion=None, model=model,
+                result = answer_question(
+                    question["pregunta"], k=3, model=model,
                     retriever=active_retriever, embedding_model=embedding_model,
                 )
                 case_records.append({
                     "id": question["id"], "question": question["pregunta"],
-                    "expected": expected, "filter": None, "generation_status": "completed",
+                    "expected": expected, "filter": result.get("applied_filter"),
+                    "generation_status": "completed",
                     "generation": _generation_record(result),
                     "diagnosis": {"status": "pending inspection of actual supplied snippets and response"},
                 })
@@ -215,8 +220,8 @@ def evaluate(*, questions_path: Path = QUESTIONS_PATH, index_dir: Path = DEFAULT
             comparison_case = next(case for case in case_records if case["id"] == K_COMPARISON_QUESTION_ID)
             original_question = next(q["pregunta"] for q in questions if q["id"] == K_COMPARISON_QUESTION_ID)
             try:
-                k1_result = generate_answer(original_question, k=1, jurisdiccion=None, model=model,
-                                            retriever=active_retriever, embedding_model=embedding_model)
+                k1_result = answer_question(original_question, k=1, model=model,
+                                             retriever=active_retriever, embedding_model=embedding_model)
                 comparison = _run_comparison(comparison_case, _generation_record(k1_result))
             except GeneratorUnavailableError as exc:
                 run_error = str(exc)
@@ -227,8 +232,9 @@ def evaluate(*, questions_path: Path = QUESTIONS_PATH, index_dir: Path = DEFAULT
             "version": 1,
             "evaluation_questions_sha256": hashlib.sha256(question_bytes).hexdigest(),
             "fixed_question_count": len(questions),
-            "baseline": {"k": 3, "jurisdiccion": None,
-                         "retrieval_protocol": "one generation call per fixed question; reuse existing bge-m3 index"},
+            "baseline": {"k": 3, "jurisdiction_policy": "automatic conservative routing via answer_question",
+                         "retrieval_protocol": "one routed generation call per fixed question; reuse existing bge-m3 index"},
+            "routing_protocol": "answer_question; automatic jurisdiction routing",
             "runtime": runtime,
             "embedding_model": embedding_model,
             "fixed_cases": case_records,
@@ -289,8 +295,8 @@ def _supplied_sources(generation: dict[str, Any]) -> str:
 
 
 def render_markdown(report: dict[str, Any]) -> str:
-    lines = ["# TP2-RAG-06 — ejecución local de generación", "",
-             "Evaluación de generación, no una métrica de exactitud general. La temperatura 0 no garantiza veracidad ni repetibilidad. Las citas se validan sólo en formato/rango; apoyo semántico requiere inspección del texto realmente enviado.", "",
+    lines = ["# Evaluación de generación con enrutamiento automático", "",
+             "Ejecución actual vía `answer_question()` (detector, filtro jurisdiccional y generación). Se escribe en un reporte nuevo y no reemplaza el baseline histórico TP2-RAG-06. No es una métrica de exactitud general. La temperatura 0 no garantiza veracidad ni repetibilidad. Las citas se validan sólo en formato/rango; apoyo semántico requiere inspección del texto realmente enviado.", "",
              "## Runtime verificado", ""]
     runtime = report.get("runtime", {})
     if runtime:
@@ -299,22 +305,26 @@ def render_markdown(report: dict[str, Any]) -> str:
         lines.append("No se conservó metadata de runtime (reporte previo incompleto).")
     lines.extend(["", "## Cinco preguntas fijas: contexto y respuesta observados", "",
                   "Los campos esperado y observado se mantienen separados. El JSON contiene los fragmentos íntegros efectivamente enviados, el mapa `[n]` a fuente/artículo/página y las respuestas originales completas.", "",
-                  "| ID / pregunta | Esperado (answer/source) | IDs y fuentes realmente enviados | Respuesta generada | Referencias usadas / chequeo de formato | Diagnóstico de evidencia y generación |",
-                  "|---|---|---|---|---|---|"])
+                  "| ID / pregunta | Esperado (answer/source) | Ruta / filtro | IDs y fuentes realmente enviados | Respuesta generada | Referencias usadas / chequeo de formato | Diagnóstico de evidencia y generación |",
+                  "|---|---|---|---|---|---|---|"])
     for case in report.get("fixed_cases", []):
         expected = case["expected"]
         expected_text = f"{expected['expected_answer']} / {expected['expected_source_article_ids']}"
         generation_status = case.get("generation_status", "completed" if "generation" in case else "error")
         if generation_status != "completed":
             sources, answer, citation = "—", _answer_for_markdown(case), "no invocado"
+            route_text = "—"
             diagnosis = case.get("diagnosis", {}).get("status", "pending")
         else:
             generation = case["generation"]
             sources = _supplied_sources(generation)
             answer = _answer_for_markdown(case)
-            cited = generation["references_used"]
-            check = generation["citation_check"]
-            citation = f"{[x['label'] for x in cited]}; valid={check['citations_valid']}, missing={check['citations_missing']}, invalid={check['citations_invalid']}"
+            route_text = (f"{generation.get('routing_status')} / {generation.get('jurisdiction_source')} / "
+                          f"{generation.get('applied_filter')}")
+            cited = generation.get("references_used") or []
+            check = generation.get("citation_check")
+            citation = (f"{[x['label'] for x in cited]}; valid={check['citations_valid']}, missing={check['citations_missing']}, invalid={check['citations_invalid']}"
+                        if check else "no invocado por aclaración de ruta")
             diag = case.get("diagnosis", {})
             diagnosis = diag.get("observations", diag.get("status", "pending manual diagnosis"))
             if diag.get("failure_categories"):
@@ -323,7 +333,7 @@ def render_markdown(report: dict[str, Any]) -> str:
                 diagnosis = f"coverage={diag['evidence_coverage']}; {diagnosis}"
             if diag.get("answer_supported_by_context"):
                 diagnosis += f"; supported={diag['answer_supported_by_context']}"
-        lines.append(f"| {case['id']} — {case['question']} | {expected_text} | {sources} | {answer} | {citation} | {diagnosis} |")
+        lines.append(f"| {case['id']} — {case['question']} | {expected_text} | {route_text} | {sources} | {answer} | {citation} | {diagnosis} |")
     comparison = report.get("k_comparison")
     lines.extend(["", "## Comparación controlada k=1 vs k=3", ""])
     if comparison and "k1" in comparison and "k3" in comparison:
@@ -340,7 +350,8 @@ def render_markdown(report: dict[str, Any]) -> str:
                   f"Snapshot de colección/IDs/manifest antes y después de generación: `{integrity.get('unchanged', 'not measured')}`. `context_sent` en el JSON es el bloque exacto entregado como `{{contexto}}`; para TXT no se inventan páginas PDF.",
                   "La verificación automática sólo detecta ausencia, formato y números de referencia fuera del mapa recuperado; no demuestra que una cita respalde la afirmación. No se aplicó reparación silenciosa de citas ni sustitución del modelo.",
                   f"Revisión: `{report.get('manual_review', {}).get('status', 'pending')}`. {report.get('manual_review', {}).get('note', 'Las observaciones diagnósticas deben completarse tras leer los fragmentos y las respuestas reales.')}",
-                  "", "La instrucción de abstención no garantiza conducta fiable. Las salidas de las dos preguntas ausentes y los casos con cobertura incompleta deben leerse junto al contexto íntegro, no como evidencia legal verificada.", ""])
+                  "", "La instrucción de abstención no garantiza conducta fiable. Las salidas de las dos preguntas ausentes y los casos con cobertura incompleta deben leerse junto al contexto íntegro, no como evidencia legal verificada.",
+                  "Los casos de este reporte pasan por `answer_question()`; las respuestas históricas sin enrutamiento siguen en `reporte_generacion.json` y no se mezclan aquí.", ""])
     return "\n".join(lines)
 
 

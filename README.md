@@ -119,11 +119,11 @@ uv run python scripts/recuperar.py --pregunta "¿Cómo define Santa Fe la autori
 uv run python scripts/evaluar_recuperacion.py
 ```
 
-`--k` debe ser positivo; `--jurisdiccion` acepta `nacional`, `pba`, `santa_fe` y, si se omite, no se aplica filtro. La capa valida modelo/corpus/manifiesto y abre la colección con creación deshabilitada: no llama al indexador, no agrega ni re-embebe documentos. Distancia nativa Chroma menor significa vecino más cercano, **no** probabilidad de respuesta correcta. El API y el JSON conservan texto completo, ID, fuente, artículo y páginas PDF disponibles; TXT no recibe páginas inventadas. Los resultados negativos también tienen vecinos; retrieval no decide abstención.
+`--k` debe ser positivo; `--jurisdiccion` acepta `nacional`, `pba`, `santa_fe` como selección manual. La CLI de usuario ahora enruta automáticamente y pide aclaración cuando no puede determinar el alcance; `--sin-filtro` activa explícitamente la consulta exploratoria global. La API de bajo nivel `SemanticRetriever.retrieve()` conserva su comportamiento: filtro explícito o sin filtro, sin inferencia implícita. La capa valida modelo/corpus/manifiesto y abre la colección con creación deshabilitada: no llama al indexador, no agrega ni re-embebe documentos. Distancia nativa Chroma menor significa vecino más cercano, **no** probabilidad de respuesta correcta. El API y el JSON conservan texto completo, ID, fuente, artículo y páginas PDF disponibles; TXT no recibe páginas inventadas. Los resultados negativos también tienen vecinos; retrieval no decide abstención.
 
 La ejecución evaluó una vez cada combinación requerida con k=5. `evalucacion/reporte_recuperacion.json` guarda los rankings completos, métricas por artículo, inspecciones manuales de pasajes realizadas por el agente (pendientes de verificación personal del estudiante), paráfrasis, comparación k=1/k=3, un preview numerado con texto íntegro e integridad del índice. `validacion_recuperacion.md` resume la evidencia; `distancias_recuperacion.svg` grafica distancias reales del top-3. En esta corrida, sin filtro y filtrada, Hit@1/3/5 fueron **0.667** y MRR@5 **0.667** (denominador: tres positivas; las negativas se excluyen). La cobertura de pasaje top-3, inspeccionada manualmente por el agente, fue nacional **parcial**, PBA **sí**, Santa Fe **no** en ambos modos. El índice/article hit no equivale a evidencia completa: el chunk siguiente del art. 12 nacional no aparece en top-5; el art. 4 santafesino no aparece en top-5 aunque sí está en los chunks, y el top vecino es el art. 67. Ver reporte para fuentes, distancias, revisión de preguntas ausentes y limitaciones.
 
-## Generación local (TP2-RAG-06)
+## Generación local (TP2-RAG-06, baseline histórica)
 
 Requiere Ollama en ejecución y el modelo local (sin cambiar ni reconstruir el índice):
 
@@ -134,10 +134,37 @@ uv run python scripts/generar.py --pregunta "¿Qué partido ganó la elección p
 uv run python scripts/evaluar_generacion.py
 ```
 
-El generador reusa `SemanticRetriever`, entrega el contexto completo numerado y muestra las fuentes directamente desde retrieval; usa `ChatOllama` con `granite4:latest`, temperatura 0 y `bge-m3` para consultas. Un chequeo automático detecta referencias faltantes o fuera del mapa, pero **no** verifica apoyo semántico ni garantiza abstención. Las respuestas reales, contextos, referencias y limitaciones observadas quedan en `evalucacion/reporte_generacion.json` y `evalucacion/validacion_generacion.md`. Versión probada: Ollama server 0.40.15, cliente Python 0.6.3; Granite 4 de 3.4B parámetros, Q4_K_M, digest `4235724a127c0f86dcc0247d67c20148705d6dd2319164014d92f71d607f4773`. El modelo no se incluye en Git y debe descargarse localmente.
+El generador reusa `SemanticRetriever`, entrega el contexto completo numerado y muestra las fuentes directamente desde retrieval; usa `ChatOllama` con `granite4:latest`, temperatura 0 y `bge-m3` para consultas. Un chequeo automático detecta referencias faltantes o fuera del mapa, pero **no** verifica apoyo semántico ni garantiza abstención. Las salidas históricas se conservan en `evalucacion/reporte_generacion.json` y `evalucacion/validacion_generacion.md`; corresponden al protocolo previo sin enrutamiento. Desde TP2-RAG-07, `scripts/evaluar_generacion.py` usa `answer_question()` y escribe en `reporte_generacion_enrutada.json` / `validacion_generacion_enrutada.md`, sin sobrescribir ni mezclar el baseline anterior. Versión probada: Ollama server 0.40.15, cliente Python 0.6.3; Granite 4 de 3.4B parámetros, Q4_K_M, digest `4235724a127c0f86dcc0247d67c20148705d6dd2319164014d92f71d607f4773`. El modelo no se incluye en Git y debe descargarse localmente.
 
 ## Alcance pendiente
 
 Faltan Gradio, reproducción integral en un directorio fresco, documentación final de asistencia de IA y demo/video. El notebook `trabajo_integrador_2_rag.ipynb` referido en la tarea no está presente en este checkout.
+
+## Enrutamiento conservador por jurisdicción (TP2-RAG-07)
+
+La detección es determinista y no usa LLM, embeddings ni Chroma. Distingue referencias normativas/alcance electoral de la mera ubicación geográfica: p. ej., “presidente en PBA” se enruta a Nación; “¿cómo voto en PBA?” pide aclaración. Reconoce también designaciones normativas como “ley provincial santafesina” como Santa Fe, no como una mera ubicación. Las consultas comparativas recuperan por separado el top-k de cada jurisdicción, conservan rankings locales y renumeran fuentes para el contexto único. Distancias de búsquedas separadas no se comparan entre sí. La selección manual prevalece; las rutas ambiguas, no especificadas o fuera del corpus no consultan el índice ni invocan el modelo. `answer_question()` es la única entrada de generación usada por CLI y evaluaciones; `generate_answer()` se conserva con `DeprecationWarning` sólo por compatibilidad y elude el enrutamiento, por lo que no debe usarse en código nuevo. Este clasificador de reglas no determina vigencia legal ni suficiencia de evidencia.
+
+```bash
+# Enrutamiento automático por norma o alcance electoral
+uv run python scripts/generar.py --pregunta "¿Qué excepciones establece el Código Electoral Nacional?" --k 3
+# Selección manual (prevalece sobre detección)
+uv run python scripts/generar.py --pregunta "¿Cómo voto en Buenos Aires?" --jurisdiccion pba
+# Opt-out explícito, exploratorio y sin filtro
+uv run python scripts/generar.py --pregunta "¿Cómo se vota en PBA?" --sin-filtro
+# Ambigua: presenta pregunta aclaratoria sin retrieval/generación
+uv run python scripts/generar.py --pregunta "¿Cómo se vota en PBA?" --json
+# Comparación: k=3 por cada jurisdicción
+uv run python scripts/generar.py --pregunta "¿Qué diferencias hay entre la Ley 5.109 y la Ley 14.478?" --k 3
+# Recuperación/evaluación offline (40 etiquetas); impacto sobre índice local opcional
+uv run python scripts/recuperar.py --pregunta "¿Cómo se vota presidente en PBA?" --k 3
+uv run python scripts/evaluar_jurisdiccion.py
+uv run python scripts/evaluar_jurisdiccion.py --with-retrieval
+```
+
+El fixture independiente [`evalucacion/preguntas_jurisdiccion.json`](evalucacion/preguntas_jurisdiccion.json) tiene 40 preguntas y SHA-256 `3ef5fa9188caefb85876c531bf95b12a5db9612389b17a08583db5e4f45a06fe`. La clasificación offline observada fue 40/40 exacta (matriz diagonal: identificadas 21, ambiguas 7, comparativas 4, no especificadas 4, no soportadas 4), precisión/recall por jurisdicción 1.00, y aclaración adecuada 15/15. Es el resultado sobre este fixture pequeño y etiquetado, no una medida de desempeño general ni prueba de cobertura de casos nuevos.
+
+En el índice local existente, la comparación usó las mismas tres preguntas respondibles y k=1/3/5. Baseline sin filtro, filtro oracle y filtro automático lograron Hit@1/3/5 **2/3** y MRR@5 **2/3**; el denominador E2E fue 3 en cada condición. El enrutamiento automático cubrió 3/3, no evitó llamadas mediante aclaración en ese subconjunto y no devolvió chunks de otras jurisdicciones (0 fugas). La mejora principal es el aislamiento de contexto, no el hit agregado: el artículo 12 nacional sigue parcialmente cubierto (falta el chunk consecutivo con el inciso d) y el artículo 4 de Santa Fe sigue ausente del top-5 aunque existe en el corpus; PBA recupera el pasaje solicitado. En un smoke comparativo k=1, se recuperaron los arts. PBA 151 y Santa Fe 287, no disposiciones sobre composición legislativa; Granite llamó erróneamente a la Ley 14.478 “Ley de Jueces”. Las citas `[1]`/`[2]` pasaron el control de formato pero no respaldan la conclusión solicitada. En el smoke PBA de 92/46, la respuesta dio el dato correcto pero omitió la cita. Son ejemplos de que el filtro y la validación sintáctica no garantizan relevancia ni apoyo semántico. El índice conservó 828 IDs y el manifest hash antes/después. Resultados íntegros, fuentes/páginas y fragmentos recuperados: [`evalucacion/reporte_jurisdiccion.json`](evalucacion/reporte_jurisdiccion.json), análisis: [`evalucacion/validacion_jurisdiccion.md`](evalucacion/validacion_jurisdiccion.md). Estas mediciones no modifican los reportes congelados TP2-RAG-05/06.
+
+`uv run pytest -q` valida fixture/aritmética y tests de rutas con dobles, sin requerir servicios. El chequeo `--with-retrieval` es read-only y nunca reconstruye el índice. Para generación comparativa se envía el contexto exacto reunido y el mapa `[n]` se renumera globalmente; controles de citas siguen siendo sintácticos, no verifican respaldo semántico. La evaluación de las cinco preguntas fija el protocolo automático y registra ruta, filtro, contexto, respuesta y citas en `reporte_generacion_enrutada.json` / `validacion_generacion_enrutada.md`. La ejecución observada mantuvo íntegro el índice: las dos preguntas ausentes se abstuvieron, pero Nación tuvo contexto parcial, Santa Fe no recuperó el art. 4 y generó una respuesta sin ese pasaje, y PBA respondió 92/46 pero omitió cita. El informe histórico sin enrutamiento permanece en `reporte_generacion.json` / `validacion_generacion.md`.
 
 El agente implementó y ejecutó estas validaciones; no se afirma que el estudiante las haya revisado personalmente, grabado una demo o enviado la entrega. La declaración final de asistencia debe completar cuándo, modelos utilizados y qué verificó personalmente el estudiante.

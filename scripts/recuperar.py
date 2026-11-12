@@ -14,6 +14,7 @@ from langchain_ollama import OllamaEmbeddings
 if __package__ in {None, ""}:  # supports `python scripts/recuperar.py` and `python -m scripts.recuperar`
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from scripts.detectar_jurisdiccion import detect_jurisdiction
 from scripts.indexar import (
     COLLECTION, DEFAULT_INDEX, DEFAULT_MODEL, DEFAULT_INPUT, MANIFEST,
     IndexConfigurationError, make_signature, read_chunks,
@@ -153,25 +154,45 @@ def main() -> int:
     parser.add_argument("--pregunta", required=True)
     parser.add_argument("--k", type=int, default=5)
     parser.add_argument("--jurisdiccion", choices=JURISDICCIONES)
+    parser.add_argument("--sin-filtro", action="store_true", help="desactiva explícitamente el enrutamiento automático")
     parser.add_argument("--index-dir", type=Path, default=DEFAULT_INDEX)
     parser.add_argument("--chunks", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--model", default=DEFAULT_MODEL)
     args = parser.parse_args()
+    if args.jurisdiccion and args.sin_filtro:
+        parser.error("--jurisdiccion y --sin-filtro son incompatibles")
+    decision = detect_jurisdiction(args.pregunta)
+    if args.jurisdiccion:
+        jurisdictions, status, source = [args.jurisdiccion], "identified", "manual"
+    elif args.sin_filtro:
+        jurisdictions, status, source = [None], "unfiltered", "unfiltered"
+    elif decision["status"] in {"identified", "comparative"}:
+        jurisdictions, status, source = decision["jurisdictions"], decision["status"], "automatic"
+    else:
+        print(f"Enrutamiento: {decision['status']} | {decision['reason']}\n"
+              f"Pregunta de aclaración: {decision['clarification_question'] or 'La jurisdicción no está cubierta por el corpus.'}\n"
+              "No se realizó recuperación.")
+        return 0
     try:
         retriever = SemanticRetriever(index_dir=args.index_dir, chunks_path=args.chunks, model=args.model)
-        results = retriever.retrieve(args.pregunta, k=args.k, jurisdiccion=args.jurisdiccion)
+        grouped = {j: retriever.retrieve(args.pregunta, k=args.k, jurisdiccion=j) for j in jurisdictions}
     except (ValueError, RetrievalIndexError, IndexConfigurationError) as exc:
         parser.error(str(exc))
-    filter_text = args.jurisdiccion or "sin filtro de jurisdicción"
-    print(f"{len(results)} resultados; k={args.k}; filtro={filter_text}; "
-          "distancia nativa Chroma (menor=vecino más cercano, no probabilidad)")
-    for result in results:
-        page = (f" pp. {result['pagina_inicio']}–{result['pagina_fin']}"
-                if "pagina_inicio" in result and "pagina_fin" in result else "")
-        print(f"{result['rank']}. {result['chunk_id']} | {result['jurisdiccion']} | "
-              f"Ley {result['ley']}, art. {result['articulo']} | {result['source']}{page} | "
-              f"distance={result['distance']}")
-        print(f"   {result['text'][:350].replace(chr(10), ' ')}")
+    filter_text = ", ".join(j or "sin filtro" for j in jurisdictions)
+    reason = (f"Jurisdicción seleccionada manualmente: {args.jurisdiccion}."
+              if source == "manual" else decision["reason"])
+    print(f"Enrutamiento: {status} | fuente={source} | jurisdicciones={jurisdictions}\n"
+          f"Justificación: {reason} | alcance={filter_text} | k={args.k} por jurisdicción")
+    for jurisdiction, results in grouped.items():
+        print(f"\n{jurisdiction or 'sin filtro'}: {len(results)} resultados; k={args.k}; "
+              "distancia nativa Chroma (menor=vecino más cercano, no probabilidad)")
+        for result in results:
+            page = (f" pp. {result['pagina_inicio']}–{result['pagina_fin']}"
+                    if "pagina_inicio" in result and "pagina_fin" in result else "")
+            print(f"{result['rank']}. {result['chunk_id']} | {result['jurisdiccion']} | "
+                  f"Ley {result['ley']}, art. {result['articulo']} | {result['source']}{page} | "
+                  f"distance={result['distance']}")
+            print(f"   {result['text'][:350].replace(chr(10), ' ')}")
     return 0
 
 
