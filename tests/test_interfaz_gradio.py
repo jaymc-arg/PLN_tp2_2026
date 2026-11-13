@@ -39,7 +39,8 @@ def test_forward_once(monkeypatch, k, mode, kwargs):
     backend = Mock(return_value=result())
     monkeypatch.setattr(generar, "answer_question", backend)
     assert ui.consultar("Pregunta", k, mode)[0] == "Respuesta [1] [2]"
-    backend.assert_called_once_with("Pregunta", k=k, **kwargs)
+    backend.assert_called_once_with("Pregunta", k=k, index_dir=ui.indexar.DEFAULT_INDEX,
+                                    chunks_path=ui.indexar.DEFAULT_INPUT, **kwargs)
 
 
 @pytest.mark.parametrize("question", ["", " \n\t", None])
@@ -103,21 +104,31 @@ def test_runtime_errors_clear_outputs(monkeypatch, error):
 def test_import_has_no_side_effects(monkeypatch):
     launch = Mock(side_effect=AssertionError("No server"))
     backend = Mock(side_effect=AssertionError("No query"))
+    from scripts import experimentos_fragmentacion as lab
+    index = Mock(side_effect=AssertionError("No indexing on import"))
+    split = Mock(side_effect=AssertionError("No splitting on import"))
+    monkeypatch.setattr(lab.indexar, "run_index", index)
+    monkeypatch.setattr(lab.fragmentar, "build_chunks", split)
     monkeypatch.setattr(ui.gr.Blocks, "launch", launch)
     monkeypatch.setattr(generar, "answer_question", backend)
     importlib.reload(ui)
     launch.assert_not_called()
     backend.assert_not_called()
+    index.assert_not_called()
+    split.assert_not_called()
 
 
 def test_page_builds_and_launches_only_locally(monkeypatch):
     launch = Mock()
     backend = Mock(side_effect=AssertionError("No query while building"))
+    prepare = Mock(side_effect=AssertionError("No preparation while building page"))
+    monkeypatch.setattr(ui, "prepare_experiment", prepare)
     monkeypatch.setattr(ui.gr.Blocks, "launch", launch)
     monkeypatch.setattr(generar, "answer_question", backend)
     ui.main()
     launch.assert_called_once_with(server_name="127.0.0.1", share=False)
     backend.assert_not_called()
+    prepare.assert_not_called()
 
 
 def test_context_builder_relocated_exactly():

@@ -136,9 +136,9 @@ uv run python scripts/evaluar_generacion.py
 
 El generador reusa `SemanticRetriever`, entrega el contexto completo numerado y muestra las fuentes directamente desde retrieval; usa `ChatOllama` con `granite4:latest`, temperatura 0 y `bge-m3` para consultas. Un chequeo automático detecta referencias faltantes o fuera del mapa, pero **no** verifica apoyo semántico ni garantiza abstención. Las salidas históricas se conservan en `evalucacion/reporte_generacion.json` y `evalucacion/validacion_generacion.md`; corresponden al protocolo previo sin enrutamiento. Desde TP2-RAG-07, `scripts/evaluar_generacion.py` usa `answer_question()` y escribe en `reporte_generacion_enrutada.json` / `validacion_generacion_enrutada.md`, sin sobrescribir ni mezclar el baseline anterior. Versión probada: Ollama server 0.40.15, cliente Python 0.6.3; Granite 4 de 3.4B parámetros, Q4_K_M, digest `4235724a127c0f86dcc0247d67c20148705d6dd2319164014d92f71d607f4773`. El modelo no se incluye en Git y debe descargarse localmente.
 
-## Interfaz Gradio local (solo lectura)
+## Interfaz Gradio local y laboratorio de fragmentación (Stage C)
 
-Requiere el índice compatible ya construido (sección «Índice vectorial local»), sus chunks de referencia y Ollama activo con `bge-m3` y `granite4:latest` descargados. La interfaz no crea ni reconstruye índices; los errores de prerrequisitos se muestran sin cambiar modelos ni datos.
+Las consultas requieren Ollama activo con `bge-m3` y `granite4:latest` descargados. El modo **Índice original** requiere además el índice compatible ya construido (sección «Índice vectorial local») y `datos/procesados/chunks.jsonl`. El laboratorio usa los tres `*_articulos.jsonl` ya preprocesados; no ejecuta preprocesamiento. Los errores se muestran sin cambiar modelos ni reconstruir índices incompatibles.
 
 ```bash
 uv sync
@@ -147,7 +147,13 @@ uv run python scripts/interfaz_gradio.py
 
 Abrir la dirección local indicada (`127.0.0.1:7860` por defecto, sin enlace público). Escribir una pregunta, elegir K=1/3/5 (3 por defecto) y jurisdicción automática, Nación, Provincia de Buenos Aires, Santa Fe o sin filtro exploratorio; pulsar **Consultar**. En comparaciones, K se aplica **por jurisdicción**. Cambiar controles no ejecuta consultas.
 
-Se muestran por separado respuesta/aclaración, enrutamiento, fuentes originales con páginas cuando existen y distancia nativa (no confianza), evidencia literal completa enviada al modelo y advertencias de citas. Una cita sintácticamente válida no verifica respaldo semántico. Las rutas irresueltas no recuperan ni generan. **Cambiar chunk size/overlap no está disponible en esta versión**: requiere un flujo separado y explícito de fragmentación y reindexación.
+Se muestran por separado respuesta/aclaración, enrutamiento (incluido índice y parámetros realmente usados), fuentes originales con páginas cuando existen y distancia nativa (no confianza), evidencia literal completa enviada al modelo y advertencias de citas. Una cita sintácticamente válida no verifica respaldo semántico. Las rutas irresueltas no recuperan ni generan.
+
+En **Laboratorio de fragmentación**, seleccionar **Índice experimental**, ajustar `chunk_size` (300–2000 **caracteres, no tokens**) y `chunk_overlap` (entero ≥0 y estrictamente menor que size), y pulsar **Preparar / reutilizar índice experimental**. Los valores iniciales son 1000/150. Cambiar controles no fragmenta, indexa ni genera: limpia los resultados previos y bloquea la consulta experimental hasta preparar los valores exactos. El estado muestra construcción, listo/reutilizado o error, cantidad de chunks y rutas activadas. La primera preparación puede tardar mientras Ollama calcula embeddings.
+
+Cada configuración guarda `chunks.jsonl`, `reporte_fragmentacion.json` e `indice/` bajo `.chroma/experimentos/<sha256>/`, ignorado por Git. La identidad incluye parámetros, modelo fijo `bge-m3`, contenido de los artículos, hash del código de fragmentación y versión del splitter. Una configuración completa compatible se valida y reutiliza **sin recalcular embeddings ni reescribir chunks/reportes**. Si cambia size/overlap, se necesita preparar explícitamente otra fragmentación e índice. Si falla la indexación antes de crear el índice, se pueden reutilizar los chunks completos al reintentar; los artefactos corruptos/incompatibles se rechazan sin borrarlos ni usar `rebuild`.
+
+Para volver, seleccionar **Índice original**: no requiere preparación ni reconstruye nada. Incluso 1000/150 experimental usa rutas privadas, nunca `datos/procesados/chunks.jsonl` ni `.chroma/electoral_laws`. El estado es por sesión; las preparaciones/consultas de esta app se serializan para evitar construcciones simultáneas. No ejecutar múltiples procesos preparando la misma configuración a la vez. Esta etapa no incluye dashboard comparativo ni evaluación automática de calidad.
 
 ## Alcance pendiente
 

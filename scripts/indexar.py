@@ -33,7 +33,7 @@ METADATA_FIELDS = (
 class IndexConfigurationError(RuntimeError):
     """La firma persistida no coincide o el directorio contiene un índice no administrado."""
 
-
+# Lee los documentos, los verifica y hashea
 def read_chunks(path: Path) -> tuple[list[dict[str, Any]], str]:
     raw = path.read_bytes()
     chunks = []
@@ -57,7 +57,7 @@ def read_chunks(path: Path) -> tuple[list[dict[str, Any]], str]:
         raise ValueError(f"No hay chunks indexables en {path}")
     return chunks, hashlib.sha256(raw).hexdigest()
 
-
+# Valida la presencia de metadatos obligatorios y que sean escalares; omite explícitamente los valores null.
 def chunk_metadata(chunk: dict[str, Any]) -> dict[str, str | int | float | bool]:
     """Chroma admite metadatos escalares; omite explícitamente los valores null."""
     metadata = {}
@@ -78,7 +78,7 @@ def chunk_metadata(chunk: dict[str, Any]) -> dict[str, str | int | float | bool]
         raise ValueError(f"Rango PDF incompleto para {chunk.get('id')}")
     return metadata
 
-
+# Convierte los chunks en Documentos de LangChain y devuelve la lista de IDs.
 def to_documents(chunks: list[dict[str, Any]]) -> tuple[list[Document], list[str]]:
     documents, ids = [], []
     for chunk in chunks:
@@ -86,7 +86,7 @@ def to_documents(chunks: list[dict[str, Any]]) -> tuple[list[Document], list[str
         documents.append(Document(page_content=chunk["texto"], metadata=chunk_metadata(chunk)))
     return documents, ids
 
-
+# Genera la firma del índice a partir del hash de los chunks y el modelo.
 def make_signature(chunks_sha256: str, model: str, collection: str = COLLECTION) -> dict[str, Any]:
     return {"managed_by": "tp2-rag-04", "signature_version": SIGNATURE_VERSION,
             "embedding_model": model, "ollama_base_url": "http://localhost:11434",
