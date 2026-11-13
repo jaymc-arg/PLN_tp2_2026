@@ -233,6 +233,21 @@ Para la declaración final de la materia se deberá añadir **qué modelos concr
 
 ---
 
+## Integración mínima e interfaz Gradio — tarea actual
+
+**Objetivo:** consulta local de solo lectura con respuesta, enrutamiento, fuentes, contexto literal completo y revisión sintáctica de citas separados.
+**Decisión:** trasladar `build_evidence_context()` sin cambios de representación a `scripts/recuperar.py`; generador y evaluador comparten esa función. La interfaz usa un callback directo a `answer_question()` y un formateador, sin caché ni reconstrucción, con K=1/3/5 y cinco modos de enrutamiento. No se modificaron corpus, chunks, prompts, indexador ni resultados congelados.
+**Archivos:** `scripts/recuperar.py`, `scripts/generar.py`, `scripts/evaluar_recuperacion.py`, nuevo `scripts/interfaz_gradio.py`, nuevo `tests/test_interfaz_gradio.py`, `pyproject.toml`, `uv.lock`, `requirements.txt`, `README.md` y esta bitácora.
+**Comandos ejecutados y resultados:**
+- `uv add gradio` → Gradio 6.32.0; `uv export --format requirements-txt --no-hashes --output-file requirements.txt`; `uv sync` completados. Aviso de copia en lugar de hardlinks, sin fallo.
+- `uv run pytest -q tests/test_interfaz_gradio.py tests/test_generar.py tests/test_recuperar.py` → 57 passed (antes de agregar el test de construcción de página).
+- `uv run pytest -q` → **137 passed**, 16 avisos esperados por pruebas de compatibilidad con `generate_answer()`.
+- `uv run python - <<'PY' … PY` → importación de `scripts.recuperar`, `scripts.generar`, `scripts.evaluar_recuperacion`, `scripts.evaluar_generacion` y ejecución independiente de cada CLI con `--help`: OK. El mismo chequeo llamó `consultar()` con «¿Cuántos diputados y senadores fija el artículo 13 de la Ley 5.109?» y «¿Cómo se vota en PBA?» sin dobles.
+- `curl --max-time 5 -sS http://localhost:11434/api/tags` → Ollama respondió con `bge-m3:latest` y `granite4:latest` disponibles.
+- `git diff --check` → limpio.
+**Resultados observados y límites:** falta `.chroma/electoral_laws` en este checkout. La consulta específica mostró `RetrievalIndexError` y orientación de prerrequisitos; la ambigua mostró motivo/aclaración, sin fuentes ni contexto. La ruta del índice siguió inexistente después: no se reconstruyó. No fue posible medir IDs/manifest antes/después de una recuperación ni validar generación real por ausencia del índice. No se abrió navegador ni puerto: la construcción real de Blocks y el lanzamiento exclusivamente local se verificaron con `launch` sustituido; importación sin consulta/lanzamiento también cubierta. Las pruebas con dobles no son resultados de desempeño jurídico/RAG. La interfaz no permite cambiar chunk size/overlap.
+**Asistencia:** implementación, pruebas y documentación realizadas por el agente de programación (modelo de sesión `gpt-6.1-sol`); no se atribuye verificación personal al estudiante.
+
 ## Registro de próximas actualizaciones
 
 Las nuevas entradas se incorporarán al avanzar en el proyecto, con este formato breve:

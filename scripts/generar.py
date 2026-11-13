@@ -17,10 +17,9 @@ from langchain_ollama import ChatOllama
 if __package__ in {None, ""}:  # soporta ejecución directa y `python -m scripts.generar`
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from scripts.evaluar_recuperacion import build_evidence_context
 from scripts.detectar_jurisdiccion import detect_jurisdiction
 from scripts.indexar import DEFAULT_INDEX, DEFAULT_INPUT, DEFAULT_MODEL as DEFAULT_EMBEDDING_MODEL
-from scripts.recuperar import JURISDICCIONES, SemanticRetriever
+from scripts.recuperar import JURISDICCIONES, SemanticRetriever, build_evidence_context
 
 DEFAULT_GENERATION_MODEL = "granite4:latest"
 OLLAMA_BASE_URL = "http://localhost:11434"

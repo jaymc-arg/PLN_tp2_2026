@@ -23,6 +23,21 @@ from scripts.indexar import (
 JURISDICCIONES = ("nacional", "pba", "santa_fe")
 
 
+def build_evidence_context(results: list[dict[str, Any]]) -> str:
+    """Full text, numbered in exactly retrieval order for later generator reuse."""
+    blocks = []
+    for number, result in enumerate(results, 1):
+        lines = [f"[{number}]", f"chunk_id: {result['chunk_id']}",
+                 f"source_article_id: {result['source_article_id']}",
+                 f"jurisdiccion: {result['jurisdiccion']}", f"ley: {result['ley']}",
+                 f"articulo: {result['articulo']}", f"source: {result['source']}"]
+        if "pagina_inicio" in result:
+            lines.append(f"paginas_articulo: {result['pagina_inicio']}–{result['pagina_fin']}")
+        lines.extend(["texto:", result["text"]])
+        blocks.append("\n".join(lines))
+    return "\n\n".join(blocks)
+
+
 class RetrievalIndexError(RuntimeError):
     """El índice persistido falta, está vacío o no corresponde al corpus/modelo."""
 

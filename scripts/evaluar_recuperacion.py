@@ -12,7 +12,7 @@ from typing import Any
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from scripts.recuperar import SemanticRetriever
+from scripts.recuperar import SemanticRetriever, build_evidence_context
 from scripts.indexar import COLLECTION, DEFAULT_INDEX, DEFAULT_INPUT, DEFAULT_MODEL
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -61,21 +61,6 @@ def aggregate_metrics(rows: list[dict[str, Any]], mode: str) -> dict[str, Any]:
         "misses_contribute_zero_to_mrr": True,
         "unit": "article-level binary hit; chunks are not deduplicated before ranking",
     }
-
-
-def build_evidence_context(results: list[dict[str, Any]]) -> str:
-    """Full text, numbered in exactly retrieval order for later generator reuse."""
-    blocks = []
-    for number, result in enumerate(results, 1):
-        lines = [f"[{number}]", f"chunk_id: {result['chunk_id']}",
-                 f"source_article_id: {result['source_article_id']}",
-                 f"jurisdiccion: {result['jurisdiccion']}", f"ley: {result['ley']}",
-                 f"articulo: {result['articulo']}", f"source: {result['source']}"]
-        if "pagina_inicio" in result:
-            lines.append(f"paginas_articulo: {result['pagina_inicio']}–{result['pagina_fin']}")
-        lines.extend(["texto:", result["text"]])
-        blocks.append("\n".join(lines))
-    return "\n\n".join(blocks)
 
 
 def _verify_context(results: list[dict[str, Any]], context: str) -> None:

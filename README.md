@@ -136,9 +136,22 @@ uv run python scripts/evaluar_generacion.py
 
 El generador reusa `SemanticRetriever`, entrega el contexto completo numerado y muestra las fuentes directamente desde retrieval; usa `ChatOllama` con `granite4:latest`, temperatura 0 y `bge-m3` para consultas. Un chequeo automático detecta referencias faltantes o fuera del mapa, pero **no** verifica apoyo semántico ni garantiza abstención. Las salidas históricas se conservan en `evalucacion/reporte_generacion.json` y `evalucacion/validacion_generacion.md`; corresponden al protocolo previo sin enrutamiento. Desde TP2-RAG-07, `scripts/evaluar_generacion.py` usa `answer_question()` y escribe en `reporte_generacion_enrutada.json` / `validacion_generacion_enrutada.md`, sin sobrescribir ni mezclar el baseline anterior. Versión probada: Ollama server 0.40.15, cliente Python 0.6.3; Granite 4 de 3.4B parámetros, Q4_K_M, digest `4235724a127c0f86dcc0247d67c20148705d6dd2319164014d92f71d607f4773`. El modelo no se incluye en Git y debe descargarse localmente.
 
+## Interfaz Gradio local (solo lectura)
+
+Requiere el índice compatible ya construido (sección «Índice vectorial local»), sus chunks de referencia y Ollama activo con `bge-m3` y `granite4:latest` descargados. La interfaz no crea ni reconstruye índices; los errores de prerrequisitos se muestran sin cambiar modelos ni datos.
+
+```bash
+uv sync
+uv run python scripts/interfaz_gradio.py
+```
+
+Abrir la dirección local indicada (`127.0.0.1:7860` por defecto, sin enlace público). Escribir una pregunta, elegir K=1/3/5 (3 por defecto) y jurisdicción automática, Nación, Provincia de Buenos Aires, Santa Fe o sin filtro exploratorio; pulsar **Consultar**. En comparaciones, K se aplica **por jurisdicción**. Cambiar controles no ejecuta consultas.
+
+Se muestran por separado respuesta/aclaración, enrutamiento, fuentes originales con páginas cuando existen y distancia nativa (no confianza), evidencia literal completa enviada al modelo y advertencias de citas. Una cita sintácticamente válida no verifica respaldo semántico. Las rutas irresueltas no recuperan ni generan. **Cambiar chunk size/overlap no está disponible en esta versión**: requiere un flujo separado y explícito de fragmentación y reindexación.
+
 ## Alcance pendiente
 
-Faltan Gradio, reproducción integral en un directorio fresco, documentación final de asistencia de IA y demo/video. El notebook `trabajo_integrador_2_rag.ipynb` referido en la tarea no está presente en este checkout.
+Faltan reproducción integral en un directorio fresco, documentación final de asistencia de IA y demo/video. El notebook `trabajo_integrador_2_rag.ipynb` referido en la tarea no está presente en este checkout.
 
 ## Enrutamiento conservador por jurisdicción (TP2-RAG-07)
 
