@@ -14,12 +14,20 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_ollama import ChatOllama
 
-if __package__ in {None, ""}:  # soporta ejecución directa y `python -m scripts.generar`
+if __package__ in {None, ""}:  # soporta ejecución directa y `python -m scripts.04_generar`
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from scripts.detectar_jurisdiccion import detect_jurisdiction
-from scripts.indexar import DEFAULT_INDEX, DEFAULT_INPUT, DEFAULT_MODEL as DEFAULT_EMBEDDING_MODEL
-from scripts.recuperar import JURISDICCIONES, SemanticRetriever, build_evidence_context
+from importlib import import_module
+
+detect_jurisdiction = import_module("scripts.03_bis_detectar_jurisdiccion").detect_jurisdiction
+_indexar = import_module("scripts.02_indexar")
+DEFAULT_INDEX = _indexar.DEFAULT_INDEX
+DEFAULT_INPUT = _indexar.DEFAULT_INPUT
+DEFAULT_EMBEDDING_MODEL = _indexar.DEFAULT_MODEL
+_recuperar = import_module("scripts.03_recuperar")
+JURISDICCIONES = _recuperar.JURISDICCIONES
+SemanticRetriever = _recuperar.SemanticRetriever
+build_evidence_context = _recuperar.build_evidence_context
 
 DEFAULT_GENERATION_MODEL = "granite4:latest"
 OLLAMA_BASE_URL = "http://localhost:11434"

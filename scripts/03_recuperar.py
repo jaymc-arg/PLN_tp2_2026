@@ -11,14 +11,21 @@ from typing import Any
 from langchain_chroma import Chroma
 from langchain_ollama import OllamaEmbeddings
 
-if __package__ in {None, ""}:  # supports `python scripts/recuperar.py` and `python -m scripts.recuperar`
+if __package__ in {None, ""}:  # supports `python scripts/03_recuperar.py` and `python -m scripts.03_recuperar`
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from scripts.detectar_jurisdiccion import detect_jurisdiction
-from scripts.indexar import (
-    COLLECTION, DEFAULT_INDEX, DEFAULT_MODEL, DEFAULT_INPUT, MANIFEST,
-    IndexConfigurationError, make_signature, read_chunks,
-)
+from importlib import import_module
+
+detect_jurisdiction = import_module("scripts.03_bis_detectar_jurisdiccion").detect_jurisdiction
+_indexar = import_module("scripts.02_indexar")
+COLLECTION = _indexar.COLLECTION
+DEFAULT_INDEX = _indexar.DEFAULT_INDEX
+DEFAULT_MODEL = _indexar.DEFAULT_MODEL
+DEFAULT_INPUT = _indexar.DEFAULT_INPUT
+MANIFEST = _indexar.MANIFEST
+IndexConfigurationError = _indexar.IndexConfigurationError
+make_signature = _indexar.make_signature
+read_chunks = _indexar.read_chunks
 
 JURISDICCIONES = ("nacional", "pba", "santa_fe")
 

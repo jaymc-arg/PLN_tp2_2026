@@ -11,7 +11,10 @@ import gradio as gr
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from scripts import generar, indexar
+from importlib import import_module
+
+generar = import_module("scripts.04_generar")
+indexar = import_module("scripts.02_indexar")
 from scripts.experimentos_fragmentacion import configuration, prepare_experiment
 
 ORIGINAL = "Índice original"

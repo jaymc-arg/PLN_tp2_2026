@@ -4,10 +4,18 @@ from pathlib import Path
 import pytest
 from langchain_core.documents import Document
 
-from scripts.indexar import (
-    COLLECTION, DEFAULT_MODEL, IndexConfigurationError, chunk_metadata,
-    make_signature, prepare_index_dir, read_chunks, run_index, to_documents,
-)
+from importlib import import_module
+
+indexar = import_module("scripts.02_indexar")
+COLLECTION = indexar.COLLECTION
+DEFAULT_MODEL = indexar.DEFAULT_MODEL
+IndexConfigurationError = indexar.IndexConfigurationError
+chunk_metadata = indexar.chunk_metadata
+make_signature = indexar.make_signature
+prepare_index_dir = indexar.prepare_index_dir
+read_chunks = indexar.read_chunks
+run_index = indexar.run_index
+to_documents = indexar.to_documents
 
 ROOT = Path(__file__).resolve().parents[1]
 CHUNKS = ROOT / "datos/procesados/chunks.jsonl"

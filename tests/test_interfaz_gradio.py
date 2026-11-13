@@ -4,7 +4,12 @@ from unittest.mock import Mock
 
 import pytest
 
-from scripts import evaluar_recuperacion, generar, interfaz_gradio as ui, recuperar
+from importlib import import_module
+from scripts import evaluar_recuperacion
+
+generar = import_module("scripts.04_generar")
+ui = import_module("scripts.05_interfaz_gradio")
+recuperar = import_module("scripts.03_recuperar")
 
 
 def result():

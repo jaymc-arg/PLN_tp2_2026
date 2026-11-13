@@ -1,7 +1,11 @@
 import pytest
 from langchain_core.messages import AIMessage
 
-from scripts.generar import answer_question, generate_answer
+from importlib import import_module
+
+generator_module = import_module("scripts.04_generar")
+answer_question = generator_module.answer_question
+generate_answer = generator_module.generate_answer
 
 
 def row(jurisdiction, idx):
@@ -112,7 +116,7 @@ def test_comparative_duplicate_source_ids_are_rejected():
 
 
 def test_answer_question_does_not_call_deprecated_generator(monkeypatch):
-    import scripts.generar as generator_module
+    generator_module = import_module("scripts.04_generar")
     def forbidden(*args, **kwargs):
         raise AssertionError("new routed flow must not use deprecated generate_answer")
     monkeypatch.setattr(generator_module, "generate_answer", forbidden)

@@ -4,11 +4,14 @@ from pathlib import Path
 import pytest
 from langchain_core.messages import AIMessage
 
-from scripts import generar
-from scripts.generar import (
-    ABSTENTION, DEFAULT_GENERATION_MODEL, GeneratorUnavailableError,
-    _citation_check, generate_answer,
-)
+from importlib import import_module
+
+generar = import_module("scripts.04_generar")
+ABSTENTION = generar.ABSTENTION
+DEFAULT_GENERATION_MODEL = generar.DEFAULT_GENERATION_MODEL
+GeneratorUnavailableError = generar.GeneratorUnavailableError
+_citation_check = generar._citation_check
+generate_answer = generar.generate_answer
 
 
 class FakeRetriever:

@@ -4,7 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from scripts.detectar_jurisdiccion import detect_jurisdiction
+from importlib import import_module
+
+detect_jurisdiction = import_module("scripts.03_bis_detectar_jurisdiccion").detect_jurisdiction
 from scripts.evaluar_jurisdiccion import _article_metrics, classification_metrics, evaluate_retrieval
 
 ROOT = Path(__file__).resolve().parents[1]

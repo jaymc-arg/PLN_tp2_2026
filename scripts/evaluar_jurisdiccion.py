@@ -12,9 +12,16 @@ from typing import Any
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from scripts.detectar_jurisdiccion import JURISDICCIONES, detect_jurisdiction
-from scripts.indexar import DEFAULT_INDEX, DEFAULT_INPUT, DEFAULT_MODEL
-from scripts.recuperar import SemanticRetriever
+from importlib import import_module
+
+_detector = import_module("scripts.03_bis_detectar_jurisdiccion")
+JURISDICCIONES = _detector.JURISDICCIONES
+detect_jurisdiction = _detector.detect_jurisdiction
+_indexar = import_module("scripts.02_indexar")
+DEFAULT_INDEX = _indexar.DEFAULT_INDEX
+DEFAULT_INPUT = _indexar.DEFAULT_INPUT
+DEFAULT_MODEL = _indexar.DEFAULT_MODEL
+SemanticRetriever = import_module("scripts.03_recuperar").SemanticRetriever
 
 ROOT = Path(__file__).resolve().parent.parent
 FIXTURE = ROOT / "evalucacion/preguntas_jurisdiccion.json"

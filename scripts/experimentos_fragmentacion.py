@@ -7,8 +7,11 @@ import json
 from pathlib import Path
 from typing import Any
 
-from scripts import fragmentar, indexar
-from scripts.recuperar import SemanticRetriever
+from importlib import import_module
+
+fragmentar = import_module("scripts.01_fragmentar")
+indexar = import_module("scripts.02_indexar")
+SemanticRetriever = import_module("scripts.03_recuperar").SemanticRetriever
 
 INPUT_DIR = indexar.DEFAULT_INPUT.parent
 EXPERIMENT_ROOT = indexar.ROOT / ".chroma/experimentos"

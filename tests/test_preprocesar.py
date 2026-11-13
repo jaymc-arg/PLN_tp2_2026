@@ -5,7 +5,15 @@ import re
 
 import pytest
 
-from scripts.preprocesar import SOURCES, annotations, load_source, normalize, parse_lines, run
+from importlib import import_module
+
+preprocesar = import_module("scripts.00_preprocesar")
+SOURCES = preprocesar.SOURCES
+annotations = preprocesar.annotations
+load_source = preprocesar.load_source
+normalize = preprocesar.normalize
+parse_lines = preprocesar.parse_lines
+run = preprocesar.run
 
 ROOT = Path(__file__).resolve().parents[1]
 HASHES = {

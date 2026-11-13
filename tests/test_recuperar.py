@@ -4,8 +4,19 @@ from pathlib import Path
 
 import pytest
 
-from scripts.indexar import COLLECTION, DEFAULT_MODEL, MANIFEST, IndexConfigurationError, make_signature
-from scripts.recuperar import RetrievalIndexError, SemanticRetriever, build_result, retrieve
+from importlib import import_module
+
+indexar = import_module("scripts.02_indexar")
+COLLECTION = indexar.COLLECTION
+DEFAULT_MODEL = indexar.DEFAULT_MODEL
+MANIFEST = indexar.MANIFEST
+IndexConfigurationError = indexar.IndexConfigurationError
+make_signature = indexar.make_signature
+recuperar = import_module("scripts.03_recuperar")
+RetrievalIndexError = recuperar.RetrievalIndexError
+SemanticRetriever = recuperar.SemanticRetriever
+build_result = recuperar.build_result
+retrieve = recuperar.retrieve
 from scripts.evaluar_recuperacion import (
     article_metrics, aggregate_metrics, build_evidence_context, evaluate,
     make_distance_svg, validate_manual_review,
@@ -30,7 +41,7 @@ def prepared_index(tmp_path, rows=None):
     rows = rows or [chunk()]
     chunks_path = tmp_path / "chunks.jsonl"
     chunks_path.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows), encoding="utf-8")
-    import scripts.indexar as indexar
+    indexar = import_module("scripts.02_indexar")
     _, digest = indexar.read_chunks(chunks_path)
     index_dir = tmp_path / "index"
     index_dir.mkdir()

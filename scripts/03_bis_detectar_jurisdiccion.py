@@ -26,7 +26,7 @@ def _matches(text: str, phrases: tuple[str, ...]) -> list[str]:
     return found
 
 
-# Centralized corpus aliases; number rules require a law/legislation context.
+# Alias y geografía para cada jurisdicción. Se usan para detectar la jurisdicción de la consulta.
 ALIASES = {
     "nacional": ("codigo electoral nacional", "ley 19945", "ley 19 945", "ley nacional 19945", "ley n 19945", "ley n 19 945", "ley no 19945", "ley no 19 945", "ley nacional", "ley de la nacion", "legislacion nacional", "normativa nacional"),
     "pba": ("ley electoral bonaerense", "norma electoral bonaerense", "ley provincial bonaerense", "legislacion provincial bonaerense", "ley 5109", "ley 5 109", "ley n 5109", "ley n 5 109", "ley no 5109", "ley no 5 109", "ley bonaerense", "ley de pba"),

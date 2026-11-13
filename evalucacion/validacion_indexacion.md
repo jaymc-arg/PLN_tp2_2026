@@ -12,7 +12,7 @@
 
 ## Índice construido y comprobado
 
-`scripts/indexar.py` lee `datos/procesados/chunks.jsonl`, crea `langchain_core.documents.Document` con `page_content` idéntico a `texto`, omite metadata nula (páginas TXT) y conserva el rango PDF de artículo. Persiste colección `electoral_laws` bajo `.chroma/electoral_laws/`, excluida de Git. La firma local incluye modelo, endpoint localhost, colección, versión de esquema y SHA-256 de `chunks.jsonl`.
+`scripts/02_indexar.py` lee `datos/procesados/chunks.jsonl`, crea `langchain_core.documents.Document` con `page_content` idéntico a `texto`, omite metadata nula (páginas TXT) y conserva el rango PDF de artículo. Persiste colección `electoral_laws` bajo `.chroma/electoral_laws/`, excluida de Git. La firma local incluye modelo, endpoint localhost, colección, versión de esquema y SHA-256 de `chunks.jsonl`.
 
 Comandos ejecutados:
 
@@ -20,14 +20,14 @@ Comandos ejecutados:
 ollama --version                                           -> ollama version 0.40.15
 ollama pull bge-m3                                         -> success
 uv run python - <<'PY' [OllamaEmbeddings.embed_query]      -> vector length 1024
-uv run python scripts/indexar.py                           -> Indexados 828/828; dimensión 1024
-uv run python scripts/indexar.py                           -> Indexados 828/828; rerun idempotente
+uv run python scripts/02_indexar.py                           -> Indexados 828/828; dimensión 1024
+uv run python scripts/02_indexar.py                           -> Indexados 828/828; rerun idempotente
 consulta Chroma get(include=['metadatas'])                  -> 828 IDs; 828 únicos; conjunto = IDs del JSONL
 comparación de metadata almacenada con chunks.jsonl         -> todos los IDs coinciden; TXT sin claves de página,
                                                               PDF con páginas y demás campos esperados
-uv run python scripts/indexar.py --rebuild                 -> reconstruyó e indexó 828/828 desde cero
-uv run python scripts/indexar.py                           -> después de rebuild: 828/828, sin duplicados
-uv run python scripts/indexar.py --model bge-m3:latest     -> rechaza firma distinta antes de reutilizar;
+uv run python scripts/02_indexar.py --rebuild                 -> reconstruyó e indexó 828/828 desde cero
+uv run python scripts/02_indexar.py                           -> después de rebuild: 828/828, sin duplicados
+uv run python scripts/02_indexar.py --model bge-m3:latest     -> rechaza firma distinta antes de reutilizar;
                                                               inspección posterior: índice original intacto, 828 IDs
 uv run pytest -q                                            -> 39 passed (14.31 s)
 ```
@@ -50,4 +50,4 @@ El índice se crea con `bge-m3` para documentos y consultas, usando explícitame
 
 `datos/fuentes.csv` conserva desconocidos URL oficial verificadas, fecha de recuperación y permisos/condiciones de redistribución para las tres fuentes. No se rellenaron por inferencia ni se descargó material suplementario.
 
-Para reproducir localmente: instalar/iniciar Ollama, `ollama pull bge-m3`, `uv sync`, generar chunks si hace falta (`uv run python scripts/preprocesar.py && uv run python scripts/fragmentar.py`) y ejecutar `uv run python scripts/indexar.py`. Para recrear: `uv run python scripts/indexar.py --rebuild`. Las consultas son sólo inspección; generación, API de retrieval de la siguiente etapa, Gradio y evaluación de respuestas siguen fuera de esta tarea.
+Para reproducir localmente: instalar/iniciar Ollama, `ollama pull bge-m3`, `uv sync`, generar chunks si hace falta (`uv run python scripts/00_preprocesar.py && uv run python scripts/01_fragmentar.py`) y ejecutar `uv run python scripts/02_indexar.py`. Para recrear: `uv run python scripts/02_indexar.py --rebuild`. Las consultas son sólo inspección; generación, API de retrieval de la siguiente etapa, Gradio y evaluación de respuestas siguen fuera de esta tarea.

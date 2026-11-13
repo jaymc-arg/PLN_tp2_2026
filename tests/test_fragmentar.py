@@ -4,8 +4,13 @@ from pathlib import Path
 
 import pytest
 
-from scripts.fragmentar import build_chunks, indexable_text, normalize_visual_wraps
-from scripts.preprocesar import run
+from importlib import import_module
+
+fragmentar = import_module("scripts.01_fragmentar")
+build_chunks = fragmentar.build_chunks
+indexable_text = fragmentar.indexable_text
+normalize_visual_wraps = fragmentar.normalize_visual_wraps
+run = import_module("scripts.00_preprocesar").run
 
 ROOT = Path(__file__).resolve().parents[1]
 

@@ -5,7 +5,10 @@ from unittest.mock import Mock
 
 import pytest
 
-from scripts import experimentos_fragmentacion as lab, interfaz_gradio as ui
+from importlib import import_module
+from scripts import experimentos_fragmentacion as lab
+
+ui = import_module("scripts.05_interfaz_gradio")
 
 
 def result():

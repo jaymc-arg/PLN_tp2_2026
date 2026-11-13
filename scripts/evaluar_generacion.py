@@ -14,11 +14,18 @@ from typing import Any
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from scripts.generar import (
-    DEFAULT_GENERATION_MODEL, OLLAMA_BASE_URL, GeneratorUnavailableError, answer_question,
-)
-from scripts.indexar import DEFAULT_INDEX, DEFAULT_INPUT, DEFAULT_MODEL as DEFAULT_EMBEDDING_MODEL
-from scripts.recuperar import SemanticRetriever
+from importlib import import_module
+
+_generar = import_module("scripts.04_generar")
+DEFAULT_GENERATION_MODEL = _generar.DEFAULT_GENERATION_MODEL
+OLLAMA_BASE_URL = _generar.OLLAMA_BASE_URL
+GeneratorUnavailableError = _generar.GeneratorUnavailableError
+answer_question = _generar.answer_question
+_indexar = import_module("scripts.02_indexar")
+DEFAULT_INDEX = _indexar.DEFAULT_INDEX
+DEFAULT_INPUT = _indexar.DEFAULT_INPUT
+DEFAULT_EMBEDDING_MODEL = _indexar.DEFAULT_MODEL
+SemanticRetriever = import_module("scripts.03_recuperar").SemanticRetriever
 
 ROOT = Path(__file__).resolve().parent.parent
 QUESTIONS_PATH = ROOT / "evalucacion/preguntas.json"

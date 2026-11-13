@@ -50,10 +50,10 @@ Verificación final completa:
 
 ```text
 uv sync                                     OK
-uv run python scripts/preprocesar.py          OK; 208 / 155 / 296
+uv run python scripts/00_preprocesar.py          OK; 208 / 155 / 296
 uv run pytest -q                             15 passed (9.89 s)
 sha256sum datos/procesados/*                 huellas guardadas en archivo temporal
-uv run python scripts/preprocesar.py          OK; segunda ejecución
+uv run python scripts/00_preprocesar.py          OK; segunda ejecución
 sha256sum -c <archivo temporal de huellas>    4 archivos OK, incluido reporte
 sha256sum datos/ley_nacional.txt datos/ley_pba.txt datos/ley_sta_fe.pdf  sin cambios
 uv sync --locked                            OK
@@ -68,10 +68,10 @@ No se verificó reproducción integral del futuro RAG en un directorio fresco: q
 ## Verificación de TP2-RAG-02 y TP2-RAG-03
 
 - `uv run pytest -q -k 'amendment or pba_26 or pba_2_3_and_13'`: 9 aprobadas, 14 omitidas por selección.
-- `uv run python scripts/preprocesar.py`: tres JSONL y auditoría regenerados; 208 / 154 / 296 registros, 1 / 3 / 1 advertencias (comando histórico; ahora vive en `scripts/`).
+- `uv run python scripts/00_preprocesar.py`: tres JSONL y auditoría regenerados; 208 / 154 / 296 registros, 1 / 3 / 1 advertencias (comando histórico; ahora vive en `scripts/`).
 - Comparación programática contra una copia temporal de las salidas recibidas: sólo cambian `texto_principal` y el tipo de anotación de Santa Fe 285–290; `texto`, IDs, orden y toda la metadata permanecen iguales. PBA y Nacional no cambian. La auditoría regenerada coincide con la recibida (no cambiaron sus conteos).
 - `uv run pytest -q`: **23 aprobadas en 12.43 s**, suite completa ejecutada una vez al finalizar.
-- `sha256sum datos/procesados/* > /tmp/tp2-rag02-outputs.sha256`, segunda ejecución de `uv run python scripts/preprocesar.py` y `sha256sum -c /tmp/tp2-rag02-outputs.sha256`: **4 archivos OK**, incluido el reporte.
+- `sha256sum datos/procesados/* > /tmp/tp2-rag02-outputs.sha256`, segunda ejecución de `uv run python scripts/00_preprocesar.py` y `sha256sum -c /tmp/tp2-rag02-outputs.sha256`: **4 archivos OK**, incluido el reporte.
 - `sha256sum datos/ley_nacional.txt datos/ley_pba.txt datos/ley_sta_fe.pdf`: los originales mantienen las tres huellas medidas al iniciar TP2-RAG-02. La huella PBA vigente incluye la restauración exacta de la segunda ocurrencia desde el commit histórico `6e08426`; no se reescribió ninguna otra parte de la ley.
 - `git diff --check`: detecta espacio final en `datos/ley_pba.txt:886`, parte del cambio previo del usuario; no se alteró la fuente para limpiarlo. La comprobación limitada a los archivos de implementación/documentación de esta tarea no detecta problemas.
 
@@ -81,7 +81,7 @@ No se amplió la clasificación a otras citas ambiguas: conservan el tratamiento
 
 Se reconocen `TÍTULO ÚNICO`/`CAPÍTULO ÚNICO` sin absorber el siguiente encabezado: Santa Fe art. 40 lleva `CAPÍTULO ÚNICO`; art. 239 (Libro IV) lleva `TÍTULO ÚNICO`. Se restauró además desde `git show 6e08426:datos/ley_pba.txt` la segunda aparición de PBA 151, ausente en la fuente de entrada; no se inventó texto.
 
-`scripts/fragmentar.py` consume los JSONL de artículos y genera `chunks.jsonl` (828 registros; tamaño objetivo 1000 caracteres y solapamiento 150) y `reporte_fragmentacion.json`:
+`scripts/01_fragmentar.py` consume los JSONL de artículos y genera `chunks.jsonl` (828 registros; tamaño objetivo 1000 caracteres y solapamiento 150) y `reporte_fragmentacion.json`:
 
 | Jurisdicción | chunks | mínimo | mediana | máximo |
 |---|---:|---:|---:|---:|
@@ -93,4 +93,4 @@ No hubo chunks sobre el tamaño configurado ni registros sin vista indexable. Lo
 
 **Procedencia aún pendiente:** `datos/fuentes.csv` deja sin URL oficial verificada y fecha de recuperación a los tres documentos; los tres permisos/condiciones de redistribución figuran desconocidos. No se presume licencia. No se añadió corpus ni se evaluó retrieval accuracy; embeddings e índice vectorial están fuera de alcance.
 
-Verificación TP2-RAG-03 ejecutada: `uv sync`; `uv run python scripts/preprocesar.py` (208/155/296); `uv run python scripts/fragmentar.py` (828 chunks; 289/175/364); pruebas focalizadas (15 aprobadas); `uv run pytest -q` (**32 aprobadas en 12.22 s**); segunda ejecución de ambos scripts y comparación SHA-256: los seis JSONL/reportes generados coinciden byte a byte. SHA-256 de los originales tras la restauración: nacional `b7e7d75a…`, PBA `3c11d299…`, Santa Fe `2d244762…`. `uv export --format requirements-txt --no-hashes --output-file requirements.txt` actualizado; `git diff --check` limitado a los archivos propios de implementación/documentación/salidas no reporta errores. No se corrió el full suite de etapas RAG, que aún no están implementadas.
+Verificación TP2-RAG-03 ejecutada: `uv sync`; `uv run python scripts/00_preprocesar.py` (208/155/296); `uv run python scripts/01_fragmentar.py` (828 chunks; 289/175/364); pruebas focalizadas (15 aprobadas); `uv run pytest -q` (**32 aprobadas en 12.22 s**); segunda ejecución de ambos scripts y comparación SHA-256: los seis JSONL/reportes generados coinciden byte a byte. SHA-256 de los originales tras la restauración: nacional `b7e7d75a…`, PBA `3c11d299…`, Santa Fe `2d244762…`. `uv export --format requirements-txt --no-hashes --output-file requirements.txt` actualizado; `git diff --check` limitado a los archivos propios de implementación/documentación/salidas no reporta errores. No se corrió el full suite de etapas RAG, que aún no están implementadas.

@@ -12,8 +12,16 @@ from typing import Any
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from scripts.recuperar import SemanticRetriever, build_evidence_context
-from scripts.indexar import COLLECTION, DEFAULT_INDEX, DEFAULT_INPUT, DEFAULT_MODEL
+from importlib import import_module
+
+_recuperar = import_module("scripts.03_recuperar")
+SemanticRetriever = _recuperar.SemanticRetriever
+build_evidence_context = _recuperar.build_evidence_context
+_indexar = import_module("scripts.02_indexar")
+COLLECTION = _indexar.COLLECTION
+DEFAULT_INDEX = _indexar.DEFAULT_INDEX
+DEFAULT_INPUT = _indexar.DEFAULT_INPUT
+DEFAULT_MODEL = _indexar.DEFAULT_MODEL
 
 ROOT = Path(__file__).resolve().parent.parent
 QUESTIONS_PATH = ROOT / "evalucacion/preguntas.json"
