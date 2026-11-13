@@ -25,10 +25,10 @@ DEFAULT_MODEL = _indexar.DEFAULT_MODEL
 
 ROOT = Path(__file__).resolve().parent.parent
 QUESTIONS_PATH = ROOT / "evalucacion/preguntas.json"
-REVIEW_PATH = ROOT / "evalucacion/revision_manual_recuperacion.json"
-REPORT_PATH = ROOT / "evalucacion/reporte_recuperacion.json"
-MARKDOWN_PATH = ROOT / "evalucacion/validacion_recuperacion.md"
-PLOT_PATH = ROOT / "evalucacion/distancias_recuperacion.svg"
+REVIEW_PATH = ROOT / "evalucacion/revision_manual_recuperacion_qwen3_0_6b.json"
+REPORT_PATH = ROOT / "evalucacion/reporte_recuperacion_qwen3_0_6b.json"
+MARKDOWN_PATH = ROOT / "evalucacion/validacion_recuperacion_qwen3_0_6b.md"
+PLOT_PATH = ROOT / "evalucacion/distancias_recuperacion_qwen3_0_6b.svg"
 MAX_K = 5
 
 
@@ -170,7 +170,8 @@ def evaluate(questions_path: Path = QUESTIONS_PATH, *, index_dir: Path = DEFAULT
              report_path: Path = REPORT_PATH, markdown_path: Path = MARKDOWN_PATH,
              plot_path: Path = PLOT_PATH, review_path: Path = REVIEW_PATH,
              retriever: SemanticRetriever | None = None,
-             existing_report_path: Path | None = None) -> dict[str, Any]:
+             existing_report_path: Path | None = None,
+             baseline_report_path: Path | None = None) -> dict[str, Any]:
     question_bytes = questions_path.read_bytes()
     fixture = json.loads(question_bytes)
     questions = fixture["preguntas"]
@@ -183,6 +184,8 @@ def evaluate(questions_path: Path = QUESTIONS_PATH, *, index_dir: Path = DEFAULT
         report = json.loads(existing_report_path.read_text(encoding="utf-8"))
         if report.get("evaluation_questions_sha256") != hashlib.sha256(question_bytes).hexdigest():
             raise ValueError("El reporte previo no pertenece a este fixture fijo")
+        if report.get("embedding_model") != model:
+            raise ValueError("El reporte previo no corresponde al modelo solicitado")
         if report.get("question_count") != 5 or report.get("max_k") != MAX_K:
             raise ValueError("El reporte previo no contiene la evaluación completa top-5")
     else:
@@ -263,9 +266,17 @@ def evaluate(questions_path: Path = QUESTIONS_PATH, *, index_dir: Path = DEFAULT
 
     review = None
     if review_path.is_file():
-        review = validate_manual_review(json.loads(review_path.read_text(encoding="utf-8")), questions,
-                                        _retrieval_map(report))
+        review = json.loads(review_path.read_text(encoding="utf-8"))
+        if review.get("embedding_model", model) != model:
+            raise ValueError("La revisión manual no corresponde al modelo solicitado")
+        review = validate_manual_review(review, questions, _retrieval_map(report))
         _apply_manual_review(report, review, review_path)
+    if baseline_report_path is not None:
+        baseline = json.loads(baseline_report_path.read_text(encoding="utf-8"))
+        report["baseline_comparison"] = compare_reports(baseline, report)
+        report["baseline_comparison"]["source"] = display_path(baseline_report_path)
+    report["artifacts"] = {"report": display_path(report_path), "review": display_path(review_path),
+                           "markdown": display_path(markdown_path), "plot": display_path(plot_path)}
     report["distance_plot"]["path"] = display_path(plot_path)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -300,15 +311,90 @@ def _apply_manual_review(report: dict[str, Any], review: dict[str, Any], review_
     comparison = review["k_comparison"]
     report["k_comparison"]["manual_coverage"] = comparison
     report["paraphrase_trial"]["manual_review"] = review.get("paraphrase", {})
+    if review.get("model_comparison_notes"):
+        report["model_comparison_notes"] = review["model_comparison_notes"]
     report.pop("human_review", None)
     report["manual_review"] = {"status": "complete; quotes validated verbatim against retrieved texts",
                                "source": display_path(review_path),
                                "method": "Manual text inspection by the coding agent; quote checks are consistency aids, not legal QA. Student/legal review remains separate."}
 
 
+def compare_reports(baseline: dict[str, Any], current: dict[str, Any]) -> dict[str, Any]:
+    """Compara resultados ya guardados; nunca compara distancias entre espacios."""
+    if baseline["evaluation_questions_sha256"] != current["evaluation_questions_sha256"]:
+        raise ValueError("La comparación requiere el mismo fixture fijo")
+    metrics = ("hit_at_1", "hit_at_3", "hit_at_5", "mrr_at_5")
+    aggregate = {}
+    rows = []
+    by_id = {row["id"]: row for row in baseline["positive_questions"]}
+    for mode in ("unfiltered", "jurisdiction_filtered"):
+        old = baseline["aggregate_positive_metrics"][mode]
+        new = current["aggregate_positive_metrics"][mode]
+        if old["positive_question_denominator"] != new["positive_question_denominator"]:
+            raise ValueError("Denominadores incompatibles")
+        aggregate[mode] = {key: {"baseline": old[key], "current": new[key],
+                                 "absolute_delta": new[key] - old[key]} for key in metrics}
+        for row in current["positive_questions"]:
+            prior = by_id[row["id"]]
+            pair = {"question_id": row["id"], "mode": mode}
+            for label, entry in (("baseline", prior), ("current", row)):
+                results = entry[mode]["results"]
+                pair[label] = {
+                    "metrics": entry[mode]["article_metrics"],
+                    "passage_coverage": entry.get("answer_passage_review", {}).get(mode, {}).get("top3_passage_coverage", "pending"),
+                    "wrong_jurisdiction_top3": sum(r["jurisdiccion"] != row["jurisdiccion"] for r in results[:3]),
+                    "wrong_jurisdiction_top5": sum(r["jurisdiccion"] != row["jurisdiccion"] for r in results),
+                }
+            rows.append(pair)
+    tracked = {}
+    for chunk_id in ("nacional_19945_art_12__chunk_0002", "santa_fe_14478_art_4__chunk_0001"):
+        tracked[chunk_id] = {}
+        for label, report in (("baseline", baseline), ("current", current)):
+            tracked[chunk_id][label] = {
+                f"{row['id']}/{mode}": next((i for i, r in enumerate(row[mode]["results"], 1)
+                                            if r["chunk_id"] == chunk_id), None)
+                for row in report["positive_questions"] for mode in ("unfiltered", "jurisdiction_filtered")
+                if row["expected_article_ids"] == [chunk_id.split("__chunk_")[0]]
+            }
+    paraphrase = {}
+    for label, report in (("baseline", baseline), ("current", current)):
+        trial = report["paraphrase_trial"]
+        paraphrase[label] = article_metrics(trial["results"], trial["expected_article_ids"])
+    return {"baseline_model": baseline["embedding_model"], "current_model": current["embedding_model"],
+            "aggregate": aggregate, "positive_questions": rows,
+            "tracked_chunk_ranks": tracked, "paraphrase": paraphrase}
+
+
+def render_comparison(report: dict[str, Any]) -> list[str]:
+    comparison = report.get("baseline_comparison")
+    if not comparison:
+        return []
+    lines = [f"## Comparación {comparison['baseline_model']} (histórico) vs {comparison['current_model']}", "",
+             f"Baseline conservado: `{comparison['source']}`. Mismas preguntas, chunks, filtros y k=5; sin prefijos/instrucciones adicionales para consultas ni documentos. No se ejecutó generación.", "",
+             "Las distancias de espacios de embeddings diferentes NO son puntajes de calidad comparables.", "",
+             "| Modo | Métrica | BGE-M3 | Qwen | Δ absoluto |", "|---|---|---:|---:|---:|"]
+    for mode, metrics in comparison["aggregate"].items():
+        for metric, values in metrics.items():
+            lines.append(f"| {mode} | {metric} | {values['baseline']:.3f} | {values['current']:.3f} | {values['absolute_delta']:+.3f} |")
+    lines.extend(["", "| Pregunta/modo | Primer rango BGE→Qwen | H@1/3/5 BGE→Qwen | RR@5 BGE→Qwen | Pasaje BGE→Qwen | Otra jurisdicción top-3/top-5 BGE→Qwen |",
+                  "|---|---|---|---|---|---|"])
+    for row in comparison["positive_questions"]:
+        old, new = row["baseline"], row["current"]
+        a, b = old["metrics"], new["metrics"]
+        hits = lambda m: "/".join(str(int(m[key])) for key in ("hit_at_1", "hit_at_3", "hit_at_5"))
+        lines.append(f"| {row['question_id']}/{row['mode']} | {a['first_expected_rank']}→{b['first_expected_rank']} | {hits(a)}→{hits(b)} | {a['reciprocal_rank_at_5']:.3f}→{b['reciprocal_rank_at_5']:.3f} | {old['passage_coverage']}→{new['passage_coverage']} | {old['wrong_jurisdiction_top3']}/{old['wrong_jurisdiction_top5']}→{new['wrong_jurisdiction_top3']}/{new['wrong_jurisdiction_top5']} |")
+    lines.extend(["", "Rangos de pasajes específicos (`None` = no recuperado en top-5; no significa ausente del corpus):", "",
+                  "```json", json.dumps(comparison["tracked_chunk_ranks"], indent=2), "```", "",
+                  "Paráfrasis separada, primer rango del artículo esperado: "
+                  f"{comparison['paraphrase']['baseline']['first_expected_rank']}→{comparison['paraphrase']['current']['first_expected_rank']}.", ""])
+    lines.extend(report.get("model_comparison_notes", []))
+    lines.append("")
+    return lines
+
+
 def render_markdown(report: dict[str, Any]) -> str:
-    lines = ["# TP2-RAG-05 — resultados de recuperación semántica", "",
-             "Se usó Chroma persistente y Ollama `bge-m3`; no hubo generación. " + DISTANCE_NOTE,
+    lines = [f"# TP2-RAG-05 — recuperación semántica: {report['embedding_model']}", "",
+             f"Se usó Chroma persistente y Ollama `{report['embedding_model']}`; no hubo generación. " + DISTANCE_NOTE,
              "Hit@k/MRR se calculan a nivel de artículo y no prueban que un chunk contenga la respuesta.", "",
              "## Métricas agregadas sobre las tres positivas", "",
              "| Modo | Denominador | Hit@1 | Hit@3 | Hit@5 | MRR@5 |", "|---|---:|---:|---:|---:|---:|"]
@@ -356,9 +442,13 @@ def render_markdown(report: dict[str, Any]) -> str:
                   "Para cada positiva se consultó una vez sin filtro y una vez con jurisdicción; las dos negativas se consultaron sin filtro. Cada condición usa k=5; top-1/top-3/top-5 se obtienen cortando el mismo ranking. El JSON conserva todos los textos top-5, IDs, fuentes/páginas cuando existen y distancias nativas.", "",
                   f"Paráfrasis separada (fuera de métricas): “{report['paraphrase_trial']['question']}”. {paraphrase.get('assessment', 'Revisión pendiente')}", "",
                   f"Comparación k=1/k=3 desde el mismo ranking ({report['k_comparison']['question_id']}): {report['k_comparison']['manual_coverage']}", "",
-                  "El preview numerado completo se deriva de los mismos chunks recuperados y se guarda en `reporte_recuperacion.json`; se validaron orden, IDs, etiquetas y texto sin truncar. No se construye prompt ni se invoca un generador.", "",
+                  f"El preview numerado completo se deriva de los mismos chunks recuperados y se guarda en `{report.get('artifacts', {}).get('report', 'reporte JSON')}`; se validaron orden, IDs, etiquetas y texto sin truncar. No se construye prompt ni se invoca un generador.", "",
                   "Chroma devuelve vecinos cercanos aunque el corpus no responda. Un resultado no vacío no demuestra answerability ni se usa un umbral universal de distancia para abstener.", "",
-                  f"Integridad de índice antes/después: `{report.get('index_integrity', {}).get('unchanged', 'reutilizó reporte previo')}`. Distancias reales representativas: `distancias_recuperacion.svg`. No se midió corrección de respuestas generadas.", ""])
+                  f"Integridad de índice antes/después: `{report.get('index_integrity', {}).get('unchanged', 'reutilizó reporte previo')}`. Distancias reales representativas: `{report['distance_plot']['path']}`. No se midió corrección de respuestas generadas.", ""])
+    lines.extend(render_comparison(report))
+    if report.get("runtime_metadata"):
+        lines.extend(["## Entorno y preservación", "", "```json",
+                      json.dumps(report["runtime_metadata"], ensure_ascii=False, indent=2), "```", ""])
     return "\n".join(lines)
 
 
@@ -372,13 +462,16 @@ def main() -> int:
     parser.add_argument("--markdown", type=Path, default=MARKDOWN_PATH)
     parser.add_argument("--plot", type=Path, default=PLOT_PATH)
     parser.add_argument("--review", type=Path, default=REVIEW_PATH)
+    parser.add_argument("--baseline-report", type=Path, default=None,
+                        help="comparar métricas/rankings con un reporte histórico del mismo fixture, sin consultarlo")
     parser.add_argument("--usar-reporte-existente", type=Path, default=None,
                         help="rehacer resumen/plot tras anotación manual sin volver a consultar Chroma")
     args = parser.parse_args()
     try:
         evaluate(args.questions, index_dir=args.index_dir, chunks_path=args.chunks, model=args.model,
                  report_path=args.report, markdown_path=args.markdown, plot_path=args.plot,
-                 review_path=args.review, existing_report_path=args.usar_reporte_existente)
+                 review_path=args.review, existing_report_path=args.usar_reporte_existente,
+                 baseline_report_path=args.baseline_report)
     except Exception as exc:
         print(f"Error al evaluar retrieval: {exc}", file=sys.stderr)
         return 1

@@ -94,7 +94,7 @@ def consultar(question: str, k: int = 3, jurisdiction: str = "Automática",
         # También incluye errores de conexión/embeddings; nunca reconstruir ni usar fallback.
         return (f"No se pudo completar la consulta ({type(exc).__name__}): {exc}\n"
                 "Comprobá el índice compatible previamente construido y Ollama activo con "
-                "bge-m3 y granite4:latest. No se reconstruyó el índice ni se cambió de modelo.",
+                f"{indexar.DEFAULT_MODEL} y {generar.DEFAULT_GENERATION_MODEL}. No se reconstruyó el índice ni se cambió de modelo.",
                 "Consulta fallida.", "", "", "No aplica: consulta fallida.")
 
 
@@ -116,7 +116,7 @@ def preparar(mode: str, chunk_size: int, chunk_overlap: int):
         yield active, status, "", "", "", "", ""
     except Exception as exc:
         yield (None, f"Error ({type(exc).__name__}): {exc}\n"
-               "Revisá artículos procesados, artefactos y Ollama con bge-m3. "
+               f"Revisá artículos procesados, artefactos y Ollama con {indexar.DEFAULT_MODEL}. "
                "No se borraron índices ni se usó otro modelo; el baseline no se modificó.",
                "", "", "", "", "")
 

@@ -16,9 +16,9 @@ from langchain_ollama import OllamaEmbeddings
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_INPUT = ROOT / "datos/procesados/chunks.jsonl"
-DEFAULT_INDEX = ROOT / ".chroma/electoral_laws"
+DEFAULT_INDEX = ROOT / ".chroma/electoral_laws_qwen3_0_6b"
 COLLECTION = "electoral_laws"
-DEFAULT_MODEL = "bge-m3"
+DEFAULT_MODEL = "qwen3-embedding:0.6b"
 MANIFEST = "index_manifest.json"
 SIGNATURE_VERSION = 1
 REQUIRED_FIELDS = (
@@ -213,7 +213,7 @@ def main() -> int:
     except Exception as exc:
         print(f"Error al indexar: {exc}", file=sys.stderr)
         if "ollama" in str(exc).lower() or "connection" in str(exc).lower():
-            print("Compruebe que Ollama esté instalado/en ejecución y que exista el modelo: ollama pull bge-m3",
+            print(f"Compruebe que Ollama esté instalado/en ejecución y que exista el modelo: ollama pull {args.model}",
                   file=sys.stderr)
         return 1
     return 0

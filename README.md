@@ -89,15 +89,14 @@ Requiere Ollama instalado desde [ollama.com](https://ollama.com/) y su servicio 
 ```bash
 # Iniciar sólo si el servicio Ollama no está corriendo ya:
 ollama serve
-ollama pull bge-m3
+ollama pull qwen3-embedding:0.6b
 ollama list
 uv sync
-uv run python scripts/00_preprocesar.py
-uv run python scripts/01_fragmentar.py
+# Usar datos/procesados/chunks.jsonl ya versionado, sin volver a fragmentar:
 uv run python scripts/02_indexar.py
 ```
 
-`scripts/02_indexar.py` lee los chunks ya generados, crea `Document` de LangChain, usa `OllamaEmbeddings(model="bge-m3", base_url="http://localhost:11434")` y persiste una colección `electoral_laws` bajo `.chroma/electoral_laws/` (ruta ignorada por Git). Al terminar verifica los IDs/cantidad, informa dimensión sólo si el embedding la devuelve y muestra una inspección semántica de hasta tres fragmentos. Esa consulta sirve para inspeccionar la conexión y el ranking, **no acredita que la respuesta a una pregunta sea correcta**. Las preguntas fijas se evalúan por separado en `evalucacion/` mediante retrieval read-only.
+`scripts/02_indexar.py` lee los chunks ya generados, crea `Document` de LangChain, usa `OllamaEmbeddings(model="qwen3-embedding:0.6b", base_url="http://localhost:11434")` y persiste una colección `electoral_laws` bajo `.chroma/electoral_laws_qwen3_0_6b/` (ruta ignorada por Git). Al terminar verifica los IDs/cantidad, informa dimensión sólo si el embedding la devuelve y muestra una inspección semántica de hasta tres fragmentos. Esa consulta sirve para inspeccionar la conexión y el ranking, **no acredita que la respuesta a una pregunta sea correcta**. Las preguntas fijas se evalúan por separado en `evalucacion/` mediante retrieval read-only.
 
 La firma local contiene versión de esquema, nombre de colección, modelo y SHA-256 exacto de `chunks.jsonl`. Una repetición con la misma firma es idempotente (IDs estables y upsert); cambio de modelo o chunks detiene el uso y pide regenerar explícitamente:
 
@@ -105,7 +104,7 @@ La firma local contiene versión de esquema, nombre de colección, modelo y SHA-
 uv run python scripts/02_indexar.py --rebuild
 ```
 
-`--rebuild` elimina sólo el directorio de índice seleccionado, y se niega a borrar carpetas sin un manifest propio reconocido. También se puede seleccionar ruta/modelo mediante `--index-dir` y `--model`; no se debe cambiar el modelo si se pretende reutilizar el índice. Índice y embeddings se ejecutan localmente; no se consulta un proveedor remoto. Versiones verificadas en este entorno: Ollama `0.40.15`; modelo `bge-m3:latest` (ID `790764642607`, dimensión devuelta 1024); `langchain-chroma 0.2.6`, `langchain-ollama 0.3.10`, `chromadb 1.5.9`, cliente Python `ollama 0.6.3`. En la indexación observada hubo 828/828 IDs únicos y persistidos.
+`--rebuild` elimina sólo el directorio de índice seleccionado, y se niega a borrar carpetas sin un manifest propio reconocido. También se puede seleccionar ruta/modelo mediante `--index-dir` y `--model`; no se debe cambiar el modelo si se pretende reutilizar el índice. Índice y embeddings se ejecutan localmente; no se consulta un proveedor remoto. Registro histórico BGE-M3 (no describe el nuevo modelo por defecto): Ollama `0.40.15`; modelo `bge-m3:latest` (ID `790764642607`, dimensión devuelta 1024); `langchain-chroma 0.2.6`, `langchain-ollama 0.3.10`, `chromadb 1.5.9`, cliente Python `ollama 0.6.3`. En la indexación observada hubo 828/828 IDs únicos y persistidos.
 
 El TXT/PDF no se modifica: el indexador sólo lee `chunks.jsonl`. La conversión omite campos `null` (en particular páginas para TXT) en metadatos Chroma y mantiene rango completo de páginas del artículo PDF, no páginas inventadas por chunk. El indexador no mide precisión ni genera respuestas; esas etapas se validan por separado en los reportes de `evalucacion/`.
 
@@ -116,12 +115,28 @@ Con el índice existente y Ollama activo, consulta sin filtro o restringe en Chr
 ```bash
 uv run python scripts/03_recuperar.py --pregunta "¿Qué excepciones al deber de votar establece el Código Electoral Nacional?" --k 5
 uv run python scripts/03_recuperar.py --pregunta "¿Cómo define Santa Fe la autoridad de mesa?" --jurisdiccion santa_fe --k 5
-uv run python scripts/evaluar_recuperacion.py
+uv run python scripts/evaluar_recuperacion.py --baseline-report evalucacion/reporte_recuperacion.json
 ```
+
+El default es Qwen3-Embedding 0.6B con índice separado. Para consultar explícitamente el índice histórico BGE-M3, seleccionar **ambos** modelo y ruta (no reutilizar un índice con otro modelo):
+
+```bash
+uv run python scripts/03_recuperar.py --model bge-m3 --index-dir .chroma/electoral_laws --pregunta "¿Qué excepciones enumera el artículo 12 del Código Electoral Nacional?" --k 5
+```
+
+El protocolo Qwen usa los cinco casos congelados, seis consultas positivas (sin/con filtro), dos negativas, paráfrasis independiente y cortes k=1/3 del mismo top-5, sin instrucciones/prefijos de consulta nuevos. Sus cuatro salidas llevan sufijo `_qwen3_0_6b`: `reporte_recuperacion`, `revision_manual_recuperacion`, `validacion_recuperacion` y `distancias_recuperacion`. La revisión es específica del modelo y sus citas se cotejan literalmente; no se aplica la revisión histórica. Para rerenderizar tras inspeccionar los resultados, sin volver a consultar:
+
+```bash
+uv run python scripts/evaluar_recuperacion.py --usar-reporte-existente evalucacion/reporte_recuperacion_qwen3_0_6b.json --baseline-report evalucacion/reporte_recuperacion.json
+```
+
+Los cuatro paths de salida/revisión son configurables con `--report`, `--review`, `--markdown`, `--plot`. El reporte nuevo contiene la comparación con el baseline y el registro de entorno. Las distancias entre modelos no son calidad directamente comparable.
+
+**Ejecución Qwen real:** 828 IDs únicos, dimensión 1024, Q8_0, digest `ac6da0dfba84a81fdbfbaf330198c33cd77c4cdfc53e8bc50eb581914a15621d`. Sin filtro, Hit@1/3/5 y MRR@5 permanecen en 0.667. Con filtro: Hit@1/3=0.667, Hit@5=1.000 (Δ=+0.333), MRR@5=0.750 (Δ=+0.083). Santa Fe recupera su definición en rango 4 filtrado: K=3 todavía no la incluye. La continuación nacional sigue ausente del top-5; PBA conserva el pasaje 92/46 en rango 1. La paráfrasis nacional mejora de rango 4 a 1, pero no completa las exenciones. Hay más confusión interjurisdiccional sin filtro en PBA/Santa Fe; no se concluye una mejora general. Revisión del agente con citas cotejadas, no validación jurídica independiente. Ver [informe Qwen y comparación](evalucacion/validacion_recuperacion_qwen3_0_6b.md); baseline y sus artefactos se conservaron sin cambios.
 
 `--k` debe ser positivo; `--jurisdiccion` acepta `nacional`, `pba`, `santa_fe` como selección manual. La CLI de usuario ahora enruta automáticamente y pide aclaración cuando no puede determinar el alcance; `--sin-filtro` activa explícitamente la consulta exploratoria global. La API de bajo nivel `SemanticRetriever.retrieve()` conserva su comportamiento: filtro explícito o sin filtro, sin inferencia implícita. La capa valida modelo/corpus/manifiesto y abre la colección con creación deshabilitada: no llama al indexador, no agrega ni re-embebe documentos. Distancia nativa Chroma menor significa vecino más cercano, **no** probabilidad de respuesta correcta. El API y el JSON conservan texto completo, ID, fuente, artículo y páginas PDF disponibles; TXT no recibe páginas inventadas. Los resultados negativos también tienen vecinos; retrieval no decide abstención.
 
-La ejecución evaluó una vez cada combinación requerida con k=5. `evalucacion/reporte_recuperacion.json` guarda los rankings completos, métricas por artículo, inspecciones manuales de pasajes realizadas por el agente (pendientes de verificación personal del estudiante), paráfrasis, comparación k=1/k=3, un preview numerado con texto íntegro e integridad del índice. `validacion_recuperacion.md` resume la evidencia; `distancias_recuperacion.svg` grafica distancias reales del top-3. En esta corrida, sin filtro y filtrada, Hit@1/3/5 fueron **0.667** y MRR@5 **0.667** (denominador: tres positivas; las negativas se excluyen). La cobertura de pasaje top-3, inspeccionada manualmente por el agente, fue nacional **parcial**, PBA **sí**, Santa Fe **no** en ambos modos. El índice/article hit no equivale a evidencia completa: el chunk siguiente del art. 12 nacional no aparece en top-5; el art. 4 santafesino no aparece en top-5 aunque sí está en los chunks, y el top vecino es el art. 67. Ver reporte para fuentes, distancias, revisión de preguntas ausentes y limitaciones.
+La ejecución **histórica BGE-M3** evaluó una vez cada combinación requerida con k=5. `evalucacion/reporte_recuperacion.json` guarda los rankings completos, métricas por artículo, inspecciones manuales de pasajes realizadas por el agente (pendientes de verificación personal del estudiante), paráfrasis, comparación k=1/k=3, un preview numerado con texto íntegro e integridad del índice. `validacion_recuperacion.md` resume la evidencia; `distancias_recuperacion.svg` grafica distancias reales del top-3. En esta corrida, sin filtro y filtrada, Hit@1/3/5 fueron **0.667** y MRR@5 **0.667** (denominador: tres positivas; las negativas se excluyen). La cobertura de pasaje top-3, inspeccionada manualmente por el agente, fue nacional **parcial**, PBA **sí**, Santa Fe **no** en ambos modos. El índice/article hit no equivale a evidencia completa: el chunk siguiente del art. 12 nacional no aparece en top-5; el art. 4 santafesino no aparece en top-5 aunque sí está en los chunks, y el top vecino es el art. 67. Ver reporte para fuentes, distancias, revisión de preguntas ausentes y limitaciones.
 
 ## Generación local (TP2-RAG-06, baseline histórica)
 
@@ -134,11 +149,11 @@ uv run python scripts/04_generar.py --pregunta "¿Qué partido ganó la elecció
 uv run python scripts/evaluar_generacion.py
 ```
 
-El generador reusa `SemanticRetriever`, entrega el contexto completo numerado y muestra las fuentes directamente desde retrieval; usa `ChatOllama` con `granite4:latest`, temperatura 0 y `bge-m3` para consultas. Un chequeo automático detecta referencias faltantes o fuera del mapa, pero **no** verifica apoyo semántico ni garantiza abstención. Las salidas históricas se conservan en `evalucacion/reporte_generacion.json` y `evalucacion/validacion_generacion.md`; corresponden al protocolo previo sin enrutamiento. Desde TP2-RAG-07, `scripts/evaluar_generacion.py` usa `answer_question()` y escribe en `reporte_generacion_enrutada.json` / `validacion_generacion_enrutada.md`, sin sobrescribir ni mezclar el baseline anterior. Versión probada: Ollama server 0.40.15, cliente Python 0.6.3; Granite 4 de 3.4B parámetros, Q4_K_M, digest `4235724a127c0f86dcc0247d67c20148705d6dd2319164014d92f71d607f4773`. El modelo no se incluye en Git y debe descargarse localmente.
+El generador reusa `SemanticRetriever`, entrega el contexto completo numerado y muestra las fuentes directamente desde retrieval; usa `ChatOllama` con `granite4:latest`, temperatura 0 y el default compartido `qwen3-embedding:0.6b` para consultas nuevas. Los resultados de generación que siguen son históricos con BGE-M3; no se repitió evaluación de generación al cambiar embeddings. Un chequeo automático detecta referencias faltantes o fuera del mapa, pero **no** verifica apoyo semántico ni garantiza abstención. Las salidas históricas se conservan en `evalucacion/reporte_generacion.json` y `evalucacion/validacion_generacion.md`; corresponden al protocolo previo sin enrutamiento. Desde TP2-RAG-07, `scripts/evaluar_generacion.py` usa `answer_question()` y escribe en `reporte_generacion_enrutada.json` / `validacion_generacion_enrutada.md`, sin sobrescribir ni mezclar el baseline anterior. Versión probada: Ollama server 0.40.15, cliente Python 0.6.3; Granite 4 de 3.4B parámetros, Q4_K_M, digest `4235724a127c0f86dcc0247d67c20148705d6dd2319164014d92f71d607f4773`. El modelo no se incluye en Git y debe descargarse localmente.
 
 ## Interfaz Gradio local y laboratorio de fragmentación (Stage C)
 
-Las consultas requieren Ollama activo con `bge-m3` y `granite4:latest` descargados. El modo **Índice original** requiere además el índice compatible ya construido (sección «Índice vectorial local») y `datos/procesados/chunks.jsonl`. El laboratorio usa los tres `*_articulos.jsonl` ya preprocesados; no ejecuta preprocesamiento. Los errores se muestran sin cambiar modelos ni reconstruir índices incompatibles.
+Las consultas requieren Ollama activo con `qwen3-embedding:0.6b` y `granite4:latest` descargados. El modo **Índice original** requiere además el índice compatible ya construido (sección «Índice vectorial local») y `datos/procesados/chunks.jsonl`. El laboratorio usa los tres `*_articulos.jsonl` ya preprocesados; no ejecuta preprocesamiento. Los errores se muestran sin cambiar modelos ni reconstruir índices incompatibles.
 
 ```bash
 uv sync
@@ -151,9 +166,9 @@ Se muestran por separado respuesta/aclaración, enrutamiento (incluido índice y
 
 En **Laboratorio de fragmentación**, seleccionar **Índice experimental**, ajustar `chunk_size` (300–2000 **caracteres, no tokens**) y `chunk_overlap` (entero ≥0 y estrictamente menor que size), y pulsar **Preparar / reutilizar índice experimental**. Los valores iniciales son 1000/150. Cambiar controles no fragmenta, indexa ni genera: limpia los resultados previos y bloquea la consulta experimental hasta preparar los valores exactos. El estado muestra construcción, listo/reutilizado o error, cantidad de chunks y rutas activadas. La primera preparación puede tardar mientras Ollama calcula embeddings.
 
-Cada configuración guarda `chunks.jsonl`, `reporte_fragmentacion.json` e `indice/` bajo `.chroma/experimentos/<sha256>/`, ignorado por Git. La identidad incluye parámetros, modelo fijo `bge-m3`, contenido de los artículos, hash del código de fragmentación y versión del splitter. Una configuración completa compatible se valida y reutiliza **sin recalcular embeddings ni reescribir chunks/reportes**. Si cambia size/overlap, se necesita preparar explícitamente otra fragmentación e índice. Si falla la indexación antes de crear el índice, se pueden reutilizar los chunks completos al reintentar; los artefactos corruptos/incompatibles se rechazan sin borrarlos ni usar `rebuild`.
+Cada configuración guarda `chunks.jsonl`, `reporte_fragmentacion.json` e `indice/` bajo `.chroma/experimentos/<sha256>/`, ignorado por Git. La identidad incluye parámetros, modelo default compartido `qwen3-embedding:0.6b`, contenido de los artículos, hash del código de fragmentación y versión del splitter. Una configuración completa compatible se valida y reutiliza **sin recalcular embeddings ni reescribir chunks/reportes**. Si cambia size/overlap, se necesita preparar explícitamente otra fragmentación e índice. Si falla la indexación antes de crear el índice, se pueden reutilizar los chunks completos al reintentar; los artefactos corruptos/incompatibles se rechazan sin borrarlos ni usar `rebuild`.
 
-Para volver, seleccionar **Índice original**: no requiere preparación ni reconstruye nada. Incluso 1000/150 experimental usa rutas privadas, nunca `datos/procesados/chunks.jsonl` ni `.chroma/electoral_laws`. El estado es por sesión; las preparaciones/consultas de esta app se serializan para evitar construcciones simultáneas. No ejecutar múltiples procesos preparando la misma configuración a la vez. Esta etapa no incluye dashboard comparativo ni evaluación automática de calidad.
+Para volver, seleccionar **Índice original**: no requiere preparación ni reconstruye nada. Incluso 1000/150 experimental usa rutas privadas, nunca `datos/procesados/chunks.jsonl`, `.chroma/electoral_laws_qwen3_0_6b` ni el histórico `.chroma/electoral_laws`. El estado es por sesión; las preparaciones/consultas de esta app se serializan para evitar construcciones simultáneas. No ejecutar múltiples procesos preparando la misma configuración a la vez. Esta etapa no incluye dashboard comparativo ni evaluación automática de calidad.
 
 ## Alcance pendiente
 

@@ -68,6 +68,17 @@ def test_configuration_signature_detects_model_and_corpus_changes(tmp_path):
     assert json.loads((path / "index_manifest.json").read_text())["embedding_model"] == "other-model"
 
 
+def test_qwen_default_cannot_reuse_historical_bge_manifest(tmp_path):
+    assert DEFAULT_MODEL == "qwen3-embedding:0.6b"
+    assert indexar.DEFAULT_INDEX.name == "electoral_laws_qwen3_0_6b"
+    path = tmp_path / "bge-baseline"
+    prepare_index_dir(path, make_signature("a" * 64, "bge-m3"), rebuild=False)
+    before = (path / "index_manifest.json").read_bytes()
+    with pytest.raises(IndexConfigurationError, match="incompatible"):
+        prepare_index_dir(path, make_signature("a" * 64, DEFAULT_MODEL), rebuild=False)
+    assert (path / "index_manifest.json").read_bytes() == before
+
+
 def test_rebuild_refuses_unmanaged_directory_and_protected_paths(tmp_path):
     unmanaged = tmp_path / "unmanaged"
     unmanaged.mkdir()

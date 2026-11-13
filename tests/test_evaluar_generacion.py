@@ -21,7 +21,7 @@ def fake_routed_result(question, k=3, **kwargs):
               "articulo": "1", "rank": 1, "text": "Texto de prueba íntegro.", "distance": 0.1}
     return {
         "question": question, "generation_model": "granite4:latest", "temperature": 0, "k": k,
-        "jurisdiccion": jurisdiction, "embedding_model": "bge-m3", "answer": "Respuesta [1].",
+        "jurisdiccion": jurisdiction, "embedding_model": evaluation.DEFAULT_EMBEDDING_MODEL, "answer": "Respuesta [1].",
         "original_response": "Respuesta [1].", "answer_status": "answered", "fallback_reason": None,
         "abstained": False, "references_used": [{"number": 1, "label": "[1]", "chunk_id": record["chunk_id"]}],
         "citation_check": {"citations_valid": True, "citations_missing": False, "citations_invalid": False},

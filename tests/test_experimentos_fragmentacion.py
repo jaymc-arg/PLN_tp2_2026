@@ -55,6 +55,12 @@ def test_identity_content_parameters_and_code(workspace, monkeypatch):
     assert not root.exists() and baseline.read_text() == "baseline intacto"
 
 
+def test_model_change_creates_a_distinct_experiment_identity(workspace, monkeypatch):
+    current = lab.configuration(500, 80)
+    monkeypatch.setattr(lab.indexar, "DEFAULT_MODEL", "bge-m3")
+    assert lab.configuration(500, 80) != current
+
+
 def fake_pipeline(monkeypatch):
     def split(inputs, target, **kwargs):
         target.parent.mkdir(parents=True)
@@ -80,7 +86,7 @@ def test_prepare_isolation_and_reuse(workspace, monkeypatch):
     assert active["chunks_path"] != str(baseline)
     split.assert_called_once_with(inputs, Path(active["chunks_path"]), chunk_size=1000, chunk_overlap=150)
     index.assert_called_once_with(Path(active["chunks_path"]), Path(active["index_dir"]),
-                                  model="bge-m3", rebuild=False)
+                                  model=lab.indexar.DEFAULT_MODEL, rebuild=False)
     again, status = lab.prepare_experiment(1000, 150)
     assert again == active and "Reutilizado" in status
     assert split.call_count == index.call_count == 1

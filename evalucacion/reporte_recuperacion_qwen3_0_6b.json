@@ -1,0 +1,1692 @@
+{
+  "version": 1,
+  "evaluation_questions_sha256": "5b0c0f545671a2a34ea68de096c10c6fb22914bb7b3410011c19df9f40d3de4e",
+  "question_count": 5,
+  "positive_count": 3,
+  "negative_count": 2,
+  "max_k": 5,
+  "distance_semantics": "Distancia nativa de Chroma: un valor menor indica un vecino más cercano, no una probabilidad de corrección.",
+  "embedding_model": "qwen3-embedding:0.6b",
+  "collection": "electoral_laws",
+  "positive_questions": [
+    {
+      "id": "nacional_respondible_deber_votar",
+      "question": "¿Qué excepciones al deber de votar enumera el artículo 12 del Código Electoral Nacional?",
+      "jurisdiccion": "nacional",
+      "expected_article_ids": [
+        "nacional_19945_art_12"
+      ],
+      "reference_answer": "El artículo 12 exceptúa a jueces y auxiliares obligados a concurrir a sus oficinas; a quienes el día de la elección estén a más de 500 km del lugar de votación por motivos razonables y acrediten su comparecencia ante la autoridad policial; a personas enfermas o imposibilitadas por fuerza mayor debidamente justificadas; y a personal de servicios públicos cuyas tareas impidan votar, con comunicación y certificación del empleador. La propia norma dice que las exenciones son optativas para el elector.",
+      "unfiltered": {
+        "filter": null,
+        "results": [
+          {
+            "rank": 1,
+            "id": "nacional_19945_art_12__chunk_0001",
+            "chunk_id": "nacional_19945_art_12__chunk_0001",
+            "source_article_id": "nacional_19945_art_12",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "12",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "text": "Artículo 12. - Deber de votar. Todo elector tiene el deber de votar en la elección nacional que se realice en su distrito.\n\nQuedan exentos de esa obligación:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial;\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables.\n\nTales electores se presentarán el día de la elección a la autoridad policial más próxima, la que extenderá certificación escrita que acredite la comparecencia;\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares.",
+            "distance": 0.5659645199775696,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO I.\nDel Cuerpo Electoral",
+            "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+          },
+          {
+            "rank": 2,
+            "id": "pba_5109_art_4__chunk_0001",
+            "chunk_id": "pba_5109_art_4__chunk_0001",
+            "source_article_id": "pba_5109_art_4",
+            "jurisdiccion": "pba",
+            "ley": "5109",
+            "articulo": "4",
+            "source": "ley_pba.txt",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 4°.-  Quedan exentos de la obligación de votar:\n\na) Los que se hallen físicamente imposibilitados para concurrir al comicio por razones de salud.\n\nLa enfermedad se justificará con un certificado expedido por la autoridad médica local. Será obligación de la autoridad médica, concurrir al domicilio donde se encuentre la persona imposibilitada de trasladarse, en las formas y condiciones que establezca la reglamentación.\n\nb) Los funcionarios y empleados que por sus ocupaciones, como tales, no puedan hacerlo.\n\nEstos casos se justificarán con un certificado expedido por los superiores jerárquicos respectivos.\n\nc) Los jueces y sus auxiliares que por imperio de esta Ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial.\n\nd) Los que al día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables, debiendo acreditarse ante la autoridad que corresponda.",
+            "distance": 0.7465661764144897,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "capitulo": "CAPÍTULO I\nDERECHO ELECTORAL"
+          },
+          {
+            "rank": 3,
+            "id": "santa_fe_14478_art_120__chunk_0001",
+            "chunk_id": "santa_fe_14478_art_120__chunk_0001",
+            "source_article_id": "santa_fe_14478_art_120",
+            "jurisdiccion": "santa_fe",
+            "ley": "14478",
+            "articulo": "120",
+            "source": "ley_sta_fe.pdf",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 120.- No emisión del sufragio en elecciones primarias. Justificación. Quedan eximidos los ciudadanos que comuniquen en forma fehaciente su voluntad de no participar al Juez Electoral o a las reparticiones habilitadas, desde la fecha de la convocatoria y hasta cuarenta y ocho (48) horas antes del comicio. Las personas electoras que no concurran a votar sin causa justificada quedan sujetas a las sanciones previstas por este Código.",
+            "distance": 0.7698651552200317,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "pagina_inicio": 33,
+            "pagina_fin": 33,
+            "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+            "titulo": "TÍTULO VI\nELECCIONES PRIMARIAS, ABIERTAS, SIMULTÁNEAS Y OBLIGATORIAS",
+            "capitulo": "CAPÍTULO I\nPROCESO DE SELECCIÓN DE CANDIDATOS"
+          },
+          {
+            "rank": 4,
+            "id": "nacional_19945_art_88__chunk_0001",
+            "chunk_id": "nacional_19945_art_88__chunk_0001",
+            "source_article_id": "nacional_19945_art_88",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "88",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "text": "Artículo 88. - Derecho del elector a votar. Todo aquel que figure en el padrón y exhiba su documento cívico tiene el derecho a votar y nadie podrá cuestionarlo en el acto del sufragio. Los presidentes no aceptarán impugnación alguna que se funde en la inhabilidad del elector para figurar en el padrón electoral.\n\nEstá excluido del mismo quien se encuentre tachado con tinta roja en el padrón de la mesa, no pudiendo en tal caso emitir el voto aunque se alegare error.",
+            "distance": 0.7703544497489929,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO IV\nEL ACTO ELECTORAL",
+            "capitulo": "CAPITULO IV\nEmisión del sufragio"
+          },
+          {
+            "rank": 5,
+            "id": "nacional_19945_art_18__chunk_0001",
+            "chunk_id": "nacional_19945_art_18__chunk_0001",
+            "source_article_id": "nacional_19945_art_18",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "18",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "text": "Artículo 18: Registro de infractores al deber de votar. La Cámara Nacional Electoral llevará un registro de infractores al deber de votar establecido en el artículo 12. Luego de cada elección nacional, elaborará un listado por distrito, con nombre, apellido y matrícula de los electores mayores de dieciocho (18) años y menores de setenta (70) años de edad de quienes no se tenga constancia de emisión del voto, el que pondrá en conocimiento del Poder Ejecutivo. Los gobiernos provinciales y de la Ciudad Autónoma de Buenos Aires podrán solicitar a la Cámara el listado correspondiente a los electores de su distrito.",
+            "distance": 0.7757588028907776,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO I.\nDel Cuerpo Electoral",
+            "capitulo": "CAPITULO II\nDel Registro Nacional de Electores"
+          }
+        ],
+        "article_metrics": {
+          "expected_article_ids": [
+            "nacional_19945_art_12"
+          ],
+          "first_expected_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "reciprocal_rank_at_5": 1.0,
+          "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+        }
+      },
+      "jurisdiction_filtered": {
+        "filter": "nacional",
+        "results": [
+          {
+            "rank": 1,
+            "id": "nacional_19945_art_12__chunk_0001",
+            "chunk_id": "nacional_19945_art_12__chunk_0001",
+            "source_article_id": "nacional_19945_art_12",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "12",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "text": "Artículo 12. - Deber de votar. Todo elector tiene el deber de votar en la elección nacional que se realice en su distrito.\n\nQuedan exentos de esa obligación:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial;\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables.\n\nTales electores se presentarán el día de la elección a la autoridad policial más próxima, la que extenderá certificación escrita que acredite la comparecencia;\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares.",
+            "distance": 0.5659645199775696,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO I.\nDel Cuerpo Electoral",
+            "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+          },
+          {
+            "rank": 2,
+            "id": "nacional_19945_art_88__chunk_0001",
+            "chunk_id": "nacional_19945_art_88__chunk_0001",
+            "source_article_id": "nacional_19945_art_88",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "88",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "text": "Artículo 88. - Derecho del elector a votar. Todo aquel que figure en el padrón y exhiba su documento cívico tiene el derecho a votar y nadie podrá cuestionarlo en el acto del sufragio. Los presidentes no aceptarán impugnación alguna que se funde en la inhabilidad del elector para figurar en el padrón electoral.\n\nEstá excluido del mismo quien se encuentre tachado con tinta roja en el padrón de la mesa, no pudiendo en tal caso emitir el voto aunque se alegare error.",
+            "distance": 0.7703544497489929,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO IV\nEL ACTO ELECTORAL",
+            "capitulo": "CAPITULO IV\nEmisión del sufragio"
+          },
+          {
+            "rank": 3,
+            "id": "nacional_19945_art_18__chunk_0001",
+            "chunk_id": "nacional_19945_art_18__chunk_0001",
+            "source_article_id": "nacional_19945_art_18",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "18",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "text": "Artículo 18: Registro de infractores al deber de votar. La Cámara Nacional Electoral llevará un registro de infractores al deber de votar establecido en el artículo 12. Luego de cada elección nacional, elaborará un listado por distrito, con nombre, apellido y matrícula de los electores mayores de dieciocho (18) años y menores de setenta (70) años de edad de quienes no se tenga constancia de emisión del voto, el que pondrá en conocimiento del Poder Ejecutivo. Los gobiernos provinciales y de la Ciudad Autónoma de Buenos Aires podrán solicitar a la Cámara el listado correspondiente a los electores de su distrito.",
+            "distance": 0.7757588028907776,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO I.\nDel Cuerpo Electoral",
+            "capitulo": "CAPITULO II\nDel Registro Nacional de Electores"
+          },
+          {
+            "rank": 4,
+            "id": "nacional_19945_art_139__chunk_0001",
+            "chunk_id": "nacional_19945_art_139__chunk_0001",
+            "source_article_id": "nacional_19945_art_139",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "139",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "text": "Artículo 139. - Delitos. Enumeración. Se penará con prisión de uno (1) a tres (3) años a quien:\n\na) Con violencia o intimidación impidiere ejercer un cargo electoral o el derecho al sufragio;\n\nb) Compeliere a un elector a votar de manera determinada;\n\nc) Lo privare de la libertad, antes o durante las horas señaladas para la elección, para imposibilitarle el ejercicio de un cargo electoral o el sufragio;\n\nd) Suplantare a un sufragante o votare más de una vez en la misma elección o de cualquier otra manera emitiere su voto sin derecho;\n\ne) Sustrajere, destruyere o sustituyere urnas utilizadas en una elección antes de realizarse el escrutinio;\n\nf) Hiciere lo mismo con las boletas únicas de papel desde que éstas fueran depositadas por los electores hasta la terminación del escrutinio;\n\ng) Igualmente, antes de la emisión del voto sustrajere boletas únicas de papel de la mesa, las destruyere, sustituyere, adulterare u ocultare;",
+            "distance": 0.839862048625946,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO VI\nViolación de la Ley Electoral:",
+            "capitulo": "CAPITULO II\nDe los delitos electorales"
+          },
+          {
+            "rank": 5,
+            "id": "nacional_19945_art_87__chunk_0001",
+            "chunk_id": "nacional_19945_art_87__chunk_0001",
+            "source_article_id": "nacional_19945_art_87",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "87",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "text": "Artículo 87. - Inadmisibilidad del voto. Ninguna autoridad, ni aun el juez federal con competencia electoral, podrá ordenar al presidente de mesa que admita el voto de un elector que no figura inscripto en los ejemplares del padrón electoral.",
+            "distance": 0.8472121953964233,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO IV\nEL ACTO ELECTORAL",
+            "capitulo": "CAPITULO IV\nEmisión del sufragio"
+          }
+        ],
+        "article_metrics": {
+          "expected_article_ids": [
+            "nacional_19945_art_12"
+          ],
+          "first_expected_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "reciprocal_rank_at_5": 1.0,
+          "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+        }
+      },
+      "filter_comparison": {
+        "top1_changed": false,
+        "top3_ids_changed": true
+      },
+      "answer_passage_review": {
+        "unfiltered": {
+          "reviewed_top3_chunk_ids": [
+            "nacional_19945_art_12__chunk_0001",
+            "pba_5109_art_4__chunk_0001",
+            "santa_fe_14478_art_120__chunk_0001"
+          ],
+          "top3_passage_coverage": "partial",
+          "evidence": [
+            {
+              "chunk_id": "nacional_19945_art_12__chunk_0001",
+              "quote": "c) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto."
+            }
+          ],
+          "retrieved_nonanswering_matches": [
+            {
+              "chunk_id": "pba_5109_art_4__chunk_0001",
+              "quote": "b) Los funcionarios y empleados que por sus ocupaciones, como tales, no puedan hacerlo."
+            },
+            {
+              "chunk_id": "santa_fe_14478_art_120__chunk_0001",
+              "quote": "ARTÍCULO 120.- No emisión del sufragio en elecciones primarias. Justificación."
+            }
+          ],
+          "limitation": "El rango 1 enumera a-c y la justificación policial/médica, pero no contiene la causal d, su comunicación/certificación ni el carácter optativo de las exenciones. La continuación nacional no llega al top-5. Los rangos 2 y 3 son regímenes provinciales y no completan la enumeración nacional.",
+          "diagnostic_category": "fragmentación y recuperación; confusión de jurisdicción en vecinos",
+          "next_experiment": "Evaluar por separado recuperación del fragmento contiguo, sin incorporarla en este ensayo de modelo."
+        },
+        "jurisdiction_filtered": {
+          "reviewed_top3_chunk_ids": [
+            "nacional_19945_art_12__chunk_0001",
+            "nacional_19945_art_88__chunk_0001",
+            "nacional_19945_art_18__chunk_0001"
+          ],
+          "top3_passage_coverage": "partial",
+          "evidence": [
+            {
+              "chunk_id": "nacional_19945_art_12__chunk_0001",
+              "quote": "Tales electores se presentarán el día de la elección a la autoridad policial más próxima, la que extenderá certificación escrita que acredite la comparecencia;"
+            }
+          ],
+          "retrieved_nonanswering_matches": [
+            {
+              "chunk_id": "nacional_19945_art_88__chunk_0001",
+              "quote": "Artículo 88. - Derecho del elector a votar."
+            },
+            {
+              "chunk_id": "nacional_19945_art_18__chunk_0001",
+              "quote": "Artículo 18: Registro de infractores al deber de votar."
+            }
+          ],
+          "limitation": "El filtro elimina leyes provinciales, pero los artículos 88 y 18 tratan derecho al voto y registro de infractores: no aportan la continuación faltante del art. 12. La respuesta completa sigue sin estar en top-3 ni top-5.",
+          "diagnostic_category": "fragmentación y recuperación dentro de la jurisdicción",
+          "next_experiment": "Inspeccionar expansión contigua en un ensayo posterior, conservando este ranking."
+        }
+      }
+    },
+    {
+      "id": "pba_respondible_representacion",
+      "question": "Según el artículo 13 de la Ley Electoral bonaerense 5.109, ¿cuántos diputados y senadores integran la representación legislativa provincial?",
+      "jurisdiccion": "pba",
+      "expected_article_ids": [
+        "pba_5109_art_13"
+      ],
+      "reference_answer": "El texto principal del artículo 13 fija la representación en 92 diputados y 46 senadores. La propuesta observada de 100 diputados y 50 senadores aparece en una nota histórica/editorial y no es la respuesta que establece el texto principal del registro.",
+      "unfiltered": {
+        "filter": null,
+        "results": [
+          {
+            "rank": 1,
+            "id": "pba_5109_art_13__chunk_0001",
+            "chunk_id": "pba_5109_art_13__chunk_0001",
+            "source_article_id": "pba_5109_art_13",
+            "jurisdiccion": "pba",
+            "ley": "5109",
+            "articulo": "13",
+            "source": "ley_pba.txt",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 13.-* Fíjase la representación legislativa de la Provincia en noventa y dos (92) diputados y cuarenta y seis (46) senadores los que serán elegidos en la siguiente proporción:\n\nSECCIÓN CAPITAL, elegirá tres (3) senadores y seis (6) diputados.\n\nSECCIÓN PRIMERA, elegirá ocho (8) senadores y quince (15) diputados.\n\nSECCIÓN SEGUNDA, elegirá cinco (5) senadores y once (11) diputados.\n\nSECCIÓN TERCERA, elegirá nueve (9) senadores y dieciocho (18) diputados.\n\nSECCIÓN CUARTA, elegirá siete (7) senadores y catorce (14) diputados.\n\nSECCIÓN QUINTA, elegirá cinco (5) senadores y once (11) diputados.\n\nSECCIÓN SEXTA, elegirá seis (6) senadores y once (11) diputados\n\nSECCIÓN SEPTIMA, elegirá tres (3) senadores y seis (6) diputados.\n\n.",
+            "distance": 0.7326980233192444,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "capitulo": "CAPÍTULO II\nDE LA DIVISION ELECTORAL"
+          },
+          {
+            "rank": 2,
+            "id": "santa_fe_14478_art_133__chunk_0001",
+            "chunk_id": "santa_fe_14478_art_133__chunk_0001",
+            "source_article_id": "santa_fe_14478_art_133",
+            "jurisdiccion": "santa_fe",
+            "ley": "14478",
+            "articulo": "133",
+            "source": "ley_sta_fe.pdf",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 133.- Elección de diputados y diputadas provinciales. Sistema proporcional. La Cámara de Diputados se compone de cincuenta (50) legisladores elegidos directamente por el pueblo mediante sistema de representación proporcional, constituyendo la Provincia un distrito electoral único. La distribución de cargos se realiza aplicando el sistema D'Hondt, entre las agrupaciones políticas que alcancen el cuatro por ciento (4%) del padrón electoral del distrito.",
+            "distance": 0.8301405906677246,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "pagina_inicio": 36,
+            "pagina_fin": 36,
+            "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+            "titulo": "TÍTULO VII\nELECCIONES GENERALES",
+            "capitulo": "CAPÍTULO II\nDE LA PROCLAMACIÓN DE LOS ELECTOS"
+          },
+          {
+            "rank": 3,
+            "id": "nacional_19945_art_166__chunk_0001",
+            "chunk_id": "nacional_19945_art_166__chunk_0001",
+            "source_article_id": "nacional_19945_art_166",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "166",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "text": "Artículo 166.- A los fines de la aplicación de la disposición transitoria cuarta contenida en la Constitución Nacional acerca de la elección de Senadores Nacionales por las provincias en ocasión de la renovación parcial trienal de 1995, las legislaturas en cada provincia procederán a la elección de un Senador conforme con la disposición constitucional que establece que sean tres los Senadores por cada distrito y que no resulten los tres Senadores del distrito de un mismo partido político o alianza electoral, de modo tal que, en lo posible, correspondan dos Senadores Nacionales a la mayoría y uno a la primera minoría.",
+            "distance": 0.8405192494392395,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO VIII\nDisposiciones Generales y Transitorias",
+            "capitulo": "Capítulo Unico"
+          },
+          {
+            "rank": 4,
+            "id": "nacional_19945_art_166__chunk_0002",
+            "chunk_id": "nacional_19945_art_166__chunk_0002",
+            "source_article_id": "nacional_19945_art_166",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "166",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 2,
+            "text": "Las legislaturas provinciales deberán observar que el conjunto de los tres Senadores Nacionales por cada distrito se integre, de no resultar legalmente imposible, con dos bancas al partido o alianza electoral con el mayor número de miembros en dicha legislatura y la banca restante corresponda al partido o alianza electoral que le siga en número de miembros. A estos efectos, el o los Senadores en ejercicio deberán computarse al partido político o alianza electoral al cual pertenecían al momento de su elección.\n\nEn caso de empate prevalecerá el partido o alianza que hubiere obtenido mayor cantidad de votos válidos emitidos en la elección de renovación legislativa inmediata anterior, en el nivel provincial.\n\nLas disposiciones del presente artículo y del anterior, al mencionar a alianzas o partidos políticos se refieren a las alianzas o partidos que participaron en la última elección provincial para renovar cargos legislativos provinciales excluyendo el proceso electoral de 1995.",
+            "distance": 0.8577542304992676,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO VIII\nDisposiciones Generales y Transitorias",
+            "capitulo": "Capítulo Unico"
+          },
+          {
+            "rank": 5,
+            "id": "nacional_19945_art_156__chunk_0001",
+            "chunk_id": "nacional_19945_art_156__chunk_0001",
+            "source_article_id": "nacional_19945_art_156",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "156",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "text": "Artículo 156.- Los Senadores Nacionales por las provincias y la Ciudad de Buenos Aires se elegirán en forma directa por el pueblo de las mismas que se considerarán a este fin como distritos electorales.\n\nCada elector votará por una lista oficializada con dos candidatos titulares y dos suplentes.\n\n.",
+            "distance": 0.9283000230789185,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO VII\nSistema Electoral Nacional",
+            "capitulo": "CAPITULO II\nDe la elección de Senadores Nacionales"
+          }
+        ],
+        "article_metrics": {
+          "expected_article_ids": [
+            "pba_5109_art_13"
+          ],
+          "first_expected_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "reciprocal_rank_at_5": 1.0,
+          "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+        }
+      },
+      "jurisdiction_filtered": {
+        "filter": "pba",
+        "results": [
+          {
+            "rank": 1,
+            "id": "pba_5109_art_13__chunk_0001",
+            "chunk_id": "pba_5109_art_13__chunk_0001",
+            "source_article_id": "pba_5109_art_13",
+            "jurisdiccion": "pba",
+            "ley": "5109",
+            "articulo": "13",
+            "source": "ley_pba.txt",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 13.-* Fíjase la representación legislativa de la Provincia en noventa y dos (92) diputados y cuarenta y seis (46) senadores los que serán elegidos en la siguiente proporción:\n\nSECCIÓN CAPITAL, elegirá tres (3) senadores y seis (6) diputados.\n\nSECCIÓN PRIMERA, elegirá ocho (8) senadores y quince (15) diputados.\n\nSECCIÓN SEGUNDA, elegirá cinco (5) senadores y once (11) diputados.\n\nSECCIÓN TERCERA, elegirá nueve (9) senadores y dieciocho (18) diputados.\n\nSECCIÓN CUARTA, elegirá siete (7) senadores y catorce (14) diputados.\n\nSECCIÓN QUINTA, elegirá cinco (5) senadores y once (11) diputados.\n\nSECCIÓN SEXTA, elegirá seis (6) senadores y once (11) diputados\n\nSECCIÓN SEPTIMA, elegirá tres (3) senadores y seis (6) diputados.\n\n.",
+            "distance": 0.7326980233192444,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "capitulo": "CAPÍTULO II\nDE LA DIVISION ELECTORAL"
+          },
+          {
+            "rank": 2,
+            "id": "pba_5109_art_11__chunk_0001",
+            "chunk_id": "pba_5109_art_11__chunk_0001",
+            "source_article_id": "pba_5109_art_11",
+            "jurisdiccion": "pba",
+            "ley": "5109",
+            "articulo": "11",
+            "source": "ley_pba.txt",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 11.- Para las elecciones de concejales y consejeros escolares, cada uno de los partidos en que se divide la Provincia, constituye un distrito Electoral.\n\nA los efectos del cómputo de los sufragios para la elección de Gobernador y Vicegobernador, la Provincia se considerará como una sola Sección Electoral.",
+            "distance": 0.9512890577316284,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "capitulo": "CAPÍTULO II\nDE LA DIVISION ELECTORAL"
+          },
+          {
+            "rank": 3,
+            "id": "pba_5109_art_151__chunk_0001",
+            "chunk_id": "pba_5109_art_151__chunk_0001",
+            "source_article_id": "pba_5109_art_151",
+            "jurisdiccion": "pba",
+            "ley": "5109",
+            "articulo": "151",
+            "source": "ley_pba.txt",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 151.-  A efectos de la adecuación de la normativa a los requerimientos específicos del sistema de voto electrónico seleccionado, el Poder Ejecutivo reglamentará los artículos que resulten menester de la Ley 5.109 (T.O. Decreto N° 997/93) y sus modificatorias.",
+            "distance": 0.953917384147644,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "capitulo": "CAPÍTULO XXVII\nSISTEMA DE VOTO ELECTRÓNICO"
+          },
+          {
+            "rank": 4,
+            "id": "pba_5109_art_12__chunk_0001",
+            "chunk_id": "pba_5109_art_12__chunk_0001",
+            "source_article_id": "pba_5109_art_12",
+            "jurisdiccion": "pba",
+            "ley": "5109",
+            "articulo": "12",
+            "source": "ley_pba.txt",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 12.- Divídese el territorio de la Provincia en ocho secciones electorales para elegir senadores y diputados a la Honorable Legislatura, que se denominarán y formarán del modo siguiente:\n\nSECCIÓN CAPITAL: La forma el partido de La Plata.\n\nPRIMERA SECCIÓN ELECTORAL: Los partidos de Campana, Escobar, General Las Heras, General Rodríguez, General San Martín, Hurlingham, Ituzaingó, José C. Paz, Luján, Malvinas Argentinas, Marcos Paz, Mercedes, Merlo, Moreno, Morón, Navarro, Pilar, San Fernando, San Miguel, San Isidro, Suipacha, Tigre, Tres de Febrero y Vicente López.\n\nPartidos que se incorporan a la Sección con posterioridad al texto ordenado por decreto 997/93:\n\nSEGUNDA SECCIÓN ELECTORAL: Los partidos de Baradero, Bartolomé Mitre, Capitán Sarmiento, Carmen de Areco, Colón, Exaltación de la Cruz, Pergamino, Ramallo, Rojas, Salto, San Andrés de Giles, San Antonio de Areco, San Nicolás, San Pedro y Zárate.",
+            "distance": 0.9749425649642944,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "capitulo": "CAPÍTULO II\nDE LA DIVISION ELECTORAL"
+          },
+          {
+            "rank": 5,
+            "id": "pba_5109_art_29__chunk_0001",
+            "chunk_id": "pba_5109_art_29__chunk_0001",
+            "source_article_id": "pba_5109_art_29",
+            "jurisdiccion": "pba",
+            "ley": "5109",
+            "articulo": "29",
+            "source": "ley_pba.txt",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 29.- La Junta Electoral está obligada a proporcionar a cada partido político que intervenga en las elecciones, quince (15) ejemplares completos, como mínimo, del Registro Electoral de cada distrito, cantidad que podrá aumentarse hasta treinta, en proporción a los inscriptos. Deberá conservar una reserva mínima de treinta (30) ejemplares por cada distrito.\n\nCAPÍTULO V (#)\n\nDE LOS PARTIDOS POLITICOS",
+            "distance": 1.0066527128219604,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "capitulo": "CAPÍTULO IV\nDEL REGISTRO DE ELECTORES"
+          }
+        ],
+        "article_metrics": {
+          "expected_article_ids": [
+            "pba_5109_art_13"
+          ],
+          "first_expected_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "reciprocal_rank_at_5": 1.0,
+          "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+        }
+      },
+      "filter_comparison": {
+        "top1_changed": false,
+        "top3_ids_changed": true
+      },
+      "answer_passage_review": {
+        "unfiltered": {
+          "reviewed_top3_chunk_ids": [
+            "pba_5109_art_13__chunk_0001",
+            "santa_fe_14478_art_133__chunk_0001",
+            "nacional_19945_art_166__chunk_0001"
+          ],
+          "top3_passage_coverage": "yes",
+          "evidence": [
+            {
+              "chunk_id": "pba_5109_art_13__chunk_0001",
+              "quote": "Fíjase la representación legislativa de la Provincia en noventa y dos (92) diputados y cuarenta y seis (46) senadores"
+            }
+          ],
+          "retrieved_nonanswering_matches": [
+            {
+              "chunk_id": "santa_fe_14478_art_133__chunk_0001",
+              "quote": "La Cámara de Diputados se compone de cincuenta (50) legisladores"
+            },
+            {
+              "chunk_id": "nacional_19945_art_166__chunk_0001",
+              "quote": "las legislaturas en cada provincia procederán a la elección de un Senador"
+            }
+          ],
+          "limitation": "El rango 1 sí contiene las dos cantidades requeridas. Los siguientes dos vecinos son Santa Fe y una disposición nacional transitoria sobre senadores de 1995; no deben mezclarse con la composición bonaerense.",
+          "diagnostic_category": "acierto del pasaje y ruido interjurisdiccional",
+          "next_experiment": "Medir el efecto del filtro sin extrapolar este acierto a otras preguntas."
+        },
+        "jurisdiction_filtered": {
+          "reviewed_top3_chunk_ids": [
+            "pba_5109_art_13__chunk_0001",
+            "pba_5109_art_11__chunk_0001",
+            "pba_5109_art_151__chunk_0001"
+          ],
+          "top3_passage_coverage": "yes",
+          "evidence": [
+            {
+              "chunk_id": "pba_5109_art_13__chunk_0001",
+              "quote": "Fíjase la representación legislativa de la Provincia en noventa y dos (92) diputados y cuarenta y seis (46) senadores"
+            }
+          ],
+          "retrieved_nonanswering_matches": [
+            {
+              "chunk_id": "pba_5109_art_11__chunk_0001",
+              "quote": "Para las elecciones de concejales y consejeros escolares"
+            },
+            {
+              "chunk_id": "pba_5109_art_151__chunk_0001",
+              "quote": "A efectos de la adecuación de la normativa a los requerimientos específicos del sistema de voto electrónico seleccionado"
+            }
+          ],
+          "limitation": "La evidencia suficiente permanece en rango 1. El filtro sustituye los otros vecinos por reglas de distritos electorales y adecuación al voto electrónico, sin aportar a la cantidad de legisladores.",
+          "diagnostic_category": "acierto del pasaje; vecinos irrelevantes de la jurisdicción correcta",
+          "next_experiment": "No cambiar el pipeline a partir de un único ejemplo suficiente."
+        }
+      }
+    },
+    {
+      "id": "santa_fe_respondible_autoridad_mesa",
+      "question": "¿Cómo define el artículo 4 de la Ley 14.478 a la autoridad de mesa?",
+      "jurisdiccion": "santa_fe",
+      "expected_article_ids": [
+        "santa_fe_14478_art_4"
+      ],
+      "reference_answer": "Es la persona que ejerce la presidencia de la mesa receptora de votos y, ante ausencia o impedimento, quien la reemplaza conforme al orden de designación establecido en el Código.",
+      "unfiltered": {
+        "filter": null,
+        "results": [
+          {
+            "rank": 1,
+            "id": "nacional_19945_art_14__chunk_0001",
+            "chunk_id": "nacional_19945_art_14__chunk_0001",
+            "source_article_id": "nacional_19945_art_14",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "14",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "text": "Artículo 14.- Funciones de los electores. Todas las funciones que esta ley atribuye a las autoridades de mesa son irrenunciables y serán compensadas en la forma que determina esta ley y su reglamentación.",
+            "distance": 0.8710112571716309,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO I.\nDel Cuerpo Electoral",
+            "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+          },
+          {
+            "rank": 2,
+            "id": "santa_fe_14478_art_64__chunk_0001",
+            "chunk_id": "santa_fe_14478_art_64__chunk_0001",
+            "source_article_id": "santa_fe_14478_art_64",
+            "jurisdiccion": "santa_fe",
+            "ley": "14478",
+            "articulo": "64",
+            "source": "ley_sta_fe.pdf",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 64.- Autoridades de mesa en establecimientos de detención. Las autoridades de las mesas especiales constituidas en los establecimientos de detención son designadas por el Juez Electoral entre personas electoras del circuito electoral en cuyo territorio se asienta el establecimiento de detención, con exclusión de las personas inscriptas en el padrón de privados de libertad.",
+            "distance": 0.9889907836914062,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "pagina_inicio": 21,
+            "pagina_fin": 21,
+            "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+            "titulo": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+            "capitulo": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA"
+          },
+          {
+            "rank": 3,
+            "id": "pba_5109_art_45__chunk_0001",
+            "chunk_id": "pba_5109_art_45__chunk_0001",
+            "source_article_id": "pba_5109_art_45",
+            "jurisdiccion": "pba",
+            "ley": "5109",
+            "articulo": "45",
+            "source": "ley_pba.txt",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 45.- Los Presidentes de mesa tendrán a sus inmediatas órdenes la fuerza pública necesaria para el cumplimiento de sus funciones.\n\nEl Comisario o empleado de Policía que mandase la fuerza pública del distrito, acatará las órdenes de los Presidentes de mesa bajo las penas que establece esta ley, sin que pueda eximirlo de ellas la excusa de proceder por orden de sus superiores, quienes quiera que éstos fueren.",
+            "distance": 1.0310477018356323,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "capitulo": "CAPÍTULO VI\nDE LAS MESAS RECEPTORAS DE VOTOS"
+          },
+          {
+            "rank": 4,
+            "id": "nacional_19945_art_72__chunk_0001",
+            "chunk_id": "nacional_19945_art_72__chunk_0001",
+            "source_article_id": "nacional_19945_art_72",
+            "jurisdiccion": "nacional",
+            "ley": "19945",
+            "articulo": "72",
+            "source": "ley_nacional.txt",
+            "chunk_numero": 1,
+            "text": "Artículo 72 — Autoridades de la mesa. Para la designación de las autoridades de mesa se dará prioridad a los electores que resulten de una selección aleatoria por medios informáticos en la cual se debe tener en cuenta su grado de instrucción y edad, a los electores que hayan sido capacitados a tal efecto y a continuación a los inscriptos en el Registro Público de Postulantes a Autoridades de Mesa.\n\nCada mesa electoral tendrá como única autoridad un funcionario que actuará con el título de presidente. Se designará también un suplente, que auxiliará al presidente y lo reemplazará en los casos que esta ley determina.\n\nEn caso de tratarse de la elección de Presidente y Vicepresidente de la Nación, las autoridades de mesa designadas para la primera vuelta cumplirán también esa función en caso de llevarse a cabo la segunda vuelta.\n\nLos electores que hayan cumplido funciones como autoridades de mesa recibirán una compensación consistente en una suma fija en concepto de viático.",
+            "distance": 1.049486756324768,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "titulo": "TITULO IV\nEL ACTO ELECTORAL",
+            "capitulo": "CAPITULO II\nMesas receptoras de votos"
+          },
+          {
+            "rank": 5,
+            "id": "santa_fe_14478_art_67__chunk_0001",
+            "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+            "source_article_id": "santa_fe_14478_art_67",
+            "jurisdiccion": "santa_fe",
+            "ley": "14478",
+            "articulo": "67",
+            "source": "ley_sta_fe.pdf",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 67.- Autoridades de mesa. Cada mesa electoral tiene como única autoridad quien ejerce la presidencia de mesa y dos (2) suplentes que la auxilian y reemplazan, en el orden de sus designaciones, por inasistencia o ausencias momentáneas; siendo éstos los únicos supuestos en que tienen injerencia en el acto comicial. La autoridad de mesa no puede retirarse del local de votación mientras dure el comicio; en su caso será reemplazado definitivamente por sus suplentes. Si luego de constituida la mesa concurre la persona que hubiera sido designada titular de la presidencia de mesa, ésta toma posesión del cargo, dejando constancia escrita de ello.",
+            "distance": 1.0513118505477905,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "pagina_inicio": 21,
+            "pagina_fin": 21,
+            "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+            "titulo": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+            "capitulo": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA"
+          }
+        ],
+        "article_metrics": {
+          "expected_article_ids": [
+            "santa_fe_14478_art_4"
+          ],
+          "first_expected_rank": null,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "reciprocal_rank_at_5": 0.0,
+          "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+        }
+      },
+      "jurisdiction_filtered": {
+        "filter": "santa_fe",
+        "results": [
+          {
+            "rank": 1,
+            "id": "santa_fe_14478_art_64__chunk_0001",
+            "chunk_id": "santa_fe_14478_art_64__chunk_0001",
+            "source_article_id": "santa_fe_14478_art_64",
+            "jurisdiccion": "santa_fe",
+            "ley": "14478",
+            "articulo": "64",
+            "source": "ley_sta_fe.pdf",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 64.- Autoridades de mesa en establecimientos de detención. Las autoridades de las mesas especiales constituidas en los establecimientos de detención son designadas por el Juez Electoral entre personas electoras del circuito electoral en cuyo territorio se asienta el establecimiento de detención, con exclusión de las personas inscriptas en el padrón de privados de libertad.",
+            "distance": 0.9889907836914062,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "pagina_inicio": 21,
+            "pagina_fin": 21,
+            "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+            "titulo": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+            "capitulo": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA"
+          },
+          {
+            "rank": 2,
+            "id": "santa_fe_14478_art_67__chunk_0001",
+            "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+            "source_article_id": "santa_fe_14478_art_67",
+            "jurisdiccion": "santa_fe",
+            "ley": "14478",
+            "articulo": "67",
+            "source": "ley_sta_fe.pdf",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 67.- Autoridades de mesa. Cada mesa electoral tiene como única autoridad quien ejerce la presidencia de mesa y dos (2) suplentes que la auxilian y reemplazan, en el orden de sus designaciones, por inasistencia o ausencias momentáneas; siendo éstos los únicos supuestos en que tienen injerencia en el acto comicial. La autoridad de mesa no puede retirarse del local de votación mientras dure el comicio; en su caso será reemplazado definitivamente por sus suplentes. Si luego de constituida la mesa concurre la persona que hubiera sido designada titular de la presidencia de mesa, ésta toma posesión del cargo, dejando constancia escrita de ello.",
+            "distance": 1.0513118505477905,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "pagina_inicio": 21,
+            "pagina_fin": 21,
+            "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+            "titulo": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+            "capitulo": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA"
+          },
+          {
+            "rank": 3,
+            "id": "santa_fe_14478_art_68__chunk_0001",
+            "chunk_id": "santa_fe_14478_art_68__chunk_0001",
+            "source_article_id": "santa_fe_14478_art_68",
+            "jurisdiccion": "santa_fe",
+            "ley": "14478",
+            "articulo": "68",
+            "source": "ley_sta_fe.pdf",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 68.- Requisitos para ser autoridad de mesa. Son requisitos para la presidencia y suplencia de mesa:\na. ser persona electora hábil del municipio;\nb. tener entre 18 y 70 años de edad;\nc. saber leer y escribir; y\nd. no ser persona candidata, apoderada o fiscal en dicha elección.",
+            "distance": 1.0515141487121582,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "pagina_inicio": 21,
+            "pagina_fin": 22,
+            "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+            "titulo": "TÍTULO III\nDE LOS ACTOS PREVIOS A LA ELECCIÓN",
+            "capitulo": "CAPÍTULO IV\nDE LA DESIGNACIÓN DE LAS AUTORIDADES DE MESA"
+          },
+          {
+            "rank": 4,
+            "id": "santa_fe_14478_art_4__chunk_0001",
+            "chunk_id": "santa_fe_14478_art_4__chunk_0001",
+            "source_article_id": "santa_fe_14478_art_4",
+            "jurisdiccion": "santa_fe",
+            "ley": "14478",
+            "articulo": "4",
+            "source": "ley_sta_fe.pdf",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 4.- Definiciones. A los efectos de este Código, se entiende por:\na. agrupación política: todo partido político, confederación de partidos o frente o alianza electoral que cuente con reconocimiento vigente del Juez Electoral. Cuando este Código se refiere a agrupaciones políticas comprende a todas las formas asociativas habilitadas para postular candidaturas;\nb. autoridad de mesa: la persona que ejerce la presidencia de la mesa receptora de votos y, en caso de ausencia o impedimento, quien la reemplaza conforme al orden de designación establecido en este Código;\nc. Boleta Única de Papel: instrumento oficial de votación confeccionado por el Juez Electoral para cada categoría o tramo de cargo electivo, que contiene las opciones electorales ofrecidas a las personas electoras, conforme a las características establecidas en este Código;",
+            "distance": 1.0557862520217896,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "pagina_inicio": 1,
+            "pagina_fin": 4,
+            "libro": "LIBRO I\nOBJETO, PRINCIPIOS RECTORES Y AUTORIDAD",
+            "titulo": "TÍTULO I\nPRINCIPIOS, DERECHOS Y GARANTÍAS",
+            "capitulo": "CAPÍTULO I\nÁMBITO DE APLICACIÓN Y ORDEN PÚBLICO"
+          },
+          {
+            "rank": 5,
+            "id": "santa_fe_14478_art_288__chunk_0001",
+            "chunk_id": "santa_fe_14478_art_288__chunk_0001",
+            "source_article_id": "santa_fe_14478_art_288",
+            "jurisdiccion": "santa_fe",
+            "ley": "14478",
+            "articulo": "288",
+            "source": "ley_sta_fe.pdf",
+            "chunk_numero": 1,
+            "text": "ARTÍCULO 288.- Modifícase el artículo 8 la Ley N° 14439, el que queda redactado de la siguiente manera: \"ARTÍCULO 8 - Organización. Secciones. División del trabajo. A los fines de su organización y funcionamiento, se establecen las siguientes secciones:\na) Sección N° 1, integrada por jueces de Primera Instancia en lo contencioso administrativo, con competencia para actuar en primera instancia en todo el territorio de la Provincia, con independencia del asiento de su cargo.",
+            "distance": 1.0636391639709473,
+            "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+            "pagina_inicio": 67,
+            "pagina_fin": 68,
+            "libro": "LIBRO V\nDISPOSICIONES FINALES",
+            "titulo": "TÍTULO ÚNICO",
+            "capitulo": "CAPÍTULO I\nMODIFICACIONES"
+          }
+        ],
+        "article_metrics": {
+          "expected_article_ids": [
+            "santa_fe_14478_art_4"
+          ],
+          "first_expected_rank": 4,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": true,
+          "reciprocal_rank_at_5": 0.25,
+          "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+        }
+      },
+      "filter_comparison": {
+        "top1_changed": true,
+        "top3_ids_changed": true
+      },
+      "answer_passage_review": {
+        "unfiltered": {
+          "reviewed_top3_chunk_ids": [
+            "nacional_19945_art_14__chunk_0001",
+            "santa_fe_14478_art_64__chunk_0001",
+            "pba_5109_art_45__chunk_0001"
+          ],
+          "top3_passage_coverage": "no",
+          "evidence": [],
+          "retrieved_nonanswering_matches": [
+            {
+              "chunk_id": "nacional_19945_art_14__chunk_0001",
+              "quote": "Todas las funciones que esta ley atribuye a las autoridades de mesa son irrenunciables"
+            },
+            {
+              "chunk_id": "santa_fe_14478_art_64__chunk_0001",
+              "quote": "Autoridades de mesa en establecimientos de detención."
+            },
+            {
+              "chunk_id": "pba_5109_art_45__chunk_0001",
+              "quote": "Los Presidentes de mesa tendrán a sus inmediatas órdenes la fuerza pública necesaria para el cumplimiento de sus funciones."
+            }
+          ],
+          "limitation": "Ninguno de estos tres pasajes es la definición pedida del art. 4. El primer resultado es nacional; el segundo describe designación en establecimientos de detención y el tercero atribuciones respecto de la fuerza pública en PBA. El artículo esperado tampoco aparece en top-5 sin filtro.",
+          "diagnostic_category": "recuperación fallida y confusión jurisdiccional",
+          "next_experiment": "Investigar por separado la priorización de definiciones legales, sin alterar este experimento."
+        },
+        "jurisdiction_filtered": {
+          "reviewed_top3_chunk_ids": [
+            "santa_fe_14478_art_64__chunk_0001",
+            "santa_fe_14478_art_67__chunk_0001",
+            "santa_fe_14478_art_68__chunk_0001"
+          ],
+          "top3_passage_coverage": "no",
+          "evidence": [],
+          "retrieved_nonanswering_matches": [
+            {
+              "chunk_id": "santa_fe_14478_art_64__chunk_0001",
+              "quote": "son designadas por el Juez Electoral entre personas electoras del circuito electoral"
+            },
+            {
+              "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+              "quote": "Cada mesa electoral tiene como única autoridad quien ejerce la presidencia de mesa y dos (2) suplentes que la auxilian y reemplazan, en el orden de sus designaciones"
+            },
+            {
+              "chunk_id": "santa_fe_14478_art_68__chunk_0001",
+              "quote": "Requisitos para ser autoridad de mesa."
+            }
+          ],
+          "related_substantive_support": "El art. 67, rango 2, aporta contenido relacionado sobre presidencia y reemplazo. Eso es apoyo indirecto del significado, pero no verifica la definición atribuida específicamente al art. 4. Se conserva el criterio estricto del protocolo histórico al marcar no para el pasaje solicitado.",
+          "limitation": "No hay definición del art. 4 en top-3. La inspección adicional del rango 4 sí encuentra santa_fe_14478_art_4__chunk_0001, inciso b, pp. 1–4, con el pasaje completo: mejora top-5, pero K=3 seguiría omitiéndolo. El rango 1 sigue priorizando mesas de detención.",
+          "diagnostic_category": "recuperación: pasaje correcto en rango 4, fuera del contexto top-3",
+          "next_experiment": "Examinar K y priorización del pasaje en una etapa separada; no confundir Hit@5 con suficiencia de K=3."
+        }
+      }
+    }
+  ],
+  "negative_questions": [
+    {
+      "id": "ausente_resultado_electoral",
+      "question": "¿Qué partido ganó la elección presidencial argentina de 2023 y cuántos votos obtuvo?",
+      "filter": null,
+      "results": [
+        {
+          "rank": 1,
+          "id": "santa_fe_14478_art_159__chunk_0002",
+          "chunk_id": "santa_fe_14478_art_159__chunk_0002",
+          "source_article_id": "santa_fe_14478_art_159",
+          "jurisdiccion": "santa_fe",
+          "ley": "14478",
+          "articulo": "159",
+          "source": "ley_sta_fe.pdf",
+          "chunk_numero": 2,
+          "text": "b. cuarenta por ciento (40%) restante entre todas las agrupaciones políticas que oficialicen precandidaturas o candidaturas, en forma proporcional a la cantidad de votos obtenidos en la elección general anterior de la categoría gobernador y vicegobernador y diputados provinciales, para el caso de elecciones provinciales y locales o de la categoría que se elige en cada distrito para el caso de elecciones locales y de renovación parcial de cargos.",
+          "distance": 1.1454932689666748,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "pagina_inicio": 42,
+          "pagina_fin": 42,
+          "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+          "titulo": "TÍTULO VIII\nDE LA CAMPAÑA ELECTORAL",
+          "capitulo": "CAPÍTULO III\nPUBLICIDAD ELECTORAL EN MEDIOS AUDIOVISUALES"
+        },
+        {
+          "rank": 2,
+          "id": "santa_fe_14478_art_25__chunk_0001",
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "source_article_id": "santa_fe_14478_art_25",
+          "jurisdiccion": "santa_fe",
+          "ley": "14478",
+          "articulo": "25",
+          "source": "ley_sta_fe.pdf",
+          "chunk_numero": 1,
+          "text": "ARTÍCULO 25.- Personas Electoras. Son electoras las personas argentinas y extranjeras que hayan cumplido dieciséis (16) años de edad al momento de la elección, posean residencia efectiva en la Provincia y no se encuentren comprendidas en las causales de inhabilitación previstas en este Código. Para la elección de cargos municipales o departamentales, se requiere además residencia efectiva en el respectivo distrito electoral, en los términos que establece este Código. Las personas electoras extranjeras, además de los requisitos aquí previstos, deben contar con documento de identidad argentino y una residencia permanente y continua de dos (2) años en la Provincia.",
+          "distance": 1.1734195947647095,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "pagina_inicio": 9,
+          "pagina_fin": 9,
+          "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+          "titulo": "TÍTULO I\nDEL CUERPO ELECTORAL",
+          "capitulo": "CAPÍTULO I\nDE LAS PERSONAS ELECTORAS"
+        },
+        {
+          "rank": 3,
+          "id": "nacional_19945_art_166__chunk_0003",
+          "chunk_id": "nacional_19945_art_166__chunk_0003",
+          "source_article_id": "nacional_19945_art_166",
+          "jurisdiccion": "nacional",
+          "ley": "19945",
+          "articulo": "166",
+          "source": "ley_nacional.txt",
+          "chunk_numero": 3,
+          "text": "En la Ciudad de Buenos Aires se celebrará durante 1995 una elección directa de Senador Nacional, a efectos de incorporar el tercer Senador por el distrito. Cada elector votará por una lista oficializada con un candidato titular y un suplente.\n\nResultará electo el titular de la lista que obtuviere el mayor número de sufragios, y el suplente lo sustituirá en los casos previstos por el artículo 62 de la Constitución Nacional.\n\n.\n\nDocumentos cívicos.",
+          "distance": 1.1801555156707764,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "titulo": "TITULO VIII\nDisposiciones Generales y Transitorias",
+          "capitulo": "Capítulo Unico"
+        },
+        {
+          "rank": 4,
+          "id": "santa_fe_14478_art_23__chunk_0001",
+          "chunk_id": "santa_fe_14478_art_23__chunk_0001",
+          "source_article_id": "santa_fe_14478_art_23",
+          "jurisdiccion": "santa_fe",
+          "ley": "14478",
+          "articulo": "23",
+          "source": "ley_sta_fe.pdf",
+          "chunk_numero": 1,
+          "text": "ARTICULO 23.- Secretario Electoral. Requisitos, designación y remoción. La Secretaría Electoral está dirigida por un Secretario o Secretaria Electoral, quien debe ser ciudadano argentino y contar con experiencia comprobada en materia electoral. La designación se realiza a propuesta del Poder Ejecutivo con acuerdo de la Legislatura y ejerce sus funciones durante el período del Gobernador que lo ha designado. El Secretario Electoral sólo podrá ser removido por el Poder Ejecutivo por justa causa, fundada en mal desempeño, desconocimiento inexcusable del derecho o incumplimiento de los deberes a su cargo. El acto que disponga la remoción debe expresar sus fundamentos y ser comunicado a la Legislatura.",
+          "distance": 1.1803911924362183,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "pagina_inicio": 8,
+          "pagina_fin": 8,
+          "libro": "LIBRO I\nOBJETO, PRINCIPIOS RECTORES Y AUTORIDAD",
+          "titulo": "TÍTULO II\nDE LAS AUTORIDADES Y ORGANISMOS ELECTORALES",
+          "capitulo": "CAPÍTULO II\nDE LA SECRETARÍA ELECTORAL"
+        },
+        {
+          "rank": 5,
+          "id": "nacional_19945_art_164_ter__chunk_0001",
+          "chunk_id": "nacional_19945_art_164_ter__chunk_0001",
+          "source_article_id": "nacional_19945_art_164_ter",
+          "jurisdiccion": "nacional",
+          "ley": "19945",
+          "articulo": "164 ter",
+          "source": "ley_nacional.txt",
+          "chunk_numero": 1,
+          "text": "Artículo 164 ter: Postulación por distritos regionales provinciales y de la Ciudad Autónoma de Buenos Aires. Podrán postular candidatos a parlamentarios del Mercosur por distrito regional provincial y de la Ciudad Autónoma de Buenos Aires, las agrupaciones políticas de distrito correspondientes.\n\nCada elector votará por una sola lista oficializada de un único candidato con dos suplentes.\n\nResultará electo parlamentario del Mercosur por distrito regional provincial o en su caso de la Ciudad Autónoma de Buenos Aires, el candidato de la agrupación política, que obtuviere la mayoría de los votos emitidos en el respectivo distrito.",
+          "distance": 1.1839447021484375,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "titulo": "TITULO VII\nSistema Electoral Nacional",
+          "capitulo": "CAPITULO IV\nDe los parlamentarios del Mercosur"
+        }
+      ],
+      "answerability_review": {
+        "reviewed_top3_chunk_ids": [
+          "santa_fe_14478_art_159__chunk_0002",
+          "santa_fe_14478_art_25__chunk_0001",
+          "nacional_19945_art_166__chunk_0003"
+        ],
+        "can_substantiate_requested_fact": false,
+        "retrieved_nonanswering_matches": [
+          {
+            "chunk_id": "santa_fe_14478_art_159__chunk_0002",
+            "quote": "en forma proporcional a la cantidad de votos obtenidos en la elección general anterior"
+          },
+          {
+            "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+            "quote": "Son electoras las personas argentinas y extranjeras que hayan cumplido dieciséis (16) años de edad al momento de la elección"
+          },
+          {
+            "chunk_id": "nacional_19945_art_166__chunk_0003",
+            "quote": "En la Ciudad de Buenos Aires se celebrará durante 1995 una elección directa de Senador Nacional"
+          }
+        ],
+        "explanation": "El top-3 trata distribución normativa vinculada con elecciones anteriores, requisitos para ser elector y una elección de senador de 1995. Los rangos 4–5 son designación del secretario electoral y reglas para elegir parlamentarios del Mercosur. Ninguno contiene el partido ganador ni votos efectivamente contados en la presidencial de 2023: no se pueden deducir de normas."
+      }
+    },
+    {
+      "id": "ausente_gasto_real_partido",
+      "question": "¿Cuánto dinero gastó efectivamente cada partido político en la campaña presidencial argentina de 2023?",
+      "filter": null,
+      "results": [
+        {
+          "rank": 1,
+          "id": "santa_fe_14478_art_169__chunk_0001",
+          "chunk_id": "santa_fe_14478_art_169__chunk_0001",
+          "source_article_id": "santa_fe_14478_art_169",
+          "jurisdiccion": "santa_fe",
+          "ley": "14478",
+          "articulo": "169",
+          "source": "ley_sta_fe.pdf",
+          "chunk_numero": 1,
+          "text": "ARTÍCULO 169.- Cuenta única de campaña. Los fondos destinados a financiar la campaña electoral deben depositarse en una cuenta bancaria única por agrupación política, abierta en una entidad financiera reconocida por el Banco Central de la República Argentina, a la orden conjunta del responsable económico-financiero y del responsable político de campaña. Cuando las elecciones sean de competencia departamental o municipios de más de veinte mil (20.000) habitantes, las agrupaciones políticas pueden abrir cuentas adicionales en cada ámbito de actuación, conforme lo determine la reglamentación.",
+          "distance": 0.8943378925323486,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "pagina_inicio": 44,
+          "pagina_fin": 44,
+          "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+          "titulo": "TÍTULO VIII\nDE LA CAMPAÑA ELECTORAL",
+          "capitulo": "CAPÍTULO IV\nFINANCIAMIENTO DE LA CAMPAÑA ELECTORAL"
+        },
+        {
+          "rank": 2,
+          "id": "santa_fe_14478_art_173__chunk_0001",
+          "chunk_id": "santa_fe_14478_art_173__chunk_0001",
+          "source_article_id": "santa_fe_14478_art_173",
+          "jurisdiccion": "santa_fe",
+          "ley": "14478",
+          "articulo": "173",
+          "source": "ley_sta_fe.pdf",
+          "chunk_numero": 1,
+          "text": "ARTÍCULO 173.- Topes individuales. El límite a los aportes de las personas humanas para las campañas electorales no puede superar el uno por ciento (1%) del límite de gastos establecido en el artículo 172. Este límite se duplicará para aquellos aportes que resulten de una obligación emanada de las cartas orgánicas partidarias referida a los aportes de los afiliados cuando desempeñen cargos públicos electivos o presten servicios con cargos jerárquicos en la Administración Pública Provincial o Municipal. Los aportes efectuados por personas no afiliadas que tengan cargos públicos electivos o presten servicios con cargos jerárquicos se considerarán, a todos los efectos, aportes de afiliados cuando así lo manifiesten los aportantes. Los candidatos pueden aportar para el financiamiento de gastos electorales fondos de su propio patrimonio por un monto que no supere el uno por ciento (1%) del total permitido para la campaña respectiva. A los fines de fijar el límite referido previamente, se",
+          "distance": 0.9710839986801147,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "pagina_inicio": 45,
+          "pagina_fin": 45,
+          "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+          "titulo": "TÍTULO VIII\nDE LA CAMPAÑA ELECTORAL",
+          "capitulo": "CAPÍTULO IV\nFINANCIAMIENTO DE LA CAMPAÑA ELECTORAL"
+        },
+        {
+          "rank": 3,
+          "id": "santa_fe_14478_art_172__chunk_0001",
+          "chunk_id": "santa_fe_14478_art_172__chunk_0001",
+          "source_article_id": "santa_fe_14478_art_172",
+          "jurisdiccion": "santa_fe",
+          "ley": "14478",
+          "articulo": "172",
+          "source": "ley_sta_fe.pdf",
+          "chunk_numero": 1,
+          "text": "ARTÍCULO 172.- Límite de gastos electorales. Las listas internas de las agrupaciones políticas que participen de las elecciones primarias, abiertas, simultáneas y obligatorias no pueden superar en concepto de gastos de campaña la suma equivalente a un (1) JUS por cada doscientos (200) electores habilitados para votar. El mismo tope de gasto regirá para la elección general para cada una de las agrupaciones políticas que participen. Las agrupaciones políticas que superen los límites establecidos quedan sujetas a las sanciones previstas en este Código.",
+          "distance": 1.012833833694458,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "pagina_inicio": 45,
+          "pagina_fin": 45,
+          "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+          "titulo": "TÍTULO VIII\nDE LA CAMPAÑA ELECTORAL",
+          "capitulo": "CAPÍTULO IV\nFINANCIAMIENTO DE LA CAMPAÑA ELECTORAL"
+        },
+        {
+          "rank": 4,
+          "id": "santa_fe_14478_art_170__chunk_0001",
+          "chunk_id": "santa_fe_14478_art_170__chunk_0001",
+          "source_article_id": "santa_fe_14478_art_170",
+          "jurisdiccion": "santa_fe",
+          "ley": "14478",
+          "articulo": "170",
+          "source": "ley_sta_fe.pdf",
+          "chunk_numero": 1,
+          "text": "ARTÍCULO 170.- Fuentes de financiamiento. Los recursos de las agrupaciones políticas para la campaña electoral provienen de:\na. los aportes del Fondo Partidario Permanente que destine el presupuesto provincial;\nb. los aportes de personas humanas afiliadas o simpatizantes; y\nc. los aportes de personas jurídicas de derecho privado, en las condiciones que establezca la reglamentación.",
+          "distance": 1.0245352983474731,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "pagina_inicio": 44,
+          "pagina_fin": 44,
+          "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+          "titulo": "TÍTULO VIII\nDE LA CAMPAÑA ELECTORAL",
+          "capitulo": "CAPÍTULO IV\nFINANCIAMIENTO DE LA CAMPAÑA ELECTORAL"
+        },
+        {
+          "rank": 5,
+          "id": "pba_5109_art_132_ter__chunk_0001",
+          "chunk_id": "pba_5109_art_132_ter__chunk_0001",
+          "source_article_id": "pba_5109_art_132_ter",
+          "jurisdiccion": "pba",
+          "ley": "5109",
+          "articulo": "132 ter",
+          "source": "ley_pba.txt",
+          "chunk_numero": 1,
+          "text": "ARTÍCULO 132 ter.-  Se aplicará multa que se fijará entre diez (10) y sesenta (60) haberes mensuales mínimos de la Administración Pública Provincial a los partidos políticos, federaciones, alianzas transitorias o agrupaciones municipales que incumplan los plazos establecidos para el comienzo o la finalización de la campaña electoral en las elecciones primarias. Igual multa se aplicará a quien difunda propaganda política, encuestas o sondeos preelectorales o proyecciones sobre el resultado de la elección fuera de los plazos establecidos en la normativa vigente.\n\nTambién quedarán alcanzados por dicha sanción quienes realicen actos de gobierno y/o publicidad oficial fuera de los plazos que establece la normativa vigente.",
+          "distance": 1.0385496616363525,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "capitulo": "CAPÍTULO XXIV\nDISPOSICIONES PENALES"
+        }
+      ],
+      "answerability_review": {
+        "reviewed_top3_chunk_ids": [
+          "santa_fe_14478_art_169__chunk_0001",
+          "santa_fe_14478_art_173__chunk_0001",
+          "santa_fe_14478_art_172__chunk_0001"
+        ],
+        "can_substantiate_requested_fact": false,
+        "retrieved_nonanswering_matches": [
+          {
+            "chunk_id": "santa_fe_14478_art_169__chunk_0001",
+            "quote": "Los fondos destinados a financiar la campaña electoral deben depositarse en una cuenta bancaria única por agrupación política"
+          },
+          {
+            "chunk_id": "santa_fe_14478_art_173__chunk_0001",
+            "quote": "El límite a los aportes de las personas humanas para las campañas electorales no puede superar el uno por ciento (1%) del límite de gastos establecido en el artículo 172."
+          },
+          {
+            "chunk_id": "santa_fe_14478_art_172__chunk_0001",
+            "quote": "Límite de gastos electorales."
+          }
+        ],
+        "explanation": "Los vecinos son obligaciones de cuenta bancaria, topes de aportes y límites de gastos santafesinos; los restantes describen fuentes de financiamiento y multas bonaerenses por plazos de campaña. No son rendiciones ni montos ejecutados por cada partido en la campaña presidencial de 2023. Un tope permitido no acredita gasto real."
+      }
+    }
+  ],
+  "aggregate_positive_metrics": {
+    "unfiltered": {
+      "positive_question_denominator": 3,
+      "hit_at_1": 0.6666666666666666,
+      "hit_at_3": 0.6666666666666666,
+      "hit_at_5": 0.6666666666666666,
+      "mrr_at_5": 0.6666666666666666,
+      "misses_contribute_zero_to_mrr": true,
+      "unit": "article-level binary hit; chunks are not deduplicated before ranking"
+    },
+    "jurisdiction_filtered": {
+      "positive_question_denominator": 3,
+      "hit_at_1": 0.6666666666666666,
+      "hit_at_3": 0.6666666666666666,
+      "hit_at_5": 1.0,
+      "mrr_at_5": 0.75,
+      "misses_contribute_zero_to_mrr": true,
+      "unit": "article-level binary hit; chunks are not deduplicated before ranking"
+    },
+    "denominator": "three positive questions; misses count zero; negatives excluded"
+  },
+  "paraphrase_trial": {
+    "label": "separate paraphrase; excluded from fixed metrics",
+    "question": "¿En qué situaciones puede una persona electora quedar exceptuada de votar en una elección nacional?",
+    "expected_article_ids": [
+      "nacional_19945_art_12"
+    ],
+    "results": [
+      {
+        "rank": 1,
+        "id": "nacional_19945_art_12__chunk_0001",
+        "chunk_id": "nacional_19945_art_12__chunk_0001",
+        "source_article_id": "nacional_19945_art_12",
+        "jurisdiccion": "nacional",
+        "ley": "19945",
+        "articulo": "12",
+        "source": "ley_nacional.txt",
+        "chunk_numero": 1,
+        "text": "Artículo 12. - Deber de votar. Todo elector tiene el deber de votar en la elección nacional que se realice en su distrito.\n\nQuedan exentos de esa obligación:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial;\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables.\n\nTales electores se presentarán el día de la elección a la autoridad policial más próxima, la que extenderá certificación escrita que acredite la comparecencia;\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares.",
+        "distance": 0.6669492721557617,
+        "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+        "titulo": "TITULO I.\nDel Cuerpo Electoral",
+        "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+      },
+      {
+        "rank": 2,
+        "id": "pba_5109_art_4__chunk_0001",
+        "chunk_id": "pba_5109_art_4__chunk_0001",
+        "source_article_id": "pba_5109_art_4",
+        "jurisdiccion": "pba",
+        "ley": "5109",
+        "articulo": "4",
+        "source": "ley_pba.txt",
+        "chunk_numero": 1,
+        "text": "ARTÍCULO 4°.-  Quedan exentos de la obligación de votar:\n\na) Los que se hallen físicamente imposibilitados para concurrir al comicio por razones de salud.\n\nLa enfermedad se justificará con un certificado expedido por la autoridad médica local. Será obligación de la autoridad médica, concurrir al domicilio donde se encuentre la persona imposibilitada de trasladarse, en las formas y condiciones que establezca la reglamentación.\n\nb) Los funcionarios y empleados que por sus ocupaciones, como tales, no puedan hacerlo.\n\nEstos casos se justificarán con un certificado expedido por los superiores jerárquicos respectivos.\n\nc) Los jueces y sus auxiliares que por imperio de esta Ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial.\n\nd) Los que al día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables, debiendo acreditarse ante la autoridad que corresponda.",
+        "distance": 0.7348198890686035,
+        "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+        "capitulo": "CAPÍTULO I\nDERECHO ELECTORAL"
+      },
+      {
+        "rank": 3,
+        "id": "pba_5109_art_6__chunk_0001",
+        "chunk_id": "pba_5109_art_6__chunk_0001",
+        "source_article_id": "pba_5109_art_6",
+        "jurisdiccion": "pba",
+        "ley": "5109",
+        "articulo": "6",
+        "source": "ley_pba.txt",
+        "chunk_numero": 1,
+        "text": "ARTÍCULO 6°.- Ningún elector podrá ser detenido por la autoridad durante las horas de la elección, salvo si es sorprendido en flagrante delito o existiera orden del Juez Competente. Fuera de estos casos no podrá estorbársele el tránsito desde su domicilio hasta el lugar de la mesa receptora de votos o molestársele en el desempeño de sus funciones.",
+        "distance": 0.791981041431427,
+        "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+        "capitulo": "CAPÍTULO I\nDERECHO ELECTORAL"
+      },
+      {
+        "rank": 4,
+        "id": "nacional_19945_art_88__chunk_0001",
+        "chunk_id": "nacional_19945_art_88__chunk_0001",
+        "source_article_id": "nacional_19945_art_88",
+        "jurisdiccion": "nacional",
+        "ley": "19945",
+        "articulo": "88",
+        "source": "ley_nacional.txt",
+        "chunk_numero": 1,
+        "text": "Artículo 88. - Derecho del elector a votar. Todo aquel que figure en el padrón y exhiba su documento cívico tiene el derecho a votar y nadie podrá cuestionarlo en el acto del sufragio. Los presidentes no aceptarán impugnación alguna que se funde en la inhabilidad del elector para figurar en el padrón electoral.\n\nEstá excluido del mismo quien se encuentre tachado con tinta roja en el padrón de la mesa, no pudiendo en tal caso emitir el voto aunque se alegare error.",
+        "distance": 0.8098694682121277,
+        "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+        "titulo": "TITULO IV\nEL ACTO ELECTORAL",
+        "capitulo": "CAPITULO IV\nEmisión del sufragio"
+      },
+      {
+        "rank": 5,
+        "id": "nacional_19945_art_87__chunk_0001",
+        "chunk_id": "nacional_19945_art_87__chunk_0001",
+        "source_article_id": "nacional_19945_art_87",
+        "jurisdiccion": "nacional",
+        "ley": "19945",
+        "articulo": "87",
+        "source": "ley_nacional.txt",
+        "chunk_numero": 1,
+        "text": "Artículo 87. - Inadmisibilidad del voto. Ninguna autoridad, ni aun el juez federal con competencia electoral, podrá ordenar al presidente de mesa que admita el voto de un elector que no figura inscripto en los ejemplares del padrón electoral.",
+        "distance": 0.8167680501937866,
+        "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+        "titulo": "TITULO IV\nEL ACTO ELECTORAL",
+        "capitulo": "CAPITULO IV\nEmisión del sufragio"
+      }
+    ],
+    "manual_review": {
+      "reviewed_top3_chunk_ids": [
+        "nacional_19945_art_12__chunk_0001",
+        "pba_5109_art_4__chunk_0001",
+        "pba_5109_art_6__chunk_0001"
+      ],
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "quote": "Quedan exentos de esa obligación:"
+        }
+      ],
+      "assessment": "Qwen coloca el artículo nacional 12 en rango 1 también con la paráfrasis independiente. En top-3 siguen dos artículos bonaerenses: exenciones y protección frente a detención/obstrucción del tránsito al comicio. Solo el primero aporta parte de la respuesta nacional; la continuación del art. 12 no aparece en top-5. La mejora de rango no resuelve la fragmentación."
+    }
+  },
+  "k_comparison": {
+    "question_id": "nacional_respondible_deber_votar",
+    "question": "¿Qué excepciones al deber de votar enumera el artículo 12 del Código Electoral Nacional?",
+    "source_ranking": "same unfiltered top-5 result; no second query",
+    "k1": {
+      "results": [
+        {
+          "rank": 1,
+          "id": "nacional_19945_art_12__chunk_0001",
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "source_article_id": "nacional_19945_art_12",
+          "jurisdiccion": "nacional",
+          "ley": "19945",
+          "articulo": "12",
+          "source": "ley_nacional.txt",
+          "chunk_numero": 1,
+          "text": "Artículo 12. - Deber de votar. Todo elector tiene el deber de votar en la elección nacional que se realice en su distrito.\n\nQuedan exentos de esa obligación:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial;\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables.\n\nTales electores se presentarán el día de la elección a la autoridad policial más próxima, la que extenderá certificación escrita que acredite la comparecencia;\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares.",
+          "distance": 0.5659645199775696,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "titulo": "TITULO I.\nDel Cuerpo Electoral",
+          "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+        }
+      ]
+    },
+    "k3": {
+      "results": [
+        {
+          "rank": 1,
+          "id": "nacional_19945_art_12__chunk_0001",
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "source_article_id": "nacional_19945_art_12",
+          "jurisdiccion": "nacional",
+          "ley": "19945",
+          "articulo": "12",
+          "source": "ley_nacional.txt",
+          "chunk_numero": 1,
+          "text": "Artículo 12. - Deber de votar. Todo elector tiene el deber de votar en la elección nacional que se realice en su distrito.\n\nQuedan exentos de esa obligación:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial;\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables.\n\nTales electores se presentarán el día de la elección a la autoridad policial más próxima, la que extenderá certificación escrita que acredite la comparecencia;\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares.",
+          "distance": 0.5659645199775696,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "titulo": "TITULO I.\nDel Cuerpo Electoral",
+          "capitulo": "CAPITULO I\nDe la calidad, derechos y deberes del elector"
+        },
+        {
+          "rank": 2,
+          "id": "pba_5109_art_4__chunk_0001",
+          "chunk_id": "pba_5109_art_4__chunk_0001",
+          "source_article_id": "pba_5109_art_4",
+          "jurisdiccion": "pba",
+          "ley": "5109",
+          "articulo": "4",
+          "source": "ley_pba.txt",
+          "chunk_numero": 1,
+          "text": "ARTÍCULO 4°.-  Quedan exentos de la obligación de votar:\n\na) Los que se hallen físicamente imposibilitados para concurrir al comicio por razones de salud.\n\nLa enfermedad se justificará con un certificado expedido por la autoridad médica local. Será obligación de la autoridad médica, concurrir al domicilio donde se encuentre la persona imposibilitada de trasladarse, en las formas y condiciones que establezca la reglamentación.\n\nb) Los funcionarios y empleados que por sus ocupaciones, como tales, no puedan hacerlo.\n\nEstos casos se justificarán con un certificado expedido por los superiores jerárquicos respectivos.\n\nc) Los jueces y sus auxiliares que por imperio de esta Ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial.\n\nd) Los que al día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables, debiendo acreditarse ante la autoridad que corresponda.",
+          "distance": 0.7465661764144897,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "capitulo": "CAPÍTULO I\nDERECHO ELECTORAL"
+        },
+        {
+          "rank": 3,
+          "id": "santa_fe_14478_art_120__chunk_0001",
+          "chunk_id": "santa_fe_14478_art_120__chunk_0001",
+          "source_article_id": "santa_fe_14478_art_120",
+          "jurisdiccion": "santa_fe",
+          "ley": "14478",
+          "articulo": "120",
+          "source": "ley_sta_fe.pdf",
+          "chunk_numero": 1,
+          "text": "ARTÍCULO 120.- No emisión del sufragio en elecciones primarias. Justificación. Quedan eximidos los ciudadanos que comuniquen en forma fehaciente su voluntad de no participar al Juez Electoral o a las reparticiones habilitadas, desde la fecha de la convocatoria y hasta cuarenta y ocho (48) horas antes del comicio. Las personas electoras que no concurran a votar sin causa justificada quedan sujetas a las sanciones previstas por este Código.",
+          "distance": 0.7698651552200317,
+          "distance_kind": "Chroma native distance; lower means closer, not probability/confidence",
+          "pagina_inicio": 33,
+          "pagina_fin": 33,
+          "libro": "LIBRO II\nRÉGIMEN ELECTORAL",
+          "titulo": "TÍTULO VI\nELECCIONES PRIMARIAS, ABIERTAS, SIMULTÁNEAS Y OBLIGATORIAS",
+          "capitulo": "CAPÍTULO I\nPROCESO DE SELECCIÓN DE CANDIDATOS"
+        }
+      ]
+    },
+    "manual_coverage": {
+      "question_id": "nacional_respondible_deber_votar",
+      "k1_coverage": "partial: rango 1 con a-c, sin la continuación nacional que contiene d y condiciones adicionales.",
+      "k3_coverage": "partial: los otros dos pasajes son PBA art. 4 y Santa Fe art. 120; no completan el artículo nacional. Aumenta evidencia visible, no la cobertura de esa respuesta.",
+      "diagnosis": "Se usaron cortes del mismo ranking Qwen top-5, no una consulta adicional; no se interpreta la norma provincial como una excepción nacional."
+    }
+  },
+  "numbered_evidence_context": {
+    "question_id": "nacional_respondible_deber_votar",
+    "source_chunk_ids": [
+      "nacional_19945_art_12__chunk_0001",
+      "pba_5109_art_4__chunk_0001",
+      "santa_fe_14478_art_120__chunk_0001"
+    ],
+    "text": "[1]\nchunk_id: nacional_19945_art_12__chunk_0001\nsource_article_id: nacional_19945_art_12\njurisdiccion: nacional\nley: 19945\narticulo: 12\nsource: ley_nacional.txt\ntexto:\nArtículo 12. - Deber de votar. Todo elector tiene el deber de votar en la elección nacional que se realice en su distrito.\n\nQuedan exentos de esa obligación:\n\na) Los jueces y sus auxiliares que por imperio de esta ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial;\n\nb) Los que el día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables.\n\nTales electores se presentarán el día de la elección a la autoridad policial más próxima, la que extenderá certificación escrita que acredite la comparecencia;\n\nc) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto. Estas causales deberán ser justificadas en primer término por médicos del servicio de sanidad nacional; en su defecto por médicos oficiales, provinciales o municipales, y en ausencia de éstos por médicos particulares.\n\n[2]\nchunk_id: pba_5109_art_4__chunk_0001\nsource_article_id: pba_5109_art_4\njurisdiccion: pba\nley: 5109\narticulo: 4\nsource: ley_pba.txt\ntexto:\nARTÍCULO 4°.-  Quedan exentos de la obligación de votar:\n\na) Los que se hallen físicamente imposibilitados para concurrir al comicio por razones de salud.\n\nLa enfermedad se justificará con un certificado expedido por la autoridad médica local. Será obligación de la autoridad médica, concurrir al domicilio donde se encuentre la persona imposibilitada de trasladarse, en las formas y condiciones que establezca la reglamentación.\n\nb) Los funcionarios y empleados que por sus ocupaciones, como tales, no puedan hacerlo.\n\nEstos casos se justificarán con un certificado expedido por los superiores jerárquicos respectivos.\n\nc) Los jueces y sus auxiliares que por imperio de esta Ley deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial.\n\nd) Los que al día de la elección se encuentren a más de quinientos (500) kilómetros del lugar donde deban votar y justifiquen que el alejamiento obedece a motivos razonables, debiendo acreditarse ante la autoridad que corresponda.\n\n[3]\nchunk_id: santa_fe_14478_art_120__chunk_0001\nsource_article_id: santa_fe_14478_art_120\njurisdiccion: santa_fe\nley: 14478\narticulo: 120\nsource: ley_sta_fe.pdf\npaginas_articulo: 33–33\ntexto:\nARTÍCULO 120.- No emisión del sufragio en elecciones primarias. Justificación. Quedan eximidos los ciudadanos que comuniquen en forma fehaciente su voluntad de no participar al Juez Electoral o a las reparticiones habilitadas, desde la fecha de la convocatoria y hasta cuarenta y ocho (48) horas antes del comicio. Las personas electoras que no concurran a votar sin causa justificada quedan sujetas a las sanciones previstas por este Código."
+  },
+  "distance_plot": {
+    "path": "evalucacion/distancias_recuperacion_qwen3_0_6b.svg",
+    "question": "¿Qué excepciones al deber de votar enumera el artículo 12 del Código Electoral Nacional?",
+    "ranks": [
+      1,
+      2,
+      3
+    ],
+    "distances": [
+      0.5659645199775696,
+      0.7465661764144897,
+      0.7698651552200317
+    ]
+  },
+  "index_integrity": {
+    "before_queries": {
+      "count": 828,
+      "ids_sha256": "d991473aa3f76b07ecd9e35afa203bb1b26a2946b45a2d57f971d46059513df0",
+      "manifest_sha256": "c5131ae5fb7641cd55a9a370c1399eb0dc0bba3b30a2872fc4dc983642d64449",
+      "ids_match_chunks": true
+    },
+    "after_queries": {
+      "count": 828,
+      "ids_sha256": "d991473aa3f76b07ecd9e35afa203bb1b26a2946b45a2d57f971d46059513df0",
+      "manifest_sha256": "c5131ae5fb7641cd55a9a370c1399eb0dc0bba3b30a2872fc4dc983642d64449",
+      "ids_match_chunks": true
+    },
+    "unchanged": true
+  },
+  "manual_review": {
+    "status": "complete; quotes validated verbatim against retrieved texts",
+    "source": "evalucacion/revision_manual_recuperacion_qwen3_0_6b.json",
+    "method": "Manual text inspection by the coding agent; quote checks are consistency aids, not legal QA. Student/legal review remains separate."
+  },
+  "baseline_comparison": {
+    "baseline_model": "bge-m3",
+    "current_model": "qwen3-embedding:0.6b",
+    "aggregate": {
+      "unfiltered": {
+        "hit_at_1": {
+          "baseline": 0.6666666666666666,
+          "current": 0.6666666666666666,
+          "absolute_delta": 0.0
+        },
+        "hit_at_3": {
+          "baseline": 0.6666666666666666,
+          "current": 0.6666666666666666,
+          "absolute_delta": 0.0
+        },
+        "hit_at_5": {
+          "baseline": 0.6666666666666666,
+          "current": 0.6666666666666666,
+          "absolute_delta": 0.0
+        },
+        "mrr_at_5": {
+          "baseline": 0.6666666666666666,
+          "current": 0.6666666666666666,
+          "absolute_delta": 0.0
+        }
+      },
+      "jurisdiction_filtered": {
+        "hit_at_1": {
+          "baseline": 0.6666666666666666,
+          "current": 0.6666666666666666,
+          "absolute_delta": 0.0
+        },
+        "hit_at_3": {
+          "baseline": 0.6666666666666666,
+          "current": 0.6666666666666666,
+          "absolute_delta": 0.0
+        },
+        "hit_at_5": {
+          "baseline": 0.6666666666666666,
+          "current": 1.0,
+          "absolute_delta": 0.33333333333333337
+        },
+        "mrr_at_5": {
+          "baseline": 0.6666666666666666,
+          "current": 0.75,
+          "absolute_delta": 0.08333333333333337
+        }
+      }
+    },
+    "positive_questions": [
+      {
+        "question_id": "nacional_respondible_deber_votar",
+        "mode": "unfiltered",
+        "baseline": {
+          "metrics": {
+            "expected_article_ids": [
+              "nacional_19945_art_12"
+            ],
+            "first_expected_rank": 1,
+            "hit_at_1": true,
+            "hit_at_3": true,
+            "hit_at_5": true,
+            "reciprocal_rank_at_5": 1.0,
+            "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+          },
+          "passage_coverage": "partial",
+          "wrong_jurisdiction_top3": 2,
+          "wrong_jurisdiction_top5": 3
+        },
+        "current": {
+          "metrics": {
+            "expected_article_ids": [
+              "nacional_19945_art_12"
+            ],
+            "first_expected_rank": 1,
+            "hit_at_1": true,
+            "hit_at_3": true,
+            "hit_at_5": true,
+            "reciprocal_rank_at_5": 1.0,
+            "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+          },
+          "passage_coverage": "partial",
+          "wrong_jurisdiction_top3": 2,
+          "wrong_jurisdiction_top5": 2
+        }
+      },
+      {
+        "question_id": "pba_respondible_representacion",
+        "mode": "unfiltered",
+        "baseline": {
+          "metrics": {
+            "expected_article_ids": [
+              "pba_5109_art_13"
+            ],
+            "first_expected_rank": 1,
+            "hit_at_1": true,
+            "hit_at_3": true,
+            "hit_at_5": true,
+            "reciprocal_rank_at_5": 1.0,
+            "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+          },
+          "passage_coverage": "yes",
+          "wrong_jurisdiction_top3": 1,
+          "wrong_jurisdiction_top5": 3
+        },
+        "current": {
+          "metrics": {
+            "expected_article_ids": [
+              "pba_5109_art_13"
+            ],
+            "first_expected_rank": 1,
+            "hit_at_1": true,
+            "hit_at_3": true,
+            "hit_at_5": true,
+            "reciprocal_rank_at_5": 1.0,
+            "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+          },
+          "passage_coverage": "yes",
+          "wrong_jurisdiction_top3": 2,
+          "wrong_jurisdiction_top5": 4
+        }
+      },
+      {
+        "question_id": "santa_fe_respondible_autoridad_mesa",
+        "mode": "unfiltered",
+        "baseline": {
+          "metrics": {
+            "expected_article_ids": [
+              "santa_fe_14478_art_4"
+            ],
+            "first_expected_rank": null,
+            "hit_at_1": false,
+            "hit_at_3": false,
+            "hit_at_5": false,
+            "reciprocal_rank_at_5": 0.0,
+            "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+          },
+          "passage_coverage": "no",
+          "wrong_jurisdiction_top3": 1,
+          "wrong_jurisdiction_top5": 2
+        },
+        "current": {
+          "metrics": {
+            "expected_article_ids": [
+              "santa_fe_14478_art_4"
+            ],
+            "first_expected_rank": null,
+            "hit_at_1": false,
+            "hit_at_3": false,
+            "hit_at_5": false,
+            "reciprocal_rank_at_5": 0.0,
+            "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+          },
+          "passage_coverage": "no",
+          "wrong_jurisdiction_top3": 2,
+          "wrong_jurisdiction_top5": 3
+        }
+      },
+      {
+        "question_id": "nacional_respondible_deber_votar",
+        "mode": "jurisdiction_filtered",
+        "baseline": {
+          "metrics": {
+            "expected_article_ids": [
+              "nacional_19945_art_12"
+            ],
+            "first_expected_rank": 1,
+            "hit_at_1": true,
+            "hit_at_3": true,
+            "hit_at_5": true,
+            "reciprocal_rank_at_5": 1.0,
+            "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+          },
+          "passage_coverage": "partial",
+          "wrong_jurisdiction_top3": 0,
+          "wrong_jurisdiction_top5": 0
+        },
+        "current": {
+          "metrics": {
+            "expected_article_ids": [
+              "nacional_19945_art_12"
+            ],
+            "first_expected_rank": 1,
+            "hit_at_1": true,
+            "hit_at_3": true,
+            "hit_at_5": true,
+            "reciprocal_rank_at_5": 1.0,
+            "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+          },
+          "passage_coverage": "partial",
+          "wrong_jurisdiction_top3": 0,
+          "wrong_jurisdiction_top5": 0
+        }
+      },
+      {
+        "question_id": "pba_respondible_representacion",
+        "mode": "jurisdiction_filtered",
+        "baseline": {
+          "metrics": {
+            "expected_article_ids": [
+              "pba_5109_art_13"
+            ],
+            "first_expected_rank": 1,
+            "hit_at_1": true,
+            "hit_at_3": true,
+            "hit_at_5": true,
+            "reciprocal_rank_at_5": 1.0,
+            "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+          },
+          "passage_coverage": "yes",
+          "wrong_jurisdiction_top3": 0,
+          "wrong_jurisdiction_top5": 0
+        },
+        "current": {
+          "metrics": {
+            "expected_article_ids": [
+              "pba_5109_art_13"
+            ],
+            "first_expected_rank": 1,
+            "hit_at_1": true,
+            "hit_at_3": true,
+            "hit_at_5": true,
+            "reciprocal_rank_at_5": 1.0,
+            "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+          },
+          "passage_coverage": "yes",
+          "wrong_jurisdiction_top3": 0,
+          "wrong_jurisdiction_top5": 0
+        }
+      },
+      {
+        "question_id": "santa_fe_respondible_autoridad_mesa",
+        "mode": "jurisdiction_filtered",
+        "baseline": {
+          "metrics": {
+            "expected_article_ids": [
+              "santa_fe_14478_art_4"
+            ],
+            "first_expected_rank": null,
+            "hit_at_1": false,
+            "hit_at_3": false,
+            "hit_at_5": false,
+            "reciprocal_rank_at_5": 0.0,
+            "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+          },
+          "passage_coverage": "no",
+          "wrong_jurisdiction_top3": 0,
+          "wrong_jurisdiction_top5": 0
+        },
+        "current": {
+          "metrics": {
+            "expected_article_ids": [
+              "santa_fe_14478_art_4"
+            ],
+            "first_expected_rank": 4,
+            "hit_at_1": false,
+            "hit_at_3": false,
+            "hit_at_5": true,
+            "reciprocal_rank_at_5": 0.25,
+            "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+          },
+          "passage_coverage": "no",
+          "wrong_jurisdiction_top3": 0,
+          "wrong_jurisdiction_top5": 0
+        }
+      }
+    ],
+    "tracked_chunk_ranks": {
+      "nacional_19945_art_12__chunk_0002": {
+        "baseline": {
+          "nacional_respondible_deber_votar/unfiltered": null,
+          "nacional_respondible_deber_votar/jurisdiction_filtered": null
+        },
+        "current": {
+          "nacional_respondible_deber_votar/unfiltered": null,
+          "nacional_respondible_deber_votar/jurisdiction_filtered": null
+        }
+      },
+      "santa_fe_14478_art_4__chunk_0001": {
+        "baseline": {
+          "santa_fe_respondible_autoridad_mesa/unfiltered": null,
+          "santa_fe_respondible_autoridad_mesa/jurisdiction_filtered": null
+        },
+        "current": {
+          "santa_fe_respondible_autoridad_mesa/unfiltered": null,
+          "santa_fe_respondible_autoridad_mesa/jurisdiction_filtered": 4
+        }
+      }
+    },
+    "paraphrase": {
+      "baseline": {
+        "expected_article_ids": [
+          "nacional_19945_art_12"
+        ],
+        "first_expected_rank": 4,
+        "hit_at_1": false,
+        "hit_at_3": false,
+        "hit_at_5": true,
+        "reciprocal_rank_at_5": 0.25,
+        "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+      },
+      "current": {
+        "expected_article_ids": [
+          "nacional_19945_art_12"
+        ],
+        "first_expected_rank": 1,
+        "hit_at_1": true,
+        "hit_at_3": true,
+        "hit_at_5": true,
+        "reciprocal_rank_at_5": 1.0,
+        "metric_unit": "retrieved chunks ranked; binary article hit, repeated chunks do not add extra hits"
+      }
+    },
+    "source": "evalucacion/reporte_recuperacion.json"
+  },
+  "artifacts": {
+    "report": "evalucacion/reporte_recuperacion_qwen3_0_6b.json",
+    "review": "evalucacion/revision_manual_recuperacion_qwen3_0_6b.json",
+    "markdown": "evalucacion/validacion_recuperacion_qwen3_0_6b.md",
+    "plot": "evalucacion/distancias_recuperacion_qwen3_0_6b.svg"
+  },
+  "runtime_metadata": {
+    "python": "3.12.7",
+    "ollama_server": "0.40.15",
+    "embedding_model": {
+      "tag": "qwen3-embedding:0.6b",
+      "digest": "ac6da0dfba84a81fdbfbaf330198c33cd77c4cdfc53e8bc50eb581914a15621d",
+      "quantization": "Q8_0",
+      "returned_dimensions": 1024
+    },
+    "packages": {
+      "langchain-chroma": "0.2.6",
+      "langchain-ollama": "0.3.10",
+      "chromadb": "1.5.9",
+      "ollama": "0.6.3"
+    },
+    "query_encoding": "Texto original sin prefijo ni instrucción añadida; mismo OllamaEmbeddings que el baseline.",
+    "index_build_command": "uv run python scripts/02_indexar.py",
+    "new_index": {
+      "path": ".chroma/electoral_laws_qwen3_0_6b",
+      "unique_ids": 828,
+      "manifest": {
+        "managed_by": "tp2-rag-04",
+        "signature_version": 1,
+        "embedding_model": "qwen3-embedding:0.6b",
+        "ollama_base_url": "http://localhost:11434",
+        "collection": "electoral_laws",
+        "chunks_sha256": "381218f917d28ad9ba66f887173971d56da222d451a6314009e2245ef99e3871"
+      },
+      "all_metadata_and_texts_match_original_chunks": true,
+      "smoke_top3_ids": [
+        "nacional_19945_art_12__chunk_0001",
+        "pba_5109_art_4__chunk_0001",
+        "pba_5109_art_9__chunk_0001"
+      ]
+    },
+    "frozen_questions_sha256": "5b0c0f545671a2a34ea68de096c10c6fb22914bb7b3410011c19df9f40d3de4e",
+    "source_chunks_unchanged": true,
+    "all_preexisting_evaluation_files_unchanged": true,
+    "historical_artifacts_sha256": {
+      "evalucacion/reporte_recuperacion.json": "636d08e2e0c35d512b98a5524509d1f8b6ee7a054bad0bb164d89d68a9704249",
+      "evalucacion/revision_manual_recuperacion.json": "f035e1b1f0d57dc1ac9d0f2f9c5421a6825206024c23621947a2722249c1d7ee",
+      "evalucacion/validacion_recuperacion.md": "8ec612edfeca9a8d67afd78cd14d775dbcd6e3dffff2988b10f38c90c49d3b6b",
+      "evalucacion/distancias_recuperacion.svg": "b9eed94fd5c0a8a01f04accacd409dfeb3f6bbc0e4e7e76a817ba9c6661b1ed8"
+    },
+    "bge_index_preservation": {
+      "ids_count": 828,
+      "ids_sha256": "d991473aa3f76b07ecd9e35afa203bb1b26a2946b45a2d57f971d46059513df0",
+      "manifest_sha256": "93c7538fc463b647b056881df9a49001905d650c698f4dc95a0ee0f3ddd922e1",
+      "ids_and_manifest_unchanged": true
+    },
+    "protocol_runs": {
+      "positive_queries": 6,
+      "negative_queries": 2,
+      "independent_paraphrase_queries": 1,
+      "k": 5,
+      "k1_k3_derived_from_same_ranking": true
+    }
+  },
+  "model_comparison_notes": [
+    "La mejora cuantitativa fija se limita al modo filtrado: Santa Fe pasa de no recuperar el artículo esperado en top-5 a rango 4. Hit@5 sube de 2/3 a 3/3 (+1/3) y MRR@5 de 2/3 a 3/4 (+1/12). Hit@1 y Hit@3 quedan en 2/3, igual que todas las métricas sin filtro. Nación y PBA conservan primer rango 1 en ambos modos.",
+    "El pasaje definitorio santafesino completo está ahora en rango 4 filtrado, no en top-3 ni en top-5 global. La cobertura estricta del pasaje solicitado en top-3 permanece Nación parcial, PBA sí, Santa Fe no. El art. 67 ofrece apoyo relacionado, pero no prueba la atribución al art. 4. La continuación nacional con causal d y carácter optativo sigue fuera de top-5 en ambos modelos y ambos modos.",
+    "No hay mejora general del aislamiento jurisdiccional sin filtro: Nación conserva 2 vecinos de otra jurisdicción en top-3 (top-5 pasa de 3 a 2), PBA empeora de 1 a 2 en top-3 (3 a 4 en top-5) y Santa Fe de 1 a 2 en top-3 (2 a 3 en top-5). Con filtro explícito ambos modelos tienen cero vecinos de otra jurisdicción.",
+    "La paráfrasis separada mejora el primer rango del artículo nacional de 4 con BGE-M3 a 1 con Qwen, fuera del agregado fijo. La comparación k=1/k=3 no añade las excepciones nacionales faltantes; las dos preguntas ausentes siguen devolviendo vecinos normativos que no establecen los hechos pedidos.",
+    "Este cambio de tag/modelo, con su cuantización propia, se ensayó sin instrucciones adicionales ni cambios de chunks, filtro, distancia o ranking. Tres positivas y dos ausentes no estiman precisión general ni vigencia legal; las distancias de modelos distintos no son magnitudes de calidad comparables. La inspección del agente y las comprobaciones de citas no sustituyen revisión jurídica ni verificación personal del estudiante."
+  ]
+}

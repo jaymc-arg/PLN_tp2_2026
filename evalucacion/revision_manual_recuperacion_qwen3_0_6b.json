@@ -1,0 +1,129 @@
+{
+  "embedding_model": "qwen3-embedding:0.6b",
+  "reviewer": "Agente de programación: inspección de los resultados Qwen reales; no revisión jurídica independiente ni verificación personal del estudiante.",
+  "method": "Lectura de los top-3 completos de las seis consultas positivas, ambas negativas y la paráfrasis; seguimiento adicional del rango 4 filtrado santafesino y de los chunks nacionales originales. Las citas se cotejan automáticamente contra los resultados nuevos, no contra el baseline.",
+  "coverage_criterion": "yes = el pasaje solicitado está completo; partial = parte del pasaje solicitado; no = el pasaje solicitado no está en top-3. En Santa Fe se exige la definición del artículo 4 mencionado expresamente: una regla relacionada del art. 67 se registra como apoyo sustantivo indirecto, no como verificación de esa atribución.",
+  "fixed_positive": {
+    "nacional_respondible_deber_votar": {
+      "unfiltered": {
+        "reviewed_top3_chunk_ids": ["nacional_19945_art_12__chunk_0001", "pba_5109_art_4__chunk_0001", "santa_fe_14478_art_120__chunk_0001"],
+        "top3_passage_coverage": "partial",
+        "evidence": [{"chunk_id": "nacional_19945_art_12__chunk_0001", "quote": "c) Los enfermos o imposibilitados por fuerza mayor, suficientemente comprobada, que les impida asistir al acto."}],
+        "retrieved_nonanswering_matches": [
+          {"chunk_id": "pba_5109_art_4__chunk_0001", "quote": "b) Los funcionarios y empleados que por sus ocupaciones, como tales, no puedan hacerlo."},
+          {"chunk_id": "santa_fe_14478_art_120__chunk_0001", "quote": "ARTÍCULO 120.- No emisión del sufragio en elecciones primarias. Justificación."}
+        ],
+        "limitation": "El rango 1 enumera a-c y la justificación policial/médica, pero no contiene la causal d, su comunicación/certificación ni el carácter optativo de las exenciones. La continuación nacional no llega al top-5. Los rangos 2 y 3 son regímenes provinciales y no completan la enumeración nacional.",
+        "diagnostic_category": "fragmentación y recuperación; confusión de jurisdicción en vecinos",
+        "next_experiment": "Evaluar por separado recuperación del fragmento contiguo, sin incorporarla en este ensayo de modelo."
+      },
+      "jurisdiction_filtered": {
+        "reviewed_top3_chunk_ids": ["nacional_19945_art_12__chunk_0001", "nacional_19945_art_88__chunk_0001", "nacional_19945_art_18__chunk_0001"],
+        "top3_passage_coverage": "partial",
+        "evidence": [{"chunk_id": "nacional_19945_art_12__chunk_0001", "quote": "Tales electores se presentarán el día de la elección a la autoridad policial más próxima, la que extenderá certificación escrita que acredite la comparecencia;"}],
+        "retrieved_nonanswering_matches": [
+          {"chunk_id": "nacional_19945_art_88__chunk_0001", "quote": "Artículo 88. - Derecho del elector a votar."},
+          {"chunk_id": "nacional_19945_art_18__chunk_0001", "quote": "Artículo 18: Registro de infractores al deber de votar."}
+        ],
+        "limitation": "El filtro elimina leyes provinciales, pero los artículos 88 y 18 tratan derecho al voto y registro de infractores: no aportan la continuación faltante del art. 12. La respuesta completa sigue sin estar en top-3 ni top-5.",
+        "diagnostic_category": "fragmentación y recuperación dentro de la jurisdicción",
+        "next_experiment": "Inspeccionar expansión contigua en un ensayo posterior, conservando este ranking."
+      }
+    },
+    "pba_respondible_representacion": {
+      "unfiltered": {
+        "reviewed_top3_chunk_ids": ["pba_5109_art_13__chunk_0001", "santa_fe_14478_art_133__chunk_0001", "nacional_19945_art_166__chunk_0001"],
+        "top3_passage_coverage": "yes",
+        "evidence": [{"chunk_id": "pba_5109_art_13__chunk_0001", "quote": "Fíjase la representación legislativa de la Provincia en noventa y dos (92) diputados y cuarenta y seis (46) senadores"}],
+        "retrieved_nonanswering_matches": [
+          {"chunk_id": "santa_fe_14478_art_133__chunk_0001", "quote": "La Cámara de Diputados se compone de cincuenta (50) legisladores"},
+          {"chunk_id": "nacional_19945_art_166__chunk_0001", "quote": "las legislaturas en cada provincia procederán a la elección de un Senador"}
+        ],
+        "limitation": "El rango 1 sí contiene las dos cantidades requeridas. Los siguientes dos vecinos son Santa Fe y una disposición nacional transitoria sobre senadores de 1995; no deben mezclarse con la composición bonaerense.",
+        "diagnostic_category": "acierto del pasaje y ruido interjurisdiccional",
+        "next_experiment": "Medir el efecto del filtro sin extrapolar este acierto a otras preguntas."
+      },
+      "jurisdiction_filtered": {
+        "reviewed_top3_chunk_ids": ["pba_5109_art_13__chunk_0001", "pba_5109_art_11__chunk_0001", "pba_5109_art_151__chunk_0001"],
+        "top3_passage_coverage": "yes",
+        "evidence": [{"chunk_id": "pba_5109_art_13__chunk_0001", "quote": "Fíjase la representación legislativa de la Provincia en noventa y dos (92) diputados y cuarenta y seis (46) senadores"}],
+        "retrieved_nonanswering_matches": [
+          {"chunk_id": "pba_5109_art_11__chunk_0001", "quote": "Para las elecciones de concejales y consejeros escolares"},
+          {"chunk_id": "pba_5109_art_151__chunk_0001", "quote": "A efectos de la adecuación de la normativa a los requerimientos específicos del sistema de voto electrónico seleccionado"}
+        ],
+        "limitation": "La evidencia suficiente permanece en rango 1. El filtro sustituye los otros vecinos por reglas de distritos electorales y adecuación al voto electrónico, sin aportar a la cantidad de legisladores.",
+        "diagnostic_category": "acierto del pasaje; vecinos irrelevantes de la jurisdicción correcta",
+        "next_experiment": "No cambiar el pipeline a partir de un único ejemplo suficiente."
+      }
+    },
+    "santa_fe_respondible_autoridad_mesa": {
+      "unfiltered": {
+        "reviewed_top3_chunk_ids": ["nacional_19945_art_14__chunk_0001", "santa_fe_14478_art_64__chunk_0001", "pba_5109_art_45__chunk_0001"],
+        "top3_passage_coverage": "no",
+        "evidence": [],
+        "retrieved_nonanswering_matches": [
+          {"chunk_id": "nacional_19945_art_14__chunk_0001", "quote": "Todas las funciones que esta ley atribuye a las autoridades de mesa son irrenunciables"},
+          {"chunk_id": "santa_fe_14478_art_64__chunk_0001", "quote": "Autoridades de mesa en establecimientos de detención."},
+          {"chunk_id": "pba_5109_art_45__chunk_0001", "quote": "Los Presidentes de mesa tendrán a sus inmediatas órdenes la fuerza pública necesaria para el cumplimiento de sus funciones."}
+        ],
+        "limitation": "Ninguno de estos tres pasajes es la definición pedida del art. 4. El primer resultado es nacional; el segundo describe designación en establecimientos de detención y el tercero atribuciones respecto de la fuerza pública en PBA. El artículo esperado tampoco aparece en top-5 sin filtro.",
+        "diagnostic_category": "recuperación fallida y confusión jurisdiccional",
+        "next_experiment": "Investigar por separado la priorización de definiciones legales, sin alterar este experimento."
+      },
+      "jurisdiction_filtered": {
+        "reviewed_top3_chunk_ids": ["santa_fe_14478_art_64__chunk_0001", "santa_fe_14478_art_67__chunk_0001", "santa_fe_14478_art_68__chunk_0001"],
+        "top3_passage_coverage": "no",
+        "evidence": [],
+        "retrieved_nonanswering_matches": [
+          {"chunk_id": "santa_fe_14478_art_64__chunk_0001", "quote": "son designadas por el Juez Electoral entre personas electoras del circuito electoral"},
+          {"chunk_id": "santa_fe_14478_art_67__chunk_0001", "quote": "Cada mesa electoral tiene como única autoridad quien ejerce la presidencia de mesa y dos (2) suplentes que la auxilian y reemplazan, en el orden de sus designaciones"},
+          {"chunk_id": "santa_fe_14478_art_68__chunk_0001", "quote": "Requisitos para ser autoridad de mesa."}
+        ],
+        "related_substantive_support": "El art. 67, rango 2, aporta contenido relacionado sobre presidencia y reemplazo. Eso es apoyo indirecto del significado, pero no verifica la definición atribuida específicamente al art. 4. Se conserva el criterio estricto del protocolo histórico al marcar no para el pasaje solicitado.",
+        "limitation": "No hay definición del art. 4 en top-3. La inspección adicional del rango 4 sí encuentra santa_fe_14478_art_4__chunk_0001, inciso b, pp. 1–4, con el pasaje completo: mejora top-5, pero K=3 seguiría omitiéndolo. El rango 1 sigue priorizando mesas de detención.",
+        "diagnostic_category": "recuperación: pasaje correcto en rango 4, fuera del contexto top-3",
+        "next_experiment": "Examinar K y priorización del pasaje en una etapa separada; no confundir Hit@5 con suficiencia de K=3."
+      }
+    }
+  },
+  "negative": {
+    "ausente_resultado_electoral": {
+      "reviewed_top3_chunk_ids": ["santa_fe_14478_art_159__chunk_0002", "santa_fe_14478_art_25__chunk_0001", "nacional_19945_art_166__chunk_0003"],
+      "can_substantiate_requested_fact": false,
+      "retrieved_nonanswering_matches": [
+        {"chunk_id": "santa_fe_14478_art_159__chunk_0002", "quote": "en forma proporcional a la cantidad de votos obtenidos en la elección general anterior"},
+        {"chunk_id": "santa_fe_14478_art_25__chunk_0001", "quote": "Son electoras las personas argentinas y extranjeras que hayan cumplido dieciséis (16) años de edad al momento de la elección"},
+        {"chunk_id": "nacional_19945_art_166__chunk_0003", "quote": "En la Ciudad de Buenos Aires se celebrará durante 1995 una elección directa de Senador Nacional"}
+      ],
+      "explanation": "El top-3 trata distribución normativa vinculada con elecciones anteriores, requisitos para ser elector y una elección de senador de 1995. Los rangos 4–5 son designación del secretario electoral y reglas para elegir parlamentarios del Mercosur. Ninguno contiene el partido ganador ni votos efectivamente contados en la presidencial de 2023: no se pueden deducir de normas."
+    },
+    "ausente_gasto_real_partido": {
+      "reviewed_top3_chunk_ids": ["santa_fe_14478_art_169__chunk_0001", "santa_fe_14478_art_173__chunk_0001", "santa_fe_14478_art_172__chunk_0001"],
+      "can_substantiate_requested_fact": false,
+      "retrieved_nonanswering_matches": [
+        {"chunk_id": "santa_fe_14478_art_169__chunk_0001", "quote": "Los fondos destinados a financiar la campaña electoral deben depositarse en una cuenta bancaria única por agrupación política"},
+        {"chunk_id": "santa_fe_14478_art_173__chunk_0001", "quote": "El límite a los aportes de las personas humanas para las campañas electorales no puede superar el uno por ciento (1%) del límite de gastos establecido en el artículo 172."},
+        {"chunk_id": "santa_fe_14478_art_172__chunk_0001", "quote": "Límite de gastos electorales."}
+      ],
+      "explanation": "Los vecinos son obligaciones de cuenta bancaria, topes de aportes y límites de gastos santafesinos; los restantes describen fuentes de financiamiento y multas bonaerenses por plazos de campaña. No son rendiciones ni montos ejecutados por cada partido en la campaña presidencial de 2023. Un tope permitido no acredita gasto real."
+    }
+  },
+  "k_comparison": {
+    "question_id": "nacional_respondible_deber_votar",
+    "k1_coverage": "partial: rango 1 con a-c, sin la continuación nacional que contiene d y condiciones adicionales.",
+    "k3_coverage": "partial: los otros dos pasajes son PBA art. 4 y Santa Fe art. 120; no completan el artículo nacional. Aumenta evidencia visible, no la cobertura de esa respuesta.",
+    "diagnosis": "Se usaron cortes del mismo ranking Qwen top-5, no una consulta adicional; no se interpreta la norma provincial como una excepción nacional."
+  },
+  "paraphrase": {
+    "reviewed_top3_chunk_ids": ["nacional_19945_art_12__chunk_0001", "pba_5109_art_4__chunk_0001", "pba_5109_art_6__chunk_0001"],
+    "evidence": [{"chunk_id": "nacional_19945_art_12__chunk_0001", "quote": "Quedan exentos de esa obligación:"}],
+    "assessment": "Qwen coloca el artículo nacional 12 en rango 1 también con la paráfrasis independiente. En top-3 siguen dos artículos bonaerenses: exenciones y protección frente a detención/obstrucción del tránsito al comicio. Solo el primero aporta parte de la respuesta nacional; la continuación del art. 12 no aparece en top-5. La mejora de rango no resuelve la fragmentación."
+  },
+  "model_comparison_notes": [
+    "La mejora cuantitativa fija se limita al modo filtrado: Santa Fe pasa de no recuperar el artículo esperado en top-5 a rango 4. Hit@5 sube de 2/3 a 3/3 (+1/3) y MRR@5 de 2/3 a 3/4 (+1/12). Hit@1 y Hit@3 quedan en 2/3, igual que todas las métricas sin filtro. Nación y PBA conservan primer rango 1 en ambos modos.",
+    "El pasaje definitorio santafesino completo está ahora en rango 4 filtrado, no en top-3 ni en top-5 global. La cobertura estricta del pasaje solicitado en top-3 permanece Nación parcial, PBA sí, Santa Fe no. El art. 67 ofrece apoyo relacionado, pero no prueba la atribución al art. 4. La continuación nacional con causal d y carácter optativo sigue fuera de top-5 en ambos modelos y ambos modos.",
+    "No hay mejora general del aislamiento jurisdiccional sin filtro: Nación conserva 2 vecinos de otra jurisdicción en top-3 (top-5 pasa de 3 a 2), PBA empeora de 1 a 2 en top-3 (3 a 4 en top-5) y Santa Fe de 1 a 2 en top-3 (2 a 3 en top-5). Con filtro explícito ambos modelos tienen cero vecinos de otra jurisdicción.",
+    "La paráfrasis separada mejora el primer rango del artículo nacional de 4 con BGE-M3 a 1 con Qwen, fuera del agregado fijo. La comparación k=1/k=3 no añade las excepciones nacionales faltantes; las dos preguntas ausentes siguen devolviendo vecinos normativos que no establecen los hechos pedidos.",
+    "Este cambio de tag/modelo, con su cuantización propia, se ensayó sin instrucciones adicionales ni cambios de chunks, filtro, distancia o ranking. Tres positivas y dos ausentes no estiman precisión general ni vigencia legal; las distancias de modelos distintos no son magnitudes de calidad comparables. La inspección del agente y las comprobaciones de citas no sustituyen revisión jurídica ni verificación personal del estudiante."
+  ]
+}

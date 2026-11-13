@@ -327,3 +327,26 @@ def test_evaluator_queries_each_filter_once_and_keeps_paraphrase_separate(tmp_pa
     assert hashlib.sha256(fixture_copy.read_bytes()).hexdigest() == digest_before
     assert report_path.exists() and markdown_path.exists() and plot_path.exists()
     assert report["index_integrity"]["unchanged"] is True
+    from scripts.evaluar_recuperacion import render_markdown, compare_reports
+    assert f"Ollama `{DEFAULT_MODEL}`" in markdown_path.read_text()
+    assert str(report_path) in markdown_path.read_text()
+    historical = json.loads(json.dumps(report))
+    historical["embedding_model"] = "bge-m3"
+    assert "Ollama `bge-m3`" in render_markdown(historical)
+    comparison = compare_reports(historical, report)
+    assert comparison["aggregate"]["unfiltered"]["hit_at_1"]["absolute_delta"] == 0
+    assert comparison["baseline_model"] == "bge-m3"
+    assert comparison["current_model"] == DEFAULT_MODEL
+    wrong_review = tmp_path / "bge-review.json"
+    wrong_review.write_text(json.dumps({"embedding_model": "bge-m3"}))
+    with pytest.raises(ValueError, match="revisión manual.*modelo"):
+        evaluate(fixture_copy, existing_report_path=report_path,
+                 report_path=report_path, markdown_path=markdown_path, plot_path=plot_path,
+                 review_path=wrong_review)
+    historical["evaluation_questions_sha256"] = "different fixture"
+    with pytest.raises(ValueError, match="fixture"):
+        compare_reports(historical, report)
+    with pytest.raises(ValueError, match="modelo"):
+        evaluate(fixture_copy, model="other", existing_report_path=report_path,
+                 report_path=report_path, markdown_path=markdown_path, plot_path=plot_path,
+                 review_path=tmp_path / "missing-review.json")
