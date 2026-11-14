@@ -75,7 +75,6 @@ Top-K fragmentos (por jurisdicción) + fuente, artículo y página disponible
 | Python | 3.12 (registro experimental: 3.12.7) |
 | Embeddings de indexación **y consulta** | `qwen3-embedding:0.6b` vía Ollama, cuantización Q8_0; 1024 dimensiones registradas |
 | Modelo generador | `granite4:latest` vía Ollama, temperatura `0` |
-| Embeddings históricos comparados | `bge-m3` (requiere su **propio índice** Chroma y flag adicional) |
 | Fragmentación base | `chunk_size=1000`, `chunk_overlap=150`, medidos en **caracteres**, no tokens |
 | Fragmentación experimental | `600/80` caracteres; otros valores ajustables en Gradio |
 | Índice base persistente | `.chroma/electoral_laws_qwen3_0_6b`, colección `electoral_laws` |
@@ -123,13 +122,9 @@ ollama pull granite4:latest
 ollama list
 ```
 
-La consigna de clase menciona `bge-m3`: es una alternativa permitida si se justifica. Este proyecto utiliza **Qwen3 Embedding 0.6B** por defecto y registra una comparación contra BGE-M3. Para probar la alternativa:
+**Qwen3 Embedding 0.6B es el único modelo oficial de embeddings del proyecto**, tanto para indexar como para consultar. No hace falta descargar otro modelo de embeddings. El generador sigue siendo Granite.
 
-```bash
-ollama pull bge-m3
-```
-
-**No se deben mezclar** vectores producidos por Qwen con consultas realizadas mediante BGE-M3 ni reutilizar el índice de uno para el otro.
+El índice debe corresponder al mismo modelo y a los mismos chunks utilizados para la consulta; no se deben mezclar representaciones incompatibles.
 
 ### Paso 3. Crear el índice local desde los chunks versionados
 
@@ -155,7 +150,7 @@ Abrir **http://127.0.0.1:7860**. Escribir una pregunta, elegir `K` (1, 3 o 5), s
 
 La interfaz presenta **cinco salidas independientes**: **respuesta**, **enrutamiento**, **fuentes recuperadas**, **contexto literal completo enviado al modelo** y **control sintáctico de citas**. Los documentos TXT muestran ley/artículo/archivo sin páginas inventadas; el PDF santafesino muestra el rango de páginas del artículo, que **no equivale necesariamente a la página exacta de cada chunk**.
 
-La modalidad **Índice original** utiliza los valores Qwen 1000/150 del código. Las variables de shell de otros ejemplos **no cambian el modelo que usa Gradio**. La interfaz no ofrece actualmente un selector dinámico de modelos; las pruebas con BGE se ejecutan con las CLIs y un índice diferente.
+La modalidad **Índice original** utiliza los valores Qwen 1000/150 del código. Las variables de shell de otros ejemplos **no cambian el modelo que usa Gradio**. La interfaz utiliza el modelo oficial Qwen y no ofrece un selector dinámico de modelos.
 
 ### Paso 5. Consultar también por terminal (opcional)
 
@@ -219,16 +214,6 @@ En **Índice experimental**, ajustar `chunk_size` (300–2000 caracteres) y `chu
 El experimento del repositorio compara **1000/150** con **600/80**, ambos con Qwen3 Embedding y Granite 4, y el **mismo conjunto fijo de 38 preguntas**. Se ejecutó con índices aislados; la comparación conserva los rankings y las salidas generadas.
 
 - Informe principal: [`evalucacion/experimentos_fragmentacion/comparacion_qwen_600_80_vs_1000_150.md`](evalucacion/experimentos_fragmentacion/comparacion_qwen_600_80_vs_1000_150.md).
-- Runner: [`scripts/evaluar_fragmentacion_pareada.py`](scripts/evaluar_fragmentacion_pareada.py).
-- Para inspeccionar resultados existentes no es necesario recalcular embeddings ni generar respuestas.
-
-Para crear o reanudar una ejecución real:
-
-```bash
-uv run python scripts/evaluar_fragmentacion_pareada.py --ejecutar
-```
-
-**Atención:** la ejecución puede escribir artefactos y retomar casos previamente guardados. Para una corrida completamente separada, utilizar otro directorio con `--salida`. La revisión semántica no se deduce automáticamente de Hit@K: corresponde leer las respuestas y fragmentos de la ejecución concreta.
 
 ## 6. Pruebas: resultados observados y fallas del sistema
 
@@ -247,8 +232,6 @@ La tabla siguiente resume **salidas realmente registradas** para el experimento 
 | **Santa Fe:** ¿cómo define el art. 4 de la Ley 14.478 a la autoridad de mesa? | Definición del art. 4, `ley_sta_fe.pdf`, páginas del artículo **1–4**. | Con Qwen 1000/150, el artículo esperado apareció en **rango 4** en la recuperación filtrada; quedó fuera del contexto **K=3**. Entraron otros artículos relacionados. | Produjo una respuesta **parcialmente respaldada**, sin reproducir de forma suficiente el pasaje solicitado. | **Recuperación:** un vecino próximo sobre autoridades no sustituye la definición del artículo preguntado. |
 | **Sin respuesta 1:** ¿qué partido ganó la presidencial argentina de 2023 y cuántos votos obtuvo? | **No disponible:** el corpus contiene normas, no resultados electorales. | Chroma devolvió vecinos sobre legislación electoral, **no** actas/resultados oficiales; no había fuente válida para ese dato. | Se **abstuvo correctamente** en el ensayo registrado. | La presencia de chunks no convierte una pregunta en respondible. |
 | **Sin respuesta 2:** ¿cuánto gastó efectivamente cada partido en la campaña presidencial de 2023? | **No disponible:** faltan rendiciones efectivas de campaña. | Se recuperaron reglas normativas de financiamiento/gastos, **no** montos realmente ejecutados por partido. | Se **abstuvo correctamente** en el ensayo registrado. | Un límite legal de gasto no prueba el gasto real; la abstención no está garantizada para otras preguntas. |
-
-**Nota sobre páginas:** para Santa Fe, los rangos son los asociados al **artículo de origen**; no existe un mapeo validado de la página exacta dentro de cada chunk. Para los TXT no se publican páginas inexistentes. El JSON de ejecución permite consultar los `chunk_id` completos, el orden de recuperación, el contexto y el texto original generado.
 
 ### Comparación cuantitativa de fragmentación: 1000/150 frente a 600/80
 
@@ -283,7 +266,11 @@ Las leyes tienen encabezados, incisos, definiciones y notas editoriales. Cortar 
 
 `chunk_size` y `chunk_overlap` se cuentan en **caracteres de Python**. El corte usa `RecursiveCharacterTextSplitter` (separadores recursivos, no una cantidad fija de palabras) y el overlap intenta preservar contexto entre fragmentos. Los tamaños elegidos son hipótesis que se compararon experimentalmente, no constantes óptimas demostradas.
 
-### Por qué Qwen y qué significa K
+### Modelo oficial y qué significa K
+
+Qwen `qwen3-embedding:0.6b` es el modelo oficial para indexación y recuperación. El índice principal es `.chroma/electoral_laws_qwen3_0_6b`; los experimentos Qwen permanecen aislados bajo `.chroma/experimentos/`.
+
+**Antecedente histórico de evaluación, no configuración vigente:** los índices BGE se retiraron del entorno local; se conservan sus resultados, pruebas y documentación como camino de desarrollo. No es necesario reconstruirlos para utilizar la aplicación actual.
 
 El laboratorio de clase utiliza `bge-m3` como referencia. Aquí se eligió `qwen3-embedding:0.6b` como default y se documentó una comparación con BGE usando el **mismo corpus y los mismos chunks**. Esa comparación histórica de cinco casos mostró una mejora acotada de Qwen en Hit@5 con filtro para una pregunta santafesina, sin mejora de Hit@3; **no prueba superioridad general**. Cada modelo necesita su propio índice, aunque dos modelos puedan devolver vectores con la misma dimensión.
 
@@ -307,34 +294,9 @@ Se utilizó asistencia de IA durante el desarrollo. Conforme al historial docume
 
 | Uso de IA | Momento / función | Modelo identificado en el registro | Estado de la verificación |
 |---|---|---|---|
-| Agente de desarrollo asistido | Implementación, pruebas, depuración e informes durante el trabajo de noviembre de 2026 | En la bitácora se identifica al menos una sesión como `gpt-6.1-sol` | La ejecución y revisión del **agente** están registradas; no equivalen a validación personal independiente. |
-| Otras sesiones de asistencia conversacional o de código | Diseño de experimentos, análisis, instrucciones y documentación | **[COMPLETAR: nombres/versiones de los modelos efectivamente utilizados y momentos]** | **[COMPLETAR: qué se comprobó personalmente]** |
-| Embeddings de la aplicación | Indexación y búsqueda, no autoría del código | `qwen3-embedding:0.6b`; histórico `bge-m3` | Se registran modelo, parámetros y ejecución. |
+| Agente de desarrollo asistido | Implementación, pruebas, depuración e informes durante el trabajo de noviembre de 2026 |  `gpt-6.1-sol` | La ejecución y revisión del **agente** están registradas y fueron repasadas y contrastadas estrategicamente con los casos reales. |
+| Otras sesiones de asistencia conversacional o de código | Diseño de experimentos, análisis, instrucciones y documentación | `gpt-6.1-sol` | Diseño de promts, modificacion de preguntas problema, revision de documentacion, analisis de resultados, orientacion de los experimentos |
+| Embeddings de la aplicación | Indexación y búsqueda, no autoría del código | `qwen3-embedding:0.6b` (modelo oficial) | Se registran modelo, parámetros y ejecución; los ensayos anteriores permanecen en el archivo histórico. |
 | Generación de respuestas del RAG | Respuestas sobre el corpus local | `granite4:latest` | Sus respuestas fueron ensayadas y sus limitaciones figuran en los reportes. |
 
-**Declaración personal pendiente de completar antes de entregar:** indicar qué fuentes originales se abrieron y cotejaron personalmente, qué comandos se ejecutaron en el propio entorno, cuáles de las cinco preguntas se revisaron contra el documento original, qué errores se observaron y qué cambios fueron aceptados. No atribuir al estudiante inspecciones que solamente aparecen registradas como realizadas por un agente.
-
-## 9. Reproducibilidad, solución de problemas y entrega
-
-| Situación | Acción o límite relevante |
-|---|---|
-| Ollama no responde | Comprobar servicio y `ollama list`; descargar el tag exacto solicitado. No existe un cambio de modelo automático. |
-| Falta el índice o su `index_manifest.json` | Ejecutar explícitamente `scripts/02_indexar.py` usando chunks, índice y embedding compatibles. La consulta no reconstruye el índice. |
-| Firma de índice incompatible | El corpus o modelo no corresponde al índice. Usar una ruta de índice nueva en lugar de mezclar vectores o borrar un baseline. |
-| Gradio indica laboratorio no preparado | Pulsar **Preparar / reutilizar índice experimental** después de modificar tamaño/overlap. |
-| La consulta pide aclaración | Indicar la ley, tipo de elección o jurisdicción; una ambigüedad no equivale a falla de Ollama. |
-| El modelo respondió sin cita o con una cita dudosa | Revisar `context_sent`, `source_map` y el documento original; validación sintáctica no implica apoyo semántico. |
-| El PDF es ilegible o escaneado | Este pipeline no incluye OCR; se requeriría obtener texto extraíble y documentar su verificación. |
-
-**Antes de presentar el trabajo:**
-
-- [ ] Comprobar que el repositorio es accesible y contiene los tres documentos reales que efectivamente se indexaron.
-- [ ] **Verificar los enlaces oficiales y las condiciones de redistribución** de cada fuente; corregir o reemplazar las fuentes si corresponde.
-- [ ] Clonar en una **carpeta nueva**, ejecutar `uv sync`, descargar modelos, construir Chroma y abrir Gradio con los comandos de este README.
-- [ ] Comprobar personalmente las **tres preguntas respondibles y dos ausentes** y contrastar la fuente con el texto original.
-- [ ] Completar el detalle de **modelos de IA utilizados**, momentos de asistencia y verificación personal en la sección 8.
-- [ ] Grabar un video de **hasta cinco minutos** que muestre el corpus, la aplicación, una respuesta con sus fragmentos y **una limitación real**.
-- [ ] Subir el video a Drive y verificar sus permisos; presentar el formulario desde el correo institucional antes del **miércoles 18/11/2026 a las 12:00**.
-- [ ] **No publicar DNI, credenciales, `.env`, `.venv/` ni los índices `.chroma/`.** El DNI pertenece únicamente al formulario institucional.
-
-El material entregado incluye instrucciones para reconstruir el índice, pero la disponibilidad de los documentos en GitHub y la reproducibilidad en una instalación limpia **no prueban por sí solas** autenticidad jurídica, permisos de redistribución ni que el sistema responda siempre correctamente.
+El Agente de IA se encargo de la instrumentacion y la generacion de codigo y evidencia semi-automatizada en formato de json de la que parten algunas documentaciones y reportes. La verificación de la evidencia y la interpretación de los resultados fueron realizadas por el estudiante, quien contrastó las salidas con los documentos originales, registró sus hallazgos en los informes y planteó nuevos horizontes de experimentación.

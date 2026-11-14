@@ -254,7 +254,7 @@ def evaluate(*, questions_path: Path = QUESTIONS_PATH, index_dir: Path = DEFAULT
             "evaluation_questions_sha256": hashlib.sha256(question_bytes).hexdigest(),
             "fixed_question_count": len(questions),
             "baseline": {"k": 3, "jurisdiction_policy": "automatic conservative routing via answer_question",
-                         "retrieval_protocol": "one routed generation call per fixed question; reuse existing bge-m3 index"},
+                         "retrieval_protocol": f"one routed generation call per fixed question; reuse existing {embedding_model} index"},
             "routing_protocol": "answer_question; automatic jurisdiction routing",
             "runtime": runtime,
             "embedding_model": embedding_model,

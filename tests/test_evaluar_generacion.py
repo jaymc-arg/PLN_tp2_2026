@@ -59,6 +59,9 @@ def test_generation_evaluation_uses_answer_question_for_all_fixed_and_comparison
     assert [call["k"] for call in calls] == [3, 3, 3, 3, 3, 1]
     assert all(call["retriever"] is retriever for call in calls)
     assert report["routing_protocol"] == "answer_question; automatic jurisdiction routing"
+    assert report["embedding_model"] == "qwen3-embedding:0.6b"
+    assert report["baseline"]["retrieval_protocol"] == (
+        "one routed generation call per fixed question; reuse existing qwen3-embedding:0.6b index")
     assert all(case["generation"]["jurisdiction_source"] == "automatic" for case in report["fixed_cases"])
     assert all(case["generation"]["routing_status"] == "identified" for case in report["fixed_cases"])
     assert report["k_comparison"]["k1"]["routing_status"] == "identified"
