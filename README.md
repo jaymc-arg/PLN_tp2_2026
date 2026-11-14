@@ -1,7 +1,10 @@
 # RAG local sobre legislación electoral argentina
 
 **Trabajo Integrador 2 — Procesamiento de Lenguaje Natural (IFTS N.º 24, 2026)**  
+
 Repositorio: [jaymc-arg/PLN_tp2_2026](https://github.com/jaymc-arg/PLN_tp2_2026)
+
+Alumno: Juan Martín Carabetta
 
 Este proyecto implementa un sistema de **generación aumentada por recuperación (RAG)** para consultar disposiciones del Código Electoral Nacional, la Ley Electoral de la Provincia de Buenos Aires y el Código Electoral de Santa Fe. La aplicación recupera fragmentos de las fuentes **antes** de generar y muestra por separado la respuesta, la procedencia y el **contexto literal enviado al modelo**.
 
