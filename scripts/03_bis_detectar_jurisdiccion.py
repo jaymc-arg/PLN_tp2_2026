@@ -1,6 +1,7 @@
-"""Deterministic, conservative routing rules for the three indexed jurisdictions.
+"""Reglas deterministas y conservadoras para las tres jurisdicciones indexadas.
 
-Rules are intentionally corpus-specific; signals describe text matches, not legal advice.
+Las señales representan coincidencias textuales auditables, no asesoramiento
+jurídico ni una inferencia automática de la norma aplicable.
 """
 from __future__ import annotations
 
@@ -12,12 +13,17 @@ JURISDICCIONES = ("nacional", "pba", "santa_fe")
 
 
 def normalize(text: str) -> str:
+    """Normaliza mayúsculas, tildes y puntuación para comparar señales textuales.
+
+    No interpreta semántica jurídica: reduce variaciones ortográficas del usuario.
+    """
     folded = unicodedata.normalize("NFKD", text.casefold())
     plain = "".join(c for c in folded if not unicodedata.combining(c))
     return re.sub(r"[^a-z0-9]+", " ", plain).strip()
 
 
 def _matches(text: str, phrases: tuple[str, ...]) -> list[str]:
+    """Detecta alias como frases completas para evitar coincidencias parciales espurias."""
     found = []
     for phrase in phrases:
         normalized = normalize(phrase)
@@ -42,14 +48,18 @@ COMPARE = ("comparar", "compara", "comparacion", "comparaciones", "diferencia", 
 
 
 def detect_jurisdiction(question: str) -> dict[str, Any]:
-    """Return an auditable routing decision without I/O or model/index access."""
+    """Decide la jurisdicción con señales auditables, sin consultar modelos ni índices.
+
+    Una ubicación geográfica sola no basta para resolver qué ley electoral rige.
+    Las preguntas ambiguas se devuelven con una solicitud de aclaración.
+    """
     if not isinstance(question, str):
         raise TypeError("question debe ser texto")
     text = normalize(question)
     padded = f" {text} "
     signals: dict[str, Any] = {"normalized_query": text, "law": [], "scope": [], "geography": [], "unsupported_geography": [], "comparison": []}
     law = {j: _matches(text, phrases) for j, phrases in ALIASES.items()}
-    # A bare province name inside an alias is geography, not a named law.
+    # Una provincia mencionada como lugar no identifica por sí sola la ley consultada.
     law["pba"] = [p for p in law["pba"] if p not in ("provincia de buenos aires",)]
     for j, hits in law.items():
         if hits:
@@ -109,7 +119,7 @@ def detect_jurisdiction(question: str) -> dict[str, Any]:
     if len(provincial_geo) > 1:
         return _decision("ambiguous", [], signals, "Se mencionan varias provincias sin una comparación normativa explícita.", "¿Qué jurisdicción querés consultar, o querés comparar ambas?")
     if provincial_geo:
-        # General voting or voting obligation cannot identify which election's rules apply.
+        # Votar en una provincia no distingue entre comicios nacionales y provinciales.
         return _decision("ambiguous", [], signals, "La provincia aparece como ubicación, pero no queda claro qué elección o legislación rige la consulta.", "¿Consultás por una elección nacional o por la elección provincial?")
     if geo["nacional"]:
         return _decision("ambiguous", [], signals, "La mención de Argentina o de un ámbito geográfico no determina por sí sola la norma aplicable.", "¿Te referís a una elección presidencial/nacional o a una elección provincial?")
@@ -117,5 +127,6 @@ def detect_jurisdiction(question: str) -> dict[str, Any]:
 
 
 def _decision(status: str, jurisdictions: list[str], signals: dict[str, Any], reason: str, clarification: str | None) -> dict[str, Any]:
+    """Devuelve una decisión trazable con señales, motivo y aclaración posible."""
     return {"status": status, "jurisdictions": jurisdictions, "signals": signals, "reason": reason,
             "clarification_question": clarification}

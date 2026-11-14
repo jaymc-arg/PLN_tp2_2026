@@ -72,6 +72,11 @@ def format_result(result: dict[str, Any]) -> tuple[str, str, str, str, str]:
 def consultar(question: str, k: int = 3, jurisdiction: str = "Automática",
               mode: str = ORIGINAL, chunk_size: int = 1000, chunk_overlap: int = 150,
               active: dict[str, Any] | None = None) -> tuple[str, str, str, str, str]:
+    """Conecta los controles de Gradio con el mismo flujo de generación que la CLI.
+
+    No acepta un experimento si cambió algún parámetro desde su preparación
+    y jamás reconstruye el índice durante una consulta.
+    """
     if not isinstance(question, str) or not question.strip():
         return "Escribí una pregunta no vacía.", "Sin consulta.", "", "", "No aplica: sin consulta."
     try:
@@ -122,6 +127,11 @@ def preparar(mode: str, chunk_size: int, chunk_overlap: int):
 
 
 def main() -> None:
+    """Construye la interfaz y separa preparar índice de formular preguntas.
+
+    Los controles invalidan resultados pero no disparan trabajo costoso;
+    las consultas exponen el contexto exacto que recibió el modelo.
+    """
     with gr.Blocks(title="Consulta de legislación electoral", analytics_enabled=False) as app:
         gr.Markdown("# Consulta de legislación electoral\n"
                     "Las consultas son de solo lectura. K se aplica **por jurisdicción** en preguntas comparativas. "

@@ -1,4 +1,4 @@
-"""Read-only semantic retrieval from the persistent TP2 Chroma index."""
+"""Recuperación semántica de solo lectura desde el índice persistente Chroma."""
 from __future__ import annotations
 
 import argparse
@@ -31,7 +31,10 @@ JURISDICCIONES = ("nacional", "pba", "santa_fe")
 
 
 def build_evidence_context(results: list[dict[str, Any]]) -> str:
-    """Full text, numbered in exactly retrieval order for later generator reuse."""
+    """Arma evidencia literal numerada en el orden exacto de recuperación.
+
+    El generador reutiliza este contexto, sin seleccionar ni reordenar chunks.
+    """
     blocks = []
     for number, result in enumerate(results, 1):
         lines = [f"[{number}]", f"chunk_id: {result['chunk_id']}",
@@ -51,6 +54,11 @@ class RetrievalIndexError(RuntimeError):
 
 def build_result(rank: int, chunk_id: str, metadata: dict[str, Any], text: str,
                  distance: float | None) -> dict[str, Any]:
+    """Normaliza un resultado de Chroma sin perder texto ni procedencia.
+
+    La distancia es una medida de vecindad interna al índice, no confianza
+    probabilística ni prueba de que el fragmento responda la pregunta.
+    """
     result = {
         "rank": rank,
         "id": chunk_id,
@@ -72,11 +80,16 @@ def build_result(rank: int, chunk_id: str, metadata: dict[str, Any], text: str,
 
 
 class SemanticRetriever:
-    """Reusable retriever; reads Chroma and never adds, deletes, or re-embeds documents."""
+    """Recuperador reutilizable de solo lectura: nunca reindexa ni borra datos."""
 
     def __init__(self, *, index_dir: Path = DEFAULT_INDEX, chunks_path: Path = DEFAULT_INPUT,
                  model: str = DEFAULT_MODEL, embeddings: Any = None,
                  vector_store_class: Any = None):
+        """Abre solo un índice compatible con el JSONL y modelo solicitados.
+
+        Rechaza manifests o IDs distintos; recuperar nunca corrige el índice
+        ni reingesta documentos silenciosamente.
+        """
         self.index_dir = Path(index_dir).expanduser().resolve()
         self.chunks_path = Path(chunks_path).expanduser().resolve()
         self.model = model
@@ -125,6 +138,7 @@ class SemanticRetriever:
         self._expected_ids = expected_ids
 
     def integrity_snapshot(self) -> dict[str, Any]:
+        """Resume IDs y manifest para detectar alteraciones antes/después de evaluar."""
         current = self.store.get(include=[]).get("ids", [])
         manifest_bytes = (self.index_dir / MANIFEST).read_bytes()
         return {"count": len(current),
@@ -134,6 +148,11 @@ class SemanticRetriever:
 
     def retrieve(self, question: str, k: int = 5,
                  jurisdiccion: str | None = None) -> list[dict[str, Any]]:
+        """Calcula el embedding de la pregunta y consulta Chroma con filtro opcional.
+
+        K limita vecinos devueltos, no garantiza relevancia: la validación del
+        contenido recuperado corresponde a la evaluación y al generador.
+        """
         _validate_request(question, k, jurisdiccion)
         vector = self.embeddings.embed_query(question)
         kwargs = {"query_embeddings": [vector], "n_results": k,
@@ -154,6 +173,7 @@ class SemanticRetriever:
 
 
 def _validate_request(question: str, k: int, jurisdiccion: str | None) -> None:
+    """Rechaza preguntas vacías, K no positivo y jurisdicciones fuera del corpus."""
     if not isinstance(question, str) or not question.strip():
         raise ValueError("question debe ser una cadena no vacía")
     if type(k) is not int or k <= 0:
@@ -165,13 +185,18 @@ def _validate_request(question: str, k: int, jurisdiccion: str | None) -> None:
 def retrieve(question: str, k: int = 5, jurisdiccion: str | None = None, *,
              index_dir: Path = DEFAULT_INDEX, chunks_path: Path = DEFAULT_INPUT,
              model: str = DEFAULT_MODEL, retriever: SemanticRetriever | None = None) -> list[dict[str, Any]]:
-    """Función pública reusable: devuelve top-k con texto completo y provenance del índice local."""
+    """Devuelve hasta K vecinos con texto íntegro y procedencia del índice local."""
     _validate_request(question, k, jurisdiccion)
     active_retriever = retriever or SemanticRetriever(index_dir=index_dir, chunks_path=chunks_path, model=model)
     return active_retriever.retrieve(question, k=k, jurisdiccion=jurisdiccion)
 
 
 def main() -> int:
+    """CLI de recuperación: decide jurisdicción antes de acceder a Chroma.
+
+    Si la pregunta es ambigua pide aclaración, salvo selección manual o búsqueda
+    sin filtro solicitada explícitamente.
+    """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--pregunta", required=True)
     parser.add_argument("--k", type=int, default=5)

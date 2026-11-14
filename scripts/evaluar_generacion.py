@@ -40,6 +40,7 @@ class EvaluationRuntimeError(RuntimeError):
 
 
 def display_path(path: Path) -> str:
+    """Normaliza rutas para hacer portables las referencias del reporte."""
     resolved = Path(path).expanduser().resolve()
     try:
         return resolved.relative_to(ROOT).as_posix()
@@ -48,6 +49,7 @@ def display_path(path: Path) -> str:
 
 
 def _get_json(endpoint: str) -> dict[str, Any]:
+    """Consulta la API local de Ollama y convierte errores en fallas evaluables."""
     try:
         with urllib.request.urlopen(f"{OLLAMA_BASE_URL}{endpoint}", timeout=5) as response:
             return json.loads(response.read().decode("utf-8"))
@@ -58,6 +60,7 @@ def _get_json(endpoint: str) -> dict[str, Any]:
 
 
 def inspect_local_model(model: str) -> dict[str, Any]:
+    """Registra versión y digest del modelo usado para reproducir resultados."""
     version = _get_json("/api/version").get("version", "unknown")
     tags = _get_json("/api/tags").get("models", [])
     item = next((entry for entry in tags if entry.get("name") == model or entry.get("model") == model), None)
@@ -82,7 +85,10 @@ def inspect_local_model(model: str) -> dict[str, Any]:
 
 
 def _generation_record(result: dict[str, Any]) -> dict[str, Any]:
-    # Keep full retrieved text and exact prompt context in the evaluation artifact.
+    """Conserva pregunta, evidencia literal, prompt y respuesta para auditoría.
+
+    No resume los chunks: las citas deben contrastarse con texto íntegro.
+    """
     keys = (
         "question", "generation_model", "temperature", "k", "jurisdiccion", "embedding_model",
         "answer", "original_response", "answer_status", "fallback_reason", "abstained",
@@ -95,6 +101,7 @@ def _generation_record(result: dict[str, Any]) -> dict[str, Any]:
 
 
 def _run_comparison(case: dict[str, Any], k1_result: dict[str, Any]) -> dict[str, Any]:
+    """Contrasta K=1 y K=3 conservando el caso y sus respuestas efectivas."""
     k3 = case["generation"]
     return {
         "question_id": case["id"],
@@ -113,6 +120,7 @@ def _run_comparison(case: dict[str, Any], k1_result: dict[str, Any]) -> dict[str
 
 
 def validate_manual_review(review: dict[str, Any], report: dict[str, Any]) -> dict[str, Any]:
+    """Exige juicios manuales completos para los casos realmente evaluados."""
     actual_cases = {case["id"]: case for case in report.get("fixed_cases", [])}
     question_ids = set(actual_cases)
     cases = review.get("cases", {})
@@ -145,6 +153,7 @@ def validate_manual_review(review: dict[str, Any], report: dict[str, Any]) -> di
 
 
 def apply_manual_review(report: dict[str, Any], review: dict[str, Any], review_path: Path) -> None:
+    """Incorpora revisión humana sin atribuirla automáticamente al modelo."""
     for case in report["fixed_cases"]:
         case["diagnosis"] = review["cases"][case["id"]]
     report["k_comparison"]["manual_diagnosis"] = review["k_comparison"]
@@ -161,6 +170,11 @@ def evaluate(*, questions_path: Path = QUESTIONS_PATH, index_dir: Path = DEFAULT
              embedding_model: str = DEFAULT_EMBEDDING_MODEL, report_path: Path = REPORT_PATH,
              markdown_path: Path = MARKDOWN_PATH, review_path: Path = REVIEW_PATH,
              retriever: Any = None, existing_report_path: Path | None = None) -> dict[str, Any]:
+    """Evalúa cinco casos históricos mediante el enrutador actual.
+
+    Los reportes históricos sin enrutamiento se conservan separados y no se
+    interpretan como resultados del flujo nuevo.
+    """
     question_bytes = questions_path.read_bytes()
     fixture = json.loads(question_bytes)
     questions = fixture["preguntas"]
@@ -284,6 +298,7 @@ def evaluate(*, questions_path: Path = QUESTIONS_PATH, index_dir: Path = DEFAULT
 
 
 def _answer_for_markdown(case: dict[str, Any]) -> str:
+    """Expone estados de generación fallida, no ejecutada o completada."""
     status = case.get("generation_status", "completed" if "generation" in case else "error")
     if status == "error" or "generation_error" in case:
         return f"ERROR: {case.get('generation_error', 'model invocation failed')}"
@@ -294,6 +309,7 @@ def _answer_for_markdown(case: dict[str, Any]) -> str:
 
 
 def _supplied_sources(generation: dict[str, Any]) -> str:
+    """Formatea solamente las fuentes que efectivamente recibió el generador."""
     sources = []
     for item in generation.get("source_map", []):
         page = f", pp. {item['pagina_inicio']}–{item['pagina_fin']}" if "pagina_inicio" in item else ""
@@ -302,6 +318,7 @@ def _supplied_sources(generation: dict[str, Any]) -> str:
 
 
 def render_markdown(report: dict[str, Any]) -> str:
+    """Produce un informe que distingue trazabilidad, citas y juicio semántico."""
     lines = ["# Evaluación de generación con enrutamiento automático", "",
              "Ejecución actual vía `answer_question()` (detector, filtro jurisdiccional y generación). Se escribe en un reporte nuevo y no reemplaza el baseline histórico TP2-RAG-06. No es una métrica de exactitud general. La temperatura 0 no garantiza veracidad ni repetibilidad. Las citas se validan sólo en formato/rango; apoyo semántico requiere inspección del texto realmente enviado.", "",
              "## Runtime verificado", ""]
@@ -363,6 +380,7 @@ def render_markdown(report: dict[str, Any]) -> str:
 
 
 def main() -> int:
+    """Ejecuta o revisa la evaluación sin modificar el corpus original."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--questions", type=Path, default=QUESTIONS_PATH)
     parser.add_argument("--index-dir", type=Path, default=DEFAULT_INDEX)

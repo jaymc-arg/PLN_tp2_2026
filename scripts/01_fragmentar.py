@@ -17,7 +17,11 @@ LIST_ITEM = re.compile(r"^(?:(?:[a-záéíóúñ]|\d+|[ivxlcdm]+)[.)]|[-•])\s"
 
 
 def indexable_text(record: dict) -> str:
-    """Vista de búsqueda: line-wrap PDF reparado, texto legal sin paráfrasis."""
+    """Prepara texto indexable: repara saltos visuales sin parafrasear la norma.
+
+    Conserva el texto principal y, cuando solo hay una nota de derogación,
+    expone esa nota sin interpretar la vigencia jurídica.
+    """
     principal = record.get("texto_principal", "").strip()
     if principal and len(principal) > len(record.get("articulo", "")) + 24:
         return normalize_visual_wraps(principal)
@@ -40,6 +44,7 @@ def normalize_visual_wraps(text: str) -> str:
             if output and output[-1] != "":
                 output.append("")
             continue
+        # No unir incisos o listas con la oración anterior: tienen estructura normativa propia.
         if not output or output[-1] == "" or LIST_ITEM.match(line):
             output.append(line)
         else:
@@ -49,6 +54,12 @@ def normalize_visual_wraps(text: str) -> str:
 
 def build_chunks(input_dir: Path, output_path: Path, *, chunk_size: int = 1000,
                  chunk_overlap: int = 150) -> tuple[list[dict], dict]:
+    """Genera chunks independientes por artículo, medidos en caracteres.
+
+    El divisor prioriza párrafos, saltos de línea y palabras antes de cortar
+    por caracteres. Procesa cada artículo por separado: puede dividir uno largo,
+    pero nunca mezcla dos; el solapamiento conserva contexto entre cortes.
+    """
     if chunk_size <= 0 or chunk_overlap < 0 or chunk_overlap >= chunk_size:
         raise ValueError("Se requiere chunk_size > 0 y 0 <= chunk_overlap < chunk_size")
     splitter = RecursiveCharacterTextSplitter(
@@ -68,6 +79,8 @@ def build_chunks(input_dir: Path, output_path: Path, *, chunk_size: int = 1000,
                 if not view:
                     skipped.append({"source_article_id": article["id"], "motivo": "vista indexable vacía"})
                     continue
+                # Se invoca el divisor para UN artículo a la vez; así se impide mezclar normas.
+                # Un artículo breve queda completo; uno largo puede producir varios chunks.
                 for number, doc in enumerate(splitter.create_documents([view]), 1):
                     metadata = {
                         "source_article_id": article["id"],
@@ -78,6 +91,7 @@ def build_chunks(input_dir: Path, output_path: Path, *, chunk_size: int = 1000,
                         "libro": article.get("libro"),
                         "titulo": article.get("titulo"),
                         "capitulo": article.get("capitulo"),
+                        # La página proviene del artículo original; no se inventa una página exacta para cada corte.
                         "pagina_inicio": article.get("pagina_inicio"),
                         "pagina_fin": article.get("pagina_fin"),
                         "chunk_numero": number,
@@ -103,6 +117,10 @@ def build_chunks(input_dir: Path, output_path: Path, *, chunk_size: int = 1000,
 
 
 def summarize(chunks: list[dict], skipped: list[dict], chunk_size: int, chunk_overlap: int) -> dict:
+    """Resume longitudes, cantidad de fragmentos y omisiones por jurisdicción.
+
+    Estos valores describen el corte; no miden relevancia ni calidad semántica.
+    """
     grouped: dict[str, list[int]] = defaultdict(list)
     for chunk in chunks:
         grouped[chunk["jurisdiccion"]].append(len(chunk["texto"]))

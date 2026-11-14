@@ -1,3 +1,5 @@
+"""Protege decisiones de ruta y comparaciones sin depender de Ollama real."""
+
 import pytest
 from langchain_core.messages import AIMessage
 
@@ -9,6 +11,7 @@ generate_answer = generator_module.generate_answer
 
 
 def row(jurisdiction, idx):
+    """Fabrica evidencia separada por jurisdicción para inspeccionar ranking y citas."""
     law = {"nacional": "19945", "pba": "5109", "santa_fe": "14478"}[jurisdiction]
     article = {"nacional": "12", "pba": "13", "santa_fe": "4"}[jurisdiction]
     result = {"rank": idx, "chunk_id": f"{jurisdiction}-{idx}", "source_article_id": f"{jurisdiction}_{law}_art_{article}",
@@ -89,6 +92,7 @@ def test_unfiltered_opt_out_preserves_exploratory_path_and_is_labeled():
 
 
 def test_comparison_runs_independent_top_k_queries_and_reuses_exact_evidence_with_valid_citations():
+    """Exige K por jurisdicción y evita búsquedas ocultas tras generar la respuesta."""
     q = "¿Qué diferencias hay entre la Ley 5.109 y la Ley 14.478?"
     retriever, chat = FakeRetriever(), FakeChat()
     result = answer_question(q, k=2, retriever=retriever, chat_model=chat)

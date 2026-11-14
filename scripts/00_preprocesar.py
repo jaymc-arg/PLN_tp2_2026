@@ -34,6 +34,11 @@ def normalize(text: str) -> str:
 
 
 def load_source(path: Path):
+    """Lee TXT en UTF-8 o PDF página por página y registra su procedencia.
+
+    La limpieza de layout se limita a dos rótulos comprobados del PDF; cualquier
+    otra eliminación podría alterar la evidencia normativa.
+    """
     removed = []
     if path.suffix == ".pdf":
         from langchain_community.document_loaders import PyPDFLoader
@@ -225,6 +230,10 @@ def parse_lines(lines, jurisdiction: str, law: str, source: str):
 
 
 def run(root: Path, output: Path):
+    """Orquesta la extracción de las tres fuentes y conserva auditoría por archivo.
+
+    Escribe artículos y advertencias por separado; no resuelve vigencia legal.
+    """
     output.mkdir(parents=True, exist_ok=True)
     report = {"version_esquema": 1, "fuentes": {}}
     for jurisdiction, law, filename in SOURCES:

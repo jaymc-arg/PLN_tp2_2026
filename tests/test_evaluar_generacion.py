@@ -1,3 +1,5 @@
+"""Comprueba la evaluación enrutada sin consumir modelos ni índices reales."""
+
 import hashlib
 import json
 from pathlib import Path
@@ -16,6 +18,7 @@ class FakeRetriever:
 
 
 def fake_routed_result(question, k=3, **kwargs):
+    """Imita un resultado auditable completo sin depender de generación real."""
     jurisdiction = "nacional" if "Código Electoral Nacional" in question or "presidencial" in question else "pba"
     record = {"chunk_id": f"{jurisdiction}-{k}", "source_article_id": f"{jurisdiction}_article",
               "jurisdiccion": jurisdiction, "source": f"{jurisdiction}.txt", "ley": "1",
@@ -37,6 +40,7 @@ def fake_routed_result(question, k=3, **kwargs):
 
 
 def test_generation_evaluation_uses_answer_question_for_all_fixed_and_comparison_calls(tmp_path, monkeypatch, five_case_protocol_fixture):
+    """Impide evaluar por error la API histórica que omite el enrutamiento."""
     calls = []
     def routed(question, *, k=3, model=None, retriever=None, embedding_model=None):
         calls.append({"question": question, "k": k, "model": model, "retriever": retriever,

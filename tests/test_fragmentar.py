@@ -1,3 +1,5 @@
+"""Verifica que el corte respete artículos y conserve trazabilidad a su fuente."""
+
 import hashlib
 import json
 from pathlib import Path
@@ -17,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 @pytest.fixture(scope="module")
 def chunk_corpus(tmp_path_factory):
+    """Construye desde artículos reales una muestra reproducible de fragmentación."""
     out = tmp_path_factory.mktemp("chunks")
     run(ROOT / "datos", out)
     chunks, report = build_chunks(out, out / "chunks.jsonl")
@@ -52,6 +55,7 @@ def test_repeal_annotation_gets_nonempty_explicit_index_description(chunk_corpus
 
 
 def test_chunks_are_traceable_and_never_mix_articles(chunk_corpus):
+    """Protege la frontera entre artículos: cada chunk debe preservar un origen único."""
     chunks, report, articles, _ = chunk_corpus
     ids = [c["id"] for c in chunks]
     assert len(ids) == len(set(ids))
@@ -97,6 +101,7 @@ def test_index_view_preserves_amendments_not_observed_pba_history(chunk_corpus):
 
 
 def test_chunking_deterministic_and_parameters_valid(chunk_corpus, tmp_path):
+    """Asegura cortes repetibles y descarta solapamientos inconsistentes."""
     _, _, _, source_dir = chunk_corpus
     first = (source_dir / "chunks.jsonl").read_bytes()
     first_report = (source_dir / "reporte_fragmentacion.json").read_bytes()

@@ -1,3 +1,5 @@
+"""Prueba abstenciones y citas sin atribuir validez semántica al formato."""
+
 import json
 from pathlib import Path
 
@@ -36,6 +38,7 @@ class FakeChat:
 
 def record(chunk_id, text, *, jurisdiction="nacional", source="ley.txt", article="12",
            law="19945", pages=None, distance=0.2):
+    """Crea resultados de recuperación con metadatos y texto arbitrario verificable."""
     result = {
         "rank": 1, "id": chunk_id, "chunk_id": chunk_id,
         "source_article_id": f"{jurisdiction}_{law}_art_{article}",
@@ -143,6 +146,7 @@ def test_empty_retrieval_does_not_construct_or_invoke_chat_model(monkeypatch):
 
 
 def test_invalid_and_malformed_citations_are_flagged_without_rewriting_answer():
+    """Una cita fallida debe advertirse, no repararse inventando fuentes."""
     result = generate_answer("q", retriever=FakeRetriever([record("c1", "text")]),
                              chat_model=FakeChat("La regla aplica [3] y se indica [n]."))
     check = result["citation_check"]

@@ -18,6 +18,10 @@ EXPERIMENT_ROOT = indexar.ROOT / ".chroma/experimentos"
 
 
 def validate_parameters(chunk_size: int, chunk_overlap: int) -> None:
+    """Rechaza valores fraccionarios o fuera del rango admitido por el laboratorio.
+
+    Gradio puede enviar números como float aun cuando visualmente sean enteros.
+    """
     # Gradio Number puede entregar enteros como float; no aceptar fracciones ni bool.
     if (isinstance(chunk_size, bool) or isinstance(chunk_overlap, bool)
             or not isinstance(chunk_size, (int, float)) or not isinstance(chunk_overlap, (int, float))
@@ -47,6 +51,11 @@ def configuration(chunk_size: int, chunk_overlap: int) -> dict[str, Any]:
 
 
 def prepare_experiment(chunk_size: int, chunk_overlap: int) -> tuple[dict[str, Any], str]:
+    """Construye o reutiliza un índice aislado sin alterar el baseline.
+
+    La identidad incluye parámetros, corpus, modelo y código del splitter;
+    no sobrescribe artefactos incompletos ni sigue enlaces simbólicos.
+    """
     active = configuration(chunk_size, chunk_overlap)  # valida antes de cualquier I/O
     chunks_path, index_dir = Path(active["chunks_path"]), Path(active["index_dir"])
     # No seguir enlaces que pudieran redirigir una escritura fuera del experimento.

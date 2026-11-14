@@ -12,12 +12,14 @@ ui = import_module("scripts.05_interfaz_gradio")
 
 
 def result():
+    """Fabrica una respuesta sin llamada al modelo para probar la presentación."""
     return {"answer": "Respuesta", "source_map": [], "context_sent": "Contexto literal\n" * 1000,
             "citation_check": None, "model_invoked": False}
 
 
 @pytest.fixture
 def workspace(tmp_path, monkeypatch):
+    """Aísla entradas e índices experimentales de los artefactos baseline."""
     inputs = tmp_path / "procesados"
     inputs.mkdir()
     for jurisdiction in lab.fragmentar.JURISDICTIONS:
@@ -62,6 +64,7 @@ def test_model_change_creates_a_distinct_experiment_identity(workspace, monkeypa
 
 
 def fake_pipeline(monkeypatch):
+    """Intercepta fragmentación e indexación para verificar efectos sin I/O externo."""
     def split(inputs, target, **kwargs):
         target.parent.mkdir(parents=True)
         target.write_text("chunks experimentales")
@@ -78,6 +81,7 @@ def fake_pipeline(monkeypatch):
 
 
 def test_prepare_isolation_and_reuse(workspace, monkeypatch):
+    """Exige reutilización del mismo experimento sin tocar el índice original."""
     inputs, root, baseline = workspace
     before = {path: path.read_bytes() for path in inputs.iterdir()}
     split, index = fake_pipeline(monkeypatch)

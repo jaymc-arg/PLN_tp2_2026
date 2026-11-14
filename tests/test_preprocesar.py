@@ -1,3 +1,5 @@
+"""Protege la fidelidad del corpus: ninguna extracción debe perder texto legal."""
+
 import hashlib
 import json
 from pathlib import Path
@@ -25,11 +27,13 @@ HASHES = {
 
 
 def parse(text):
+    """Crea una fuente sintética sin páginas para aislar reglas de segmentación."""
     return parse_lines([(line, None) for line in text.splitlines()], "test", "1", "fixture.txt")
 
 
 @pytest.fixture(scope="module")
 def corpus(tmp_path_factory):
+    """Procesa las fuentes reales una sola vez por módulo y expone sus auditorías."""
     out = tmp_path_factory.mktemp("procesados")
     report = run(ROOT / "datos", out)
     records = {
@@ -135,6 +139,7 @@ def test_real_schema_order_fidelity_and_original_hash(corpus, jurisdiction, law,
 
 
 def article(corpus, jurisdiction, number):
+    """Recupera un artículo del corpus de prueba por número y jurisdicción."""
     return next(r for r in corpus[0][jurisdiction] if r["articulo"] == number)
 
 
@@ -245,6 +250,7 @@ def test_amendment_classification_requires_verified_enclosing_source():
 
 
 def test_deterministic_all_outputs(corpus, tmp_path):
+    """Evita que el mismo corpus produzca IDs o auditorías diferentes entre corridas."""
     run(ROOT / "datos", tmp_path)
     for first in corpus[2].iterdir():
         assert first.read_bytes() == (tmp_path / first.name).read_bytes()

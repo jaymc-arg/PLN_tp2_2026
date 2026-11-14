@@ -33,6 +33,7 @@ MAX_K = 5
 
 
 def display_path(path: Path) -> str:
+    """Presenta rutas relativas al proyecto cuando es posible para reportes legibles."""
     resolved = Path(path).expanduser().resolve()
     try:
         return resolved.relative_to(ROOT).as_posix()
@@ -43,6 +44,11 @@ DISTANCE_NOTE = "Distancia nativa de Chroma: un valor menor indica un vecino má
 
 
 def article_metrics(results: list[dict[str, Any]], expected_article_ids: list[str]) -> dict[str, Any]:
+    """Calcula Hit@K y rango recíproco a nivel de artículo fuente.
+
+    Un chunk del artículo esperado cuenta como hit, aunque no incluya el
+    pasaje que responde: esa cobertura exige revisión separada.
+    """
     expected = set(expected_article_ids)
     ranks = [r["rank"] for r in results if r["source_article_id"] in expected]
     first = min(ranks) if ranks else None
@@ -58,6 +64,7 @@ def article_metrics(results: list[dict[str, Any]], expected_article_ids: list[st
 
 
 def aggregate_metrics(rows: list[dict[str, Any]], mode: str) -> dict[str, Any]:
+    """Promedia métricas sobre preguntas positivas, con denominador explícito."""
     metrics = [row[mode]["article_metrics"] for row in rows]
     denominator = len(metrics)
     return {
@@ -72,6 +79,7 @@ def aggregate_metrics(rows: list[dict[str, Any]], mode: str) -> dict[str, Any]:
 
 
 def _verify_context(results: list[dict[str, Any]], context: str) -> None:
+    """Comprueba que el prompt de evidencia conserva orden, IDs y texto recuperado."""
     cursor = 0
     for number, result in enumerate(results, 1):
         required = [f"[{number}]", f"chunk_id: {result['chunk_id']}",
@@ -143,6 +151,7 @@ def validate_manual_review(review: dict[str, Any], questions: list[dict[str, Any
 
 
 def make_distance_svg(results: list[dict[str, Any]], question: str) -> str:
+    """Dibuja distancias nativas con sus etiquetas; no las convierte en probabilidades."""
     rows = [r for r in results[:3] if isinstance(r.get("distance"), (int, float))]
     width, row_height, left, right = 900, 58, 310, 850
     height = 135 + row_height * max(1, len(rows))
@@ -172,6 +181,11 @@ def evaluate(questions_path: Path = QUESTIONS_PATH, *, index_dir: Path = DEFAULT
              retriever: SemanticRetriever | None = None,
              existing_report_path: Path | None = None,
              baseline_report_path: Path | None = None) -> dict[str, Any]:
+    """Evalúa recuperación sobre preguntas fijas, con y sin filtro jurisdiccional.
+
+    Separa métricas automáticas por artículo y revisión humana del pasaje
+    que permite contestar; no invoca generación.
+    """
     question_bytes = questions_path.read_bytes()
     fixture = json.loads(question_bytes)
     questions = fixture["preguntas"]
@@ -293,6 +307,7 @@ def evaluate(questions_path: Path = QUESTIONS_PATH, *, index_dir: Path = DEFAULT
 
 
 def _retrieval_map(report: dict[str, Any]) -> dict[tuple[str, str], list[dict[str, Any]]]:
+    """Indexa rankings guardados por pregunta y modo para contrastar revisiones."""
     mapping = {}
     for row in report["positive_questions"]:
         mapping[(row["id"], "unfiltered")] = row["unfiltered"]["results"]
@@ -304,6 +319,7 @@ def _retrieval_map(report: dict[str, Any]) -> dict[tuple[str, str], list[dict[st
 
 
 def _apply_manual_review(report: dict[str, Any], review: dict[str, Any], review_path: Path) -> None:
+    """Adjunta juicios manuales sin confundirlos con métricas automáticas."""
     for row in report["positive_questions"]:
         row["answer_passage_review"] = review["fixed_positive"][row["id"]]
     for row in report["negative_questions"]:
@@ -366,6 +382,7 @@ def compare_reports(baseline: dict[str, Any], current: dict[str, Any]) -> dict[s
 
 
 def render_comparison(report: dict[str, Any]) -> list[str]:
+    """Convierte resultados de comparación entre modelos en filas explicativas."""
     comparison = report.get("baseline_comparison")
     if not comparison:
         return []
@@ -393,6 +410,7 @@ def render_comparison(report: dict[str, Any]) -> list[str]:
 
 
 def render_markdown(report: dict[str, Any]) -> str:
+    """Construye un informe auditable con rankings, pasajes y métricas."""
     lines = [f"# TP2-RAG-05 — recuperación semántica: {report['embedding_model']}", "",
              f"Se usó Chroma persistente y Ollama `{report['embedding_model']}`; no hubo generación. " + DISTANCE_NOTE,
              "Hit@k/MRR se calculan a nivel de artículo y no prueban que un chunk contenga la respuesta.", "",
@@ -407,14 +425,17 @@ def render_markdown(report: dict[str, Any]) -> str:
                   "La inspección textual manual la realizó el agente de código sobre los chunks recuperados completos; no equivale a revisión jurídica ni a verificación personal del estudiante.", "",
                   "| " + " | ".join(headers) + " |", "|" + "|".join(["---"] * len(headers)) + "|"])
     def metric_cells(row: dict[str, Any], mode: str) -> list[str]:
+        """Formatea Hit@K y MRR para cada modo de recuperación."""
         m = row[mode]["article_metrics"]
         return [str(int(m["hit_at_1"])), str(int(m["hit_at_3"])), str(int(m["hit_at_5"])),
                 f"{m['reciprocal_rank_at_5']:.3f}"]
     def passage_text(item: dict[str, Any]) -> str:
+        """Presenta evidencia revisada y pasajes recuperados pero insuficientes."""
         citations = item.get("evidence", []) + item.get("retrieved_nonanswering_matches", [])
         quotes = "; ".join(f"`{e['chunk_id']}`: “{e['quote']}”" for e in citations) or "sin pasaje esperado"
         return f"{item.get('top3_passage_coverage', 'pending')}: {quotes}"
     def source_text(results: list[dict[str, Any]]) -> str:
+        """Conserva identificadores, páginas y distancias visibles en el informe."""
         return "; ".join(f"{r['chunk_id']} ({r['source']}" +
                           (f", pp. {r['pagina_inicio']}–{r['pagina_fin']}" if "pagina_inicio" in r else "") +
                           f"; d={r['distance']:.6f})" for r in results[:3])
@@ -453,6 +474,7 @@ def render_markdown(report: dict[str, Any]) -> str:
 
 
 def main() -> int:
+    """CLI que permite ejecutar evaluación o trabajar con reportes existentes."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--questions", type=Path, default=QUESTIONS_PATH)
     parser.add_argument("--index-dir", type=Path, default=DEFAULT_INDEX)

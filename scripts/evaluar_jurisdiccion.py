@@ -1,4 +1,4 @@
-"""Offline routing classification and optional read-only retrieval impact evaluation."""
+"""Evalúa el enrutamiento jurisdiccional y su impacto opcional en la recuperación."""
 from __future__ import annotations
 
 import argparse
@@ -32,6 +32,11 @@ STATUSES = ("identified", "ambiguous", "comparative", "unspecified", "unsupporte
 
 
 def classification_metrics(cases: list[dict[str, Any]]) -> dict[str, Any]:
+    """Calcula matriz de clasificación, acierto y errores dañinos del detector.
+
+    Distingue cobertura del filtrado automático de exactitud: decidir siempre
+    especificar una jurisdicción no sería necesariamente un buen resultado.
+    """
     matrix = {gold: {pred: 0 for pred in STATUSES} for gold in STATUSES}
     exact = 0
     per_jurisdiction = {}
@@ -95,6 +100,7 @@ def classification_metrics(cases: list[dict[str, Any]]) -> dict[str, Any]:
 
 
 def _article_metrics(rows: list[dict[str, Any]], k: int) -> dict[str, Any]:
+    """Calcula aciertos por artículo y rango recíproco en las consultas evaluadas."""
     denominator = len(rows)
     hits = [any(r.get("source_article_id") in row["expected_source_article_ids"] for r in row["results"][:k]) for row in rows]
     reciprocal = []
@@ -107,6 +113,7 @@ def _article_metrics(rows: list[dict[str, Any]], k: int) -> dict[str, Any]:
 
 def evaluate_retrieval(*, questions: list[dict[str, Any]], index_dir: Path, chunks_path: Path,
                        model: str, retriever: Any = None) -> dict[str, Any]:
+    """Mide cómo afecta el enrutamiento a la recuperación sin generar respuestas."""
     baseline = json.loads(BASELINE_FIXTURE.read_text(encoding="utf-8"))
     cases = [q for q in baseline["preguntas"] if q["respondible"]]
     active = retriever or SemanticRetriever(index_dir=index_dir, chunks_path=chunks_path, model=model)
@@ -171,6 +178,7 @@ def evaluate_retrieval(*, questions: list[dict[str, Any]], index_dir: Path, chun
 def run(*, fixture_path: Path = FIXTURE, report_path: Path = REPORT, markdown_path: Path = MARKDOWN,
         index_dir: Path = DEFAULT_INDEX, chunks_path: Path = DEFAULT_INPUT, model: str = DEFAULT_MODEL,
         with_retrieval: bool = False, retriever: Any = None) -> dict[str, Any]:
+    """Ejecuta evaluación determinista y, opcionalmente, recuperación de solo lectura."""
     raw = fixture_path.read_bytes()
     fixture = json.loads(raw)
     questions = fixture["preguntas"]
@@ -198,6 +206,7 @@ def run(*, fixture_path: Path = FIXTURE, report_path: Path = REPORT, markdown_pa
 
 
 def render_markdown(report: dict[str, Any]) -> str:
+    """Resume matriz de confusión, cobertura y errores del detector de territorio."""
     m = report["classification"]["metrics"]
     lines = ["# Evaluación de enrutamiento jurisdiccional", "",
              f"Fixture independiente: `{report['fixture_count']}` casos; SHA-256 `{report['fixture_sha256']}`. No se usa Ollama/Chroma para clasificar.", "",
@@ -232,6 +241,7 @@ def render_markdown(report: dict[str, Any]) -> str:
 
 
 def main() -> int:
+    """Expone clasificación y evaluación opcional por línea de comandos."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--fixture", type=Path, default=FIXTURE)
     parser.add_argument("--report", type=Path, default=REPORT)

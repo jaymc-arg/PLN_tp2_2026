@@ -35,10 +35,12 @@ LABELS = {"supported", "partially_supported", "unsupported", "abstained_correctl
 
 
 def digest(path):
+    """Calcula SHA-256 de un artefacto para verificar su identidad reproducible."""
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
 def save(path, data):
+    """Guarda JSON mediante archivo temporal y reemplazo, evitando escrituras parciales."""
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
     temporary.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -46,6 +48,10 @@ def save(path, data):
 
 
 def validate_fixture(path=FIXTURE):
+    """Inmoviliza el conjunto de 38 preguntas mediante hash y estructura esperada.
+
+    Evita comparar estrategias sobre muestras distintas por accidente.
+    """
     if digest(path) != FIXTURE_HASH:
         raise ValueError("El fixture no coincide con el SHA-256 acordado")
     questions = json.loads(path.read_text())["preguntas"]
@@ -131,6 +137,7 @@ def verify_or_resume(chunks_path, index_dir, *, allow_resume=False):
 def generation_from_ranking(question, groups, *, chat_model=None):
     """Reusa top-5 REAL de esta pregunta; nunca consulta otra vez ni reconstruye evidencia."""
     def retrieve(text, k, jurisdiccion):
+        """Sirve el prefijo K del ranking real guardado, sin buscar nuevamente."""
         if text != question["pregunta"] or k not in (1, 3, 5):
             raise ValueError("Petición ajena al ranking guardado")
         for group in groups:
@@ -146,11 +153,17 @@ def generation_from_ranking(question, groups, *, chat_model=None):
 
 
 def protected_hashes():
+    """Registra hashes de entradas que el ensayo no debe alterar."""
     paths = [*lab.INPUT_DIR.glob("*.json*"), *ROOT.joinpath("evalucacion").glob("*")]
     return {str(p.relative_to(ROOT)): digest(p) for p in paths if p.is_file()}
 
 
 def execute(output=OUTPUT):
+    """Ejecuta ambos brazos sobre las mismas preguntas y el mismo embedding.
+
+    La comparación 1000/150 frente a 600/80 aísla la fragmentación,
+    y admite reanudación sin repetir respuestas ya registradas.
+    """
     questions = validate_fixture()
     if indexar.DEFAULT_MODEL != "qwen3-embedding:0.6b":
         raise ValueError("Este ensayo requiere Qwen en ambos brazos")
@@ -233,6 +246,7 @@ def execute(output=OUTPUT):
 
 
 def apply_review(report, reviews):
+    """Valida etiquetas manuales y las incorpora a la traza de cada pregunta."""
     if set(reviews) != {c["id"] for c in report["cases"]}:
         raise ValueError("Revisión incompleta o ajena")
     for case in report["cases"]:
@@ -272,9 +286,11 @@ def apply_review(report, reviews):
 
 
 def aggregate(cases):
+    """Resume aciertos automáticos y evaluaciones humanas con denominadores."""
     positives = [c for c in cases if c["fixture"]["respondible"]]
     negatives = [c for c in cases if not c["fixture"]["respondible"]]
     def rate(items, predicate):
+        """Calcula tasas sin dividir por cero cuando no hay casos en el estrato."""
         return {"count": sum(bool(predicate(c)) for c in items), "denominator": len(items),
                 "rate": sum(bool(predicate(c)) for c in items) / len(items) if items else None}
     recall = {}
@@ -304,6 +320,10 @@ def aggregate(cases):
 
 
 def paired_outcomes(reports):
+    """Clasifica victorias, regresiones y empates para las mismas preguntas.
+
+    Un cambio de Hit@3 no sustituye la revisión de cobertura ni de respuesta.
+    """
     result = {}
     for metric in ("hit_at_3", "passage_k3", "supported_answer", "correct_negative_abstention", "negative_no_unsupported_facts"):
         buckets = {"wins_600_80": [], "regressions_600_80": [], "ties": [], "needs_review": []}
@@ -312,6 +332,7 @@ def paired_outcomes(reports):
             if (metric in {"correct_negative_abstention", "negative_no_unsupported_facts"}) == positive:
                 continue
             def score(c):
+                """Normaliza métricas distintas antes de comparar los dos brazos por caso."""
                 if metric == "hit_at_3":
                     return int(c.get("article_metrics", {}).get("hit_at_3", False))
                 if metric == "passage_k3":
@@ -330,6 +351,7 @@ def paired_outcomes(reports):
 
 
 def render(output=OUTPUT, review_path=None):
+    """Reconstruye el informe a partir de trazas; no consulta modelos nuevamente."""
     reports = {a: json.loads((output / f"qwen_{a}.json").read_text()) for a in ARMS}
     review = json.loads(review_path.read_text()) if review_path else None
     for arm, report in reports.items():
@@ -379,6 +401,7 @@ def render(output=OUTPUT, review_path=None):
                       f"| {title} | Hit@3 base→600 | Pasaje completo@3 base→600 | Supported base→600 | Abstención correcta base→600 |",
                       "|---|---|---|---|---|"])
         def cell(metric):
+            """Expone numerador, denominador y tasa sin ocultar muestras vacías."""
             return f"{metric['count']}/{metric['denominator']}" + (f" ({metric['rate']:.3f})" if metric['rate'] is not None else " (n/a)")
         for key in reports[ARMS[0]][grouping]:
             cells = [" → ".join(cell(reports[a][grouping][key][m]) for a in ARMS) for m in ("hit_at_3", "full_evidence_at_3", "supported_answer", "correct_abstention")]
@@ -408,6 +431,7 @@ def render(output=OUTPUT, review_path=None):
 
 
 def main():
+    """Separa ejecución costosa (--ejecutar) de revisión y renderizado offline."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--ejecutar", action="store_true")
     parser.add_argument("--salida", type=Path, default=OUTPUT)

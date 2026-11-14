@@ -1,3 +1,5 @@
+"""Verifica identidad del índice, idempotencia y rechazo de borrados inseguros."""
+
 import json
 from pathlib import Path
 
@@ -129,6 +131,7 @@ class FakeChroma:
 
 
 def write_chunks(path):
+    """Genera entradas controladas para verificar integridad sin Ollama."""
     records = [
         {"id": "art-1__chunk_0001", "texto": "evidencia primera", "source_article_id": "art-1",
          "jurisdiccion": "nacional", "ley": "19945", "articulo": "1", "source": "ley.txt",
@@ -142,6 +145,7 @@ def write_chunks(path):
 
 
 def test_index_contract_idempotence_rebuild_and_smoke_metadata(tmp_path, capsys):
+    """Distingue reejecución idempotente, reconstrucción autorizada y prueba de búsqueda."""
     chunks_path = tmp_path / "chunks.jsonl"
     expected = write_chunks(chunks_path)
     index_dir = tmp_path / "selected-index"

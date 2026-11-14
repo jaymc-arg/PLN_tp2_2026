@@ -1,3 +1,5 @@
+"""Evalúa el detector conservador con casos explícitos y ambiguos."""
+
 import hashlib
 import json
 from pathlib import Path

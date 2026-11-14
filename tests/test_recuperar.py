@@ -1,3 +1,5 @@
+"""Prueba recuperación inmutable, evidencia literal y evaluación por artículo."""
+
 import hashlib
 import json
 from pathlib import Path
@@ -28,6 +30,7 @@ FIXTURE_SHA256 = "f25203f27d0dc12bdc430a47cc58911e1c023807d9179a7507e93cc2003992
 
 
 def chunk(chunk_id="a__chunk_0001", *, jurisdiction="nacional", pages=None):
+    """Fabrica un chunk con origen controlado y páginas solo cuando corresponde."""
     row = {"id": chunk_id, "texto": "Texto íntegro del fragmento.\nSegunda línea completa.",
            "source_article_id": "a", "jurisdiccion": jurisdiction, "ley": "19945",
            "articulo": "12", "source": "ley.txt", "chunk_numero": 1,
@@ -38,6 +41,7 @@ def chunk(chunk_id="a__chunk_0001", *, jurisdiction="nacional", pages=None):
 
 
 def prepared_index(tmp_path, rows=None):
+    """Construye manifest y JSONL compatibles para pruebas de solo lectura."""
     rows = rows or [chunk()]
     chunks_path = tmp_path / "chunks.jsonl"
     chunks_path.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows), encoding="utf-8")
@@ -99,6 +103,7 @@ class FakeStore:
 
 @pytest.fixture
 def fake_index(tmp_path):
+    """Sustituye embeddings y Chroma para probar orden y metadatos sin servicios."""
     rows = [
         {**chunk("n1", jurisdiction="nacional"), "distance": 0.11},
         {**chunk("p1", jurisdiction="pba"), "distance": 0.22},
@@ -233,6 +238,7 @@ def test_article_metrics_handle_miss_duplicate_chunks_and_negatives():
 
 
 def test_full_text_evidence_context_order_and_page_numbers():
+    """Rechaza cualquier truncamiento o reordenamiento del contexto enviado al modelo."""
     txt = build_result(1, "txt-1", {"source_article_id": "a", "jurisdiccion": "nacional",
                        "ley": "19945", "articulo": "12", "source": "ley.txt", "chunk_numero": 1},
                        "Exact text\nnot shortened.", 0.1)

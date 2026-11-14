@@ -57,6 +57,7 @@ class GeneratorUnavailableError(RuntimeError):
 
 
 def _validate_request(question: str, k: int, jurisdiccion: str | None, model: str) -> None:
+    """Valida la consulta y el modelo antes de recuperar o generar evidencia."""
     if not isinstance(question, str) or not question.strip():
         raise ValueError("question debe ser una cadena no vacía")
     if type(k) is not int or k <= 0:
@@ -68,6 +69,7 @@ def _validate_request(question: str, k: int, jurisdiccion: str | None, model: st
 
 
 def _source_reference(number: int, record: dict[str, Any]) -> dict[str, Any]:
+    """Asigna etiquetas [n] a los resultados reales, sin fabricar páginas para TXT."""
     reference = {
         "number": number,
         "label": f"[{number}]",
@@ -89,6 +91,11 @@ def _source_reference(number: int, record: dict[str, Any]) -> dict[str, Any]:
 
 def _citation_check(raw_response: str, source_map: list[dict[str, Any]], *,
                     abstained: bool) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Verifica solo la sintaxis y existencia de referencias [n] en la respuesta.
+
+    Una cita numéricamente válida puede respaldar mal una afirmación;
+    este chequeo NO mide fidelidad semántica del contenido.
+    """
     matches = list(_CITATION_RE.finditer(raw_response))
     valid_numbers: list[int] = []
     invalid_references: list[dict[str, str]] = []
@@ -137,6 +144,9 @@ def _citation_check(raw_response: str, source_map: list[dict[str, Any]], *,
 
 
 def _answer_from_response(raw_response: str) -> tuple[str, str | None, bool]:
+    """Conserva la salida original y aplica abstención explícita ante salida vacía
+    o compuesta únicamente por números de cita.
+    """
     stripped = raw_response.strip()
     if stripped == ABSTENTION:
         return ABSTENTION, None, True
@@ -152,7 +162,11 @@ def _answer_from_response(raw_response: str) -> tuple[str, str | None, bool]:
 def _generate_from_records(question: str, records: list[dict[str, Any]], k: int,
                            jurisdiccion: str | None, model: str,
                            embedding_model: str, chat_model: Any = None) -> dict[str, Any]:
-    """Shared generation implementation for records already retrieved by the router."""
+    """Genera usando exclusivamente los registros ya recuperados por el enrutador.
+
+    Si no hay evidencia, se abstiene sin invocar el modelo; conserva el contexto
+    exacto y verifica únicamente el formato de las citas emitidas.
+    """
     _validate_request(question, k, jurisdiccion, model)
     context_sent = build_evidence_context(records)
     source_map = [_source_reference(number, record) for number, record in enumerate(records, 1)]
@@ -223,10 +237,10 @@ def generate_answer(question: str, k: int = 3, jurisdiccion: str | None = None,
                     retriever: Any = None, chat_model: Any = None,
                     index_dir: Path = DEFAULT_INDEX, chunks_path: Path = DEFAULT_INPUT,
                     embedding_model: str = DEFAULT_EMBEDDING_MODEL) -> dict[str, Any]:
-    """Deprecated low-level generation entry point; use `answer_question` instead.
+    """Punto de entrada obsoleto, conservado por compatibilidad histórica.
 
-    Retained for compatibility with historical callers. This bypasses conservative
-    jurisdiction routing and should not be used for new application/evaluation calls.
+    Omite el enrutamiento jurisdiccional conservador; las aplicaciones y
+    evaluaciones nuevas deben llamar a `answer_question`.
     """
     warnings.warn(
         "generate_answer() bypasses jurisdiction routing and is deprecated; use answer_question().",
@@ -250,10 +264,11 @@ def answer_question(question: str, k: int = 3, jurisdiccion: str | None = None,
                     retriever: Any = None, chat_model: Any = None,
                     index_dir: Path = DEFAULT_INDEX, chunks_path: Path = DEFAULT_INPUT,
                     embedding_model: str = DEFAULT_EMBEDDING_MODEL) -> dict[str, Any]:
-    """Conservative user-facing router and supported generation entry point.
+    """Enruta conservadoramente y genera con evidencia de jurisdicciones explícitas.
 
-    New application and evaluation calls must use this function. `generate_answer`
-    remains only as a deprecated compatibility wrapper that bypasses routing.
+    Puede pedir aclaración sin recuperar; en comparaciones obtiene K chunks por
+    jurisdicción y preserva el ranking local de cada búsqueda. Es la entrada
+    pública que deben usar interfaz y evaluadores nuevos.
     """
     _validate_request(question, k, None, model)
     if jurisdiccion is not None and sin_filtro:
@@ -308,7 +323,7 @@ def answer_question(question: str, k: int = 3, jurisdiccion: str | None = None,
     ids = [r["chunk_id"] for r in records]
     if len(ids) != len(set(ids)):
         raise ValueError("La recuperación comparativa devolvió IDs duplicados")
-    # Renumber rank globally only as an evidence list; preserve each local rank separately.
+    # La numeración global ordena citas, pero cada jurisdicción conserva su ranking local.
     if len(jurisdictions) > 1:
         for r in records:
             r["comparative_rank"] = r["rank"]
@@ -324,6 +339,7 @@ def answer_question(question: str, k: int = 3, jurisdiccion: str | None = None,
 
 
 def _render_cli_result(result: dict[str, Any]) -> str:
+    """Expone respuesta, decisiones de enrutamiento y evidencia literal por separado."""
     if result.get("routing_status") in {"ambiguous", "unspecified", "unsupported"}:
         return (f"ENRUTAMIENTO: {result['routing_status']} | {result['routing_reason']}\n"
                 f"ACLARACIÓN: {result.get('clarification_question') or 'La jurisdicción no está cubierta por el corpus.'}\n"
@@ -355,6 +371,7 @@ def _render_cli_result(result: dict[str, Any]) -> str:
 
 
 def main() -> int:
+    """CLI de generación que permite inspeccionar el resultado auditable en JSON."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--pregunta", required=True)
     parser.add_argument("--k", type=int, choices=(1, 3, 5), default=3)

@@ -35,6 +35,11 @@ class IndexConfigurationError(RuntimeError):
 
 # Lee los documentos, los verifica y hashea
 def read_chunks(path: Path) -> tuple[list[dict[str, Any]], str]:
+    """Valida el JSONL e identifica el contenido exacto con SHA-256.
+
+    El hash incluye los bytes originales: cambiar fragmentos exige reindexar
+    porque los embeddings persistidos corresponden al corpus anterior.
+    """
     raw = path.read_bytes()
     chunks = []
     seen = set()
@@ -80,6 +85,10 @@ def chunk_metadata(chunk: dict[str, Any]) -> dict[str, str | int | float | bool]
 
 # Convierte los chunks en Documentos de LangChain y devuelve la lista de IDs.
 def to_documents(chunks: list[dict[str, Any]]) -> tuple[list[Document], list[str]]:
+    """Convierte cada chunk en Document de LangChain conservando su ID estable.
+
+    El ID permite detectar registros faltantes sin duplicar los ya persistidos.
+    """
     documents, ids = [], []
     for chunk in chunks:
         ids.append(chunk["id"])
@@ -88,12 +97,22 @@ def to_documents(chunks: list[dict[str, Any]]) -> tuple[list[Document], list[str
 
 # Genera la firma del índice a partir del hash de los chunks y el modelo.
 def make_signature(chunks_sha256: str, model: str, collection: str = COLLECTION) -> dict[str, Any]:
+    """Fija la identidad del índice por corpus, modelo y colección.
+
+    No es seguro reutilizar vectores calculados con otro modelo, aun si tienen
+    la misma dimensión.
+    """
     return {"managed_by": "tp2-rag-04", "signature_version": SIGNATURE_VERSION,
             "embedding_model": model, "ollama_base_url": "http://localhost:11434",
             "collection": collection, "chunks_sha256": chunks_sha256}
 
 
 def prepare_index_dir(index_dir: Path, signature: dict[str, Any], *, rebuild: bool) -> None:
+    """Protege el índice de reutilización incompatible y reconstrucciones accidentales.
+
+    Solo --rebuild puede borrar un directorio reconocido como propio; rutas
+    protegidas o sin manifest válido nunca se eliminan.
+    """
     resolved = index_dir.expanduser().resolve()
     forbidden = {Path(resolved.anchor), ROOT.resolve(), ROOT.resolve().parent,
                  (ROOT / "datos").resolve(), Path.home().resolve()}
@@ -102,7 +121,7 @@ def prepare_index_dir(index_dir: Path, signature: dict[str, Any], *, rebuild: bo
     manifest_path = resolved / MANIFEST
     if rebuild and resolved.exists():
         if any(resolved.iterdir()):
-            # Never recursively remove an unrecognized directory on the strength of a typo.
+            # Un error tipográfico en la ruta nunca debe provocar el borrado de datos ajenos.
             try:
                 existing = json.loads(manifest_path.read_text(encoding="utf-8"))
             except (OSError, json.JSONDecodeError) as exc:
@@ -130,6 +149,7 @@ def prepare_index_dir(index_dir: Path, signature: dict[str, Any], *, rebuild: bo
 
 
 def software_versions() -> dict[str, str]:
+    """Registra versiones de dependencias para reproducir una indexación observada."""
     packages = ("langchain-chroma", "langchain-ollama", "chromadb", "ollama")
     versions = {}
     for package in packages:
@@ -143,6 +163,11 @@ def software_versions() -> dict[str, str]:
 def run_index(chunks_path: Path = DEFAULT_INPUT, index_dir: Path = DEFAULT_INDEX, *,
               model: str = DEFAULT_MODEL, rebuild: bool = False, smoke_question: str | None = None,
               embeddings: Any = None, vector_store_class: Any = None) -> dict[str, Any]:
+    """Indexa únicamente IDs faltantes y verifica la colección persistida.
+
+    La consulta de inspección comprueba conectividad y recuperación, no la
+    corrección jurídica ni la calidad de la respuesta del generador.
+    """
     chunks, chunks_hash = read_chunks(chunks_path)
     signature = make_signature(chunks_hash, model)
     documents, ids = to_documents(chunks)
@@ -199,6 +224,7 @@ def run_index(chunks_path: Path = DEFAULT_INPUT, index_dir: Path = DEFAULT_INDEX
 
 
 def main() -> int:
+    """Expone la indexación por CLI y devuelve un código de salida verificable."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--chunks", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--index-dir", type=Path, default=DEFAULT_INDEX)

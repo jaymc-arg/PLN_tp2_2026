@@ -13,6 +13,7 @@ recuperar = import_module("scripts.03_recuperar")
 
 
 def result():
+    """Fija evidencia y citas adversariales para comprobar que Gradio no las modifica."""
     return {
         "answer": "Respuesta [1] [2]", "routing_status": "comparative",
         "jurisdiction_source": "automatic", "jurisdictions": ["pba", "santa_fe"],
@@ -137,6 +138,7 @@ def test_page_builds_and_launches_only_locally(monkeypatch):
 
 
 def test_context_builder_relocated_exactly():
+    """Evita reconstrucciones divergentes del contexto entre UI, recuperación y modelo."""
     assert generar.build_evidence_context is recuperar.build_evidence_context
     assert evaluar_recuperacion.build_evidence_context is recuperar.build_evidence_context
     records = [
