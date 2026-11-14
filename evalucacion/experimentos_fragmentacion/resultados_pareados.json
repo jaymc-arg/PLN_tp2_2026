@@ -1,0 +1,152 @@
+{
+  "hit_at_3": {
+    "wins_600_80": [
+      "santa_fe_respondible_autoridad_mesa"
+    ],
+    "regressions_600_80": [],
+    "ties": [
+      "nacional_respondible_deber_votar",
+      "pba_respondible_representacion",
+      "nacional_electores_edad",
+      "nacional_licencia_laboral",
+      "nacional_subregistros_electores",
+      "nacional_registro_infractores",
+      "nacional_difusion_padrones",
+      "nacional_reclamos_padron",
+      "nacional_boleta_unica",
+      "nacional_designacion_autoridades",
+      "nacional_eleccion_presidencial",
+      "pba_electores",
+      "pba_exenciones_deber_votar",
+      "pba_documentos_habilitantes",
+      "pba_distritos_municipales",
+      "pba_septima_seccion",
+      "pba_junta_electoral_composicion",
+      "pba_junta_electoral_funciones",
+      "pba_presidente_mesa_requisitos",
+      "pba_proclamacion_intendente",
+      "santa_fe_ambito_aplicacion",
+      "santa_fe_electores_extranjeros",
+      "santa_fe_capacidad_mesa",
+      "santa_fe_convocatoria_primarias",
+      "santa_fe_autoridades_mesa",
+      "santa_fe_exenciones_voto",
+      "santa_fe_horario_constitucion_mesa",
+      "santa_fe_boleta_unica",
+      "santa_fe_cuenta_campana",
+      "comparativa_nacional_santa_fe_electores",
+      "comparativa_nacional_santa_fe_bup"
+    ],
+    "needs_review": []
+  },
+  "passage_k3": {
+    "wins_600_80": [
+      "santa_fe_respondible_autoridad_mesa"
+    ],
+    "regressions_600_80": [
+      "nacional_eleccion_presidencial",
+      "santa_fe_electores_extranjeros",
+      "santa_fe_exenciones_voto",
+      "comparativa_nacional_santa_fe_electores"
+    ],
+    "ties": [
+      "nacional_respondible_deber_votar",
+      "pba_respondible_representacion",
+      "nacional_electores_edad",
+      "nacional_licencia_laboral",
+      "nacional_subregistros_electores",
+      "nacional_registro_infractores",
+      "nacional_difusion_padrones",
+      "nacional_reclamos_padron",
+      "nacional_boleta_unica",
+      "nacional_designacion_autoridades",
+      "pba_electores",
+      "pba_exenciones_deber_votar",
+      "pba_documentos_habilitantes",
+      "pba_distritos_municipales",
+      "pba_septima_seccion",
+      "pba_junta_electoral_composicion",
+      "pba_junta_electoral_funciones",
+      "pba_presidente_mesa_requisitos",
+      "pba_proclamacion_intendente",
+      "santa_fe_ambito_aplicacion",
+      "santa_fe_capacidad_mesa",
+      "santa_fe_convocatoria_primarias",
+      "santa_fe_autoridades_mesa",
+      "santa_fe_horario_constitucion_mesa",
+      "santa_fe_boleta_unica",
+      "santa_fe_cuenta_campana",
+      "comparativa_nacional_santa_fe_bup"
+    ],
+    "needs_review": []
+  },
+  "supported_answer": {
+    "wins_600_80": [
+      "nacional_subregistros_electores",
+      "pba_junta_electoral_composicion",
+      "pba_junta_electoral_funciones",
+      "santa_fe_horario_constitucion_mesa",
+      "santa_fe_boleta_unica",
+      "santa_fe_cuenta_campana"
+    ],
+    "regressions_600_80": [
+      "nacional_difusion_padrones",
+      "nacional_designacion_autoridades",
+      "santa_fe_electores_extranjeros"
+    ],
+    "ties": [
+      "nacional_respondible_deber_votar",
+      "pba_respondible_representacion",
+      "santa_fe_respondible_autoridad_mesa",
+      "nacional_electores_edad",
+      "nacional_licencia_laboral",
+      "nacional_registro_infractores",
+      "nacional_reclamos_padron",
+      "nacional_eleccion_presidencial",
+      "pba_electores",
+      "pba_exenciones_deber_votar",
+      "pba_documentos_habilitantes",
+      "pba_distritos_municipales",
+      "pba_septima_seccion",
+      "pba_presidente_mesa_requisitos",
+      "pba_proclamacion_intendente",
+      "santa_fe_ambito_aplicacion",
+      "santa_fe_capacidad_mesa",
+      "santa_fe_convocatoria_primarias",
+      "santa_fe_autoridades_mesa",
+      "santa_fe_exenciones_voto",
+      "comparativa_nacional_santa_fe_electores",
+      "comparativa_nacional_santa_fe_bup"
+    ],
+    "needs_review": [
+      "nacional_boleta_unica"
+    ]
+  },
+  "correct_negative_abstention": {
+    "wins_600_80": [],
+    "regressions_600_80": [],
+    "ties": [
+      "ausente_resultado_electoral",
+      "ausente_gasto_real_partido",
+      "ausente_ganador_gobernador_pba_2023",
+      "ausente_gastos_campana_sf_2025",
+      "ausente_votos_presidenciales_2023",
+      "ausente_escuela_asignada"
+    ],
+    "needs_review": []
+  },
+  "negative_no_unsupported_facts": {
+    "wins_600_80": [],
+    "regressions_600_80": [
+      "ausente_escuela_asignada"
+    ],
+    "ties": [
+      "ausente_resultado_electoral",
+      "ausente_gasto_real_partido",
+      "ausente_ganador_gobernador_pba_2023",
+      "ausente_gastos_campana_sf_2025",
+      "ausente_votos_presidenciales_2023"
+    ],
+    "needs_review": []
+  }
+}

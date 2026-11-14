@@ -1,0 +1,4 @@
+1. implementacion general del proyecto muy basado en IA, chunks 1000 y overlap 150 + todo generico como lo que propuso el profe
+2. mejoras de enrutamiento jurisdiccional
+3. mejoras de enrutamiento por articulo
+3. chunks 600 y 50

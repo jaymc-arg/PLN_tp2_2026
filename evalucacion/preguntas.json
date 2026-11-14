@@ -1,14 +1,17 @@
 {
-  "version": 1,
-  "estado": "fixture fijo definido antes de inspeccionar resultados de recuperación; no modificar para favorecer resultados",
-  "uso": "Evaluación de retrieval en una etapa posterior; respuestas esperadas redactadas manualmente desde los JSONL de artículos.",
+  "version": 2,
+  "estado": "Fixture fijo propuesto para evaluar fragmentación; respuestas de referencia elaboradas desde los artículos JSONL del corpus. No editar tras obtener resultados para favorecer un modelo.",
+  "uso": "Comparación controlada de chunk_size/chunk_overlap 1000/150 versus 600/80; fuentes_esperadas son identificadores de artículos, no de chunks.",
+  "nota_metodologica": "Este fixture amplía y reemplaza evalucacion/preguntas.json para el experimento 1000/150 frente a 600/80. No reutilizar las revisiones ni los informes históricos de cinco casos como si correspondieran al nuevo conjunto. preguntas_jurisdiccion.json sigue siendo un fixture independiente de enrutamiento: sus etiquetas no garantizan relevancia documental.",
   "preguntas": [
     {
       "id": "nacional_respondible_deber_votar",
       "respondible": true,
       "jurisdiccion": "nacional",
       "pregunta": "¿Qué excepciones al deber de votar enumera el artículo 12 del Código Electoral Nacional?",
-      "fuentes_esperadas": ["nacional_19945_art_12"],
+      "fuentes_esperadas": [
+        "nacional_19945_art_12"
+      ],
       "respuesta_referencia": "El artículo 12 exceptúa a jueces y auxiliares obligados a concurrir a sus oficinas; a quienes el día de la elección estén a más de 500 km del lugar de votación por motivos razonables y acrediten su comparecencia ante la autoridad policial; a personas enfermas o imposibilitadas por fuerza mayor debidamente justificadas; y a personal de servicios públicos cuyas tareas impidan votar, con comunicación y certificación del empleador. La propia norma dice que las exenciones son optativas para el elector.",
       "anotacion": "Síntesis manual; conserva condiciones y no amplía causales."
     },
@@ -17,7 +20,9 @@
       "respondible": true,
       "jurisdiccion": "pba",
       "pregunta": "Según el artículo 13 de la Ley Electoral bonaerense 5.109, ¿cuántos diputados y senadores integran la representación legislativa provincial?",
-      "fuentes_esperadas": ["pba_5109_art_13"],
+      "fuentes_esperadas": [
+        "pba_5109_art_13"
+      ],
       "respuesta_referencia": "El texto principal del artículo 13 fija la representación en 92 diputados y 46 senadores. La propuesta observada de 100 diputados y 50 senadores aparece en una nota histórica/editorial y no es la respuesta que establece el texto principal del registro.",
       "anotacion": "Ground truth contrastado con texto principal y nota diferenciada del artículo."
     },
@@ -26,7 +31,9 @@
       "respondible": true,
       "jurisdiccion": "santa_fe",
       "pregunta": "¿Cómo define el artículo 4 de la Ley 14.478 a la autoridad de mesa?",
-      "fuentes_esperadas": ["santa_fe_14478_art_4"],
+      "fuentes_esperadas": [
+        "santa_fe_14478_art_4"
+      ],
       "respuesta_referencia": "Es la persona que ejerce la presidencia de la mesa receptora de votos y, ante ausencia o impedimento, quien la reemplaza conforme al orden de designación establecido en el Código.",
       "anotacion": "Definición literal del inciso b; el artículo se extiende por páginas 1–4."
     },
@@ -47,6 +54,420 @@
       "fuentes_esperadas": [],
       "respuesta_referencia": "No respondible con este corpus: las normas pueden regular financiamiento, pero no aportan las rendiciones contables reales de partidos para esa campaña.",
       "anotacion": "Distinguir disposiciones o límites legales de datos contables observados que no forman parte de estas fuentes."
+    },
+    {
+      "id": "nacional_electores_edad",
+      "respondible": true,
+      "jurisdiccion": "nacional",
+      "pregunta": "¿Desde qué edad son electores los argentinos nativos, por opción y naturalizados en elecciones nacionales?",
+      "fuentes_esperadas": [
+        "nacional_19945_art_1"
+      ],
+      "respuesta_referencia": "Los argentinos nativos y por opción son electores desde los 16 años; los naturalizados, desde los 18 años, siempre que no estén inhabilitados conforme a la ley.",
+      "tipo": "articulo_breve",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks.",
+      "origen_jurisdiccion": "nat_02"
+    },
+    {
+      "id": "nacional_licencia_laboral",
+      "respondible": true,
+      "jurisdiccion": "nacional",
+      "pregunta": "Si una persona trabaja durante el horario de una elección nacional, ¿qué derecho tiene para poder votar sin perder salario?",
+      "fuentes_esperadas": [
+        "nacional_19945_art_8"
+      ],
+      "respuesta_referencia": "Quien deba trabajar durante el acto electoral tiene derecho a una licencia especial del empleador para votar o desempeñar funciones en el comicio, sin descuento de salario ni recargo posterior de horario.",
+      "tipo": "parafrasis",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks."
+    },
+    {
+      "id": "nacional_subregistros_electores",
+      "respondible": true,
+      "jurisdiccion": "nacional",
+      "pregunta": "¿Qué cuatro subregistros forman parte del Registro Nacional de Electores?",
+      "fuentes_esperadas": [
+        "nacional_19945_art_15"
+      ],
+      "respuesta_referencia": "Electores por distrito; electores inhabilitados y excluidos; electores residentes en el exterior; y electores privados de la libertad.",
+      "tipo": "enumeracion_larga",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks.",
+      "origen_jurisdiccion": "nat_01"
+    },
+    {
+      "id": "nacional_registro_infractores",
+      "respondible": true,
+      "jurisdiccion": "nacional",
+      "pregunta": "¿Quién lleva el registro nacional de infractores al deber de votar y qué edades considera el listado posterior a una elección?",
+      "fuentes_esperadas": [
+        "nacional_19945_art_18"
+      ],
+      "respuesta_referencia": "La Cámara Nacional Electoral lleva el registro. Tras cada elección nacional elabora por distrito un listado de electores mayores de 18 y menores de 70 años sin constancia de emisión del voto, con sus datos identificatorios.",
+      "tipo": "parafrasis",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks."
+    },
+    {
+      "id": "nacional_difusion_padrones",
+      "respondible": true,
+      "jurisdiccion": "nacional",
+      "pregunta": "¿Cuándo deben publicarse los padrones provisionales nacionales y dónde se difunden?",
+      "fuentes_esperadas": [
+        "nacional_19945_art_26"
+      ],
+      "respuesta_referencia": "La Cámara Nacional Electoral debe publicarlos diez días después del cierre del registro de cada elección, en su sitio web y/o por otros medios convenientes, con resguardos de privacidad y difusión de vías de consulta y reclamo.",
+      "tipo": "articulo_mediano",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks.",
+      "origen_jurisdiccion": "nat_01"
+    },
+    {
+      "id": "nacional_reclamos_padron",
+      "respondible": true,
+      "jurisdiccion": "nacional",
+      "pregunta": "Si una persona no figura en el padrón provisional nacional o aparece con un error, ¿cuál es el plazo de reclamo y por qué medios puede hacerlo?",
+      "fuentes_esperadas": [
+        "nacional_19945_art_27"
+      ],
+      "respuesta_referencia": "Tiene quince días corridos desde la publicación del padrón provisional para reclamar ante el juez federal con competencia electoral, personalmente, por correo postal gratuito o por vía web.",
+      "tipo": "parafrasis",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks.",
+      "origen_jurisdiccion": "nat_01"
+    },
+    {
+      "id": "nacional_boleta_unica",
+      "respondible": true,
+      "jurisdiccion": "nacional",
+      "pregunta": "¿Qué instrumento de votación prevé el Código Electoral Nacional para los procesos electorales nacionales?",
+      "fuentes_esperadas": [
+        "nacional_19945_art_62"
+      ],
+      "respuesta_referencia": "El artículo 62 establece la Boleta Única de Papel como instrumento de votación para todos los procesos electorales nacionales contemplados en el Código.",
+      "tipo": "articulo_breve",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks.",
+      "origen_jurisdiccion": "nat_07"
+    },
+    {
+      "id": "nacional_designacion_autoridades",
+      "respondible": true,
+      "jurisdiccion": "nacional",
+      "pregunta": "En elecciones nacionales, ¿quién designa a los presidentes y suplentes de mesa, con qué anticipación y qué condición de padrón deben cumplir?",
+      "fuentes_esperadas": [
+        "nacional_19945_art_75"
+      ],
+      "respuesta_referencia": "El juzgado federal con competencia electoral los designa al menos treinta días antes de las primarias, ratificando la designación para las generales. Deben figurar en el padrón de la mesa en la que son designados.",
+      "tipo": "articulo_largo",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks."
+    },
+    {
+      "id": "nacional_eleccion_presidencial",
+      "respondible": true,
+      "jurisdiccion": "nacional",
+      "pregunta": "¿Cómo se eligen presidente y vicepresidente de la Nación y qué sistema electoral se utiliza?",
+      "fuentes_esperadas": [
+        "nacional_19945_art_148"
+      ],
+      "respuesta_referencia": "Son elegidos simultánea y directamente por el pueblo mediante un sistema de doble vuelta. El territorio nacional es un distrito único y cada elector vota una fórmula indivisible para ambos cargos.",
+      "tipo": "articulo_mediano",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks.",
+      "origen_jurisdiccion": "nat_03"
+    },
+    {
+      "id": "pba_electores",
+      "respondible": true,
+      "jurisdiccion": "pba",
+      "pregunta": "Según la ley electoral bonaerense 5.109, ¿desde qué edad pueden votar argentinos nativos, por opción y naturalizados en elecciones provinciales, y qué se indica sobre extranjeros?",
+      "fuentes_esperadas": [
+        "pba_5109_art_2"
+      ],
+      "respuesta_referencia": "Son electores los argentinos nativos y por opción desde los 16 años y los naturalizados desde los 18, si están inscriptos y habilitados. Los extranjeros deben cumplir los requisitos de la Ley 11.700 y sus modificatorias, no desarrollados en este artículo.",
+      "tipo": "articulo_mediano",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks."
+    },
+    {
+      "id": "pba_exenciones_deber_votar",
+      "respondible": true,
+      "jurisdiccion": "pba",
+      "pregunta": "¿Cuáles son todas las causales de exención del voto en el artículo 4 de la Ley Electoral de Buenos Aires y tienen carácter obligatorio?",
+      "fuentes_esperadas": [
+        "pba_5109_art_4"
+      ],
+      "respuesta_referencia": "El artículo contempla impedimento físico por salud; funcionarios y empleados que no puedan votar por sus ocupaciones; jueces y auxiliares obligados a mantener oficinas abiertas; personas situadas a más de 500 km con razones justificadas; y personal de servicios públicos con tareas incompatibles con concurrir al comicio. Prevé certificados y comunicación anticipada en los supuestos aplicables; las exenciones son optativas para el elector.",
+      "tipo": "enumeracion_larga",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks."
+    },
+    {
+      "id": "pba_documentos_habilitantes",
+      "respondible": true,
+      "jurisdiccion": "pba",
+      "pregunta": "¿Qué documentos cívicos habilita la Ley 5.109 para votar en la provincia de Buenos Aires?",
+      "fuentes_esperadas": [
+        "pba_5109_art_8"
+      ],
+      "respuesta_referencia": "La Libreta de Enrolamiento, la Libreta Cívica y el DNI en cualquiera de sus formatos, según el artículo 8 del texto procesado.",
+      "tipo": "articulo_breve",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks."
+    },
+    {
+      "id": "pba_distritos_municipales",
+      "respondible": true,
+      "jurisdiccion": "pba",
+      "pregunta": "En la provincia de Buenos Aires, ¿qué constituye el distrito electoral para elegir concejales y consejeros escolares y qué ámbito se usa para computar gobernador y vicegobernador?",
+      "fuentes_esperadas": [
+        "pba_5109_art_11"
+      ],
+      "respuesta_referencia": "Para concejales y consejeros escolares cada partido de la provincia constituye un distrito electoral; para computar sufragios de gobernador y vicegobernador, la provincia se considera una sola sección electoral.",
+      "tipo": "articulo_breve",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks.",
+      "origen_jurisdiccion": "pba_03"
+    },
+    {
+      "id": "pba_septima_seccion",
+      "respondible": true,
+      "jurisdiccion": "pba",
+      "pregunta": "Según el artículo 12 de la Ley 5.109, ¿cuántas secciones electorales hay para elegir legisladores provinciales y qué partidos integran la Séptima Sección?",
+      "fuentes_esperadas": [
+        "pba_5109_art_12"
+      ],
+      "respuesta_referencia": "El artículo divide el territorio en ocho secciones. La Séptima está integrada por Azul, Bolívar, General Alvear, Olavarría, Roque Pérez, Saladillo, Veinticinco de Mayo y Tapalqué.",
+      "tipo": "multichunk",
+      "anotacion": "Caso intencionalmente difícil: requiere información del comienzo y el final de un artículo extenso.",
+      "origen_jurisdiccion": "pba_06"
+    },
+    {
+      "id": "pba_junta_electoral_composicion",
+      "respondible": true,
+      "jurisdiccion": "pba",
+      "pregunta": "¿Quiénes integran la Junta Electoral permanente de la provincia de Buenos Aires según la Ley 5.109?",
+      "fuentes_esperadas": [
+        "pba_5109_art_14"
+      ],
+      "respuesta_referencia": "Los presidentes de la Suprema Corte de Justicia, del Tribunal de Cuentas y de tres Cámaras de Apelación del Departamento de la Capital, o sus sustitutos ante impedimento.",
+      "tipo": "articulo_breve",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks."
+    },
+    {
+      "id": "pba_junta_electoral_funciones",
+      "respondible": true,
+      "jurisdiccion": "pba",
+      "pregunta": "¿Qué funciones atribuye a la Junta Electoral bonaerense el artículo 20 respecto del padrón, las autoridades de mesa y los escrutinios?",
+      "fuentes_esperadas": [
+        "pba_5109_art_20"
+      ],
+      "respuesta_referencia": "Formar y depurar el registro de electores, designar y remover a las personas encargadas de recibir sufragios y realizar los escrutinios; también juzga la validez de las elecciones.",
+      "tipo": "enumeracion_larga",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks."
+    },
+    {
+      "id": "pba_presidente_mesa_requisitos",
+      "respondible": true,
+      "jurisdiccion": "pba",
+      "pregunta": "¿Qué requisitos deben cumplir las personas designadas presidentes o suplentes de mesa en elecciones bonaerenses?",
+      "fuentes_esperadas": [
+        "pba_5109_art_40"
+      ],
+      "respuesta_referencia": "Ser elector en ejercicio en el circuito de designación, saber leer y escribir correctamente, tener domicilio en el distrito y tener entre 18 y 70 años. La Junta Electoral resuelve las designaciones.",
+      "tipo": "articulo_breve",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks.",
+      "origen_jurisdiccion": "pba_04"
+    },
+    {
+      "id": "pba_proclamacion_intendente",
+      "respondible": true,
+      "jurisdiccion": "pba",
+      "pregunta": "En elecciones municipales bonaerenses, ¿a quién proclama intendente la Junta Electoral y cómo determina concejales y consejeros escolares?",
+      "fuentes_esperadas": [
+        "pba_5109_art_120"
+      ],
+      "respuesta_referencia": "Proclama intendente a quien haya obtenido más sufragios; asigna concejales y consejeros escolares según los votos y el número de cargos que corresponda a cada lista, y un número igual de suplentes conforme al orden de la lista.",
+      "tipo": "articulo_mediano",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks."
+    },
+    {
+      "id": "santa_fe_ambito_aplicacion",
+      "respondible": true,
+      "jurisdiccion": "santa_fe",
+      "pregunta": "¿En qué tipos de procesos electorales se aplica el Código Electoral de Santa Fe, Ley 14.478?",
+      "fuentes_esperadas": [
+        "santa_fe_14478_art_2"
+      ],
+      "respuesta_referencia": "Se aplica a procesos provinciales y municipales, incluida la elección de convencionales municipales y supletoriamente de convencionales provinciales; también contempla partidos políticos comprendidos en su ámbito.",
+      "tipo": "articulo_mediano",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks.",
+      "origen_jurisdiccion": "sf_04"
+    },
+    {
+      "id": "santa_fe_electores_extranjeros",
+      "respondible": true,
+      "jurisdiccion": "santa_fe",
+      "pregunta": "¿Cuáles son los requisitos de edad y residencia para ser elector en Santa Fe y qué condiciones adicionales rigen para personas extranjeras?",
+      "fuentes_esperadas": [
+        "santa_fe_14478_art_25"
+      ],
+      "respuesta_referencia": "Las personas argentinas y extranjeras deben haber cumplido 16 años, tener residencia efectiva en Santa Fe y no estar inhabilitadas. Las extranjeras además requieren documento de identidad argentino y residencia permanente y continua de dos años en la provincia.",
+      "tipo": "articulo_mediano",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks."
+    },
+    {
+      "id": "santa_fe_capacidad_mesa",
+      "respondible": true,
+      "jurisdiccion": "santa_fe",
+      "pregunta": "¿Cuántas personas electoras puede reunir una mesa en Santa Fe y qué ocurre si sobran menos de sesenta?",
+      "fuentes_esperadas": [
+        "santa_fe_14478_art_30"
+      ],
+      "respuesta_referencia": "Cada mesa reúne hasta 350 electores, ordenados alfabéticamente y sin distinción de género. Si restan menos de 60, se distribuyen en mesas próximas y estas pueden superar 350; con 60 o más se crea una mesa independiente.",
+      "tipo": "articulo_mediano",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks."
+    },
+    {
+      "id": "santa_fe_convocatoria_primarias",
+      "respondible": true,
+      "jurisdiccion": "santa_fe",
+      "pregunta": "¿Quién convoca a las elecciones primarias y generales en Santa Fe y con qué anticipación deben convocarse las primarias?",
+      "fuentes_esperadas": [
+        "santa_fe_14478_art_41"
+      ],
+      "respuesta_referencia": "El Poder Ejecutivo convoca ambas en un mismo acto. Las primarias abiertas, simultáneas y obligatorias se convocan entre 120 y 150 días antes de su realización.",
+      "tipo": "articulo_breve",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks."
+    },
+    {
+      "id": "santa_fe_autoridades_mesa",
+      "respondible": true,
+      "jurisdiccion": "santa_fe",
+      "pregunta": "Según la Ley 14.478, ¿cuántos suplentes tiene la presidencia de una mesa electoral de Santa Fe y cuándo pueden intervenir?",
+      "fuentes_esperadas": [
+        "santa_fe_14478_art_67"
+      ],
+      "respuesta_referencia": "Cada mesa tiene una única autoridad que ejerce la presidencia y dos suplentes que auxilian y reemplazan, por orden de designación, ante inasistencia o ausencias momentáneas.",
+      "tipo": "articulo_mediano",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks.",
+      "origen_jurisdiccion": "sf_01"
+    },
+    {
+      "id": "santa_fe_exenciones_voto",
+      "respondible": true,
+      "jurisdiccion": "santa_fe",
+      "pregunta": "¿Qué causales de eximición del sufragio reconoce el artículo 77 del Código Electoral de Santa Fe?",
+      "fuentes_esperadas": [
+        "santa_fe_14478_art_77"
+      ],
+      "respuesta_referencia": "Exime a personas mayores de 16 y menores de 18 y a mayores de 70; funcionarios obligados a mantener oficinas abiertas; electores a más de 500 km por motivos justificados con certificación policial; enfermos o impedidos por fuerza mayor debidamente acreditada; y personal de servicios públicos impedido por sus tareas, con comunicación y certificación del empleador.",
+      "tipo": "enumeracion_larga",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks.",
+      "origen_jurisdiccion": "amb_06"
+    },
+    {
+      "id": "santa_fe_horario_constitucion_mesa",
+      "respondible": true,
+      "jurisdiccion": "santa_fe",
+      "pregunta": "¿A qué hora deben presentarse las autoridades de mesa en Santa Fe y qué ocurre si a las 8:30 no han llegado?",
+      "fuentes_esperadas": [
+        "santa_fe_14478_art_81"
+      ],
+      "respuesta_referencia": "Deben presentarse a las 7:45. Si a las 8:30 no se presentaron los designados, la autoridad policial informa al Juez Electoral para que adopte medidas de habilitación del comicio.",
+      "tipo": "articulo_breve",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks."
+    },
+    {
+      "id": "santa_fe_boleta_unica",
+      "respondible": true,
+      "jurisdiccion": "santa_fe",
+      "pregunta": "En las elecciones generales de Santa Fe, ¿qué instrumento de votación se utiliza según el artículo 129?",
+      "fuentes_esperadas": [
+        "santa_fe_14478_art_129"
+      ],
+      "respuesta_referencia": "Se utiliza exclusivamente la Boleta Única de Papel, con las características y procedimientos previstos en el capítulo correspondiente del Código.",
+      "tipo": "articulo_breve",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks.",
+      "origen_jurisdiccion": "sf_02"
+    },
+    {
+      "id": "santa_fe_cuenta_campana",
+      "respondible": true,
+      "jurisdiccion": "santa_fe",
+      "pregunta": "¿Dónde deben depositarse los fondos de campaña electoral en Santa Fe y quiénes tienen la cuenta a su orden?",
+      "fuentes_esperadas": [
+        "santa_fe_14478_art_169"
+      ],
+      "respuesta_referencia": "Deben depositarse en una cuenta bancaria única por agrupación política en una entidad reconocida por el Banco Central, a la orden conjunta de los responsables económico-financiero y político de campaña. El artículo prevé cuentas adicionales en determinados ámbitos.",
+      "tipo": "articulo_mediano",
+      "anotacion": "Respuesta de referencia basada en texto_principal del artículo procesado; verificar cobertura literal en los chunks.",
+      "origen_jurisdiccion": "sf_06"
+    },
+    {
+      "id": "comparativa_nacional_santa_fe_electores",
+      "respondible": true,
+      "jurisdiccion": null,
+      "pregunta": "Compará las condiciones generales de edad y nacionalidad para ser elector que establecen el Código Electoral Nacional y el Código Electoral de Santa Fe.",
+      "fuentes_esperadas": [
+        "nacional_19945_art_1",
+        "santa_fe_14478_art_25"
+      ],
+      "respuesta_referencia": "La ley nacional reconoce a argentinos nativos y por opción desde los 16 años, y naturalizados desde los 18, sin inhabilitaciones. El Código de Santa Fe incluye a personas argentinas y extranjeras desde los 16 años con residencia efectiva; para extranjeras añade DNI argentino y dos años de residencia permanente y continua en la provincia.",
+      "tipo": "comparativa",
+      "anotacion": "Comparar sólo lo declarado por estas dos fuentes; no inferir que los requisitos de otras leyes externas estén agotados.",
+      "origen_jurisdiccion": "cmp_03",
+      "jurisdicciones": [
+        "nacional",
+        "santa_fe"
+      ]
+    },
+    {
+      "id": "comparativa_nacional_santa_fe_bup",
+      "respondible": true,
+      "jurisdiccion": null,
+      "pregunta": "¿Qué dispone cada norma sobre la Boleta Única de Papel: el Código Electoral Nacional y el Código Electoral de Santa Fe?",
+      "fuentes_esperadas": [
+        "nacional_19945_art_62",
+        "santa_fe_14478_art_129"
+      ],
+      "respuesta_referencia": "El Código Nacional la establece para todos los procesos electorales nacionales contemplados en él; Santa Fe dispone su utilización exclusiva en las elecciones generales, conforme a las reglas de su Código.",
+      "tipo": "comparativa",
+      "anotacion": "Dos fuentes necesarias; comprobar que ninguna jurisdicción sea omitida.",
+      "origen_jurisdiccion": "cmp_03",
+      "jurisdicciones": [
+        "nacional",
+        "santa_fe"
+      ]
+    },
+    {
+      "id": "ausente_ganador_gobernador_pba_2023",
+      "respondible": false,
+      "jurisdiccion": "pba",
+      "pregunta": "¿Qué candidato ganó la elección de gobernador de la provincia de Buenos Aires en 2023 y con qué porcentaje de votos?",
+      "fuentes_esperadas": [],
+      "respuesta_referencia": "No respondible con este corpus: la Ley 5.109 regula comicios, pero no presenta los resultados reales ni porcentajes de la elección de 2023.",
+      "tipo": "negativa",
+      "anotacion": "El corpus de normas electorales no contiene el hecho puntual requerido."
+    },
+    {
+      "id": "ausente_gastos_campana_sf_2025",
+      "respondible": false,
+      "jurisdiccion": "santa_fe",
+      "pregunta": "¿Cuánto gastó efectivamente cada agrupación política en la campaña electoral santafesina de 2025?",
+      "fuentes_esperadas": [],
+      "respuesta_referencia": "No respondible con este corpus: el Código de Santa Fe regula financiamiento, pero no contiene las rendiciones efectivas de gastos de esa campaña.",
+      "tipo": "negativa",
+      "anotacion": "El corpus de normas electorales no contiene el hecho puntual requerido."
+    },
+    {
+      "id": "ausente_votos_presidenciales_2023",
+      "respondible": false,
+      "jurisdiccion": "nacional",
+      "pregunta": "¿Cuántos votos recibió cada fórmula presidencial argentina en la segunda vuelta de 2023?",
+      "fuentes_esperadas": [],
+      "respuesta_referencia": "No respondible con este corpus: la legislación electoral no ofrece el escrutinio real de esa segunda vuelta.",
+      "tipo": "negativa",
+      "anotacion": "El corpus de normas electorales no contiene el hecho puntual requerido."
+    },
+    {
+      "id": "ausente_escuela_asignada",
+      "respondible": false,
+      "jurisdiccion": null,
+      "pregunta": "¿En qué escuela y mesa me corresponde votar en la próxima elección?",
+      "fuentes_esperadas": [],
+      "respuesta_referencia": "No respondible con este corpus: normas generales no permiten determinar el establecimiento o mesa personal de votación sin consultar un padrón individualizado.",
+      "tipo": "negativa",
+      "anotacion": "También sirve para comprobar abstención; no proporcionar ubicaciones inventadas."
     }
   ]
 }

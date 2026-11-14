@@ -24,7 +24,7 @@ from scripts.evaluar_recuperacion import (
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURE = ROOT / "evalucacion/preguntas.json"
-FIXTURE_SHA256 = "5b0c0f545671a2a34ea68de096c10c6fb22914bb7b3410011c19df9f40d3de4e"
+FIXTURE_SHA256 = "f25203f27d0dc12bdc430a47cc58911e1c023807d9179a7507e93cc200399275"
 
 
 def chunk(chunk_id="a__chunk_0001", *, jurisdiction="nacional", pages=None):
@@ -299,9 +299,9 @@ class FakeEvaluationRetriever:
         return [dict(self.rank[0], rank=rank) for rank in range(1, min(k, 1) + 1)]
 
 
-def test_evaluator_queries_each_filter_once_and_keeps_paraphrase_separate(tmp_path):
+def test_evaluator_queries_each_filter_once_and_keeps_paraphrase_separate(tmp_path, five_case_protocol_fixture):
     fixture_copy = tmp_path / "questions.json"
-    fixture_copy.write_bytes(FIXTURE.read_bytes())
+    fixture_copy.write_bytes(five_case_protocol_fixture.read_bytes())
     digest_before = hashlib.sha256(fixture_copy.read_bytes()).hexdigest()
     fake = FakeEvaluationRetriever()
     report_path = tmp_path / "report.json"

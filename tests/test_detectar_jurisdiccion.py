@@ -95,7 +95,7 @@ def test_classification_metrics_count_wrong_comparisons_and_separate_coverage_fr
     assert metrics["comparative_detection"]["recall"] == {"numerator": 1, "denominator": 2, "value": 0.5}
 
 
-def test_article_hit_and_retrieval_comparison_arithmetic_with_fake_rankings():
+def test_article_hit_and_retrieval_comparison_arithmetic_with_fake_rankings(tmp_path, monkeypatch):
     rows = [
         {"expected_source_article_ids": ["a"], "results": [{"source_article_id": "a"}]},
         {"expected_source_article_ids": ["b"], "results": [{"source_article_id": "x"}, {"source_article_id": "b"}]},
@@ -127,6 +127,15 @@ def test_article_hit_and_retrieval_comparison_arithmetic_with_fake_rankings():
             return [{"source_article_id": article, "jurisdiccion": expected_j if article == expected else "nacional",
                      "chunk_id": f"{article}-{n}"} for n, article in enumerate(ordered, 1)]
 
+    # Contrato histórico con datos sintéticos: no usa ni archiva el fixture anterior.
+    from scripts import evaluar_jurisdiccion as evaluation
+    synthetic = tmp_path / "synthetic-routing-impact.json"
+    synthetic.write_text(json.dumps({"preguntas": [
+        {"id": "synthetic_nat", "respondible": True, "jurisdiccion": "nacional", "pregunta": "Código Electoral Nacional", "fuentes_esperadas": ["nacional_19945_art_12"]},
+        {"id": "synthetic_pba", "respondible": True, "jurisdiccion": "pba", "pregunta": "Ley 5.109", "fuentes_esperadas": ["pba_5109_art_13"]},
+        {"id": "synthetic_sf", "respondible": True, "jurisdiccion": "santa_fe", "pregunta": "Ley 14.478", "fuentes_esperadas": ["santa_fe_14478_art_4"]},
+    ]}))
+    monkeypatch.setattr(evaluation, "BASELINE_FIXTURE", synthetic)
     fake = FakeIndex()
     impact = evaluate_retrieval(questions=[], index_dir=ROOT / ".chroma/electoral_laws",
                                 chunks_path=ROOT / "datos/procesados/chunks.jsonl", model="bge-m3", retriever=fake)

@@ -246,6 +246,7 @@ def generate_answer(question: str, k: int = 3, jurisdiccion: str | None = None,
 
 def answer_question(question: str, k: int = 3, jurisdiccion: str | None = None,
                     model: str = DEFAULT_GENERATION_MODEL, *, sin_filtro: bool = False,
+                    jurisdicciones: list[str] | None = None,
                     retriever: Any = None, chat_model: Any = None,
                     index_dir: Path = DEFAULT_INDEX, chunks_path: Path = DEFAULT_INPUT,
                     embedding_model: str = DEFAULT_EMBEDDING_MODEL) -> dict[str, Any]:
@@ -257,8 +258,20 @@ def answer_question(question: str, k: int = 3, jurisdiccion: str | None = None,
     _validate_request(question, k, None, model)
     if jurisdiccion is not None and sin_filtro:
         raise ValueError("--jurisdiccion y --sin-filtro son opciones incompatibles")
+    if jurisdicciones is not None:
+        if jurisdiccion is not None or sin_filtro:
+            raise ValueError("jurisdicciones no se combina con jurisdiccion ni sin_filtro")
+        if (not isinstance(jurisdicciones, list) or len(jurisdicciones) < 2
+                or any(j not in JURISDICCIONES for j in jurisdicciones)
+                or len(set(jurisdicciones)) != len(jurisdicciones)):
+            raise ValueError("jurisdicciones debe contener al menos dos jurisdicciones válidas distintas")
     detected = detect_jurisdiction(question)
-    if jurisdiccion is not None:
+    if jurisdicciones is not None:
+        route = {**detected, "status": "comparative", "jurisdictions": list(jurisdicciones),
+                 "reason": f"Jurisdicciones seleccionadas explícitamente: {jurisdicciones}.",
+                 "clarification_question": None}
+        source, scope = "manual", list(jurisdicciones)
+    elif jurisdiccion is not None:
         if jurisdiccion not in JURISDICCIONES:
             raise ValueError(f"jurisdiccion debe ser una de {JURISDICCIONES}")
         route = {**detected, "status": "identified", "jurisdictions": [jurisdiccion],
@@ -307,7 +320,7 @@ def answer_question(question: str, k: int = 3, jurisdiccion: str | None = None,
             "routing_reason": route["reason"], "clarification_question": None,
             "applied_filter": jurisdictions[0] if len(jurisdictions) == 1 else jurisdictions,
             "per_jurisdiction_retrievals": per_jurisdiction if len(jurisdictions) > 1 else None,
-            "routing_status": detected["status"]}
+            "routing_status": route["status"] if jurisdicciones is not None else detected["status"]}
 
 
 def _render_cli_result(result: dict[str, Any]) -> str:

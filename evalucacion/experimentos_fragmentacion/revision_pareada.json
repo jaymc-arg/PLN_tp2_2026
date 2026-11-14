@@ -1,0 +1,3606 @@
+{
+  "fixture_sha256": "f25203f27d0dc12bdc430a47cc58911e1c023807d9179a7507e93cc200399275",
+  "reviewer": "coding-agent inspection; not independent legal/human verification",
+  "coding_agent_model": "gpt-6.1-sol",
+  "source_validation": {
+    "unique_cases": 38,
+    "answerable": 32,
+    "unanswerable": 6,
+    "two_jurisdiction_positives": 2,
+    "expected_article_ids_and_jurisdictions_validated": true,
+    "references_checked_against_texto_principal_by_coding_agent": true,
+    "inconsistent_source_or_reference_cases": [],
+    "note": "Verificación previa a las búsquedas; no determina vigencia ni validez jurídica independiente."
+  },
+  "rubric": {
+    "passage": "full = todos los hechos necesarios de la referencia y atribución correcta; partial = apoyo sustantivo incompleto; none = ninguna evidencia del hecho pedido. Se inspeccionaron los hechos en K3 y se verificó K5 con las mismas trazas.",
+    "supported": "Estricto: respuesta completa y sin extensión factual material no apoyada, con referencias pertinentes que respalden sus afirmaciones. Se admiten paráfrasis y repeticiones del mismo hecho; no se confunde una cita numéricamente válida con apoyo semántico.",
+    "partially_supported": "Algunos hechos están apoyados, pero hay omisiones, condiciones/atribuciones incorrectas, citas ausentes o referencias no pertinentes. La justificación separa estos defectos.",
+    "factual_correctness": "full = hechos requeridos completos y afirmaciones sustentadas; partial = mezcla incompleta/no enteramente sustentada; incorrect = contradicción material explicitada en justificación; uncertain = alcance no establecido; not_applicable = no se afirma el hecho negativo solicitado.",
+    "citation_support": "Inspección semántica del agente, independiente de citation_check del generador. full cubre las afirmaciones y referencias pertinentes; partial mezcla apoyo y errores; none no respalda el hecho citado; missing sin citas; not_applicable en abstención sin afirmaciones.",
+    "negative_abstention": "Se exige negativa explícita por insuficiencia de evidencia para el hecho solicitado, no solo una exposición de normas ni una aclaración del router. En esta corrida las cinco abstenciones claras por brazo son exactamente la frase prescrita; escuela_asignada no la emite.",
+    "negative_factual_rate": "unsupported_factual_answer marca cualquier afirmación material no apoyada en una respuesta negativa, incluso una extensión ajena. No se deduce automáticamente de partially_supported. invented_requested_fact mide aparte una ubicación/resultado/monto pedido inventado.",
+    "needs_review": "Incertidumbre de interpretación marcada, no un acierto ni un fallo confirmado: único medio en la respuesta nacional BUP base. Los hechos y el contexto fueron inspeccionados, no es un caso sin ejecutar.",
+    "anchors": "criterios_pasajes.json fue elaborado desde las fuentes antes de leer respuestas. La búsqueda literal solo ayuda a cotejar cobertura/citas; no decide automáticamente apoyo factual ni causalidad. Las citas evidence son substrings sin modificar del contexto realmente enviado."
+  },
+  "1000_150": {
+    "nacional_respondible_deber_votar": {
+      "passage_coverage_k3": "partial",
+      "passage_coverage_k5": "partial",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "full",
+      "failure_stages": [
+        "fragmentation",
+        "retrieval"
+      ],
+      "justification": "Enumera a-c y cita correctamente [1], pero faltan la causal d, comunicación/certificación y carácter optativo. Esas omisiones ya están en el contexto recuperado; no se puede considerar una enumeración completa.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "f7f47e1b4809b282e9179b1068a649661e299817583276b5ed609b31beac723a",
+      "literal_anchor_checks": {
+        "found_at_3": 7,
+        "required_anchor_count": 12,
+        "missing_at_3": [
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "El personal de organismos y empresas de servicios públicos"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "tareas que le impidan asistir al comicio"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "el empleador o su representante legal comunicarán"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "la pertinente certificación"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "de carácter optativo para el elector"
+          }
+        ],
+        "missing_at_5": [
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "El personal de organismos y empresas de servicios públicos"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "tareas que le impidan asistir al comicio"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "el empleador o su representante legal comunicarán"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "la pertinente certificación"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "de carácter optativo para el elector"
+          }
+        ],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "quote": "Los jueces y sus auxiliares",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "quote": "deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "quote": "a más de quinientos (500) kilómetros",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "quote": "motivos razonables",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "quote": "certificación escrita que acredite la comparecencia",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "quote": "Los enfermos o imposibilitados por fuerza mayor",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "quote": "deberán ser justificadas",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Regresión dentro de partial: la base tiene a-c y certificación, 600 solo a-b. Ninguna recupera d/optatividad."
+    },
+    "pba_respondible_representacion": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "full",
+      "citation_support": "missing",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "92 diputados y 46 senadores son correctos y están en [1]. La respuesta no incluye ninguna cita, aunque el contexto es suficiente. Se distingue corrección factual de soporte explícito de citas.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "cd0dffecc2fcb1ee02e2913a0b685efe75a75ba8b93f974a66501ad3531b0863",
+      "literal_anchor_checks": {
+        "found_at_3": 1,
+        "required_anchor_count": 1,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_13__chunk_0001",
+          "quote": "noventa y dos (92) diputados y cuarenta y seis (46) senadores",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Empate: 92/46 y evidencia completa, pero ambas respuestas sin citas."
+    },
+    "santa_fe_respondible_autoridad_mesa": {
+      "passage_coverage_k3": "partial",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "partial",
+      "failure_stages": [
+        "retrieval",
+        "generation"
+      ],
+      "justification": "El art. 67 en [2] ofrece apoyo relacionado sobre presidencia y suplentes, pero no acredita la atribución al artículo 4 ni se explicita el orden de reemplazo. Cita indiscriminadamente [1][2][3]; [1] es mesas de detención y [3] requisitos. La definición exacta está recién en rango 4, fuera del prompt.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "3bcec26e996feebf886109a149ccfae043905c31df351f292541ced297e41efc",
+      "literal_anchor_checks": {
+        "found_at_3": 0,
+        "required_anchor_count": 3,
+        "missing_at_3": [
+          {
+            "source_article_id": "santa_fe_14478_art_4",
+            "fact": "la persona que ejerce la presidencia de la mesa receptora de votos"
+          },
+          {
+            "source_article_id": "santa_fe_14478_art_4",
+            "fact": "en caso de ausencia o impedimento"
+          },
+          {
+            "source_article_id": "santa_fe_14478_art_4",
+            "fact": "quien la reemplaza conforme al orden de designación establecido en este Código"
+          }
+        ],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+          "quote": "ARTÍCULO 67.- Autoridades de mesa. Cada mesa electoral tiene como única autoridad quien ejerce la presidencia de mesa y dos (2) suplentes que la auxilian y reemplazan, en el orden de sus designaciones, por inasistencia o ausencias momentáneas",
+          "purpose": "Apoyo relacionado parcial del art. 67; no prueba atribución al art. 4."
+        }
+      ],
+      "paired_observation": "Mejora de pasaje: definición exacta de rango 4 a 2. 600 agrega requisitos de [3] pero cita [1][2], por eso no es supported estricto."
+    },
+    "ausente_resultado_electoral": {
+      "passage_coverage_k3": "none",
+      "passage_coverage_k5": "none",
+      "answer_label": "abstained_correctly",
+      "factual_correctness": "not_applicable",
+      "citation_support": "not_applicable",
+      "failure_stages": [],
+      "justification": "Abstención literal sin inventar ganador/votos de 2023. El contexto reúne normas sobre reparto, electores y elección senatorial de 1995, no el resultado presidencial solicitado.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "37ce93edd5b2b0ce9e5d93727c918e99073e1fb470db0650f0eca1ee20f00b6f",
+      "unsupported_factual_answer": false,
+      "invented_requested_fact": false,
+      "literal_anchor_checks": {
+        "found_at_3": 0,
+        "required_anchor_count": 0,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_159__chunk_0002",
+          "quote": "b. cuarenta por ciento (40%) restante entre todas las agrupaciones políticas que oficialicen precandidaturas o candidaturas, en forma proporcional a la cantidad de votos obtenidos en la elección general anterior de la ca",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "ARTÍCULO 25.- Personas Electoras. Son electoras las personas argentinas y extranjeras que hayan cumplido dieciséis (16) años de edad al momento de la elección, posean residencia efectiva en la Provincia y no se encuentre",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "nacional_19945_art_166__chunk_0003",
+          "quote": "En la Ciudad de Buenos Aires se celebrará durante 1995 una elección directa de Senador Nacional, a efectos de incorporar el tercer Senador por el distrito. Cada elector votará por una lista oficializada con un candidato ",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        }
+      ],
+      "paired_observation": "Hechos not_applicable→not_applicable; citas not_applicable→not_applicable. Mismo pasaje K3."
+    },
+    "ausente_gasto_real_partido": {
+      "passage_coverage_k3": "none",
+      "passage_coverage_k5": "none",
+      "answer_label": "abstained_correctly",
+      "factual_correctness": "not_applicable",
+      "citation_support": "not_applicable",
+      "failure_stages": [],
+      "justification": "Abstención literal. Cuenta de campaña y límites de aportes/gastos son reglas, no rendiciones reales de cada partido en 2023.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "37ce93edd5b2b0ce9e5d93727c918e99073e1fb470db0650f0eca1ee20f00b6f",
+      "unsupported_factual_answer": false,
+      "invented_requested_fact": false,
+      "literal_anchor_checks": {
+        "found_at_3": 0,
+        "required_anchor_count": 0,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_169__chunk_0001",
+          "quote": "ARTÍCULO 169.- Cuenta única de campaña. Los fondos destinados a financiar la campaña electoral deben depositarse en una cuenta bancaria única por agrupación política, abierta en una entidad financiera reconocida por el B",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_173__chunk_0001",
+          "quote": "ARTÍCULO 173.- Topes individuales. El límite a los aportes de las personas humanas para las campañas electorales no puede superar el uno por ciento (1%) del límite de gastos establecido en el artículo 172. Este límite se",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_172__chunk_0001",
+          "quote": "ARTÍCULO 172.- Límite de gastos electorales. Las listas internas de las agrupaciones políticas que participen de las elecciones primarias, abiertas, simultáneas y obligatorias no pueden superar en concepto de gastos de c",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        }
+      ],
+      "paired_observation": "Hechos not_applicable→not_applicable; citas not_applicable→not_applicable. Mismo pasaje K3."
+    },
+    "nacional_electores_edad": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "full",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Las edades 16 para nativos/por opción y 18 para naturalizados están correctamente citadas en [1], pero omite la condición de no inhabilitación incluida en la referencia y disponible en ese mismo chunk.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "1d64e3f5b88f2dfa2e7f3f68f3fb0c7e6ad691a2cb44f281e890c1c9231cf41d",
+      "literal_anchor_checks": {
+        "found_at_3": 3,
+        "required_anchor_count": 3,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_1__chunk_0001",
+          "quote": "argentinos nativos y por opción, desde los dieciséis (16) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_1__chunk_0001",
+          "quote": "argentinos naturalizados, desde los dieciocho (18) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_1__chunk_0001",
+          "quote": "no tengan ninguna de las inhabilitaciones",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→partial; citas full→full. Mismo pasaje K3."
+    },
+    "nacional_licencia_laboral": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "La licencia especial para votar o desempeñar funciones, sin deducción salarial ni recargo posterior, está completa en [1] y la respuesta la parafrasea correctamente. La repetición final no introduce hechos distintos.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "59d8748d76455cf2d111735a9a1dd50ed2fa15255aa5147a0c03da11b5f9f4fd",
+      "literal_anchor_checks": {
+        "found_at_3": 3,
+        "required_anchor_count": 3,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_8__chunk_0001",
+          "quote": "licencia especial de sus empleadores",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_8__chunk_0001",
+          "quote": "emitir el voto o desempeñar funciones en el comicio",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_8__chunk_0001",
+          "quote": "sin deducción alguna del salario ni ulterior recargo de horario",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas full→full. Mismo pasaje K3."
+    },
+    "nacional_subregistros_electores": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Los cuatro subregistros están completos y correctamente citados con [1]. Sin embargo agrega que pertenecen a la ley electoral del Perú: atribución nacional falsa/no respaldada por el contexto argentino. El control de formato pasa y no detecta este error sustantivo.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "98df2087f7ba647c42b08fd9ad876084d52032ac0947cd28e821184e3c6d4f14",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 4,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_15__chunk_0001",
+          "quote": "De electores por distrito",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_15__chunk_0001",
+          "quote": "De electores inhabilitados y excluidos",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_15__chunk_0001",
+          "quote": "De electores residentes en el exterior",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_15__chunk_0001",
+          "quote": "De electores privados de la libertad",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→full; citas partial→full. Mismo pasaje K3."
+    },
+    "nacional_registro_infractores": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "missing",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Identifica Cámara y edades del registro, pero no explicita el listado por distrito y termina ampliándolo a quienes no se hayan registrado como votantes, algo distinto de no constar la emisión del voto. No incluye citas numeradas. El contexto era suficiente.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "69f3aec3cbe9ae04df6a18bf9840b37d0e2dd2b68408a4608a53bf893bcd3a82",
+      "literal_anchor_checks": {
+        "found_at_3": 5,
+        "required_anchor_count": 5,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_18__chunk_0001",
+          "quote": "La Cámara Nacional Electoral llevará un registro de infractores",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_18__chunk_0001",
+          "quote": "Luego de cada elección nacional",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_18__chunk_0001",
+          "quote": "un listado por distrito",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_18__chunk_0001",
+          "quote": "mayores de dieciocho (18) años y menores de setenta (70) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_18__chunk_0001",
+          "quote": "no se tenga constancia de emisión del voto",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→partial; citas missing→partial. Mismo pasaje K3."
+    },
+    "nacional_difusion_padrones": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "Diez días tras cierre, publicación web/u otros medios, privacidad y vías de denuncias/reclamos/consulta: todos los hechos requeridos están en [1] y se citan correctamente.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "bd7552aab15abbcf1db6f9b02e31c6597a301447e877509fbbe061d9e28d8517",
+      "literal_anchor_checks": {
+        "found_at_3": 6,
+        "required_anchor_count": 6,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_26__chunk_0001",
+          "quote": "La Cámara Nacional Electoral",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_26__chunk_0001",
+          "quote": "diez (10) días después de la fecha de cierre del registro",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_26__chunk_0001",
+          "quote": "en su sitio web y/o por otros medios",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_26__chunk_0001",
+          "quote": "previsiones legales de privacidad",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_26__chunk_0001",
+          "quote": "denuncias y reclamos",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_26__chunk_0001",
+          "quote": "consultas al padrón provisional",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→partial; citas full→none. Mismo pasaje K3."
+    },
+    "nacional_reclamos_padron": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "Responde juez, 15 días corridos desde publicación y los tres medios con [1]. La adición del art. 33 está citada en [2] y describe literalmente otro trámite. Advertencia: [2] también restringe ese trámite y excluye reclamos 27/28; no interpretar el párrafo adicional como una prórroga de los 15 días del padrón provisional.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "5926e9527078a7fa148309a719b7684e01a33fd10176260f09c160d8e0ddcc25",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 4,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_27__chunk_0001",
+          "quote": "juez federal con competencia electoral",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_27__chunk_0001",
+          "quote": "quince (15) días corridos",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_27__chunk_0001",
+          "quote": "a partir de la publicación",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_27__chunk_0001",
+          "quote": "personalmente, por vía postal en forma gratuita, o vía web",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas full→full. Mismo pasaje K3."
+    },
+    "nacional_boleta_unica": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "needs_review",
+      "factual_correctness": "uncertain",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Identifica correctamente BUP para todos los procesos y cita [1]. Añade que es el único medio: el pasaje establece BUP pero no dice expresamente exclusividad. Se deja needs_review por el alcance jurídico de esa intensificación, sin declararla falsa ni dar por verificada su suficiencia semántica.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "78b696324fb39d7d20f4353bfdff65a0457bdbe681cf97c37d380d9ee58f9bdc",
+      "literal_anchor_checks": {
+        "found_at_3": 1,
+        "required_anchor_count": 1,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_62__chunk_0001",
+          "quote": "Se establece la Boleta Única de Papel como instrumento de votación para todos los procesos electorales nacionales",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos uncertain→full; citas partial→full. Mismo pasaje K3."
+    },
+    "nacional_designacion_autoridades": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "Designación por juzgado federal, al menos 30 días antes de primarias, ratificación generales y padrón de la misma mesa: todo está en [1]. Las reglas adicionales de excusación también están dentro de ese chunk y la cita [1] las respalda.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "1c206f22d8b058aa39b8aacedac15aa26b0d0c08f423b550f3fb52cb6342e9a6",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 4,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_75__chunk_0001",
+          "quote": "El juzgado federal con competencia electoral nombrará a los presidentes y suplentes",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_75__chunk_0001",
+          "quote": "antelación no menor de treinta (30) días",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_75__chunk_0001",
+          "quote": "elecciones primarias debiendo ratificar tal designación para las elecciones generales",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_75__chunk_0001",
+          "quote": "figurar en el padrón de la mesa para la cual sean designados",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas full→partial. Mismo pasaje K3."
+    },
+    "nacional_eleccion_presidencial": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Describe correctamente elección directa/simultánea, doble vuelta, distrito único y fórmula indivisible de [1]. Pero agrega mayoría absoluta como condición de balotaje: el contexto [3] solo remite a arts. 97/98/96 sin aportar ese umbral. [2] trata diputados. Formato válido no respalda esa regla adicional.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "6a91813c7c010f77174cebe4e1990a4bfe091770deb92e42ac517c69d72ff33a",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 4,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_148__chunk_0001",
+          "quote": "simultánea y directamente por el pueblo",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_148__chunk_0001",
+          "quote": "sistema de doble vuelta",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_148__chunk_0001",
+          "quote": "territorio nacional constituye un único distrito",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_148__chunk_0001",
+          "quote": "fórmula indivisible de candidatos a ambos cargos",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→partial; citas partial→missing. Cambio de suficiencia del contexto."
+    },
+    "pba_electores": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "missing",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Edades 16/18 y remisión a Ley 11.700 correctas; omite inscripción/habilitación que estaban en [1] y no cita. La negativa a ampliar requisitos extranjeros externos es apropiada, no una abstención total.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "de04390e0c32c202148482d4a2553c3d3a94bdee6c9f0f54fd0ae0b75b7616aa",
+      "literal_anchor_checks": {
+        "found_at_3": 5,
+        "required_anchor_count": 5,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_2__chunk_0001",
+          "quote": "argentinos nativos y por opción desde los dieciséis (16) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_2__chunk_0001",
+          "quote": "naturalizados desde los dieciocho (18) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_2__chunk_0001",
+          "quote": "inscriptos en el Registro Electoral",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_2__chunk_0001",
+          "quote": "no se encuentren alcanzados por las inhabilidades",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_2__chunk_0001",
+          "quote": "extranjeros que reúnan los requisitos exigidos en la Ley 11.700",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→partial; citas missing→partial. Mismo pasaje K3."
+    },
+    "pba_exenciones_deber_votar": {
+      "passage_coverage_k3": "partial",
+      "passage_coverage_k5": "partial",
+      "answer_label": "partially_supported",
+      "factual_correctness": "incorrect",
+      "citation_support": "partial",
+      "failure_stages": [
+        "fragmentation",
+        "retrieval",
+        "generation"
+      ],
+      "justification": "Obtiene algunas causales pero dice que la exención por salud es obligatoria y que se debe llevar a la persona al lugar de votación: [1] ordena al médico concurrir al domicilio, no transportar al elector. Falta la causal e y el carácter optativo en el contexto; también omite funcionarios/empleados que sí estaban. Terminar con No encuentro no elimina las afirmaciones previas.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "c9d9773a59be81c9758a6f6aba3e41eddd8c81eac6a6df0744a5f0691f583101",
+      "literal_anchor_checks": {
+        "found_at_3": 9,
+        "required_anchor_count": 14,
+        "missing_at_3": [
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "El personal de organismos y empresas de servicios públicos"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "tareas que le impidan asistir al comicio"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "el empleador o su representante legal comunicarán a la Junta Electoral"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "la pertinente certificación"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "de carácter optativo para el elector"
+          }
+        ],
+        "missing_at_5": [
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "El personal de organismos y empresas de servicios públicos"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "tareas que le impidan asistir al comicio"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "el empleador o su representante legal comunicarán a la Junta Electoral"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "la pertinente certificación"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "de carácter optativo para el elector"
+          }
+        ],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_4__chunk_0001",
+          "quote": "físicamente imposibilitados",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_4__chunk_0001",
+          "quote": "razones de salud",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_4__chunk_0001",
+          "quote": "un certificado expedido por la autoridad médica local",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_4__chunk_0001",
+          "quote": "funcionarios y empleados",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_4__chunk_0001",
+          "quote": "por sus ocupaciones, como tales, no puedan hacerlo",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_4__chunk_0001",
+          "quote": "Los jueces y sus auxiliares",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_4__chunk_0001",
+          "quote": "mantenerlas abiertas mientras dure el acto comicial",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_4__chunk_0001",
+          "quote": "a más de quinientos (500) kilómetros",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_4__chunk_0001",
+          "quote": "motivos razonables",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Intercambio: 600 recupera optatividad pero pierde causales; la base incluso inventa obligatoriedad/transporte. No mejora completa."
+    },
+    "pba_documentos_habilitantes": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "Libreta de Enrolamiento, Libreta Cívica y DNI en cualquier formato figuran en [2]; [1] respalda el ámbito provincial/municipal/consejeros. El grupo de citas acompaña ambos aspectos sin inventar documentos.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "71723c6f84c3265974804e5d5486acc31dfcd674dae61c1f74b0c608a108865a",
+      "literal_anchor_checks": {
+        "found_at_3": 3,
+        "required_anchor_count": 3,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_8__chunk_0001",
+          "quote": "La Libreta de Enrolamiento",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_8__chunk_0001",
+          "quote": "la Libreta Cívica",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_8__chunk_0001",
+          "quote": "el Documento Nacional de Identidad (DNI), en cualquiera de sus formatos",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas full→full. Mismo pasaje K3."
+    },
+    "pba_distritos_municipales": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Las dos respuestas pedidas son correctas y citadas con [1]. Añade que la Sección Capital es la más conocida y reconocida, juicio de popularidad que no está en [2], aunque ocho secciones y La Plata sí aparecen.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "1e1c1460d99fefd0bd24881f239a65fa5b4ebfe2836cd2d71c805e570c5504d8",
+      "literal_anchor_checks": {
+        "found_at_3": 2,
+        "required_anchor_count": 2,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_11__chunk_0001",
+          "quote": "cada uno de los partidos en que se divide la Provincia, constituye un distrito Electoral",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_11__chunk_0001",
+          "quote": "Gobernador y Vicegobernador, la Provincia se considerará como una sola Sección Electoral",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→partial; citas partial→partial. Mismo pasaje K3."
+    },
+    "pba_septima_seccion": {
+      "passage_coverage_k3": "partial",
+      "passage_coverage_k5": "partial",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "missing",
+      "failure_stages": [
+        "fragmentation",
+        "retrieval",
+        "generation"
+      ],
+      "justification": "Recupera el comienzo del art. 12, no la lista de partidos de la Séptima. Responde ocho secciones y luego desvía a bancas del art. 13, sin resolver los municipios solicitados ni citar. La frase de abstención al final no convierte la respuesta extensa en abstención real.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "65f9dd4cde37d37f1e3d2c733595c9baed2f4965d73abc007cce6ff0b8ff0ab6",
+      "literal_anchor_checks": {
+        "found_at_3": 1,
+        "required_anchor_count": 3,
+        "missing_at_3": [
+          {
+            "source_article_id": "pba_5109_art_12",
+            "fact": "SEPTIMA SECCIÓN ELECTORAL"
+          },
+          {
+            "source_article_id": "pba_5109_art_12",
+            "fact": "Azul, Bolívar, General Alvear, Olavarría, Roque Pérez, Saladillo, Veinticinco de Mayo y Tapalqué"
+          }
+        ],
+        "missing_at_5": [
+          {
+            "source_article_id": "pba_5109_art_12",
+            "fact": "SEPTIMA SECCIÓN ELECTORAL"
+          },
+          {
+            "source_article_id": "pba_5109_art_12",
+            "fact": "Azul, Bolívar, General Alvear, Olavarría, Roque Pérez, Saladillo, Veinticinco de Mayo y Tapalqué"
+          }
+        ],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_12__chunk_0001",
+          "quote": "ocho secciones electorales",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Ambas sin lista de municipios; 600 además confunde Séptima con Capital."
+    },
+    "pba_junta_electoral_composicion": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "full",
+      "citation_support": "missing",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Composición correcta de Suprema Corte, Tribunal de Cuentas, tres Cámaras y sustitutos; el artículo 14 está completo en [1]. Falta toda cita numerada en la respuesta.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "5b78b0c3359d344f411f3c75784ee2d40498c9297b252bd857df7baa144521a1",
+      "literal_anchor_checks": {
+        "found_at_3": 2,
+        "required_anchor_count": 2,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_14__chunk_0001",
+          "quote": "presidentes de la Suprema Corte de Justicia, del Tribunal de Cuentas y de tres Cámaras de Apelación del Departamento de la Capital",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_14__chunk_0001",
+          "quote": "sus sustitutos en caso de impedimento",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas missing→full. Mismo pasaje K3."
+    },
+    "pba_junta_electoral_funciones": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "full",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Formar/depurar, designar/remover y escrutar correctos con [1], incluidos sus añadidos h-j que sí están en ese chunk. Omite juzgar la validez de las elecciones, incluido en la referencia y en [1]. La omisión no es por falta de evidencia.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "070049b709ff5a4d1f5451663ed3a1e954b241296ad31a3ece2f286f028f6f4b",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 4,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_20__chunk_0001",
+          "quote": "Formar y depurar el registro de electores",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_20__chunk_0001",
+          "quote": "Designar y remover los ciudadanos encargados de recibir los sufragios",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_20__chunk_0001",
+          "quote": "Realizar los escrutinios",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_20__chunk_0001",
+          "quote": "Juzgar la validez de las elecciones",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→full; citas full→full. Mismo pasaje K3."
+    },
+    "pba_presidente_mesa_requisitos": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Los cuatro requisitos personales están correctos y citados en [1]; no identifica a la Junta como órgano que resuelve designaciones. Agrega sellado de puertas/ventanas con [3] pero omite su condición no disponiéndose de local en forma. [2] sí respalda el suplente al cierre. Se penaliza la cualificación omitida, no el dato central de edad.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "b3d151dc8e58abc923b20066743e6c69cc156c195a63ad1705b1813b05133585",
+      "literal_anchor_checks": {
+        "found_at_3": 5,
+        "required_anchor_count": 5,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_40__chunk_0001",
+          "quote": "ser elector en ejercicio en el circuito de su designación",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_40__chunk_0001",
+          "quote": "saber leer y escribir correctamente",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_40__chunk_0001",
+          "quote": "tener domicilio en el distrito",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_40__chunk_0001",
+          "quote": "entre dieciocho (18) y setenta (70) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_40__chunk_0001",
+          "quote": "resueltas por la Junta Electoral",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→partial; citas partial→partial. Mismo pasaje K3."
+    },
+    "pba_proclamacion_intendente": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Intendente por mayor sufragio correcto [1], pero no explica asignación según votos/listas y suplentes iguales/en orden, que sí están en [1]. Convierte el partido territorial del art. 11 en partido político y cita [2] para esa lectura errónea. El trámite de municipios acéfalos [3] no sustituye la respuesta pedida.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "afb79ba2980e3cada56602862f798ce68ec1b6651354231d5f0f3326f19354ac",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 4,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_120__chunk_0001",
+          "quote": "Intendente al que haya obtenido mayor número de sufragios",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_120__chunk_0001",
+          "quote": "de acuerdo con los sufragios obtenidos",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_120__chunk_0001",
+          "quote": "un número de suplentes igual al de los titulares adjudicados",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_120__chunk_0001",
+          "quote": "los que sigan en orden de lista a los titulares",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→partial; citas partial→partial. Mismo pasaje K3."
+    },
+    "santa_fe_ambito_aplicacion": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "Procesos provinciales/municipales, convencionales municipales y supletoriedad provincial, y partidos alcanzados: están completos en [2], con las citas correctas. La posición de rango 2 no impide evidencia suficiente.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "563c49a2bc4382b50e8e1f8de18fef10367ec73bcad77b42a67415b00b6bd96f",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 4,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_2__chunk_0001",
+          "quote": "procesos electorales provinciales y municipales",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_2__chunk_0001",
+          "quote": "incluyendo la elección de Convencionales municipales",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_2__chunk_0001",
+          "quote": "supletoriamente la elección de Convencionales provinciales",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_2__chunk_0001",
+          "quote": "También es aplicable a los partidos políticos",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas full→full. Mismo pasaje K3."
+    },
+    "santa_fe_electores_extranjeros": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "Incluye edad, residencia, no inhabilitación, DNI argentino y dos años permanentes/continuos, con [1]. La adición de requisitos de [2] está expresamente condicionada a ser autoridad de mesa; no se la interpreta como requisito adicional para votar ni como condición exclusiva de extranjeros. Mantener esa distinción de roles al leer la respuesta.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "5639230eae9e63bc6912d4264a66cc9024dc23af08dd0b91a5f14ea9a7bca621",
+      "literal_anchor_checks": {
+        "found_at_3": 6,
+        "required_anchor_count": 6,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "argentinas y extranjeras",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "dieciséis (16) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "residencia efectiva en la Provincia",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "no se encuentren comprendidas en las causales de inhabilitación",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "documento de identidad argentino",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "residencia permanente y continua de dos (2) años en la Provincia",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→partial; citas full→full. Cambio de suficiencia del contexto."
+    },
+    "santa_fe_capacidad_mesa": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "incorrect",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Primero transcribe correctamente 350, reparto de remanente menor de 60 y mesa independiente desde 60, pero concluye que eso permite una mesa con menos de 60. Esa conclusión no deriva de [1], que manda distribuir el remanente en mesas próximas. El contexto completo no evitó la contradicción interna.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "35019aa256d1b52e7dd20f8b3320b356604911c71efc9794b6382edf8b73c25c",
+      "literal_anchor_checks": {
+        "found_at_3": 6,
+        "required_anchor_count": 6,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_30__chunk_0001",
+          "quote": "hasta trescientos cincuenta (350)",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_30__chunk_0001",
+          "quote": "agrupadas por orden alfabético y sin distinción de género",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_30__chunk_0001",
+          "quote": "fracción inferior a sesenta (60)",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_30__chunk_0001",
+          "quote": "se distribuyen los electores en mesas próximas",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_30__chunk_0001",
+          "quote": "pudiendo en tal caso excederse el número",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_30__chunk_0001",
+          "quote": "sesenta (60) o más personas electoras, se forma con ella una mesa electoral independiente",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Ambas deforman excepciones de 60 electores pese a evidencia completa: errores de generación distintos."
+    },
+    "santa_fe_convocatoria_primarias": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "Poder Ejecutivo en un mismo acto y antelación de 120 a 150 días: respuesta completa y fiel al art. 41 en [1].",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "28863c3c9617d1912dbc6c08647b45456541958e1c05e61f4dd21181c9f93e56",
+      "literal_anchor_checks": {
+        "found_at_3": 2,
+        "required_anchor_count": 2,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_41__chunk_0001",
+          "quote": "convocadas en un mismo acto por el Poder Ejecutivo",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_41__chunk_0001",
+          "quote": "máxima de ciento cincuenta (150) y mínima de ciento veinte (120) días",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas full→full. Mismo pasaje K3."
+    },
+    "santa_fe_autoridades_mesa": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Dos suplentes e intervención por ausencia están respaldados, pero no explicita orden de designación y agrega el supuesto incoherente de reemplazo por suplentes cuando no hay suplentes disponibles, que no está en [1]. Mezcla además requisitos [2] con la regla de intervención de [1].",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "d5281081799f24a78748ad96560f642861829ad46bd0ffaa4093cf3b2c6fb10b",
+      "literal_anchor_checks": {
+        "found_at_3": 3,
+        "required_anchor_count": 3,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+          "quote": "única autoridad quien ejerce la presidencia de mesa y dos (2) suplentes",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+          "quote": "auxilian y reemplazan, en el orden de sus designaciones",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+          "quote": "por inasistencia o ausencias momentáneas",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "600 mejora orden/supuestos, pero mantiene referencia no pertinente [2]."
+    },
+    "santa_fe_exenciones_voto": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "full",
+      "citation_support": "none",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Reproduce todas las causales/condiciones correctas, pero cita [1] en cada inciso. [1] es art. 256 (multa y acreditación de exenciones), no la enumeración; el pasaje íntegro art. 77 estaba en [3]. Números existentes no significan referencias semánticamente correctas.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "d88c9ec57160ef7e28be28e0d603006214d368be67225e9715bd7eee31f52f86",
+      "literal_anchor_checks": {
+        "found_at_3": 12,
+        "required_anchor_count": 12,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "mayores de dieciséis (16) y menores de dieciocho (18) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "mayores de setenta (70) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "funcionarios públicos obligados a mantener sus oficinas abiertas",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "más de quinientos (500) kilómetros",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "motivos fundados y razonables",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "certificación policial",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "enfermos o impedidos por fuerza mayor",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "certificado del médico del servicio público de salud o, en su ausencia, de médico particular",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "personal de servicios públicos",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "tareas que le impidan asistir al comicio",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "el empleador comunica la nómina al Juez Electoral",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "certificación individual",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→partial; citas none→none. Cambio de suficiencia del contexto."
+    },
+    "santa_fe_horario_constitucion_mesa": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "full",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "7:45 y comunicación policial al Juez a las 8:30 están correctos y completos en [1]. La cita [2] adicional trata ubicación/publicación de mesas y no contiene esos horarios ni la actuación policial: referencia extra no pertinente.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "a6c93736812728ca4d0eada18db39985fe81a021863221743888ddaa6f6a5756",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 4,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_81__chunk_0001",
+          "quote": "siete y cuarenta y cinco (7:45)",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_81__chunk_0001",
+          "quote": "ocho y treinta (8:30)",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_81__chunk_0001",
+          "quote": "la autoridad policial lo comunica al Juez Electoral",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_81__chunk_0001",
+          "quote": "habilitación del comicio",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas partial→full. Mismo pasaje K3."
+    },
+    "santa_fe_boleta_unica": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "full",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "BUP exclusiva en generales es correcto, pero cita [1], art. 294 de abrogaciones; el art. 129 está en [2]. La adición sobre voto de fiscales sí está respaldada por [3]. No confundir mención de Boleta Única en leyes abrogadas con la regla vigente en el texto principal suministrado.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "aff8869ba2d0d3efc2f5b01f2f6128e4f0672ce6fa6c4ed01f8b2de8487e77fb",
+      "literal_anchor_checks": {
+        "found_at_3": 2,
+        "required_anchor_count": 2,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_129__chunk_0001",
+          "quote": "En las elecciones generales se utiliza exclusivamente la Boleta Unica de Papel",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_129__chunk_0001",
+          "quote": "características y procedimientos",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas partial→full. Mismo pasaje K3."
+    },
+    "santa_fe_cuenta_campana": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "full",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Cuenta por agrupación, entidad BCRA y orden conjunta están correctos con [1]; las fuentes de financiamiento sí están en [3]. Omite la posibilidad de cuentas adicionales prevista en la referencia y disponible en [1], dejando la regla única sin esa salvedad.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "83ed2ff6e0f20fafa9f85bd232e749ce9781921ab630bdcc81d00e50bb243198",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 4,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_169__chunk_0001",
+          "quote": "cuenta bancaria única por agrupación política",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_169__chunk_0001",
+          "quote": "entidad financiera reconocida por el Banco Central",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_169__chunk_0001",
+          "quote": "a la orden conjunta del responsable económico-financiero y del responsable político de campaña",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_169__chunk_0001",
+          "quote": "pueden abrir cuentas adicionales",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→full; citas full→full. Mismo pasaje K3."
+    },
+    "comparativa_nacional_santa_fe_electores": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Ambas jurisdicciones están presentes con citas globales correctas [1]/[4]. Pero la residencia extranjera se expresa permanente sin continua, y agrega que ambos códigos reconocen protección de identidad: [4] exige DNI, no establece ese derecho para ambos códigos. No se deriva una garantía jurídica de un requisito documental.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "b850cffb31956cfe0fc40fc2a3977cf6c417463f5ec3b401c10e5332a6457074",
+      "literal_anchor_checks": {
+        "found_at_3": 9,
+        "required_anchor_count": 9,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_1__chunk_0001",
+          "quote": "argentinos nativos y por opción, desde los dieciséis (16) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_1__chunk_0001",
+          "quote": "argentinos naturalizados, desde los dieciocho (18) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_1__chunk_0001",
+          "quote": "no tengan ninguna de las inhabilitaciones",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "argentinas y extranjeras",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "dieciséis (16) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "residencia efectiva en la Provincia",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "no se encuentren comprendidas en las causales de inhabilitación",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "documento de identidad argentino",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "residencia permanente y continua de dos (2) años en la Provincia",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Ambos artículos en rango 1 en ambos brazos; 600 pierde dos años de residencia y concluye erróneamente que ambos exigen nacionalidad argentina."
+    },
+    "comparativa_nacional_santa_fe_bup": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "El diseño/idioma nacional está efectivamente en [2], y los procesos santafesinos en [5]. Sin embargo no explicita el contraste requerido todos los procesos nacionales frente a exclusividad en generales de SF, y cita [3] (aprobación de modelo nacional) para el párrafo santafesino. Los pasajes esperados [1] y [4] sí estaban completos.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "bf2a591bb066408d721dbe74b2490381715db6fc5bab2261442a670fce56319b",
+      "literal_anchor_checks": {
+        "found_at_3": 3,
+        "required_anchor_count": 3,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_62__chunk_0001",
+          "quote": "Se establece la Boleta Única de Papel como instrumento de votación para todos los procesos electorales nacionales",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_129__chunk_0001",
+          "quote": "En las elecciones generales se utiliza exclusivamente la Boleta Unica de Papel",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_129__chunk_0001",
+          "quote": "características y procedimientos",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Scopes fijados en ambos brazos ante ambigüedad del detector. 600 explicita mejor alcance nacional/exclusividad SF, pero añade una excepción no apoyada."
+    },
+    "ausente_ganador_gobernador_pba_2023": {
+      "passage_coverage_k3": "none",
+      "passage_coverage_k5": "none",
+      "answer_label": "abstained_correctly",
+      "factual_correctness": "not_applicable",
+      "citation_support": "not_applicable",
+      "unsupported_factual_answer": false,
+      "failure_stages": [],
+      "justification": "Abstención literal: el ranking filtrado PBA contiene disposiciones de comicios, distritos y electores, no candidato ganador ni porcentaje real de 2023.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "37ce93edd5b2b0ce9e5d93727c918e99073e1fb470db0650f0eca1ee20f00b6f",
+      "invented_requested_fact": false,
+      "literal_anchor_checks": {
+        "found_at_3": 0,
+        "required_anchor_count": 0,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_113__chunk_0001",
+          "quote": "ARTÍCULO 113.- La elección de Gobernador y Vicegobernador será hecha directamente por el pueblo por simple mayoría de votos; cada elector votará el nombre de un ciudadano para Gobernador y el de otro ciudadano para Viceg",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "pba_5109_art_11__chunk_0001",
+          "quote": "ARTÍCULO 11.- Para las elecciones de concejales y consejeros escolares, cada uno de los partidos en que se divide la Provincia, constituye un distrito Electoral.",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "pba_5109_art_2__chunk_0001",
+          "quote": "ARTÍCULO 2°.- . Son electores para las elecciones Provinciales, Municipales y de Consejeros Escolares:",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        }
+      ],
+      "paired_observation": "Hechos not_applicable→not_applicable; citas not_applicable→not_applicable. Mismo pasaje K3."
+    },
+    "ausente_gastos_campana_sf_2025": {
+      "passage_coverage_k3": "none",
+      "passage_coverage_k5": "none",
+      "answer_label": "abstained_correctly",
+      "factual_correctness": "not_applicable",
+      "citation_support": "not_applicable",
+      "unsupported_factual_answer": false,
+      "failure_stages": [],
+      "justification": "Abstención literal sin cifras inventadas. Fuentes de financiamiento, cuenta de campaña y tope de gastos no acreditan gasto efectivo de 2025.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "37ce93edd5b2b0ce9e5d93727c918e99073e1fb470db0650f0eca1ee20f00b6f",
+      "invented_requested_fact": false,
+      "literal_anchor_checks": {
+        "found_at_3": 0,
+        "required_anchor_count": 0,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_170__chunk_0001",
+          "quote": "ARTÍCULO 170.- Fuentes de financiamiento. Los recursos de las agrupaciones políticas para la campaña electoral provienen de:",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_169__chunk_0001",
+          "quote": "ARTÍCULO 169.- Cuenta única de campaña. Los fondos destinados a financiar la campaña electoral deben depositarse en una cuenta bancaria única por agrupación política, abierta en una entidad financiera reconocida por el B",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_172__chunk_0001",
+          "quote": "ARTÍCULO 172.- Límite de gastos electorales. Las listas internas de las agrupaciones políticas que participen de las elecciones primarias, abiertas, simultáneas y obligatorias no pueden superar en concepto de gastos de c",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        }
+      ],
+      "paired_observation": "Hechos not_applicable→not_applicable; citas not_applicable→not_applicable. Mismo pasaje K3."
+    },
+    "ausente_votos_presidenciales_2023": {
+      "passage_coverage_k3": "none",
+      "passage_coverage_k5": "none",
+      "answer_label": "abstained_correctly",
+      "factual_correctness": "not_applicable",
+      "citation_support": "not_applicable",
+      "unsupported_factual_answer": false,
+      "failure_stages": [],
+      "justification": "Abstención literal. Las reglas de segunda vuelta no ofrecen votos observados por fórmula en 2023.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "37ce93edd5b2b0ce9e5d93727c918e99073e1fb470db0650f0eca1ee20f00b6f",
+      "invented_requested_fact": false,
+      "literal_anchor_checks": {
+        "found_at_3": 0,
+        "required_anchor_count": 0,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_151__chunk_0001",
+          "quote": "Artículo 151.- En la segunda vuelta participarán solamente las dos fórmulas más votadas en la primera, resultando electa la que obtenga mayor número de votos afirmativos válidamente emitidos.",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "nacional_19945_art_152__chunk_0001",
+          "quote": "Artículo 152.- Dentro del quinto día de proclamados las dos fórmulas más votadas, éstas deberán ratificar por escrito ante la Junta Electoral Nacional de la Capital Federal su decisión de presentarse a la segunda vuelta.",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "nacional_19945_art_150__chunk_0001",
+          "quote": "Artículo 150.- Si ninguna fórmula alcanzare esas mayorías y diferencias de acuerdo al escrutinio ejecutado por las Juntas Electorales, y cuyo resultado único para toda la Nación será anunciado por la Asamblea Legislativa",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        }
+      ],
+      "paired_observation": "Hechos not_applicable→not_applicable; citas not_applicable→not_applicable. Mismo pasaje K3."
+    },
+    "ausente_escuela_asignada": {
+      "passage_coverage_k3": "none",
+      "passage_coverage_k5": "none",
+      "answer_label": "partially_supported",
+      "factual_correctness": "not_applicable",
+      "citation_support": "full",
+      "unsupported_factual_answer": false,
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "No inventa una escuela ni mesa y cita correctamente normas generales de padrón/domicilio/locales. Pero responde con esas reglas y remite a la autoridad sin declarar expresamente que el corpus no determina la asignación individual. No es la abstención exigida por el prompt ni una aclaración del router: el modelo fue invocado en modo sin filtro. Se separa falta de abstención de respuesta factual inventada (aquí no hay tal ubicación inventada).",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "55ae416dfbe67896f56b1337c1db3d946d0b59b50b26365db653765ea6ca1d36",
+      "invented_requested_fact": false,
+      "literal_anchor_checks": {
+        "found_at_3": 0,
+        "required_anchor_count": 0,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_86__chunk_0001",
+          "quote": "Artículo 86. - Dónde y cómo pueden votar los electores. Los electores podrán votar únicamente en la mesa receptora de votos en cuya lista figuren asentados y con el documento cívico habilitante. El presidente verificará ",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_4__chunk_0004",
+          "quote": "m. domicilio electoral: el domicilio consignado en el Documento Nacional de Identidad de la persona electora, a los efectos de su inscripción en el Padrón Electoral Provincial y de la determinación de la mesa en que le c",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "pba_5109_art_56__chunk_0001",
+          "quote": "ARTÍCULO 56.-  Treinta (30) días antes de cada elección, la Junta Electoral designará los locales donde funcionarán las mesas receptoras de los sufragios, en base a la última elección nacional. La publicación se hará en ",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        }
+      ],
+      "paired_observation": "Ninguna abstención explícita. Base: normas genéricas sin ubicación inventada; 600 añade la atribución errónea de Ley 5.109 a CABA."
+    }
+  },
+  "600_80": {
+    "nacional_respondible_deber_votar": {
+      "passage_coverage_k3": "partial",
+      "passage_coverage_k5": "partial",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "full",
+      "failure_stages": [
+        "fragmentation",
+        "retrieval"
+      ],
+      "justification": "Solo trae a-b; faltan certificación policial, c, d y condiciones adicionales. Las dos causales afirmadas sí están apoyadas por [1]; advierte que son las del texto recibido. Es más incompleta que 1000/150, aunque ambas caen en la categoría coarse partial.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "5db68ee0c3b55f1265e71319ae208ee5e68cb99dcbddde95661aec36a97aee39",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 12,
+        "missing_at_3": [
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "certificación escrita que acredite la comparecencia"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "Los enfermos o imposibilitados por fuerza mayor"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "deberán ser justificadas"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "El personal de organismos y empresas de servicios públicos"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "tareas que le impidan asistir al comicio"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "el empleador o su representante legal comunicarán"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "la pertinente certificación"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "de carácter optativo para el elector"
+          }
+        ],
+        "missing_at_5": [
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "certificación escrita que acredite la comparecencia"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "Los enfermos o imposibilitados por fuerza mayor"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "deberán ser justificadas"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "El personal de organismos y empresas de servicios públicos"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "tareas que le impidan asistir al comicio"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "el empleador o su representante legal comunicarán"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "la pertinente certificación"
+          },
+          {
+            "source_article_id": "nacional_19945_art_12",
+            "fact": "de carácter optativo para el elector"
+          }
+        ],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "quote": "Los jueces y sus auxiliares",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "quote": "deban asistir a sus oficinas y mantenerlas abiertas mientras dure el acto comicial",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "quote": "a más de quinientos (500) kilómetros",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_12__chunk_0001",
+          "quote": "motivos razonables",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Regresión dentro de partial: la base tiene a-c y certificación, 600 solo a-b. Ninguna recupera d/optatividad."
+    },
+    "pba_respondible_representacion": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "full",
+      "citation_support": "missing",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Responde correctamente 92/46, disponibles en [1], pero omite referencias numeradas. No se equipara un dato correcto sin citas con una respuesta completamente respaldada por citas.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "29284f519c1dea4c8cb0f9e336604d935f31096c4c4b1f90db890e3909eec9e7",
+      "literal_anchor_checks": {
+        "found_at_3": 1,
+        "required_anchor_count": 1,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_13__chunk_0001",
+          "quote": "noventa y dos (92) diputados y cuarenta y seis (46) senadores",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Empate: 92/46 y evidencia completa, pero ambas respuestas sin citas."
+    },
+    "santa_fe_respondible_autoridad_mesa": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "full",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "La definición completa está ahora en rango 2 [2]. También enumera correctamente requisitos de autoridad de mesa, pero provienen de [3] y solo cita [1][2]: esas referencias no respaldan los requisitos de 18–70 años/no candidatura. Mejora de evidencia, no de apoyo completo de todas las citas.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "81e6dccfc25d5b6b9b779032eadc267d59f208219faf09a27fea22812d7a0529",
+      "literal_anchor_checks": {
+        "found_at_3": 3,
+        "required_anchor_count": 3,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_4__chunk_0001",
+          "quote": "la persona que ejerce la presidencia de la mesa receptora de votos",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_4__chunk_0001",
+          "quote": "en caso de ausencia o impedimento",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_4__chunk_0001",
+          "quote": "quien la reemplaza conforme al orden de designación establecido en este Código",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Mejora de pasaje: definición exacta de rango 4 a 2. 600 agrega requisitos de [3] pero cita [1][2], por eso no es supported estricto."
+    },
+    "ausente_resultado_electoral": {
+      "passage_coverage_k3": "none",
+      "passage_coverage_k5": "none",
+      "answer_label": "abstained_correctly",
+      "factual_correctness": "not_applicable",
+      "citation_support": "not_applicable",
+      "failure_stages": [],
+      "justification": "Abstención literal. Normas de elección Mercosur, distribución y secretaría electoral no ofrecen ganador/votos presidenciales 2023.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "37ce93edd5b2b0ce9e5d93727c918e99073e1fb470db0650f0eca1ee20f00b6f",
+      "unsupported_factual_answer": false,
+      "invented_requested_fact": false,
+      "literal_anchor_checks": {
+        "found_at_3": 0,
+        "required_anchor_count": 0,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_164_ter__chunk_0002",
+          "quote": "Resultará electo parlamentario del Mercosur por distrito regional provincial o en su caso de la Ciudad Autónoma de Buenos Aires, el candidato de la agrupación política, que obtuviere la mayoría de los votos emitidos en e",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_159__chunk_0004",
+          "quote": "b. cuarenta por ciento (40%) restante entre todas las agrupaciones políticas que oficialicen precandidaturas o candidaturas, en forma proporcional a la cantidad de votos obtenidos en la elección general anterior de la ca",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_23__chunk_0001",
+          "quote": "ARTICULO 23.- Secretario Electoral. Requisitos, designación y remoción. La Secretaría Electoral está dirigida por un Secretario o Secretaria Electoral, quien debe ser ciudadano argentino y contar con experiencia comproba",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        }
+      ],
+      "paired_observation": "Hechos not_applicable→not_applicable; citas not_applicable→not_applicable. Mismo pasaje K3."
+    },
+    "ausente_gasto_real_partido": {
+      "passage_coverage_k3": "none",
+      "passage_coverage_k5": "none",
+      "answer_label": "abstained_correctly",
+      "factual_correctness": "not_applicable",
+      "citation_support": "not_applicable",
+      "failure_stages": [],
+      "justification": "Abstención literal. Cuenta única, topes y fuentes de financiamiento no registran el gasto ejecutado de la campaña presidencial pedida.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "37ce93edd5b2b0ce9e5d93727c918e99073e1fb470db0650f0eca1ee20f00b6f",
+      "unsupported_factual_answer": false,
+      "invented_requested_fact": false,
+      "literal_anchor_checks": {
+        "found_at_3": 0,
+        "required_anchor_count": 0,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_169__chunk_0001",
+          "quote": "ARTÍCULO 169.- Cuenta única de campaña. Los fondos destinados a financiar la campaña electoral deben depositarse en una cuenta bancaria única por agrupación política, abierta en una entidad financiera reconocida por el B",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_172__chunk_0001",
+          "quote": "ARTÍCULO 172.- Límite de gastos electorales. Las listas internas de las agrupaciones políticas que participen de las elecciones primarias, abiertas, simultáneas y obligatorias no pueden superar en concepto de gastos de c",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_170__chunk_0001",
+          "quote": "ARTÍCULO 170.- Fuentes de financiamiento. Los recursos de las agrupaciones políticas para la campaña electoral provienen de:",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        }
+      ],
+      "paired_observation": "Hechos not_applicable→not_applicable; citas not_applicable→not_applicable. Mismo pasaje K3."
+    },
+    "nacional_electores_edad": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "full",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Mismas edades correctas con [1], pero falta la condición de no estar inhabilitado pese a disponer del artículo completo. No es una pérdida de evidencia causada por chunking.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "bc1c6c32ed6aa1d03c10ed934d23e7e47d7364dda91d2157c73a1c5bce1ea98e",
+      "literal_anchor_checks": {
+        "found_at_3": 3,
+        "required_anchor_count": 3,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_1__chunk_0001",
+          "quote": "argentinos nativos y por opción, desde los dieciséis (16) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_1__chunk_0001",
+          "quote": "argentinos naturalizados, desde los dieciocho (18) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_1__chunk_0001",
+          "quote": "no tengan ninguna de las inhabilitaciones",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→partial; citas full→full. Mismo pasaje K3."
+    },
+    "nacional_licencia_laboral": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "La respuesta preserva licencia para votar/funciones, salario sin deducción y ausencia de recargo horario; [1] respalda esos puntos.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "364a97daf9ee280a4370844f15134fd1de65d5d1f200eaae9163ac6973bf4e5d",
+      "literal_anchor_checks": {
+        "found_at_3": 3,
+        "required_anchor_count": 3,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_8__chunk_0001",
+          "quote": "licencia especial de sus empleadores",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_8__chunk_0001",
+          "quote": "emitir el voto o desempeñar funciones en el comicio",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_8__chunk_0001",
+          "quote": "sin deducción alguna del salario ni ulterior recargo de horario",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas full→full. Mismo pasaje K3."
+    },
+    "nacional_subregistros_electores": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "Enumera los cuatro subregistros del art. 15 correctamente, con [1], sin introducir la atribución falsa a Perú observada en la base.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "9a0adb1980213d948ad0b621367d4eb4384938184733b2353d9e8a349c0b8df2",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 4,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_15__chunk_0001",
+          "quote": "De electores por distrito",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_15__chunk_0001",
+          "quote": "De electores inhabilitados y excluidos",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_15__chunk_0001",
+          "quote": "De electores residentes en el exterior",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_15__chunk_0001",
+          "quote": "De electores privados de la libertad",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→full; citas partial→full. Mismo pasaje K3."
+    },
+    "nacional_registro_infractores": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "La primera parte identifica correctamente Cámara, listado por distrito y edades. Luego afirma que los electores deben tener más de 18 y menos de 70 para poder emitir su voto: transforma edades del registro de infractores en un requisito de derecho al voto. [1] no respalda esa inferencia.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "0f34000da9b55e04f94fc09a45e28b128c265f14655ce27069c225e664069a49",
+      "literal_anchor_checks": {
+        "found_at_3": 5,
+        "required_anchor_count": 5,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_18__chunk_0001",
+          "quote": "La Cámara Nacional Electoral llevará un registro de infractores",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_18__chunk_0001",
+          "quote": "Luego de cada elección nacional",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_18__chunk_0001",
+          "quote": "un listado por distrito",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_18__chunk_0001",
+          "quote": "mayores de dieciocho (18) años y menores de setenta (70) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_18__chunk_0001",
+          "quote": "no se tenga constancia de emisión del voto",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→partial; citas missing→partial. Mismo pasaje K3."
+    },
+    "nacional_difusion_padrones": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "none",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "El contexto sí contiene todo, pero la respuesta omite privacidad y publicidad de consultas/reclamos, cambia y/o por y, y usa [26] y [19945] como citas inexistentes en el mapa 1–3. El pasaje correcto ahora está en [2], no en [1].",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "139970c69d46ddb5153a7fc4b717612fadb607a3390adcbc04ed0cf869fe79cf",
+      "literal_anchor_checks": {
+        "found_at_3": 6,
+        "required_anchor_count": 6,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_26__chunk_0001",
+          "quote": "La Cámara Nacional Electoral",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_26__chunk_0001",
+          "quote": "diez (10) días después de la fecha de cierre del registro",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_26__chunk_0001",
+          "quote": "en su sitio web y/o por otros medios",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_26__chunk_0001",
+          "quote": "previsiones legales de privacidad",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_26__chunk_0001",
+          "quote": "denuncias y reclamos",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_26__chunk_0001",
+          "quote": "consultas al padrón provisional",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→partial; citas full→none. Mismo pasaje K3."
+    },
+    "nacional_reclamos_padron": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "La respuesta principal reproduce todos los requisitos del art. 27 con [1]. El párrafo adicional sobre art. 33 se apoya en [2]; no se toma como plazo alternativo del reclamo provisional. La versión corta de [2] no incluye la advertencia final del art. 33 sobre reclamos 27/28, lo que exige cautela de interpretación aunque no cambia la respuesta de referencia.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "9f35f2c0169e4e0000ee5c0d67d20f798ab40788eafeed22207feb9f4e481513",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 4,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_27__chunk_0001",
+          "quote": "juez federal con competencia electoral",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_27__chunk_0001",
+          "quote": "quince (15) días corridos",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_27__chunk_0001",
+          "quote": "a partir de la publicación",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_27__chunk_0001",
+          "quote": "personalmente, por vía postal en forma gratuita, o vía web",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas full→full. Mismo pasaje K3."
+    },
+    "nacional_boleta_unica": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "Cita literalmente el art. 62 en [1], identifica BUP y su alcance a todos los procesos nacionales, sin la intensificación único medio de la base.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "5fd0f863729c4ee2a20b57b37d1c32905c8d0c733bda9ca89bdf7da1748093a8",
+      "literal_anchor_checks": {
+        "found_at_3": 1,
+        "required_anchor_count": 1,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_62__chunk_0001",
+          "quote": "Se establece la Boleta Única de Papel como instrumento de votación para todos los procesos electorales nacionales",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos uncertain→full; citas partial→full. Mismo pasaje K3."
+    },
+    "nacional_designacion_autoridades": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "full",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Los hechos requeridos son correctos, pero cita [2] para figurar en el padrón de la mesa; [2] es art. 72 sobre presidencia/suplencia, segunda vuelta y viático, no esa condición. La condición estaba en [1]. La aclaración adicional del art. 171 sí está en [3].",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "f3fae6544ab0f8ec26270f81d748c3cef2fd463e872ef736b2949c50e4207c83",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 4,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_75__chunk_0001",
+          "quote": "El juzgado federal con competencia electoral nombrará a los presidentes y suplentes",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_75__chunk_0001",
+          "quote": "antelación no menor de treinta (30) días",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_75__chunk_0001",
+          "quote": "elecciones primarias debiendo ratificar tal designación para las elecciones generales",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_75__chunk_0001",
+          "quote": "figurar en el padrón de la mesa para la cual sean designados",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas full→partial. Mismo pasaje K3."
+    },
+    "nacional_eleccion_presidencial": {
+      "passage_coverage_k3": "partial",
+      "passage_coverage_k5": "partial",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "missing",
+      "failure_stages": [
+        "fragmentation",
+        "retrieval",
+        "generation"
+      ],
+      "justification": "La fórmula indivisible quedó fuera de los fragmentos top-5 de 600/80; la respuesta también omite distrito único, que sí estaba, y convierte el mínimo de 90 días en una anticipación de 90 sin al menos. Describe parte del sistema correctamente, pero sin citas.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "329ac061a98006b5d5626cd82297da651feb8d68ced47d5e481c00b43d40102d",
+      "literal_anchor_checks": {
+        "found_at_3": 3,
+        "required_anchor_count": 4,
+        "missing_at_3": [
+          {
+            "source_article_id": "nacional_19945_art_148",
+            "fact": "fórmula indivisible de candidatos a ambos cargos"
+          }
+        ],
+        "missing_at_5": [
+          {
+            "source_article_id": "nacional_19945_art_148",
+            "fact": "fórmula indivisible de candidatos a ambos cargos"
+          }
+        ],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_148__chunk_0001",
+          "quote": "simultánea y directamente por el pueblo",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_148__chunk_0001",
+          "quote": "sistema de doble vuelta",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_148__chunk_0001",
+          "quote": "territorio nacional constituye un único distrito",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→partial; citas partial→missing. Cambio de suficiencia del contexto."
+    },
+    "pba_electores": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Edades y remisión a Ley 11.700 correctas con apoyo en [1], pero faltan inscripción/habilitación. [2] no aporta esos requisitos: es otro artículo. La existencia de referencias válidas no subsana la omisión ni hace pertinente la cita adicional.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "2e906f89b47831e825c6c90dd65f14bac393b0af9d3c4a8a33a646092366c4b0",
+      "literal_anchor_checks": {
+        "found_at_3": 5,
+        "required_anchor_count": 5,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_2__chunk_0001",
+          "quote": "argentinos nativos y por opción desde los dieciséis (16) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_2__chunk_0001",
+          "quote": "naturalizados desde los dieciocho (18) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_2__chunk_0001",
+          "quote": "inscriptos en el Registro Electoral",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_2__chunk_0001",
+          "quote": "no se encuentren alcanzados por las inhabilidades",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_2__chunk_0001",
+          "quote": "extranjeros que reúnan los requisitos exigidos en la Ley 11.700",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→partial; citas missing→partial. Mismo pasaje K3."
+    },
+    "pba_exenciones_deber_votar": {
+      "passage_coverage_k3": "partial",
+      "passage_coverage_k5": "partial",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "partial",
+      "failure_stages": [
+        "fragmentation",
+        "retrieval",
+        "generation"
+      ],
+      "justification": "El rango 1 es ahora el final del art. 4 y sí contiene optatividad; el rango 2 solo a-b. Pierde jueces, distancia y servicios públicos. Cita [1] también para a-b, que en realidad están en [2], y habla de votar según conveniencia sin acotar claramente que la opción corresponde a las personas exentas. Mejora el dato optativo pero no la enumeración completa ni las citas.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "68d425c3674eb2bea667548423ed6451c021b11285cd1c94a7e8f075e016aa9a",
+      "literal_anchor_checks": {
+        "found_at_3": 6,
+        "required_anchor_count": 14,
+        "missing_at_3": [
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "Los jueces y sus auxiliares"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "mantenerlas abiertas mientras dure el acto comicial"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "a más de quinientos (500) kilómetros"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "motivos razonables"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "El personal de organismos y empresas de servicios públicos"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "tareas que le impidan asistir al comicio"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "el empleador o su representante legal comunicarán a la Junta Electoral"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "la pertinente certificación"
+          }
+        ],
+        "missing_at_5": [
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "Los jueces y sus auxiliares"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "mantenerlas abiertas mientras dure el acto comicial"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "a más de quinientos (500) kilómetros"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "motivos razonables"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "El personal de organismos y empresas de servicios públicos"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "tareas que le impidan asistir al comicio"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "el empleador o su representante legal comunicarán a la Junta Electoral"
+          },
+          {
+            "source_article_id": "pba_5109_art_4",
+            "fact": "la pertinente certificación"
+          }
+        ],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_4__chunk_0001",
+          "quote": "físicamente imposibilitados",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_4__chunk_0001",
+          "quote": "razones de salud",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_4__chunk_0001",
+          "quote": "un certificado expedido por la autoridad médica local",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_4__chunk_0001",
+          "quote": "funcionarios y empleados",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_4__chunk_0001",
+          "quote": "por sus ocupaciones, como tales, no puedan hacerlo",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_4__chunk_0004",
+          "quote": "de carácter optativo para el elector",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Intercambio: 600 recupera optatividad pero pierde causales; la base incluso inventa obligatoriedad/transporte. No mejora completa."
+    },
+    "pba_documentos_habilitantes": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "Enumera los tres documentos y cualquier formato del DNI, con referencia correcta a [2], art. 8. El ámbito de la ley también está presente en [1].",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "50738a4df40686bbd7ae2b6e6096c586dc075c3945d699577fa120b55363dca9",
+      "literal_anchor_checks": {
+        "found_at_3": 3,
+        "required_anchor_count": 3,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_8__chunk_0001",
+          "quote": "La Libreta de Enrolamiento",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_8__chunk_0001",
+          "quote": "la Libreta Cívica",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_8__chunk_0001",
+          "quote": "el Documento Nacional de Identidad (DNI), en cualquiera de sus formatos",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas full→full. Mismo pasaje K3."
+    },
+    "pba_distritos_municipales": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Las dos reglas solicitadas están correctas en [1], pero añade que Capital es la sección más importante con [2]: ese juicio no está en la ley suministrada. Ocho secciones y La Plata sí están respaldados.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "2963b756ea54e9866b6ac5892afd8022da9d3791500293533ed606d7530bc0a7",
+      "literal_anchor_checks": {
+        "found_at_3": 2,
+        "required_anchor_count": 2,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_11__chunk_0001",
+          "quote": "cada uno de los partidos en que se divide la Provincia, constituye un distrito Electoral",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_11__chunk_0001",
+          "quote": "Gobernador y Vicegobernador, la Provincia se considerará como una sola Sección Electoral",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→partial; citas partial→partial. Mismo pasaje K3."
+    },
+    "pba_septima_seccion": {
+      "passage_coverage_k3": "partial",
+      "passage_coverage_k5": "partial",
+      "answer_label": "partially_supported",
+      "factual_correctness": "incorrect",
+      "citation_support": "missing",
+      "failure_stages": [
+        "fragmentation",
+        "retrieval",
+        "generation"
+      ],
+      "justification": "Falta la lista requerida en K3 y K5. Además de no responder municipios, confunde la Séptima con la Sección Capital, mientras el texto diferencia esas secciones. Ocho secciones sí está apoyado; no hay citas numeradas.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "749a7353602ccf4afeace25f99cf967a768ab144024b4d8589d3a21c2fabbab0",
+      "literal_anchor_checks": {
+        "found_at_3": 1,
+        "required_anchor_count": 3,
+        "missing_at_3": [
+          {
+            "source_article_id": "pba_5109_art_12",
+            "fact": "SEPTIMA SECCIÓN ELECTORAL"
+          },
+          {
+            "source_article_id": "pba_5109_art_12",
+            "fact": "Azul, Bolívar, General Alvear, Olavarría, Roque Pérez, Saladillo, Veinticinco de Mayo y Tapalqué"
+          }
+        ],
+        "missing_at_5": [
+          {
+            "source_article_id": "pba_5109_art_12",
+            "fact": "SEPTIMA SECCIÓN ELECTORAL"
+          },
+          {
+            "source_article_id": "pba_5109_art_12",
+            "fact": "Azul, Bolívar, General Alvear, Olavarría, Roque Pérez, Saladillo, Veinticinco de Mayo y Tapalqué"
+          }
+        ],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_12__chunk_0001",
+          "quote": "ocho secciones electorales",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Ambas sin lista de municipios; 600 además confunde Séptima con Capital."
+    },
+    "pba_junta_electoral_composicion": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "Mismos integrantes y sustitución por impedimento, ahora con [1] correcto en cada punto. La evidencia completa se conserva: mejora de citación, no de recuperación.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "7743051b00f7c39e697c036bef92359a685221d87edff95954333055b426d0d7",
+      "literal_anchor_checks": {
+        "found_at_3": 2,
+        "required_anchor_count": 2,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_14__chunk_0001",
+          "quote": "presidentes de la Suprema Corte de Justicia, del Tribunal de Cuentas y de tres Cámaras de Apelación del Departamento de la Capital",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_14__chunk_0001",
+          "quote": "sus sustitutos en caso de impedimento",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas missing→full. Mismo pasaje K3."
+    },
+    "pba_junta_electoral_funciones": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "Contiene las cuatro funciones de referencia, incluida juzgar validez, con [1]. El detalle de organización del escrutinio se apoya en [3], art. 102, y correo/urnas en [2], art. 68. Son funciones adicionales con sus propias referencias, no evidencia de que todas estén literalmente en art. 20.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "22851fb442b8710739e70e8ae3d28c79b042e74596328a9e1618514adf5d2cdf",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 4,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_20__chunk_0001",
+          "quote": "Formar y depurar el registro de electores",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_20__chunk_0001",
+          "quote": "Designar y remover los ciudadanos encargados de recibir los sufragios",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_20__chunk_0001",
+          "quote": "Realizar los escrutinios",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_20__chunk_0001",
+          "quote": "Juzgar la validez de las elecciones",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→full; citas full→full. Mismo pasaje K3."
+    },
+    "pba_presidente_mesa_requisitos": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Los cuatro requisitos personales están apoyados por [2], pero no menciona resolución por Junta y agrega deber de sellado con [3] sin la condición no disponiéndose de local en forma. La evidencia del artículo 40 sigue completa aunque cambia a rango 2.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "0338e3027c494a960556d0ad6071780f11f8c0889f9fb885fad1a3ec416243cb",
+      "literal_anchor_checks": {
+        "found_at_3": 5,
+        "required_anchor_count": 5,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_40__chunk_0001",
+          "quote": "ser elector en ejercicio en el circuito de su designación",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_40__chunk_0001",
+          "quote": "saber leer y escribir correctamente",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_40__chunk_0001",
+          "quote": "tener domicilio en el distrito",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_40__chunk_0001",
+          "quote": "entre dieciocho (18) y setenta (70) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_40__chunk_0001",
+          "quote": "resueltas por la Junta Electoral",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→partial; citas partial→partial. Mismo pasaje K3."
+    },
+    "pba_proclamacion_intendente": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Mejora al mencionar votos para asignación, pero dice asignar a cada ciudadano la cantidad de concejales en vez de cargos a candidatos por lista, omite suplentes iguales/ordenados y sigue confundiendo partido territorial con partido político en [2]. Todos esos datos correctos estaban en [1].",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "aaab30a5270fadee24854543409ee45bb4dfd0194cd4f90d3d9c46ae25319b83",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 4,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_120__chunk_0001",
+          "quote": "Intendente al que haya obtenido mayor número de sufragios",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_120__chunk_0001",
+          "quote": "de acuerdo con los sufragios obtenidos",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_120__chunk_0001",
+          "quote": "un número de suplentes igual al de los titulares adjudicados",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "pba_5109_art_120__chunk_0001",
+          "quote": "los que sigan en orden de lista a los titulares",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→partial; citas partial→partial. Mismo pasaje K3."
+    },
+    "santa_fe_ambito_aplicacion": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "Mismo alcance normativo completo en [2], sin pérdida de convencionales/supletoriedad ni de partidos comprendidos; citas semánticamente pertinentes.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "43c16e56f1181397f168e79578ec68b57ac859a435f52d0a999eb42e27123ca7",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 4,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_2__chunk_0001",
+          "quote": "procesos electorales provinciales y municipales",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_2__chunk_0001",
+          "quote": "incluyendo la elección de Convencionales municipales",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_2__chunk_0001",
+          "quote": "supletoriamente la elección de Convencionales provinciales",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_2__chunk_0001",
+          "quote": "También es aplicable a los partidos políticos",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas full→full. Mismo pasaje K3."
+    },
+    "santa_fe_electores_extranjeros": {
+      "passage_coverage_k3": "partial",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "full",
+      "failure_stages": [
+        "fragmentation",
+        "retrieval"
+      ],
+      "justification": "La respuesta incluye correctamente edad, residencia/no inhabilitación y DNI con [1], pero omite residencia extranjera permanente y continua de dos años. Esa frase quedó en otro chunk del art. 25 que solo llega en rango 5, no al contexto K=3. Regresión de evidencia frente a la base.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "212437e119f69432c450eee0f3e866d2224d298b6d3dbddcfa11adb0fa8a300f",
+      "literal_anchor_checks": {
+        "found_at_3": 5,
+        "required_anchor_count": 6,
+        "missing_at_3": [
+          {
+            "source_article_id": "santa_fe_14478_art_25",
+            "fact": "residencia permanente y continua de dos (2) años en la Provincia"
+          }
+        ],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "argentinas y extranjeras",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "dieciséis (16) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "residencia efectiva en la Provincia",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "no se encuentren comprendidas en las causales de inhabilitación",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "documento de identidad argentino",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→partial; citas full→full. Cambio de suficiencia del contexto."
+    },
+    "santa_fe_capacidad_mesa": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "incorrect",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "La regla general del art. 30 está bien reproducida con [1], pero añade que en detención también rige un mínimo de 60 con [2]. [2] dice exactamente lo contrario para ese supuesto: si hay menos de 60, se constituye igualmente una mesa. Error material de excepción con cita de formato válida.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "2a47531c566427a9acacf991ce9ce0221c58da8571c9f419630e427c2a789f15",
+      "literal_anchor_checks": {
+        "found_at_3": 6,
+        "required_anchor_count": 6,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_30__chunk_0001",
+          "quote": "hasta trescientos cincuenta (350)",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_30__chunk_0001",
+          "quote": "agrupadas por orden alfabético y sin distinción de género",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_30__chunk_0001",
+          "quote": "fracción inferior a sesenta (60)",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_30__chunk_0001",
+          "quote": "se distribuyen los electores en mesas próximas",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_30__chunk_0001",
+          "quote": "pudiendo en tal caso excederse el número",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_30__chunk_0001",
+          "quote": "sesenta (60) o más personas electoras, se forma con ella una mesa electoral independiente",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Ambas deforman excepciones de 60 electores pese a evidencia completa: errores de generación distintos."
+    },
+    "santa_fe_convocatoria_primarias": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "Respuesta idéntica a la base: Ejecutivo/mismo acto y máximo 150/mínimo 120, todos apoyados en [1].",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "28863c3c9617d1912dbc6c08647b45456541958e1c05e61f4dd21181c9f93e56",
+      "literal_anchor_checks": {
+        "found_at_3": 2,
+        "required_anchor_count": 2,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_41__chunk_0001",
+          "quote": "convocadas en un mismo acto por el Poder Ejecutivo",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_41__chunk_0001",
+          "quote": "máxima de ciento cincuenta (150) y mínima de ciento veinte (120) días",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas full→full. Mismo pasaje K3."
+    },
+    "santa_fe_autoridades_mesa": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "full",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Presidencia, dos suplentes, orden y supuestos de intervención están completos y correctos en [1], evitando la invención de suplentes no disponibles de la base. Sin embargo añade [2], requisitos del art. 68, como apoyo del párrafo de intervención: esa referencia no respalda esos hechos.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "e58d49636d615887a63a1948e7a72bbce0c4477d1ef753171c26282a2df8b7b5",
+      "literal_anchor_checks": {
+        "found_at_3": 3,
+        "required_anchor_count": 3,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+          "quote": "única autoridad quien ejerce la presidencia de mesa y dos (2) suplentes",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+          "quote": "auxilian y reemplazan, en el orden de sus designaciones",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_67__chunk_0001",
+          "quote": "por inasistencia o ausencias momentáneas",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "600 mejora orden/supuestos, pero mantiene referencia no pertinente [2]."
+    },
+    "santa_fe_exenciones_voto": {
+      "passage_coverage_k3": "partial",
+      "passage_coverage_k5": "partial",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "none",
+      "failure_stages": [
+        "fragmentation",
+        "retrieval",
+        "generation"
+      ],
+      "justification": "Solo enumera a-c; enfermos/fuerza mayor y servicios públicos quedaron fuera de los chunks recuperados, incluso K5. Cita erróneamente [1] (art. 256) para las tres causales que están en [3], art. 77. Regresión de evidencia respecto de la enumeración completa de la base.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "6ba3267d3e933aa93926f4ea66f6363821c4539126ec165d3b451b3ea89031ce",
+      "literal_anchor_checks": {
+        "found_at_3": 6,
+        "required_anchor_count": 12,
+        "missing_at_3": [
+          {
+            "source_article_id": "santa_fe_14478_art_77",
+            "fact": "enfermos o impedidos por fuerza mayor"
+          },
+          {
+            "source_article_id": "santa_fe_14478_art_77",
+            "fact": "certificado del médico del servicio público de salud o, en su ausencia, de médico particular"
+          },
+          {
+            "source_article_id": "santa_fe_14478_art_77",
+            "fact": "personal de servicios públicos"
+          },
+          {
+            "source_article_id": "santa_fe_14478_art_77",
+            "fact": "tareas que le impidan asistir al comicio"
+          },
+          {
+            "source_article_id": "santa_fe_14478_art_77",
+            "fact": "el empleador comunica la nómina al Juez Electoral"
+          },
+          {
+            "source_article_id": "santa_fe_14478_art_77",
+            "fact": "certificación individual"
+          }
+        ],
+        "missing_at_5": [
+          {
+            "source_article_id": "santa_fe_14478_art_77",
+            "fact": "enfermos o impedidos por fuerza mayor"
+          },
+          {
+            "source_article_id": "santa_fe_14478_art_77",
+            "fact": "certificado del médico del servicio público de salud o, en su ausencia, de médico particular"
+          },
+          {
+            "source_article_id": "santa_fe_14478_art_77",
+            "fact": "personal de servicios públicos"
+          },
+          {
+            "source_article_id": "santa_fe_14478_art_77",
+            "fact": "tareas que le impidan asistir al comicio"
+          },
+          {
+            "source_article_id": "santa_fe_14478_art_77",
+            "fact": "el empleador comunica la nómina al Juez Electoral"
+          },
+          {
+            "source_article_id": "santa_fe_14478_art_77",
+            "fact": "certificación individual"
+          }
+        ],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "mayores de dieciséis (16) y menores de dieciocho (18) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "mayores de setenta (70) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "funcionarios públicos obligados a mantener sus oficinas abiertas",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "más de quinientos (500) kilómetros",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "motivos fundados y razonables",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_77__chunk_0001",
+          "quote": "certificación policial",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→partial; citas none→none. Cambio de suficiencia del contexto."
+    },
+    "santa_fe_horario_constitucion_mesa": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "Mismos horarios y procedimiento correctos, ahora solo con la cita [1] que realmente los contiene. Mejora de pertinencia de referencias, no de evidencia disponible.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "fd23451b7ac021612f8290626f833e209c29edb5a7cefc193de7e4b5ff641f4b",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 4,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_81__chunk_0001",
+          "quote": "siete y cuarenta y cinco (7:45)",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_81__chunk_0001",
+          "quote": "ocho y treinta (8:30)",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_81__chunk_0001",
+          "quote": "la autoridad policial lo comunica al Juez Electoral",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_81__chunk_0001",
+          "quote": "habilitación del comicio",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas partial→full. Mismo pasaje K3."
+    },
+    "santa_fe_boleta_unica": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "BUP exclusiva en generales y remisión a características/procedimientos, con cita [1] correcta del art. 129 que pasa a primer rango. No agrega la referencia incorrecta a abrogaciones de la base.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "c1aa625a7bb76471b00d6521b7e4be385bc70f845a55cf89ad03e988a45d458d",
+      "literal_anchor_checks": {
+        "found_at_3": 2,
+        "required_anchor_count": 2,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_129__chunk_0001",
+          "quote": "En las elecciones generales se utiliza exclusivamente la Boleta Unica de Papel",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_129__chunk_0001",
+          "quote": "características y procedimientos",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos full→full; citas partial→full. Mismo pasaje K3."
+    },
+    "santa_fe_cuenta_campana": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "supported",
+      "factual_correctness": "full",
+      "citation_support": "full",
+      "failure_stages": [],
+      "justification": "Regla de cuenta y responsables y salvedad de cuentas adicionales están completas en [1]. La adición se refiere explícitamente a fondos del partido, art. 225 [2], y las fuentes de campaña están en [3]; no se toma la autoridad de la Carta Orgánica como sustituto de los dos responsables de la cuenta de campaña.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "c93f90a1115c59807b2ff9dabfb5d11a785c6e632c713c731cdeade89a25058b",
+      "literal_anchor_checks": {
+        "found_at_3": 4,
+        "required_anchor_count": 4,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_169__chunk_0001",
+          "quote": "cuenta bancaria única por agrupación política",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_169__chunk_0001",
+          "quote": "entidad financiera reconocida por el Banco Central",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_169__chunk_0001",
+          "quote": "a la orden conjunta del responsable económico-financiero y del responsable político de campaña",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_169__chunk_0001",
+          "quote": "pueden abrir cuentas adicionales",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Hechos partial→full; citas full→full. Mismo pasaje K3."
+    },
+    "comparativa_nacional_santa_fe_electores": {
+      "passage_coverage_k3": "partial",
+      "passage_coverage_k5": "partial",
+      "answer_label": "partially_supported",
+      "factual_correctness": "incorrect",
+      "citation_support": "partial",
+      "failure_stages": [
+        "fragmentation",
+        "retrieval",
+        "generation"
+      ],
+      "justification": "Recupera ambos artículos en rango 1 local y los primeros párrafos están citados correctamente [1]/[4]. Pero falta el fragmento de dos años continuos (también en K5) y omite DNI pese a estar disponible. La conclusión de que ambos códigos exigen nacionalidad argentina contradice la inclusión explícita de personas extranjeras en [4]. Hit de ambos artículos no implica comparación correcta.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "08e90c116482465914105cc953602f6b568e0331a04b017097af45562762a545",
+      "literal_anchor_checks": {
+        "found_at_3": 8,
+        "required_anchor_count": 9,
+        "missing_at_3": [
+          {
+            "source_article_id": "santa_fe_14478_art_25",
+            "fact": "residencia permanente y continua de dos (2) años en la Provincia"
+          }
+        ],
+        "missing_at_5": [
+          {
+            "source_article_id": "santa_fe_14478_art_25",
+            "fact": "residencia permanente y continua de dos (2) años en la Provincia"
+          }
+        ],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_1__chunk_0001",
+          "quote": "argentinos nativos y por opción, desde los dieciséis (16) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_1__chunk_0001",
+          "quote": "argentinos naturalizados, desde los dieciocho (18) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "nacional_19945_art_1__chunk_0001",
+          "quote": "no tengan ninguna de las inhabilitaciones",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "argentinas y extranjeras",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "dieciséis (16) años",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "residencia efectiva en la Provincia",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "no se encuentren comprendidas en las causales de inhabilitación",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_25__chunk_0001",
+          "quote": "documento de identidad argentino",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Ambos artículos en rango 1 en ambos brazos; 600 pierde dos años de residencia y concluye erróneamente que ambos exigen nacionalidad argentina."
+    },
+    "comparativa_nacional_santa_fe_bup": {
+      "passage_coverage_k3": "full",
+      "passage_coverage_k5": "full",
+      "answer_label": "partially_supported",
+      "factual_correctness": "partial",
+      "citation_support": "partial",
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "Ahora explicita correctamente el alcance nacional [1] y la exclusividad santafesina en generales [4], con numeración global bien usada. Pero atribuye a convencionales municipales la excepción de una boleta por categoría citando [6]: ese fragmento remite al inciso b no incluido y dice que para convencionales se confecciona boleta separada y exclusiva, sin justificar la excepción que afirma el modelo. Se deja esa extensión como no sustentada, no se interpreta jurídicamente el inciso b ausente.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "d5b4f8e0f64612f54708d2128a21a28947a52a86f2fac113fcb02ffeebf31572",
+      "literal_anchor_checks": {
+        "found_at_3": 3,
+        "required_anchor_count": 3,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_62__chunk_0001",
+          "quote": "Se establece la Boleta Única de Papel como instrumento de votación para todos los procesos electorales nacionales",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_129__chunk_0001",
+          "quote": "En las elecciones generales se utiliza exclusivamente la Boleta Unica de Papel",
+          "purpose": "required fact in supplied context"
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_129__chunk_0001",
+          "quote": "características y procedimientos",
+          "purpose": "required fact in supplied context"
+        }
+      ],
+      "paired_observation": "Scopes fijados en ambos brazos ante ambigüedad del detector. 600 explicita mejor alcance nacional/exclusividad SF, pero añade una excepción no apoyada."
+    },
+    "ausente_ganador_gobernador_pba_2023": {
+      "passage_coverage_k3": "none",
+      "passage_coverage_k5": "none",
+      "answer_label": "abstained_correctly",
+      "factual_correctness": "not_applicable",
+      "citation_support": "not_applicable",
+      "unsupported_factual_answer": false,
+      "failure_stages": [],
+      "justification": "Abstención literal con el mismo alcance PBA, sin inventar candidato ni porcentaje.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "37ce93edd5b2b0ce9e5d93727c918e99073e1fb470db0650f0eca1ee20f00b6f",
+      "invented_requested_fact": false,
+      "literal_anchor_checks": {
+        "found_at_3": 0,
+        "required_anchor_count": 0,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "pba_5109_art_113__chunk_0001",
+          "quote": "ARTÍCULO 113.- La elección de Gobernador y Vicegobernador será hecha directamente por el pueblo por simple mayoría de votos; cada elector votará el nombre de un ciudadano para Gobernador y el de otro ciudadano para Viceg",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "pba_5109_art_11__chunk_0001",
+          "quote": "ARTÍCULO 11.- Para las elecciones de concejales y consejeros escolares, cada uno de los partidos en que se divide la Provincia, constituye un distrito Electoral.",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "pba_5109_art_2__chunk_0001",
+          "quote": "ARTÍCULO 2°.- . Son electores para las elecciones Provinciales, Municipales y de Consejeros Escolares:",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        }
+      ],
+      "paired_observation": "Hechos not_applicable→not_applicable; citas not_applicable→not_applicable. Mismo pasaje K3."
+    },
+    "ausente_gastos_campana_sf_2025": {
+      "passage_coverage_k3": "none",
+      "passage_coverage_k5": "none",
+      "answer_label": "abstained_correctly",
+      "factual_correctness": "not_applicable",
+      "citation_support": "not_applicable",
+      "unsupported_factual_answer": false,
+      "failure_stages": [],
+      "justification": "Abstención literal; normas financieras no proporcionan rendiciones reales de gasto para 2025.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "37ce93edd5b2b0ce9e5d93727c918e99073e1fb470db0650f0eca1ee20f00b6f",
+      "invented_requested_fact": false,
+      "literal_anchor_checks": {
+        "found_at_3": 0,
+        "required_anchor_count": 0,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "santa_fe_14478_art_170__chunk_0001",
+          "quote": "ARTÍCULO 170.- Fuentes de financiamiento. Los recursos de las agrupaciones políticas para la campaña electoral provienen de:",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_169__chunk_0001",
+          "quote": "ARTÍCULO 169.- Cuenta única de campaña. Los fondos destinados a financiar la campaña electoral deben depositarse en una cuenta bancaria única por agrupación política, abierta en una entidad financiera reconocida por el B",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_172__chunk_0001",
+          "quote": "ARTÍCULO 172.- Límite de gastos electorales. Las listas internas de las agrupaciones políticas que participen de las elecciones primarias, abiertas, simultáneas y obligatorias no pueden superar en concepto de gastos de c",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        }
+      ],
+      "paired_observation": "Hechos not_applicable→not_applicable; citas not_applicable→not_applicable. Mismo pasaje K3."
+    },
+    "ausente_votos_presidenciales_2023": {
+      "passage_coverage_k3": "none",
+      "passage_coverage_k5": "none",
+      "answer_label": "abstained_correctly",
+      "factual_correctness": "not_applicable",
+      "citation_support": "not_applicable",
+      "unsupported_factual_answer": false,
+      "failure_stages": [],
+      "justification": "Abstención literal sin resultados o cifras de votos inventadas, aun con vecinos temáticos sobre elección presidencial.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "37ce93edd5b2b0ce9e5d93727c918e99073e1fb470db0650f0eca1ee20f00b6f",
+      "invented_requested_fact": false,
+      "literal_anchor_checks": {
+        "found_at_3": 0,
+        "required_anchor_count": 0,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_151__chunk_0001",
+          "quote": "Artículo 151.- En la segunda vuelta participarán solamente las dos fórmulas más votadas en la primera, resultando electa la que obtenga mayor número de votos afirmativos válidamente emitidos.",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "nacional_19945_art_152__chunk_0001",
+          "quote": "Artículo 152.- Dentro del quinto día de proclamados las dos fórmulas más votadas, éstas deberán ratificar por escrito ante la Junta Electoral Nacional de la Capital Federal su decisión de presentarse a la segunda vuelta.",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "nacional_19945_art_150__chunk_0001",
+          "quote": "Artículo 150.- Si ninguna fórmula alcanzare esas mayorías y diferencias de acuerdo al escrutinio ejecutado por las Juntas Electorales, y cuyo resultado único para toda la Nación será anunciado por la Asamblea Legislativa",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        }
+      ],
+      "paired_observation": "Hechos not_applicable→not_applicable; citas not_applicable→not_applicable. Mismo pasaje K3."
+    },
+    "ausente_escuela_asignada": {
+      "passage_coverage_k3": "none",
+      "passage_coverage_k5": "none",
+      "answer_label": "partially_supported",
+      "factual_correctness": "incorrect",
+      "citation_support": "partial",
+      "unsupported_factual_answer": true,
+      "failure_stages": [
+        "generation"
+      ],
+      "justification": "No inventa una escuela, pero tampoco explicita insuficiencia de evidencia individual. Además presenta Ley 5.109/art. 56 como de la Ciudad de Buenos Aires: [3] y sus metadatos corresponden a la Provincia. Las normas generales de [1]/[2] sí están respaldadas. Hay una afirmación factual jurisdiccional no apoyada, distinta de inventar una ubicación personal.",
+      "reviewer": "coding-agent inspection; not independent legal/human verification",
+      "original_response_sha256": "0d18d8274fd15fe06449e087bcf24e2f89fe8850125b895a060be4f63f04a3f6",
+      "invented_requested_fact": false,
+      "literal_anchor_checks": {
+        "found_at_3": 0,
+        "required_anchor_count": 0,
+        "missing_at_3": [],
+        "missing_at_5": [],
+        "note": "Ayuda literal; no sustituye el juicio manual de hechos/citas. Las anclas ausentes son requisitos de las fuentes, no citas recuperadas."
+      },
+      "evidence": [
+        {
+          "chunk_id": "nacional_19945_art_86__chunk_0001",
+          "quote": "Artículo 86. - Dónde y cómo pueden votar los electores. Los electores podrán votar únicamente en la mesa receptora de votos en cuya lista figuren asentados y con el documento cívico habilitante. El presidente verificará ",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "santa_fe_14478_art_4__chunk_0006",
+          "quote": "m. domicilio electoral: el domicilio consignado en el Documento Nacional de Identidad de la persona electora, a los efectos de su inscripción en el Padrón Electoral Provincial y de la determinación de la mesa en que le c",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        },
+        {
+          "chunk_id": "pba_5109_art_56__chunk_0001",
+          "quote": "ARTÍCULO 56.-  Treinta (30) días antes de cada elección, la Junta Electoral designará los locales donde funcionarán las mesas receptoras de los sufragios, en base a la última elección nacional. La publicación se hará en ",
+          "purpose": "Norma vecina; no acredita el hecho personal/electoral/contable solicitado."
+        }
+      ],
+      "paired_observation": "Ninguna abstención explícita. Base: normas genéricas sin ubicación inventada; 600 añade la atribución errónea de Ley 5.109 a CABA."
+    }
+  },
+  "execution_validation": {
+    "python": "3.12.7",
+    "per_arm": {
+      "1000_150": {
+        "index_unchanged": true,
+        "all_stored_text_metadata_match_chunks": true,
+        "dimensions": 1024,
+        "snapshot": {
+          "count": 828,
+          "ids_sha256": "d991473aa3f76b07ecd9e35afa203bb1b26a2946b45a2d57f971d46059513df0",
+          "manifest_sha256": "c5131ae5fb7641cd55a9a370c1399eb0dc0bba3b30a2872fc4dc983642d64449",
+          "ids_match_chunks": true
+        }
+      },
+      "600_80": {
+        "index_unchanged": true,
+        "all_stored_text_metadata_match_chunks": true,
+        "dimensions": 1024,
+        "snapshot": {
+          "count": 1119,
+          "ids_sha256": "bbda9489ecec0d511dbadda693736a26819884bc3f444fa2080e8b7d802a3496",
+          "manifest_sha256": "5890c90943f7a5565349191c650150ba35e20f09178e4c848f29aa7f20110bf4",
+          "ids_match_chunks": true
+        }
+      }
+    },
+    "scope_queries_total": 80,
+    "generation_invocations_total": 76,
+    "all_original_responses_and_contexts_verified": true,
+    "all_manual_quotes_verified": true,
+    "historical_files_and_source_hashes_unchanged": true,
+    "document_embeddings_created_in_this_run": 0
+  },
+  "conclusions": [
+    "### Conclusión principal",
+    "**600/80 no demuestra una mejora conjunta de evidencia y calidad frente a 1000/150.** Hit@3 mejora 31/32→32/32, pero evidencia completa K3 cae 28/32→25/32 (−9.375 puntos porcentuales). Hit@1 baja 26/32→25/32; Hit@5 queda 32/32. MRR@5 baja 0.893229→0.885417 (−0.0078125). No se cambia el default 1000/150.",
+    "Las respuestas supported estrictas sí aumentan 8/32→12/32 (+12.5 puntos): 6 victorias, 3 regresiones, 22 empates y 1 par incierto por el alcance de único medio en la base nacional BUP. No se cuenta esa incertidumbre como derrota confirmada. Corrección factual completa: 13/32→16/32. Son anotaciones conservadoras del agente, no precisión jurídica independiente.",
+    "En pasajes K3 hay 1 victoria (definición SF art. 4), 4 regresiones (fórmula presidencial indivisible; dos años de residencia extranjera SF; causales finales SF art. 77; comparación de electores) y 27 empates. Las mejoras de citación no compensan automáticamente la pérdida de requisitos/condiciones en el contexto.",
+    "### Tres casos originales",
+    "- **Nación art. 12:** mismo hit de artículo en rango 1, pero 1000/150 aporta a-c y certificación y 600/80 solo a-b. Ninguno recupera d/optatividad en K3 ni K5. Empate coarse partial con regresión de contenido dentro de la categoría; raíces: fragmentación/ranking, no cambio de modelo.",
+    "- **PBA art. 13:** ambos conservan el pasaje 92 diputados/46 senadores y ambos modelos contestan esos números sin referencias. Evidencia full en ambos; problema de generación/citación, no de retrieval.",
+    "- **Santa Fe art. 4:** la definición pasa de rango 4 (fuera de K3) a rango 2. La base usa el art. 67 como apoyo indirecto y lo atribuye al 4. 600/80 da la definición correcta, pero añade requisitos provenientes de [3] mientras cita [1][2]. Mejora real de evidencia, sin respuesta completamente citada según la rúbrica estricta.",
+    "### Comparaciones y negativas",
+    "Ambas comparaciones reúnen ambos artículos en K=1/3/5 local en los dos brazos: 2/2 casos y recall de los cuatro artículos 4/4. Eso no implica suficiente pasaje ni buena respuesta. En electores, 600/80 pierde dos años de residencia continua en SF y concluye erróneamente que ambos códigos exigen nacionalidad argentina. En BUP, los scopes se fijaron explícitamente porque el detector puro considera ambigua la segunda pregunta; no se modificó el detector ni la pregunta y no se contó una aclaración como acierto.",
+    "Abstenciones claras: **5/6 en ambos brazos**. escuela_asignada recibe una explicación de normas, no una declaración de insuficiencia del corpus. La base no inventa ubicación ni un hecho personal; 600/80 tampoco inventa escuela, pero atribuye Ley 5.109 a CABA. Afirmaciones materiales no apoyadas en negativas: 0/6→1/6; hecho individual solicitado inventado: 0/6 en ambos. Son indicadores distintos, no complementos obligatorios de la abstención.",
+    "### Límites y revisión",
+    "185 pruebas unitarias no son evidencia de calidad del modelo: la evidencia experimental son las 80 consultas top-5 y 76 invocaciones reales aquí guardadas. Las anclas literales solo asisten inspección y consistencia; las citas, omisiones, cambios de condiciones, atribuciones y extensiones fueron revisadas por el agente. Una referencia con formato válido puede apuntar a multas/abrogaciones en vez de la norma afirmada, o invertir una excepción (mesa especial con menos de 60 electores).",
+    "38 casos deliberadamente seleccionados, una generación por brazo y pregunta, sin réplicas ni estimación de variabilidad: no permiten extrapolar desempeño general ni atribuir cada diferencia de redacción exclusivamente a chunking. Temperatura 0 no es una garantía de reproducibilidad bit a bit. La revisión no establece vigencia o validez jurídica ni reemplaza verificación personal del estudiante. No se alteraron prompts, modelo, distancia, reglas de enrutamiento por defecto, Gradio ni parámetros de fragmentación de producción.",
+    "Ver revisión por caso, citas literales y faltantes en revision_pareada.json y en review de cada traza. Los informes históricos de cinco casos solo se protegieron por hash; no se usaron sus métricas, citas o diagnósticos como evidencia para los 38 nuevos casos."
+  ],
+  "verification": [
+    "- Fixture reemplazado en su ruta por el usuario y validado antes de búsquedas: SHA-256 `f25203f27d0dc12bdc430a47cc58911e1c023807d9179a7507e93cc200399275`; 38 IDs únicos, 32 respondibles, seis negativas y dos comparaciones de dos jurisdicciones. Las 32 referencias se contrastaron con texto_principal sin inconsistencias. No se archivó una copia histórica ni se creó preguntas_fragmentacion.json.",
+    "- Inspección local previa: candidato `6e7d71baa70d370e317a0bc678415048235cbabcda839600713d02b50f8de63e` = Qwen 600/80, chunks/reporte/manifest/Chroma existentes y 1119 IDs completos, **cero faltantes**. También se encontraron `e52e…` (otra configuración Qwen, 1114 chunks y 0 IDs) y `a7ff…` (BGE, 1292 IDs), no usados ni reparados. No se creó un experimento duplicado ni un índice baseline nuevo.",
+    "- Baseline: `.chroma/electoral_laws_qwen3_0_6b` con `datos/procesados/chunks.jsonl`, 828 IDs completos. Ambos chunks/reports corresponden a reconstrucción temporal byte a byte con los mismos tres artículos JSONL y código/versión actual del divisor. Temporales eliminados; originales sin reescritura.",
+    "- Ejecución real: `uv run python -u scripts/evaluar_fragmentacion_pareada.py --ejecutar > /tmp/tp2-paired-run.log 2>&1`. 40 scopes top-5 y 38 generaciones por brazo; cero errores. K=1/3/5 se derivaron del mismo ranking. answer_question recibió un adaptador de lectura de esos resultados reales, no respuestas simuladas ni una segunda recuperación. No se llamaron rutinas de embedding de documentos porque los dos índices ya estaban completos.",
+    "- Revisión: lectura de las respuestas completas, comprobación de hechos/condiciones contra fuentes y pasajes suministrados, lectura adicional de fragmentos de citas/afirmaciones problemáticas. `criterios_pasajes.json` conserva anclas de fuente; `revision_pareada.json` contiene 76 juicios, hashes de respuesta y citas cotejadas. Inspección por agente de código, no revisión legal/humana independiente.",
+    "- Render sin nuevas consultas: `uv run python scripts/evaluar_fragmentacion_pareada.py --review evalucacion/experimentos_fragmentacion/revision_pareada.json`. Los reportes JSON y este Markdown incluyen agregados por jurisdicción/tipo y pares con IDs de victorias/regresiones/empates.",
+    "- Tests dirigidos: `uv run pytest -q tests/test_fragmentacion_pareada.py tests/test_indexar.py tests/test_recuperar.py tests/test_evaluar_generacion.py` → 33 passed en la primera pasada. Suite final `uv run pytest -q` → **185 passed**, 16 avisos de deprecación esperados. Los contratos históricos usan datos sintéticos temporales; no se presentan como resultados del fixture de 38 casos.",
+    "- Verificación final mediante Python: fixture y todos los hashes protegidos iguales, IDs/manifest de ambos índices iguales a antes de la ejecución, todos los textos/metadatos persistidos iguales a sus chunks, dimensiones 1024 y configuración HNSW/L2 idéntica. Digest del Qwen y del Granite instalados sin cambio respecto del comienzo. Todas las citas manuales son substrings de los chunks realmente enviados y cada contexto coincide exactamente con el builder compartido.",
+    "- Preservación: preguntas_jurisdiccion.json, reportes/revisiones históricos, artículos JSONL y chunks originales sin cambios. No se restauró ni regeneró el SVG histórico que ya estaba eliminado al iniciar. No se ejecutó --rebuild, no se cambiaron defaults ni Gradio. El override opcional de jurisdicciones múltiples en answer_question solo fija el scope del fixture en este ensayo; sin ese argumento el comportamiento previo se conserva."
+  ]
+}

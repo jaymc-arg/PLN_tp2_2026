@@ -1,3 +1,4 @@
+import hashlib
 import json
 from pathlib import Path
 
@@ -35,7 +36,7 @@ def fake_routed_result(question, k=3, **kwargs):
     }
 
 
-def test_generation_evaluation_uses_answer_question_for_all_fixed_and_comparison_calls(tmp_path, monkeypatch):
+def test_generation_evaluation_uses_answer_question_for_all_fixed_and_comparison_calls(tmp_path, monkeypatch, five_case_protocol_fixture):
     calls = []
     def routed(question, *, k=3, model=None, retriever=None, embedding_model=None):
         calls.append({"question": question, "k": k, "model": model, "retriever": retriever,
@@ -47,7 +48,7 @@ def test_generation_evaluation_uses_answer_question_for_all_fixed_and_comparison
     retriever = FakeRetriever()
     report_path = tmp_path / "routed.json"
     markdown_path = tmp_path / "routed.md"
-    report = evaluation.evaluate(retriever=retriever, report_path=report_path, markdown_path=markdown_path,
+    report = evaluation.evaluate(questions_path=five_case_protocol_fixture, retriever=retriever, report_path=report_path, markdown_path=markdown_path,
                                  review_path=tmp_path / "no-review.json")
 
     assert len(calls) == 6
@@ -63,11 +64,12 @@ def test_generation_evaluation_uses_answer_question_for_all_fixed_and_comparison
     assert report_path.is_file()
 
 
-def test_historical_unrouted_report_is_not_reused_by_routed_evaluator(tmp_path):
-    legacy_path = evaluation.ROOT / "evalucacion/reporte_generacion.json"
+def test_historical_unrouted_report_is_not_reused_by_routed_evaluator(tmp_path, five_case_protocol_fixture):
+    legacy_path = tmp_path / "synthetic-unrouted-report.json"
+    legacy_path.write_text(json.dumps({"evaluation_questions_sha256": hashlib.sha256(five_case_protocol_fixture.read_bytes()).hexdigest()}))
     report_path = tmp_path / "must-not-be-written.json"
     with pytest.raises(ValueError, match="no usó el protocolo de enrutamiento"):
-        evaluation.evaluate(existing_report_path=legacy_path, report_path=report_path,
+        evaluation.evaluate(questions_path=five_case_protocol_fixture, existing_report_path=legacy_path, report_path=report_path,
                             markdown_path=tmp_path / "must-not-be-written.md")
     assert not report_path.exists()
     assert evaluation.REPORT_PATH.name == "reporte_generacion_enrutada.json"

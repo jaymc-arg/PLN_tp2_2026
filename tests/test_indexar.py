@@ -166,18 +166,19 @@ def test_index_contract_idempotence_rebuild_and_smoke_metadata(tmp_path, capsys)
     assert len(FakeChroma.instances[(str(index_dir), COLLECTION)]) == 2
 
 
-def test_evaluation_fixture_has_three_grounded_positives_and_two_absent_negatives():
+def test_evaluation_fixture_has_32_grounded_positives_and_six_absent_negatives():
     path = ROOT / "evalucacion/preguntas.json"
     data = json.loads(path.read_text(encoding="utf-8"))
     questions = data["preguntas"]
-    assert len(questions) == 5
+    assert len(questions) == 38
     positives = [q for q in questions if q["respondible"]]
     negatives = [q for q in questions if not q["respondible"]]
-    assert len(positives) == 3 and len(negatives) == 2
-    assert {q["jurisdiccion"] for q in positives} == {"nacional", "pba", "santa_fe"}
+    assert len(positives) == 32 and len(negatives) == 6
+    assert {q["jurisdiccion"] for q in positives if q["jurisdiccion"]} == {"nacional", "pba", "santa_fe"}
+    assert sum(len(q.get("jurisdicciones", [])) == 2 for q in positives) == 2
     corpus_ids = set()
     for filename in ("nacional_articulos.jsonl", "pba_articulos.jsonl", "santa_fe_articulos.jsonl"):
         corpus_ids.update(json.loads(line)["id"] for line in (ROOT / "datos/procesados" / filename).read_text().splitlines())
     assert all(q["fuentes_esperadas"] and set(q["fuentes_esperadas"]) <= corpus_ids for q in positives)
     assert all(not q["fuentes_esperadas"] for q in negatives)
-    assert len({q["id"] for q in questions}) == 5
+    assert len({q["id"] for q in questions}) == 38
