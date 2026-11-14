@@ -1,104 +1,121 @@
-# PLN_tp2_2026 — RAG local sobre legislación electoral
+# RAG local sobre legislación electoral argentina
 
-> **Actualización del conjunto de evaluación:** `evalucacion/preguntas.json` ahora contiene **38 casos (32 respondibles y seis ausentes)**. Para ese conjunto se usa `scripts/evaluar_fragmentacion_pareada.py`, no los evaluadores históricos restringidos a cinco preguntas. El [informe pareado Qwen 1000/150 vs 600/80](evalucacion/experimentos_fragmentacion/comparacion_qwen_600_80_vs_1000_150.md) conserva las ejecuciones reales, la revisión y los comandos. Las tablas históricas de cinco casos de esta guía no corresponden al nuevo conjunto.
->
-> `uv run python scripts/evaluar_fragmentacion_pareada.py --ejecutar` crea o reanuda la ejecución local sin repetir casos guardados. Para una corrida nueva, elegir otro directorio con `--salida`; la revisión semántica debe redactarse para sus respuestas reales. `uv run python scripts/evaluar_fragmentacion_pareada.py --review evalucacion/experimentos_fragmentacion/revision_pareada.json` solo aplica la revisión y regenera resúmenes guardados, sin consultar modelos. No se cambiaron los defaults de Gradio ni de fragmentación.
+**Trabajo Integrador 2 — Procesamiento de Lenguaje Natural (IFTS N.º 24, 2026)**  
+Repositorio: [jaymc-arg/PLN_tp2_2026](https://github.com/jaymc-arg/PLN_tp2_2026)
 
-## 1. Introducción y propósito
+Este proyecto implementa un sistema de **generación aumentada por recuperación (RAG)** para consultar disposiciones del Código Electoral Nacional, la Ley Electoral de la Provincia de Buenos Aires y el Código Electoral de Santa Fe. La aplicación recupera fragmentos de las fuentes **antes** de generar y muestra por separado la respuesta, la procedencia y el **contexto literal enviado al modelo**.
 
-Un estudiante de legislación electoral necesita localizar y comparar disposiciones de Nación, Provincia de Buenos Aires y Santa Fe con su procedencia, para preparar consultas documentales verificables, **no asesoramiento jurídico**.
+La implementación funciona **localmente**, con Python, Ollama, Chroma y Gradio. No pretende verificar la vigencia de las leyes, reemplazar las fuentes oficiales ni prestar asesoramiento jurídico.
 
-El proyecto implementa un sistema de **generación aumentada por recuperación (RAG)**: busca fragmentos de tres leyes y los entrega como evidencia a un modelo local que redacta la respuesta. La interfaz permite inspeccionar por separado respuesta, jurisdicción, fuentes, contexto literal y advertencias de citas. También incluye un laboratorio de fragmentación y evaluaciones reproducibles.
+## 1. Problema y destinatario
 
-Todo el procesamiento y las consultas se ejecutan localmente. No se usan APIs pagas. Descargar dependencias y modelos sí requiere conexión a Internet.
+**Destinatario:** estudiante o persona que necesita estudiar y contrastar legislación electoral de distintas jurisdicciones argentinas.
 
-## 2. Componentes, corpus y archivos
+**Necesidad:** encontrar disposiciones específicas, identificar a qué ley y artículo pertenecen, examinar la evidencia que recupera el buscador y reconocer cuándo la documentación disponible no alcanza para responder.
 
-### Flujo de procesamiento
+**Qué permite hacer:** consultar deberes y exenciones electorales, autoridades de mesa, composición legislativa y otras disposiciones **contenidas en los tres textos cargados**; seleccionar una jurisdicción o comparar jurisdicciones expresamente identificadas; inspeccionar textos recuperados, fuentes y advertencias de citas.
+
+**Qué no permite concluir:** quién ganó una elección, cuántos votos obtuvo un candidato, el gasto real de una campaña, la vigencia jurídica actual de una disposición o una interpretación legal definitiva. Esos datos requieren otras fuentes o verificación externa.
+
+## 2. Corpus: documentos reales, alcance y procedencia
+
+Se trabaja con **tres documentos normativos reales** almacenados en [`datos/`](datos/). El corpus comprende Nación, Provincia de Buenos Aires y Santa Fe; no representa toda la legislación electoral argentina.
+
+| Archivo incluido | Documento y organismo emisor indicado | Origen registrado | Fecha o versión indicada en el material | Condición de redistribución |
+|---|---|---|---|---|
+| [`datos/ley_nacional.txt`](datos/ley_nacional.txt) | Código Electoral Nacional, Ley 19.945; Poder Ejecutivo Nacional | [Normativa nacional](https://www.argentina.gob.ar/normativa/nacional/ley-19945-19442/actualizacion) | Texto con modificaciones anotadas; versión consolidada no acreditada | Ley argentina de dominio público |
+| [`datos/ley_pba.txt`](datos/ley_pba.txt) | Ley Electoral 5.109; Legislatura de la Provincia de Buenos Aires | [Normativa bonaerense](https://normas.gba.gob.ar/documentos/VGW7pIWV.html) | El archivo menciona el texto ordenado por Decreto 997/93 y modificaciones posteriores | Ley argentina de dominio público |
+| [`datos/ley_sta_fe.pdf`](datos/ley_sta_fe.pdf) | Ley 14.478; Legislatura de la Provincia de Santa Fe | [PDF del Tribunal Electoral de Santa Fe](https://www.santafe.gob.ar/ms/tribunalelectoral/wp-content/uploads/sites/84/2026/09/Texto-Original-Ley-N%C2%B0-14478.pdf) | Texto original; sanción 27/08/2026 y promulgación indicada el 09/09/2026 | Ley argentina de dominio público |
+
+El registro [`datos/fuentes.csv`](datos/fuentes.csv) consigna fecha de recuperación **08/11/2026**, enlaces y preguntas de referencia.
+
+**Inspección del material realizada y registrada:** el preprocesador leyó los dos TXT en UTF-8 y extrajo texto del PDF de Santa Fe con `PyPDFLoader`, sin OCR. Se documentó una inspección representativa de la extracción y un seguimiento del artículo 4 de Santa Fe a través de las páginas **1–4**.
+
+La extracción registrada identificó **208 artículos nacionales, 155 bonaerenses y 296 santafesinos**. El sistema conserva también las notas editoriales, duplicaciones de numeración, tramos fuera de artículo y advertencias, sin inferir qué disposiciones están jurídicamente vigentes. Véase [`evalucacion/validacion_preprocesamiento.md`](evalucacion/validacion_preprocesamiento.md).
+
+**Unidad de análisis:** primero se reconoce cada **artículo** con sus metadatos (jurisdicción, ley, número, archivo y rango de páginas si proviene de PDF); después se generan fragmentos dentro de ese artículo. Un artículo largo puede ocupar varios fragmentos.
+
+## 3. Arquitectura: del documento a la respuesta
 
 ```text
-Documentos reales → extracción e inspección → artículos y metadatos
-→ fragmentos → embeddings locales Ollama → índice persistente Chroma
-→ enrutamiento y recuperación → contexto/prompt explícito
-→ generación Ollama → respuesta y evidencia en Gradio
+Tres archivos reales en datos/
+    ↓
+00_preprocesar.py: lectura, inspección, artículos y procedencia
+    ↓
+01_fragmentar.py: vista indexable y chunks por artículo
+    ↓
+02_indexar.py: embeddings Ollama → índice local Chroma
+    ↓
+Pregunta del usuario → detector conservador de jurisdicción
+    ↓
+03_recuperar.py: embedding de la pregunta con EL MISMO MODELO
+    ↓
+Top-K fragmentos (por jurisdicción) + fuente, artículo y página disponible
+    ↓
+04_generar.py: contexto numerado → prompt → Granite vía Ollama
+    ↓
+05_interfaz_gradio.py: respuesta + enrutamiento + fuentes + contexto + citas
 ```
 
-| Componente | Implementación / responsabilidad |
+| Componente | Función en el pipeline |
 |---|---|
-| `scripts/00_preprocesar.py` | Lee TXT UTF-8 y PDF con `PyPDFLoader`/`pypdf`; conserva artículos, notas, procedencia y páginas PDF. |
-| `scripts/01_fragmentar.py` | Divide cada artículo con `RecursiveCharacterTextSplitter`, sin mezclar artículos. |
-| `scripts/02_indexar.py` | Crea/verifica documentos LangChain e indexa con `OllamaEmbeddings` y Chroma. |
-| `scripts/03_bis_detectar_jurisdiccion.py` | Detector determinista: Nación, PBA, Santa Fe, comparaciones y solicitudes de aclaración. Es un módulo auxiliar, no una CLI con flags. |
-| `scripts/03_recuperar.py` | Recuperación de solo lectura; valida compatibilidad del índice y conserva rankings, distancias y metadatos. |
-| `scripts/04_generar.py` | `answer_question()`, `ChatPromptTemplate`, contexto numerado, `ChatOllama` y control sintáctico de citas. |
-| `scripts/05_interfaz_gradio.py` | Página local con consultas y laboratorio de fragmentación. |
-| `scripts/experimentos_fragmentacion.py` | Prepara/reutiliza índices experimentales aislados; no modifica el índice original. |
-| `scripts/evaluar_*.py` | Evaluaciones de recuperación, enrutamiento y generación; se describen en la sección 6. |
-| `tests/` | Pruebas de extracción, firmas, rutas, contexto, citas, evaluadores y aislamiento, con dobles cuando corresponde. |
+| [`scripts/00_preprocesar.py`](scripts/00_preprocesar.py) | Extrae y segmenta los documentos en artículos, preservando el texto completo, las anotaciones y la procedencia. |
+| [`scripts/01_fragmentar.py`](scripts/01_fragmentar.py) | Genera los fragmentos indexables mediante `RecursiveCharacterTextSplitter`, sin mezclar artículos. |
+| [`scripts/02_indexar.py`](scripts/02_indexar.py) | Valida los chunks, crea embeddings locales, persiste Chroma y comprueba compatibilidad de índice/modelo/corpus. |
+| [`scripts/03_recuperar.py`](scripts/03_recuperar.py) | Busca vecinos en Chroma, opcionalmente filtra por jurisdicción y devuelve texto íntegro, ranking, distancia y metadatos. |
+| [`scripts/03_bis_detectar_jurisdiccion.py`](scripts/03_bis_detectar_jurisdiccion.py) | Identifica jurisdicción por reglas textuales explícitas y pide aclaración cuando no puede asignarla con seguridad. |
+| [`scripts/04_generar.py`](scripts/04_generar.py) | Construye el contexto y el prompt con citas numeradas; genera y verifica únicamente el formato/existencia de las citas. |
+| [`scripts/05_interfaz_gradio.py`](scripts/05_interfaz_gradio.py) | Presenta la consulta y sus cinco salidas; permite ensayar otra fragmentación mediante índices experimentales aislados. |
+| [`scripts/experimentos_fragmentacion.py`](scripts/experimentos_fragmentacion.py) | Crea o reutiliza índices identificados por corpus, modelo, parámetros y versión del divisor, sin sobrescribir el original. |
 
-Los scripts numerados se ejecutan por ruta. Para importarlos desde Python se usa `importlib.import_module("scripts.04_generar")`: un identificador de un import normal no puede comenzar con números.
+### Modelos, parámetros y versiones de referencia
 
-### Corpus y procedencia
-
-Los documentos originales permanecen en `datos/`:
-
-| Archivo | Documento | Inspección registrada por el agente |
-|---|---|---|
-| `ley_nacional.txt` | Código Electoral Nacional, Ley 19.945 | Art. 12 y excepciones cotejados con el TXT. |
-| `ley_pba.txt` | Ley Electoral 5.109 | Arts. 2, 3 y 13 cotejados; se conservan notas editoriales y numeración duplicada. |
-| `ley_sta_fe.pdf` | Ley 14.478 de Santa Fe | 70 páginas con texto extraíble, sin OCR; cotejo visual representativo y seguimiento del art. 4 entre pp. 1–4. |
-
-[datos/fuentes.csv](datos/fuentes.csv) registra la procedencia disponible y una pregunta respondible por documento. **La URL oficial, fecha de descarga y permiso de redistribución siguen sin verificación suficiente**; deben verificarse antes de publicar el corpus. No se acredita autenticidad externa ni vigencia jurídica. El TXT nacional tenía un recorte manual previo del usuario; el programa no elimina otra introducción.
-
-### Configuración actual
-
-| Elemento | Valor predeterminado |
+| Componente | Configuración de la versión principal |
 |---|---|
-| Embeddings | `qwen3-embedding:0.6b` |
-| Generación | `granite4:latest`, temperatura 0 |
-| Ollama | `http://localhost:11434` |
-| Fragmentos originales | `datos/procesados/chunks.jsonl` |
-| Fragmentación original | Tamaño 1000, solapamiento 150 **caracteres, no tokens** |
-| Índice Qwen | `.chroma/electoral_laws_qwen3_0_6b` |
-| Índice histórico BGE-M3 | `.chroma/electoral_laws`, con modelo `bge-m3` |
-| Colección Chroma | `electoral_laws` |
-| Interfaz | `127.0.0.1:7860` por defecto, sin enlace público |
+| Python | 3.12 (registro experimental: 3.12.7) |
+| Embeddings de indexación **y consulta** | `qwen3-embedding:0.6b` vía Ollama, cuantización Q8_0; 1024 dimensiones registradas |
+| Modelo generador | `granite4:latest` vía Ollama, temperatura `0` |
+| Embeddings históricos comparados | `bge-m3` (requiere su **propio índice** Chroma y flag adicional) |
+| Fragmentación base | `chunk_size=1000`, `chunk_overlap=150`, medidos en **caracteres**, no tokens |
+| Fragmentación experimental | `600/80` caracteres; otros valores ajustables en Gradio |
+| Índice base persistente | `.chroma/electoral_laws_qwen3_0_6b`, colección `electoral_laws` |
+| Interfaz | Gradio local en `127.0.0.1:7860` |
 
-Las versiones de dependencias están fijadas en `uv.lock` y exportadas en `requirements.txt`. La ejecución Qwen registrada usó Python 3.12.7, Ollama 0.40.15, langchain-chroma 0.2.6, langchain-ollama 0.3.10, chromadb 1.5.9 y cliente ollama 0.6.3. El modelo Qwen instalado fue Q8_0, dimensión 1024; su digest completo está en el informe de recuperación Qwen.
+Entorno del experimento registrado: **Ollama 0.40.15**, `langchain-chroma 0.2.6`, `langchain-ollama 0.3.10`, `chromadb 1.5.9` y cliente Python `ollama 0.6.3`. Las dependencias del proyecto están definidas en `pyproject.toml`, fijadas en `uv.lock` y exportadas también en `requirements.txt`; las versiones que cada usuario instale pueden depender del procedimiento de instalación elegido.
 
-## 3. Prerrequisitos
+## 4. Instalación y ejecución local
 
-- Python **3.12** y [uv](https://docs.astral.sh/uv/).
-- [Ollama](https://ollama.com/) instalado y su servicio activo.
-- Espacio para el entorno, modelos e índices. Se puede ejecutar en CPU, pero indexar y generar puede tardar varios minutos; no se especifica un mínimo de hardware validado.
-- Los documentos de `datos/` y los archivos procesados usados por la configuración elegida.
-- Ejecutar los ejemplos desde la raíz del repositorio, en Bash/Zsh. Las rutas explícitas relativas se interpretan desde esa terminal.
+### Requisitos
 
-Los índices `.chroma/` y los modelos Ollama **no se versionan**: en una instalación nueva hay que descargarlos/construirlos. No hace falta activar `.venv` cuando se usa `uv run`.
+- Git, **Python 3.12**, [`uv`](https://docs.astral.sh/uv/) y [Ollama](https://ollama.com/) instalados.
+- Acceso a Internet **solo para descargar** dependencias y modelos.
+- Espacio en disco para modelos e índices. Se puede ejecutar en CPU, aunque el cálculo de embeddings y la generación pueden resultar lentos.
+- Ejecutar todos los comandos desde la **raíz del repositorio**. Los ejemplos usan Bash/Zsh.
 
-## 4. Puesta en marcha paso a paso
-
-### Paso 1 — Instalar dependencias
+### Paso 1. Obtener el proyecto y el entorno
 
 ```bash
+git clone https://github.com/jaymc-arg/PLN_tp2_2026.git
+cd PLN_tp2_2026
 uv sync
 ```
 
-Opcional, si preferís activar el entorno en Linux/macOS:
+`uv sync` crea/administra `.venv` e instala las dependencias declaradas. No es necesario activar el entorno al utilizar `uv run`. Si se prefiere seguir la instalación con el `requirements.txt` exigido en la entrega:
 
 ```bash
-source .venv/bin/activate
+uv venv --python 3.12
+uv pip install -r requirements.txt
 ```
 
-### Paso 2 — Iniciar Ollama y descargar modelos
+### Paso 2. Descargar los modelos locales
 
-En una terminal, **solo si Ollama no está ya ejecutándose**:
+Si Ollama no se encuentra ejecutándose, iniciar su servicio en otra terminal:
 
 ```bash
 ollama serve
 ```
 
-Dejá esa terminal abierta. En otra terminal, desde el proyecto:
+Descargar los modelos de la configuración principal:
 
 ```bash
 ollama pull qwen3-embedding:0.6b
@@ -106,335 +123,218 @@ ollama pull granite4:latest
 ollama list
 ```
 
-### Paso 3 — Elegir modelo, fragmentos e índice
-
-Usaremos estas variables en los comandos siguientes. Son variables de la terminal, no un sistema de configuración adicional:
-
-```bash
-EMBEDDING_MODEL="qwen3-embedding:0.6b"
-GENERATION_MODEL="granite4:latest"
-CHUNKS="datos/procesados/chunks.jsonl"
-INDEX_DIR=".chroma/electoral_laws_qwen3_0_6b"
-```
-
-**Para probar BGE-M3**, descargalo y cambiá juntos modelo e índice:
+La consigna de clase menciona `bge-m3`: es una alternativa permitida si se justifica. Este proyecto utiliza **Qwen3 Embedding 0.6B** por defecto y registra una comparación contra BGE-M3. Para probar la alternativa:
 
 ```bash
 ollama pull bge-m3
-EMBEDDING_MODEL="bge-m3"
-INDEX_DIR=".chroma/electoral_laws"
 ```
 
-Mantené `CHUNKS` correspondiente al índice elegido. **Nunca consultes un índice con un modelo o archivo de fragmentos distinto del usado para construirlo.** La firma del índice comprueba modelo y SHA-256 de los fragmentos y rechaza incompatibilidades; igual dimensión no significa compatibilidad.
+**No se deben mezclar** vectores producidos por Qwen con consultas realizadas mediante BGE-M3 ni reutilizar el índice de uno para el otro.
 
-### Paso 4 — Construir el índice elegido, si hace falta
+### Paso 3. Crear el índice local desde los chunks versionados
 
-Para la configuración original se pueden usar directamente los fragmentos versionados: **no hace falta volver a preprocesar ni fragmentar**.
+Para iniciar con la configuración principal, **no es obligatorio repetir el preprocesamiento** porque `datos/procesados/chunks.jsonl` ya está disponible en el repositorio.
 
 ```bash
 uv run python scripts/02_indexar.py \
-  --chunks "$CHUNKS" --index-dir "$INDEX_DIR" --model "$EMBEDDING_MODEL" \
-  --smoke-question "¿Qué excepciones al deber de votar establece el artículo 12?"
+  --chunks datos/procesados/chunks.jsonl \
+  --index-dir .chroma/electoral_laws_qwen3_0_6b \
+  --model qwen3-embedding:0.6b \
+  --smoke-question "¿Qué excepciones establece el artículo 12 del Código Electoral Nacional?"
 ```
 
-El indexador verifica IDs y metadatos, agrega documentos faltantes y ejecuta una consulta de inspección. Repetirlo con la misma firma no duplica IDs, pero sí necesita Ollama y calcula el embedding de la consulta de inspección. Si el índice ya es compatible, podés pasar directamente a consultar.
+La ejecución registrada con fragmentación base produjo **828 chunks**. El indexador comprueba identificadores y metadatos y hace una consulta de inspección. Este número es un resultado de referencia del corpus versionado, no una garantía ante cambios futuros.
 
-`--rebuild` es **destructivo para el directorio de índice seleccionado**: no lo uses para alternar modelos. Solo corresponde a una reconstrucción deliberada de un índice propio y reconocido. Para experimentos, preferí otra ruta.
-
-### Paso 5 — Consultar por terminal
-
-**Solo recuperación, sin redactar una respuesta:**
-
-```bash
-uv run python scripts/03_recuperar.py \
-  --model "$EMBEDDING_MODEL" --index-dir "$INDEX_DIR" --chunks "$CHUNKS" \
-  --pregunta "¿Qué excepciones establece el Código Electoral Nacional?" --k 5
-```
-
-**Recuperación y generación, con salida JSON completa:**
-
-```bash
-uv run python scripts/04_generar.py \
-  --embedding-model "$EMBEDDING_MODEL" --model "$GENERATION_MODEL" \
-  --index-dir "$INDEX_DIR" --chunks "$CHUNKS" \
-  --pregunta "Según el artículo 13 de la Ley 5.109, ¿cuántos diputados y senadores hay?" \
-  --k 3 --json
-```
-
-> **Importante:** `--model` en `02_indexar.py` y `03_recuperar.py` selecciona **embeddings**. En `04_generar.py` y `evaluar_generacion.py` selecciona el **generador**; allí los embeddings se eligen con `--embedding-model`. En generación también existe el alias `--modelo`.
-
-| Control de consulta | Comportamiento |
-|---|---|
-| Sin flags de jurisdicción | Enrutamiento automático conservador. |
-| `--jurisdiccion nacional`, `pba` o `santa_fe` | Selección manual que prevalece sobre la detección. |
-| `--sin-filtro` | Consulta exploratoria global. Es incompatible con `--jurisdiccion`. |
-| `--k` | Cantidad de fragmentos **por jurisdicción** en comparaciones. Recuperación acepta cualquier entero positivo; generación admite 1, 3 o 5. |
-| `--json` | Solo en `04_generar.py`: conserva respuesta, contexto literal, ruta, fuentes y chequeo de citas. |
-
-Por ejemplo, podés reemplazar la pregunta y agregar `--jurisdiccion santa_fe --k 5`. Una comparación explícita entre las leyes 5.109 y 14.478 consulta cada jurisdicción por separado. «¿Cómo se vota en PBA?» es ambigua: sin selección manual ni `--sin-filtro`, pide precisión sin recuperar ni generar.
-
-La CLI de recuperación muestra un **adelanto de hasta 350 caracteres** por resultado; no es el contexto completo. Para ver evidencia íntegra usá generación con `--json`, Gradio o los JSON de evaluación.
-
-### Paso 6 — Abrir Gradio
+### Paso 4. Ejecutar Gradio
 
 ```bash
 uv run python scripts/05_interfaz_gradio.py
 ```
 
-Abrí **http://127.0.0.1:7860** o la dirección local indicada. Elegí pregunta, K=1/3/5 y jurisdicción; pulsá **Consultar**. Las salidas son respuesta/aclaración, enrutamiento, fuentes recuperadas, evidencia literal completa enviada al modelo y revisión de citas.
+Abrir **http://127.0.0.1:7860**. Escribir una pregunta, elegir `K` (1, 3 o 5), seleccionar jurisdicción automática, manual o sin filtro y pulsar **Consultar**.
 
-**Las variables de terminal del paso 3 no cambian Gradio.** La interfaz no tiene flags ni selector de modelos: usa los defaults compartidos de `scripts/02_indexar.py`. Actualmente **Índice original significa Qwen + fragmentación 1000/150**, no BGE. Para cambiar globalmente Gradio a BGE, cambiar juntos `DEFAULT_MODEL` a `"bge-m3"` y `DEFAULT_INDEX` a `ROOT / ".chroma/electoral_laws"`, y reiniciar. Para alternar sin editar código, usá las CLIs anteriores.
+La interfaz presenta **cinco salidas independientes**: **respuesta**, **enrutamiento**, **fuentes recuperadas**, **contexto literal completo enviado al modelo** y **control sintáctico de citas**. Los documentos TXT muestran ley/artículo/archivo sin páginas inventadas; el PDF santafesino muestra el rango de páginas del artículo, que **no equivale necesariamente a la página exacta de cada chunk**.
 
-En **Laboratorio de fragmentación**, seleccioná **Índice experimental**, elegí tamaño (300–2000 caracteres) y solapamiento (entero ≥0 y menor que tamaño), y pulsá **Preparar / reutilizar índice experimental**. Cambiar controles no indexa ni genera: limpia resultados anteriores y exige preparar la configuración visible antes de consultar.
+La modalidad **Índice original** utiliza los valores Qwen 1000/150 del código. Las variables de shell de otros ejemplos **no cambian el modelo que usa Gradio**. La interfaz no ofrece actualmente un selector dinámico de modelos; las pruebas con BGE se ejecutan con las CLIs y un índice diferente.
 
-Los experimentos consumen los artículos ya procesados y guardan `chunks.jsonl`, `reporte_fragmentacion.json` e `indice/` bajo `.chroma/experimentos/<hash>/`. La identidad incluye modelo, parámetros, contenido de artículos y código/versión del divisor. Una configuración completa compatible se reutiliza sin recalcular embeddings ni reescribir sus fragmentos. El estado es por sesión; al elegir **Índice original** se vuelve sin reconstruir nada. No ejecutar varios procesos preparando simultáneamente la misma configuración.
+### Paso 5. Consultar también por terminal (opcional)
 
-## 5. Probar otras configuraciones por terminal
-
-### Cambiar tamaño y solapamiento sin alterar los fragmentos originales
-
-Estos flags miden **caracteres**, no tokens. Tamaño controla la longitud máxima de los fragmentos; solapamiento busca repetir contexto entre fragmentos contiguos, según los separadores disponibles. No asegura que todas las excepciones de un artículo queden juntas. El punto de partida 1000/150 equilibra contexto y repetición, pero el art. 12 nacional demuestra una división incompleta real.
-
-Ejemplo independiente de 600/50:
+Solo recuperar la evidencia, sin generación:
 
 ```bash
-uv run python scripts/01_fragmentar.py \
-  --entrada datos/procesados \
-  --salida .chroma/pruebas/qwen_600_50/chunks.jsonl \
-  --chunk-size 600 --chunk-overlap 50
-
-EMBEDDING_MODEL="qwen3-embedding:0.6b"
-CHUNKS=".chroma/pruebas/qwen_600_50/chunks.jsonl"
-INDEX_DIR=".chroma/pruebas/qwen_600_50/indice"
-
-uv run python scripts/02_indexar.py \
-  --chunks "$CHUNKS" --index-dir "$INDEX_DIR" --model "$EMBEDDING_MODEL"
+uv run python scripts/03_recuperar.py \
+  --pregunta "¿Qué excepciones establece el Código Electoral Nacional?" \
+  --k 5 --jurisdiccion nacional \
+  --chunks datos/procesados/chunks.jsonl \
+  --index-dir .chroma/electoral_laws_qwen3_0_6b \
+  --model qwen3-embedding:0.6b
 ```
 
-Después usá **esas mismas tres variables** en consultas y evaluaciones. No cambies `--chunks` manteniendo un índice anterior. El fragmentador escribe el reporte `reporte_fragmentacion.json` **junto al archivo de salida**: usar directorios distintos evita sobrescribir el reporte de otra configuración.
+Recuperar y generar, mostrando el JSON completo:
 
-### Reconstruir extracción y artículos, solo si lo necesitás
+```bash
+uv run python scripts/04_generar.py \
+  --pregunta "Según el artículo 13 de la Ley 5.109, ¿cuántos diputados y senadores hay?" \
+  --k 3 --jurisdiccion pba --json \
+  --chunks datos/procesados/chunks.jsonl \
+  --index-dir .chroma/electoral_laws_qwen3_0_6b \
+  --embedding-model qwen3-embedding:0.6b --model granite4:latest
+```
 
-No es necesario para probar embeddings sobre los fragmentos versionados. Para inspeccionar toda la cadena sin sobrescribir los procesados originales:
+En `02_indexar.py` y `03_recuperar.py`, `--model` designa el **modelo de embeddings**; en `04_generar.py` designa el **generador** y `--embedding-model` selecciona el embedding. Sin jurisdicción manual, la aplicación usa el detector conservador: ante una pregunta ambigua solicita precisión en lugar de consultar una jurisdicción arbitraria.
+
+## 5. Reindexación y experimentos reproducibles
+
+El índice Chroma (`.chroma/`) es un **artefacto local derivado**: no debe versionarse. Se puede reconstruir a partir de los documentos y scripts publicados. La firma del índice comprueba el modelo y SHA-256 del archivo de fragmentos, y rechaza una combinación incompatible.
+
+### Reconstruir la cadena desde los documentos originales
+
+Para no sobrescribir los artículos procesados ni el índice base:
 
 ```bash
 uv run python scripts/00_preprocesar.py \
   --entrada datos --salida .chroma/reconstruccion/procesados
+
 uv run python scripts/01_fragmentar.py \
   --entrada .chroma/reconstruccion/procesados \
   --salida .chroma/reconstruccion/chunks.jsonl \
   --chunk-size 1000 --chunk-overlap 150
+
+uv run python scripts/02_indexar.py \
+  --chunks .chroma/reconstruccion/chunks.jsonl \
+  --index-dir .chroma/reconstruccion/indice \
+  --model qwen3-embedding:0.6b
 ```
 
-El preprocesador genera los tres `*_articulos.jsonl` y `reporte_preprocesamiento.json` en su directorio de salida. El fragmentador genera el JSONL solicitado y su reporte. Si después indexás esta reconstrucción, elegí también una ruta de índice independiente.
+Esto vuelve a ejecutar extracción, reconocimiento de artículos, fragmentación e indexación. La extracción del PDF usa texto digital y **no realiza OCR**. Si cambia un documento, el corte o el modelo, se debe construir un índice correspondiente a la nueva configuración y mantener juntos **ruta de chunks + ruta de índice + modelo**.
 
-## 6. Evaluaciones: ejecución configurable y lectura de resultados
+`--rebuild` en el indexador **elimina el índice del directorio seleccionado**, con controles para impedir borrar directorios no reconocidos; no debe utilizarse indiscriminadamente. Para comparar variantes se recomienda un nuevo directorio.
 
-### Reglas comunes
+### Laboratorio de fragmentación en Gradio
 
-- Los cinco casos de [evalucacion/preguntas.json](evalucacion/preguntas.json) son tres respondibles (uno por ley) y dos ausentes (resultado presidencial 2023 y gasto real de campaña). Se fijaron antes de observar resultados.
-- No cambies preguntas, fragmentación y modelo a la vez si querés atribuir una diferencia a una sola variable.
-- Los evaluadores **escriben sus archivos de salida**. No ejecutarlos sobre rutas históricas si querés conservarlas. Los ejemplos siguientes usan un directorio propio; cambiá su nombre para cada corrida.
-- `--review` indica una **revisión manual de entrada**, no un archivo que el evaluador complete automáticamente. Si no existe, el reporte queda pendiente de revisión; eso no significa necesariamente que haya fallado la ejecución.
-- No reutilices una revisión de otra configuración sin inspeccionar los resultados reales: los IDs, citas o hashes pueden no coincidir. Los diagnósticos semánticos no se deducen de Hit@k ni del formato de las citas.
+En **Índice experimental**, ajustar `chunk_size` (300–2000 caracteres) y `chunk_overlap` (entero entre 0 y menor que el tamaño), y pulsar **Preparar / reutilizar índice experimental**. Cambiar los controles no genera índices por sí solo. Los archivos del experimento quedan bajo `.chroma/experimentos/<identificador>/` y no reemplazan el índice base. El identificador toma en cuenta parámetros, modelo, contenidos de entrada y versión/código del divisor.
 
-Antes de ejecutar, definí modelo, fragmentos e índice con el paso 3, o con tu configuración de la sección 5. Por ejemplo, para volver a Qwen original:
+### Comparar dos configuraciones sin cambiar corpus, modelo ni preguntas
+
+El experimento del repositorio compara **1000/150** con **600/80**, ambos con Qwen3 Embedding y Granite 4, y el **mismo conjunto fijo de 38 preguntas**. Se ejecutó con índices aislados; la comparación conserva los rankings y las salidas generadas.
+
+- Informe principal: [`evalucacion/experimentos_fragmentacion/comparacion_qwen_600_80_vs_1000_150.md`](evalucacion/experimentos_fragmentacion/comparacion_qwen_600_80_vs_1000_150.md).
+- Runner: [`scripts/evaluar_fragmentacion_pareada.py`](scripts/evaluar_fragmentacion_pareada.py).
+- Para inspeccionar resultados existentes no es necesario recalcular embeddings ni generar respuestas.
+
+Para crear o reanudar una ejecución real:
 
 ```bash
-EMBEDDING_MODEL="qwen3-embedding:0.6b"
-GENERATION_MODEL="granite4:latest"
-CHUNKS="datos/procesados/chunks.jsonl"
-INDEX_DIR=".chroma/electoral_laws_qwen3_0_6b"
-RUN_DIR="evalucacion/mis_pruebas/qwen_original_01"
+uv run python scripts/evaluar_fragmentacion_pareada.py --ejecutar
 ```
 
-Los evaluadores crean los directorios de sus reportes. Repetir los ejemplos con el mismo `RUN_DIR` sobrescribe **tus salidas de esa corrida**.
+**Atención:** la ejecución puede escribir artefactos y retomar casos previamente guardados. Para una corrida completamente separada, utilizar otro directorio con `--salida`. La revisión semántica no se deduce automáticamente de Hit@K: corresponde leer las respuestas y fragmentos de la ejecución concreta.
 
-### A. Recuperación — `evaluar_recuperacion.py`
+## 6. Pruebas: resultados observados y fallas del sistema
 
-Necesita el índice compatible y Ollama con embeddings; **no invoca el generador**. Hace seis consultas positivas (tres × sin/con filtro), dos negativas y una paráfrasis nacional independiente. Todas usan K=5; deriva k=1/k=3 del mismo ranking, verifica el contexto numerado y compara IDs/manifest antes y después.
+### Conjunto de evaluación
 
-```bash
-uv run python scripts/evaluar_recuperacion.py \
-  --questions evalucacion/preguntas.json \
-  --model "$EMBEDDING_MODEL" --index-dir "$INDEX_DIR" --chunks "$CHUNKS" \
-  --report "$RUN_DIR/recuperacion.json" \
-  --markdown "$RUN_DIR/recuperacion.md" \
-  --plot "$RUN_DIR/distancias.svg" \
-  --review "$RUN_DIR/revision_recuperacion.json" \
-  --baseline-report evalucacion/reporte_recuperacion.json
-```
+El conjunto **actual** es [`evalucacion/preguntas.json`](evalucacion/preguntas.json), versión 2, con **38 casos: 32 respondibles y 6 preguntas sin respuesta en el corpus**, incluidas dos comparativas. Los **cinco casos originales** (tres respondibles, uno por documento, y dos ausentes) se mantienen identificables dentro de ese conjunto, pero **los evaluadores históricos** `evaluar_recuperacion.py` y `evaluar_generacion.py` están diseñados para el antiguo protocolo de cinco casos; no se les debe pasar el fixture actual de 38 como si fuera compatible.
 
-`--baseline-report` es opcional: compara reportes del mismo fixture, **no ejecuta búsquedas BGE** ni demuestra que otros parámetros sean idénticos. Para una comparación controlada de embeddings, mantené los mismos chunks. No existe un flag `--k` en este evaluador: su protocolo fija K=5.
+### Cinco preguntas exigidas por la consigna
 
-| Archivo / campo | Cómo leerlo |
-|---|---|
-| `recuperacion.json` | Evidencia completa: `positive_questions`, `negative_questions`, rankings `results`, textos, IDs, artículos, distancias, fuentes y páginas disponibles. |
-| `article_metrics` | Acierto del artículo esperado, no suficiencia del fragmento. Incluye `first_expected_rank`. |
-| `aggregate_positive_metrics` | Hit@1/3/5 y MRR@5 sobre las **tres positivas**; negativas excluidas. |
-| `filter_comparison` | Indica si cambió el primer resultado o el conjunto/orden top-3 al aplicar filtro. |
-| `paraphrase_trial`, `k_comparison` | Ensayo independiente y comparación de cortes del ranking. La paráfrasis no entra en el agregado fijo. |
-| `numbered_evidence_context` | Contexto literal completo con numeración global. No es una respuesta generada. |
-| `index_integrity` | Debe indicar `unchanged: true`; compara IDs y manifest, no validez jurídica. |
-| `recuperacion.md` | Resumen legible, diagnósticos y comparación si se pasó `--baseline-report`. |
-| `distancias.svg` | Distancias reales del top-3 nacional sin filtro. No son porcentajes de confianza. |
-| `revision_recuperacion.json` | Lo redactás tras inspeccionar resultados: `fixed_positive` por modo, `reviewed_top3_chunk_ids`, cobertura `yes/partial/no`, citas literales; además negativas, paráfrasis y comparación K. La función `validate_manual_review()` en el script define el contrato. |
+La tabla siguiente resume **salidas realmente registradas** para el experimento principal **Qwen 1000/150, Granite, K=3 con enrutamiento/filtro indicado por el ensayo**. «Evidencia esperada» y «evidencia recuperada» son conceptos distintos. El resultado por pregunta y sus trazas completas figuran en el [informe pareado](evalucacion/experimentos_fragmentacion/comparacion_qwen_600_80_vs_1000_150.md), no en una ejecución nueva realizada para este README.
 
-Tras escribir una revisión válida, podés actualizar JSON, Markdown y gráfico **sin nuevas consultas**:
+| Pregunta | Respuesta / fuente esperada | Fragmentos recuperados (archivo y página si existe) | Qué hizo el generador | Observación / diagnóstico |
+|---|---|---|---|---|
+| **Nación:** ¿Qué excepciones al deber de votar enumera el art. 12 del Código Electoral Nacional? | Art. 12, `ley_nacional.txt`: causales a–d, condiciones y carácter optativo. | `nacional_19945_art_12__chunk_0001`, de `ley_nacional.txt` (TXT sin página). No llegó su continuación pertinente dentro de K=3. | Contestó **parcialmente**, con referencias, pero omitió parte de las causales y condiciones. | **Fragmentación + recuperación:** acertar el artículo no garantiza disponer de todo el pasaje. |
+| **PBA:** según el art. 13 de la Ley 5.109, ¿cuántos diputados y senadores integran la representación legislativa? | Art. 13, `ley_pba.txt`: **92 diputados y 46 senadores** en el texto principal. | `pba_5109_art_13__chunk_0001`, de `ley_pba.txt` (TXT sin página), en el primer rango. | Informó correctamente **92/46**, pero sin la cita numerada requerida. | **Generación/citas:** el contenido correcto no implica trazabilidad formal correcta. |
+| **Santa Fe:** ¿cómo define el art. 4 de la Ley 14.478 a la autoridad de mesa? | Definición del art. 4, `ley_sta_fe.pdf`, páginas del artículo **1–4**. | Con Qwen 1000/150, el artículo esperado apareció en **rango 4** en la recuperación filtrada; quedó fuera del contexto **K=3**. Entraron otros artículos relacionados. | Produjo una respuesta **parcialmente respaldada**, sin reproducir de forma suficiente el pasaje solicitado. | **Recuperación:** un vecino próximo sobre autoridades no sustituye la definición del artículo preguntado. |
+| **Sin respuesta 1:** ¿qué partido ganó la presidencial argentina de 2023 y cuántos votos obtuvo? | **No disponible:** el corpus contiene normas, no resultados electorales. | Chroma devolvió vecinos sobre legislación electoral, **no** actas/resultados oficiales; no había fuente válida para ese dato. | Se **abstuvo correctamente** en el ensayo registrado. | La presencia de chunks no convierte una pregunta en respondible. |
+| **Sin respuesta 2:** ¿cuánto gastó efectivamente cada partido en la campaña presidencial de 2023? | **No disponible:** faltan rendiciones efectivas de campaña. | Se recuperaron reglas normativas de financiamiento/gastos, **no** montos realmente ejecutados por partido. | Se **abstuvo correctamente** en el ensayo registrado. | Un límite legal de gasto no prueba el gasto real; la abstención no está garantizada para otras preguntas. |
 
-```bash
-uv run python scripts/evaluar_recuperacion.py \
-  --usar-reporte-existente "$RUN_DIR/recuperacion.json" \
-  --questions evalucacion/preguntas.json --model "$EMBEDDING_MODEL" \
-  --report "$RUN_DIR/recuperacion.json" --markdown "$RUN_DIR/recuperacion.md" \
-  --plot "$RUN_DIR/distancias.svg" --review "$RUN_DIR/revision_recuperacion.json" \
-  --baseline-report evalucacion/reporte_recuperacion.json
-```
+**Nota sobre páginas:** para Santa Fe, los rangos son los asociados al **artículo de origen**; no existe un mapeo validado de la página exacta dentro de cada chunk. Para los TXT no se publican páginas inexistentes. El JSON de ejecución permite consultar los `chunk_id` completos, el orden de recuperación, el contexto y el texto original generado.
 
-Sin rutas explícitas, el evaluador usa los archivos `reporte_recuperacion_qwen3_0_6b.json`, `validacion_recuperacion_qwen3_0_6b.md`, `distancias_recuperacion_qwen3_0_6b.svg` y la revisión `revision_manual_recuperacion_qwen3_0_6b.json` en `evalucacion/`. Usá los ejemplos con `RUN_DIR` para no sobrescribir ese registro.
+### Comparación cuantitativa de fragmentación: 1000/150 frente a 600/80
 
-### B. Enrutamiento — `evaluar_jurisdiccion.py`
+| Métrica del ensayo de 38 casos | Qwen 1000/150 | Qwen 600/80 |
+|---|---:|---:|
+| Fragmentos indexados | 828 | 1.119 |
+| Hit@3 por pregunta positiva (artículos esperados) | 31/32 (96,88 %) | 32/32 (100 %) |
+| Evidencia completa dentro de K=3 | 28/32 (87,50 %) | 25/32 (78,12 %) |
+| Respuestas estrictamente respaldadas | 8/32 (25 %) | 12/32 (37,50 %) |
+| Respuestas factualmente completas | 13/32 (40,63 %) | 16/32 (50 %) |
+| Abstenciones correctas en preguntas negativas | 5/6 (83,33 %) | 5/6 (83,33 %) |
 
-La clasificación sobre las 40 etiquetas de `preguntas_jurisdiccion.json` **no requiere Ollama ni índice**:
+Las tasas de cobertura y apoyo de respuesta provienen de una **revisión de las trazas realizada por un agente de código**, no de una revisión jurídica independiente ni de una validación personal declarada por el estudiante. Hay una etiqueta de incertidumbre en el brazo 1000/150. **No se puede concluir que 600/80 sea universalmente mejor:** recupera más artículos esperados entre los tres primeros, pero con menor proporción de pasajes completos. Una respuesta respaldada exige contenido suficiente **y** citas semánticamente pertinentes; Hit@3 mide otra cosa.
 
-```bash
-uv run python scripts/evaluar_jurisdiccion.py \
-  --fixture evalucacion/preguntas_jurisdiccion.json \
-  --report "$RUN_DIR/jurisdiccion_sin_recuperacion.json" \
-  --markdown "$RUN_DIR/jurisdiccion_sin_recuperacion.md"
-```
+Para los resultados históricos de recuperación con solo cinco preguntas, ver [`evalucacion/validacion_recuperacion_qwen3_0_6b.md`](evalucacion/validacion_recuperacion_qwen3_0_6b.md), [`evalucacion/validacion_recuperacion.md`](evalucacion/validacion_recuperacion.md) y los JSON asociados. **No mezclar sus denominadores con las 38 preguntas actuales.** Los informes históricos de generación con BGE también tienen otro protocolo y no representan una nueva evaluación de Granite+Qwen.
 
-Para agregar recuperación real sobre las tres preguntas positivas de `evalucacion/preguntas.json`:
-
-```bash
-uv run python scripts/evaluar_jurisdiccion.py \
-  --fixture evalucacion/preguntas_jurisdiccion.json --with-retrieval \
-  --model "$EMBEDDING_MODEL" --index-dir "$INDEX_DIR" --chunks "$CHUNKS" \
-  --report "$RUN_DIR/jurisdiccion_con_recuperacion.json" \
-  --markdown "$RUN_DIR/jurisdiccion_con_recuperacion.md"
-```
-
-`--fixture` configura las etiquetas del detector; **no cambia** el archivo fijo de tres preguntas usado por `--with-retrieval`. El script no ofrece flags para K, revisión manual ni rerender desde un reporte previo.
-
-En el JSON, `classification.cases` muestra etiqueta esperada/predicha, señales, motivo y aclaración; `classification.metrics` contiene matriz de confusión, precisión/recall y errores de enrutamiento. `retrieval_impact` indica `not requested`, `blocked` o `completed`. Si está completado, inspeccioná sus `runs`, `metrics`, fugas jurisdiccionales e integridad: `--with-retrieval` puede quedar bloqueado aunque la clasificación se haya completado.
-
-**Advertencia:** `retrieval_impact.passage_review` contiene diagnósticos textuales históricos codificados en el script; no es una inspección nueva automática de tus pasajes. Revisá los rankings reales y usá el evaluador de recuperación para una nueva revisión específica de modelo/configuración.
-
-Sin rutas explícitas, escribe `reporte_jurisdiccion.json` y `validacion_jurisdiccion.md` en `evalucacion/`, sobrescribiendo esos destinos.
-
-### C. Generación — `evaluar_generacion.py`
-
-Requiere embeddings, índice y modelo generador. Ejecuta las cinco preguntas mediante `answer_question()` con enrutamiento automático y K=3, más una ejecución nacional K=1. No tiene flags para elegir K, filtro manual o `--sin-filtro` durante esta evaluación.
-
-```bash
-uv run python scripts/evaluar_generacion.py \
-  --questions evalucacion/preguntas.json \
-  --embedding-model "$EMBEDDING_MODEL" --model "$GENERATION_MODEL" \
-  --index-dir "$INDEX_DIR" --chunks "$CHUNKS" \
-  --report "$RUN_DIR/generacion.json" --markdown "$RUN_DIR/generacion.md" \
-  --review "$RUN_DIR/revision_generacion.json"
-```
-
-| Campo / archivo | Interpretación |
-|---|---|
-| `fixed_cases[].expected` | Respuesta/fuentes esperadas, fijadas antes de la generación. |
-| `fixed_cases[].generation` | Respuesta real, `original_response`, ruta, `source_map`, `retrieval_records` y `context_sent` exacto. |
-| `citation_check` | Citas faltantes, inexistentes o malformadas. Una cita válida sintácticamente puede no respaldar una afirmación. |
-| `generation_status`, `overall_generation_error` | Verificar errores o casos no ejecutados antes de interpretar resultados. No convertir una ejecución fallida en un acierto o abstención. |
-| `k_comparison` | Contexto/respuesta/citas con K=1 y K=3; no un porcentaje general de precisión. |
-| `manual_review`, `diagnosis` | Estado de inspección semántica. Si está pendiente, no asumir que la respuesta está respaldada. |
-| `runtime`, `embedding_model`, `index_integrity` | Modelo generador/digest, embeddings usados y comprobación de integridad. |
-| `generacion.md` | Tabla legible de casos, respuestas y limitaciones. |
-| `revision_generacion.json` | Entrada manual, no salida automática: cobertura, apoyo de respuesta, fallos/observaciones y hashes de las respuestas originales, incluida la comparación K. Ver `validate_manual_review()` en el script. |
-
-Para aplicar una revisión o rehacer el resumen sin llamar a Ollama:
-
-```bash
-uv run python scripts/evaluar_generacion.py \
-  --usar-reporte-existente "$RUN_DIR/generacion.json" \
-  --questions evalucacion/preguntas.json \
-  --embedding-model "$EMBEDDING_MODEL" --model "$GENERATION_MODEL" \
-  --report "$RUN_DIR/generacion.json" --markdown "$RUN_DIR/generacion.md" \
-  --review "$RUN_DIR/revision_generacion.json"
-```
-
-El rerender usa los datos del JSON guardado: **no cambia de modelo ni reevalúa respuestas** por pasar otros flags. Rechaza reportes históricos sin el protocolo actual de enrutamiento y valida los hashes de las respuestas si hay revisión. Una revisión vieja puede quedar marcada como no aplicada o impedir el rerender; no se debe forzar su reutilización.
-
-Sin rutas explícitas, escribe `reporte_generacion_enrutada.json` y `validacion_generacion_enrutada.md`; busca `revision_manual_generacion_enrutada.json`. Ese archivo de revisión puede no existir y no se crea automáticamente. El texto interno legado `baseline.retrieval_protocol` todavía menciona BGE: para identificar el embedding real mirá `embedding_model` y los registros de ejecución, no esa etiqueta histórica.
-
-### Cómo interpretar las métricas
-
-- **Hit@k:** fracción de preguntas positivas cuyo artículo esperado aparece entre los primeros k fragmentos. Varias coincidencias del mismo artículo no suman aciertos adicionales.
-- **MRR@5:** promedio de `1 / primer rango esperado`; si no aparece en top-5, aporta 0. Ejemplo: rango 4 aporta 0.25.
-- **Cobertura de pasaje:** revisión de si los fragmentos contienen la respuesta completa, parcial o ninguna. Puede haber un hit de artículo sin la excepción o definición requerida.
-- **Precisión/recall de jurisdicción:** miden clasificación, no exactitud de la respuesta legal.
-- **Distancia Chroma:** menor indica un vecino más cercano dentro de ese espacio; no es probabilidad ni permite comparar calidad directamente entre modelos.
-
-Primero verificá errores/integridad, después fuentes y pasajes, y finalmente apoyo de la respuesta y citas. Un ranking no vacío en una pregunta ausente no demuestra que el corpus pueda responderla.
-
-### Dónde están los resultados ya registrados
-
-| Registro | Archivos y lectura |
-|---|---|
-| Extracción / indexación | [validacion_preprocesamiento.md](evalucacion/validacion_preprocesamiento.md), [validacion_indexacion.md](evalucacion/validacion_indexacion.md). Informes históricos de inspecciones, no salidas automáticas de cada ejecución actual. |
-| Recuperación BGE-M3 | [reporte_recuperacion.json](evalucacion/reporte_recuperacion.json), [validacion_recuperacion.md](evalucacion/validacion_recuperacion.md), [revision_manual_recuperacion.json](evalucacion/revision_manual_recuperacion.json). Histórico conservado; el SVG puede no estar disponible en este checkout. |
-| Recuperación Qwen | [reporte_recuperacion_qwen3_0_6b.json](evalucacion/reporte_recuperacion_qwen3_0_6b.json), [validacion_recuperacion_qwen3_0_6b.md](evalucacion/validacion_recuperacion_qwen3_0_6b.md), [revision_manual_recuperacion_qwen3_0_6b.json](evalucacion/revision_manual_recuperacion_qwen3_0_6b.json). Incluyen comparación y citas cotejadas. El evaluador también puede generar el SVG con sufijo Qwen. |
-| Enrutamiento | [reporte_jurisdiccion.json](evalucacion/reporte_jurisdiccion.json), [validacion_jurisdiccion.md](evalucacion/validacion_jurisdiccion.md). Clasificación registrada 40/40 sobre ese conjunto; impacto de recuperación histórico con BGE. |
-| Generación BGE histórica | [reporte_generacion.json](evalucacion/reporte_generacion.json), [validacion_generacion.md](evalucacion/validacion_generacion.md): protocolo anterior sin enrutamiento. [reporte_generacion_enrutada.json](evalucacion/reporte_generacion_enrutada.json), [validacion_generacion_enrutada.md](evalucacion/validacion_generacion_enrutada.md): protocolo enrutado. No son una evaluación de generación con Qwen. |
-
-Resumen de recuperación registrada (denominador: tres positivas):
-
-| Modelo / modo | Hit@1 | Hit@3 | Hit@5 | MRR@5 |
-|---|---:|---:|---:|---:|
-| BGE-M3 sin filtro | 0.667 | 0.667 | 0.667 | 0.667 |
-| BGE-M3 filtrado | 0.667 | 0.667 | 0.667 | 0.667 |
-| Qwen sin filtro | 0.667 | 0.667 | 0.667 | 0.667 |
-| Qwen filtrado | 0.667 | 0.667 | 1.000 | 0.750 |
-
-Los cinco casos registrados muestran: Nación sigue parcial por falta de la continuación del art. 12; PBA recupera 92 diputados/46 senadores; Santa Fe encuentra la definición en rango 4 filtrado Qwen, fuera de K=3; las preguntas sobre ganador/votos de 2023 y gasto real no tienen evidencia factual en estas leyes. La paráfrasis nacional mejora de rango 4 a 1 con Qwen, pero PBA/Santa Fe tienen más vecinos de otras jurisdicciones sin filtro. No se infiere una mejora general a partir de estos casos.
-
-## 7. Pruebas y ayuda de comandos
+### Pruebas de código y reproducción de una limitación
 
 ```bash
 uv run pytest -q
-uv run python scripts/00_preprocesar.py --help
-uv run python scripts/01_fragmentar.py --help
-uv run python scripts/02_indexar.py --help
-uv run python scripts/03_recuperar.py --help
-uv run python scripts/04_generar.py --help
-uv run python scripts/evaluar_recuperacion.py --help
-uv run python scripts/evaluar_jurisdiccion.py --help
-uv run python scripts/evaluar_generacion.py --help
 ```
 
-Los tests no requieren Ollama, índice real ni abrir un puerto; las pruebas con dobles no son resultados de rendimiento del RAG. La última ejecución de suite registrada para el cambio a Qwen fue **171 passed**, con 16 avisos esperados de compatibilidad de `generate_answer()`. Para código nuevo se usa `answer_question()`.
+Las pruebas usan dobles en componentes que lo requieren, por lo que **aprobar pytest no demuestra precisión del RAG ni que Ollama esté funcionando**. La última ejecución completa **registrada** en el README original informó `171 passed`, con avisos de compatibilidad; ese resultado histórico no equivale a haber ejecutado las pruebas en otra máquina o sobre cambios posteriores.
 
-Gradio no implementa una CLI configurable con `--help`: ejecutá su script sin flags. Para regenerar el archivo de dependencias exportado, si se cambian dependencias mediante `uv`:
+**Falla concreta para demostrar:** al preguntar por *todas* las exenciones del artículo 12 nacional, el recuperador encuentra el artículo correcto, pero el fragmento enviado no contiene la continuación con la causal restante y el carácter optativo. El generador responde de forma incompleta aunque cite un artículo pertinente. Esto diferencia una **falla de cobertura de contexto** de una mera falla de formato de citas. El ensayo con menor tamaño de chunks tampoco garantiza recuperar esa continuación. Una mejora posible sería favorecer la recuperación de fragmentos contiguos **del mismo artículo**, sujeta a una nueva comparación controlada de evidencia y respuestas; no es una función implementada en el estado documentado.
 
-```bash
-uv export --format requirements-txt --no-hashes --output-file requirements.txt
-```
+## 7. Decisiones técnicas y límites
 
-## 8. Errores frecuentes, fidelidad y límites
+### Por qué la fragmentación respeta artículos
 
-| Síntoma | Qué revisar |
+Las leyes tienen encabezados, incisos, definiciones y notas editoriales. Cortar todo el documento como una secuencia única permitiría que un chunk mezcle artículos con reglas o jurisdicciones distintas. Por eso el preprocesador construye artículos y el divisor trabaja **dentro** de cada uno, conservando su identificación. Los artículos breves pueden quedar completos; los extensos se parten. La vista indexable normaliza saltos visuales del PDF y distingue determinadas notas editoriales, **sin reescribir las normas**. Este método no garantiza que una enumeración extensa entre completa en un único chunk.
+
+`chunk_size` y `chunk_overlap` se cuentan en **caracteres de Python**. El corte usa `RecursiveCharacterTextSplitter` (separadores recursivos, no una cantidad fija de palabras) y el overlap intenta preservar contexto entre fragmentos. Los tamaños elegidos son hipótesis que se compararon experimentalmente, no constantes óptimas demostradas.
+
+### Por qué Qwen y qué significa K
+
+El laboratorio de clase utiliza `bge-m3` como referencia. Aquí se eligió `qwen3-embedding:0.6b` como default y se documentó una comparación con BGE usando el **mismo corpus y los mismos chunks**. Esa comparación histórica de cinco casos mostró una mejora acotada de Qwen en Hit@5 con filtro para una pregunta santafesina, sin mejora de Hit@3; **no prueba superioridad general**. Cada modelo necesita su propio índice, aunque dos modelos puedan devolver vectores con la misma dimensión.
+
+`K` determina cuántos fragmentos vecinos se envían como evidencia. En una comparación entre dos jurisdicciones se recuperan **K por jurisdicción**. Pedir más vecinos puede recuperar información necesaria, pero también introducir ruido; Chroma puede devolver vecinos incluso cuando la respuesta no aparece en el corpus. **La distancia vectorial no es una probabilidad de verdad**, y no se aplica un umbral universal de abstención.
+
+### Prompt, citas y abstención
+
+La generación usa `ChatPromptTemplate` y `ChatOllama` local. El prompt exige respuestas en español fundadas en el contexto, distinción entre jurisdicciones, citas `[1]`, `[2]`, etc. y una fórmula explícita de abstención si falta información. La temperatura se fija en cero para reducir variación, **sin garantizar determinismo ni exactitud**.
+
+Las fuentes que se ven en Gradio provienen de los **resultados realmente recuperados**, no de citas libres inventadas por el LLM. El chequeo programático detecta referencias ausentes, malformadas o inexistentes en el mapa, pero **no valida que una afirmación concreta esté semánticamente respaldada**. Las respuestas pueden omitir citas, omitir datos o atribuir contenido de otra fuente. La instrucción de abstención tampoco garantiza un rechazo correcto en todos los casos.
+
+### Enrutamiento y cobertura del corpus
+
+Las reglas de jurisdicción distinguen referencias explícitas a Nación, PBA y Santa Fe, reconocen comparaciones y devuelven aclaraciones ante ambigüedad. Por ejemplo, una ubicación geográfica no basta siempre para saber si se pregunta por la elección nacional o provincial. El detector es específico para este corpus: no debe interpretarse como clasificador legal universal.
+
+No hay OCR automático, recuperación híbrida lexical garantizada en estos scripts ni verificador jurídico externo. La vigencia de artículos observados/derogados no se resuelve automáticamente. Para el PDF se conservan **rangos de página por artículo**, no localizaciones precisas de cada frase; para TXT no existen páginas originales. Los experimentos de código o el agente no sustituyen la comprobación directa del texto legal.
+
+## 8. Declaración de asistencia de inteligencia artificial
+
+Se utilizó asistencia de IA durante el desarrollo. Conforme al historial documentado en [`bitacora.md`](bitacora.md), su intervención comprendió **planificación y delimitación**, **implementación y revisión de scripts**, **preparación de pruebas y experimentos**, **interpretación preliminar de salidas** y **documentación**. Las tareas abarcan las etapas de preprocesamiento, fragmentación, indexación, recuperación, generación, interfaz y evaluación; no se utilizaron modelos generativos externos para responder consultas del RAG operativo.
+
+| Uso de IA | Momento / función | Modelo identificado en el registro | Estado de la verificación |
+|---|---|---|---|
+| Agente de desarrollo asistido | Implementación, pruebas, depuración e informes durante el trabajo de noviembre de 2026 | En la bitácora se identifica al menos una sesión como `gpt-6.1-sol` | La ejecución y revisión del **agente** están registradas; no equivalen a validación personal independiente. |
+| Otras sesiones de asistencia conversacional o de código | Diseño de experimentos, análisis, instrucciones y documentación | **[COMPLETAR: nombres/versiones de los modelos efectivamente utilizados y momentos]** | **[COMPLETAR: qué se comprobó personalmente]** |
+| Embeddings de la aplicación | Indexación y búsqueda, no autoría del código | `qwen3-embedding:0.6b`; histórico `bge-m3` | Se registran modelo, parámetros y ejecución. |
+| Generación de respuestas del RAG | Respuestas sobre el corpus local | `granite4:latest` | Sus respuestas fueron ensayadas y sus limitaciones figuran en los reportes. |
+
+**Declaración personal pendiente de completar antes de entregar:** indicar qué fuentes originales se abrieron y cotejaron personalmente, qué comandos se ejecutaron en el propio entorno, cuáles de las cinco preguntas se revisaron contra el documento original, qué errores se observaron y qué cambios fueron aceptados. No atribuir al estudiante inspecciones que solamente aparecen registradas como realizadas por un agente.
+
+## 9. Reproducibilidad, solución de problemas y entrega
+
+| Situación | Acción o límite relevante |
 |---|---|
-| No conecta a Ollama / falta modelo | Servicio `ollama serve` y `ollama list`; descargar el tag exacto. No hay cambio automático de modelo. |
-| Falta índice o manifest | Construir explícitamente con `02_indexar.py`, modelo/chunks/ruta correctos. La consulta no lo crea. |
-| Firma incompatible | Revisar juntos modelo, fragmentos e índice. Usar una nueva ruta para otra configuración, no borrar un baseline para resolverlo. |
-| Laboratorio no preparado | Elegir modo experimental y pulsar Preparar tras aplicar los valores; cambiar controles invalida el estado anterior. |
-| Respuesta de aclaración | Precisar elección/norma o elegir jurisdicción manualmente; no es un fallo del servidor. |
-| Review pendiente / cita que no coincide | Inspeccionar el JSON real y redactar una revisión de esa corrida. No copiar citas o hashes de otro resultado. |
-| Datos correctos sin cita, o cita sin apoyo | Revisar `context_sent` y advertencias. El control de formato no valida semántica. |
+| Ollama no responde | Comprobar servicio y `ollama list`; descargar el tag exacto solicitado. No existe un cambio de modelo automático. |
+| Falta el índice o su `index_manifest.json` | Ejecutar explícitamente `scripts/02_indexar.py` usando chunks, índice y embedding compatibles. La consulta no reconstruye el índice. |
+| Firma de índice incompatible | El corpus o modelo no corresponde al índice. Usar una ruta de índice nueva en lugar de mezclar vectores o borrar un baseline. |
+| Gradio indica laboratorio no preparado | Pulsar **Preparar / reutilizar índice experimental** después de modificar tamaño/overlap. |
+| La consulta pide aclaración | Indicar la ley, tipo de elección o jurisdicción; una ambigüedad no equivale a falla de Ollama. |
+| El modelo respondió sin cita o con una cita dudosa | Revisar `context_sent`, `source_map` y el documento original; validación sintáctica no implica apoyo semántico. |
+| El PDF es ilegible o escaneado | Este pipeline no incluye OCR; se requeriría obtener texto extraíble y documentar su verificación. |
 
-Los artículos conservan texto, notas, estructura, duplicados y fuente. Las páginas PDF son las originales, desde 1, y pueden abarcar todo el artículo; los TXT no reciben páginas inventadas. El preprocesador conserva auditoría de layout, referencias, anotaciones y segmentos fuera de artículos; no aplica OCR automático. `texto_principal` distingue notas editoriales de texto modificatorio, pero no constituye una consolidación jurídica.
+**Antes de presentar el trabajo:**
 
-Entre los límites reales: excepción nacional dividida entre chunks, definición santafesina fuera de top-3, vecinos de leyes distintas, notas históricas/observadas en PBA y respuestas de Granite sin cita o con citas formalmente válidas pero sin apoyo. El parser está ajustado a este corpus, no es un analizador universal de leyes. No se garantiza vigencia, completitud ni abstención del generador.
+- [ ] Comprobar que el repositorio es accesible y contiene los tres documentos reales que efectivamente se indexaron.
+- [ ] **Verificar los enlaces oficiales y las condiciones de redistribución** de cada fuente; corregir o reemplazar las fuentes si corresponde.
+- [ ] Clonar en una **carpeta nueva**, ejecutar `uv sync`, descargar modelos, construir Chroma y abrir Gradio con los comandos de este README.
+- [ ] Comprobar personalmente las **tres preguntas respondibles y dos ausentes** y contrastar la fuente con el texto original.
+- [ ] Completar el detalle de **modelos de IA utilizados**, momentos de asistencia y verificación personal en la sección 8.
+- [ ] Grabar un video de **hasta cinco minutos** que muestre el corpus, la aplicación, una respuesta con sus fragmentos y **una limitación real**.
+- [ ] Subir el video a Drive y verificar sus permisos; presentar el formulario desde el correo institucional antes del **miércoles 18/11/2026 a las 12:00**.
+- [ ] **No publicar DNI, credenciales, `.env`, `.venv/` ni los índices `.chroma/`.** El DNI pertenece únicamente al formulario institucional.
 
-## 9. Asistencia de IA y pendientes de entrega
-
-Se utilizó IA para delimitar el trabajo, implementar código, elaborar pruebas, ejecutar validaciones locales e inspeccionar/documentar resultados. Las intervenciones registradas el 13/11/2026 incluyen integración Gradio, laboratorio, reparación de imports y ensayo Qwen; [bitacora.md](bitacora.md) detalla tareas, comandos y límites. Una sesión de agente está identificada allí como `gpt-6.1-sol`; no se atribuye ese identificador a todas las sesiones sin registro. Qwen/BGE son modelos de embeddings del sistema y Granite su generador, no la identificación del asistente de programación.
-
-El agente registró comprobaciones técnicas y lectura de evidencia, **no una revisión jurídica independiente ni verificación personal del estudiante**. La declaración final debe completar modelos/fechas de asistencia que falten y qué comprobó personalmente el estudiante.
-
-Quedan pendientes la verificación de procedencia/redistribución, reproducción integral en un directorio fresco, revisión personal de resultados y demo/entrega final. Esta guía no afirma que esos pasos ya se realizaron. No incluir DNI, secretos ni credenciales en el repositorio público; `.venv/`, índices y archivos de entorno deben permanecer ignorados.
+El material entregado incluye instrucciones para reconstruir el índice, pero la disponibilidad de los documentos en GitHub y la reproducibilidad en una instalación limpia **no prueban por sí solas** autenticidad jurídica, permisos de redistribución ni que el sistema responda siempre correctamente.
